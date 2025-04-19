@@ -2,51 +2,72 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleTypeRole</key>
-			<string>Editor</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>com.googleusercontent.apps.37863866757-9srflvef09okfropvfsqgc534d8t18k2</string>
-			</array>
-		</dict>
-	</array>
-	<key>UIApplicationSceneManifest</key>
-	<dict>
-		<key>UIApplicationSupportsMultipleScenes</key>
-		<false/>
-		<key>UISceneConfigurations</key>
-		<dict>
-			<key>UIWindowSceneSessionRoleApplication</key>
-			<array>
-				<dict>
-					<key>UISceneConfigurationName</key>
-					<string>Default Configuration</string>
-					<key>UISceneDelegateClassName</key>
-					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
-					<key>UISceneStoryboardFile</key>
-					<string>Main</string>
-				</dict>
-			</array>
-		</dict>
-	</dict>
-    
+
+    <!-- Google Sign-In -->
+    <key>GIDClientID</key>
+    <string>37863866757-9srflvef09okfropvfsqgc534d8t18k2.apps.googleusercontent.com</string>
+
+    <!-- Facebook -->
+    <key>FacebookAppID</key>
+    <string>677702237985412</string>
+    <key>FacebookDisplayName</key>
+    <string>SmallFriends</string>
+    <key>FacebookClientToken</key>
+    <string>ec1811df2ae1cea4a935d95439d075e0</string>
+
+
+    <!-- URL Schemes para Google y Facebook -->
     <key>CFBundleURLTypes</key>
     <array>
-      <dict>
-      <key>CFBundleURLSchemes</key>
-      <array>
-        <string>677702237985412</string>
-      </array>
-      </dict>
+        <!-- Facebook -->
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb677702237985412</string>
+            </array>
+        </dict>
+        <!-- Google -->
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.37863866757-9srflvef09okfropvfsqgc534d8t18k2</string>
+            </array>
+        </dict>
     </array>
-    <key>677702237985412</key>
-    <string>APP-ID</string>
-    <key>ec1811df2ae1cea4a935d95439d075e0</key>
-    <string>CLIENT-TOKEN</string>
-    <key>SmallFriends</key>
-    <string>APP-NAME</string>
+
+    <!-- Permitir apertura de esquemas de Facebook -->
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
+
+    <!-- App Tracking Transparency (opcional) -->
+    <key>NSUserTrackingUsageDescription</key>
+    <string>Usamos esta información para ofrecerte una experiencia personalizada.</string>
+
+    <!-- Escenas -->
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <false/>
+        <key>UISceneConfigurations</key>
+        <dict>
+            <key>UIWindowSceneSessionRoleApplication</key>
+            <array>
+                <dict>
+                    <key>UISceneConfigurationName</key>
+                    <string>Default Configuration</string>
+                    <key>UISceneDelegateClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+                    <key>UISceneStoryboardFile</key>
+                    <string>Main</string>
+                </dict>
+            </array>
+        </dict>
+    </dict>
+
 </dict>
 </plist>

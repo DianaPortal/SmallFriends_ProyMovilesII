@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //Firebase
         FirebaseApp.configure()
+        ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         return true
     }
 
