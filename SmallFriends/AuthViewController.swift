@@ -38,7 +38,7 @@ class AuthViewController: UIViewController {
             //ocultar si ya se incio sesion
             authStackView.isHidden = true
             //Si ya esta logueado navega al controlador que indica que  el usuario ya esta logueado
-            navigationController?.pushViewController(HomeViewController(email: email, provider: ProviderType.init(rawValue: provider)!), animated: false)
+           navigationController?.pushViewController(HomeViewController(email: email, provider: ProviderType.init(rawValue: provider)!), animated: false)
         }
         
     }
