@@ -13,8 +13,7 @@ class HistorialViewController: UIViewController {
     @IBOutlet weak var tablaHistorial: UITableView!
     
     var datos: [HistorialDatos] = [
-        HistorialDatos(fecha: "10 de febrero, 2025", tipo: "Consulta"),
-        HistorialDatos(fecha: "4 de diciembre, 2024", tipo: "Vacunacion")
+        HistorialDatos(fecha: "10 de febrero, 2025", tipo: "Consulta", diagnostico: "Sin datos", sede: "Clinica", tratamiento: "Sin tratamiento")
     ]
     
     // MARK: Ciclo de vida
@@ -32,6 +31,32 @@ class HistorialViewController: UIViewController {
     @IBAction func volverTapped(_ sender: UIButton){
         // Regresar a la pantalla anterior
         dismiss(animated: true, completion: nil)
+    }
+    @IBAction func agregarHistorialTapped(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Nuevo registro", message: nil, preferredStyle: .alert)
+        alert.addTextField{
+            textFile in textFile.placeholder = "Fecha";
+        }
+        alert.addTextField{
+            textFile in textFile.placeholder = "Tipo";
+        }
+        alert.addTextField{
+            textFile in textFile.placeholder = "Diagnostico";
+        }
+        alert.addTextField{
+            textFile in textFile.placeholder = "Sede";
+        }
+        alert.addTextField{
+            textFile in textFile.placeholder = "Tratamiento";
+        }
+        alert.addAction(UIAlertAction(title: "Agregar", style: .default) {
+            _ in guard let fecha = alert.textFields?.first?.text,!fecha.isEmpty else {return}
+            let nuevoRegistro = HistorialDatos(fecha: fecha, tipo: "tipo", diagnostico: "diag", sede: "se", tratamiento: "tra")
+            self.datos.append(nuevoRegistro)
+            self.tablaHistorial.reloadData()
+        })
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+        present(alert, animated: true)
     }
 }
 

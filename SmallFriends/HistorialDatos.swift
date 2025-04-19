@@ -10,4 +10,7 @@ import Foundation
 struct HistorialDatos {
     let fecha: String
     let tipo: String
+    let diagnostico : String
+    let sede : String
+    let tratamiento : String
 }
