@@ -22,8 +22,8 @@
 		84AA103A2DAD635D00E5D78E /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = 84AA10392DAD635D00E5D78E /* FirebaseAuthCombine-Community */; };
 		84AA103C2DAD635D00E5D78E /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 84AA103B2DAD635D00E5D78E /* FirebaseCore */; };
 		84AA103E2DAD635D00E5D78E /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 84AA103D2DAD635D00E5D78E /* FirebaseCrashlytics */; };
-		84AA35E42DADC35F007D2E86 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA35E22DADC35F007D2E86 /* HomeViewController.swift */; };
-		84AA35E92DADD272007D2E86 /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AA35E82DADD272007D2E86 /* HomeViewController.xib */; };
+		84AA35E42DADC35F007D2E86 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AA35E22DADC35F007D2E86 /* UserViewController.swift */; };
+		84AA35E92DADD272007D2E86 /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84AA35E82DADD272007D2E86 /* UserViewController.xib */; };
 		84E9D9242DB1DD1800EFA233 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 84E9D9232DB1DD1800EFA233 /* GoogleSignIn */; };
 		84E9D9262DB1DD1800EFA233 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 84E9D9252DB1DD1800EFA233 /* GoogleSignInSwift */; };
 		84E9D9282DB1E18900EFA233 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 84E9D9272DB1E18900EFA233 /* GoogleService-Info.plist */; };
@@ -45,8 +45,8 @@
 
 /* Begin PBXFileReference section */
 		8422B2FF2DB22E4200A5D49B /* SmallFriends.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmallFriends.entitlements; sourceTree = "<group>"; };
-		84AA35E22DADC35F007D2E86 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		84AA35E82DADD272007D2E86 /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
+		84AA35E22DADC35F007D2E86 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		84AA35E82DADD272007D2E86 /* UserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		84E9D9272DB1E18900EFA233 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		B745C9012DB41009001B8847 /* InicioViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InicioViewController.swift; sourceTree = "<group>"; };
 		B745C9022DB41009001B8847 /* InicioViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InicioViewController.xib; sourceTree = "<group>"; };
@@ -134,8 +134,8 @@
 				B759220F2DAC15EC00A31AEE /* Info.plist */,
 				84E9D9272DB1E18900EFA233 /* GoogleService-Info.plist */,
 				B75922072DAC15EB00A31AEE /* SmallFriends.xcdatamodeld */,
-				84AA35E22DADC35F007D2E86 /* HomeViewController.swift */,
-				84AA35E82DADD272007D2E86 /* HomeViewController.xib */,
+				84AA35E22DADC35F007D2E86 /* UserViewController.swift */,
+				84AA35E82DADD272007D2E86 /* UserViewController.xib */,
 				B745C9012DB41009001B8847 /* InicioViewController.swift */,
 				B745C9022DB41009001B8847 /* InicioViewController.xib */,
 			);
@@ -227,7 +227,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B759220E2DAC15EC00A31AEE /* LaunchScreen.storyboard in Resources */,
-				84AA35E92DADD272007D2E86 /* HomeViewController.xib in Resources */,
+				84AA35E92DADD272007D2E86 /* UserViewController.xib in Resources */,
 				84E9D9282DB1E18900EFA233 /* GoogleService-Info.plist in Resources */,
 				B745C9042DB41009001B8847 /* InicioViewController.xib in Resources */,
 				B759220B2DAC15EC00A31AEE /* Assets.xcassets in Resources */,
@@ -244,7 +244,7 @@
 			files = (
 				B7C4F0B42DB4102D00769C8E /* HistorialTableViewCell.swift in Sources */,
 				B7C4F0B92DB4172300769C8E /* HistorialDatos.swift in Sources */,
-				84AA35E42DADC35F007D2E86 /* HomeViewController.swift in Sources */,
+				84AA35E42DADC35F007D2E86 /* UserViewController.swift in Sources */,
 				B745C9032DB41009001B8847 /* InicioViewController.swift in Sources */,
 				B75922032DAC15EB00A31AEE /* AuthViewController.swift in Sources */,
 				B75922092DAC15EB00A31AEE /* SmallFriends.xcdatamodeld in Sources */,

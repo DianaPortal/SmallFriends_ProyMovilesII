@@ -16,7 +16,7 @@ enum ProviderType: String{
     case facebook
 }
 
-class HomeViewController: UIViewController {
+class UserViewController: UIViewController {
     
     @IBOutlet weak var correoLabel: UILabel!
     @IBOutlet weak var providerLabel: UILabel!    
