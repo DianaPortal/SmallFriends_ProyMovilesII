@@ -9,6 +9,9 @@ import UIKit
 
 class InicioViewController: UIViewController {
 
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Inicio"
@@ -26,4 +29,9 @@ class InicioViewController: UIViewController {
     }
     */
 
+   /* @IBAction func perfilTapped(_ sender: UIButton) {
+        let userVC = UserViewController()
+        navigationController?.pushViewController(userVC, animated: true)
+                   
+    }*/
 }
