@@ -135,14 +135,14 @@ class AuthViewController: UIViewController {
             print("No se pudo instanciar MainTabBarController")
             return
         }
-
-        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-           let window = appDelegate.window {
+        
+        // Usamos SceneDelegate para cambiar el rootViewController
+        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+           let window = sceneDelegate.window {
             window.rootViewController = tabBarController
             window.makeKeyAndVisible()
         } else {
-            print("No se pudo acceder al AppDelegate o al window.")
+            print("No se pudo acceder al SceneDelegate o al window.")
         }
     }
-
 }
