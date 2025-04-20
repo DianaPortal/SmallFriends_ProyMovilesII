@@ -41,6 +41,7 @@
 		B7C4F0B12DB40E3900769C8E /* HistorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C4F0B02DB40E3900769C8E /* HistorialViewController.swift */; };
 		B7C4F0B42DB4102D00769C8E /* HistorialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C4F0B22DB4102D00769C8E /* HistorialTableViewCell.swift */; };
 		B7C4F0B92DB4172300769C8E /* HistorialDatos.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C4F0B82DB4172300769C8E /* HistorialDatos.swift */; };
+		B7C8C7E42DB56F950065AFAD /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C8C7E32DB56F950065AFAD /* NotificationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		B7C4F0B02DB40E3900769C8E /* HistorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorialViewController.swift; sourceTree = "<group>"; };
 		B7C4F0B22DB4102D00769C8E /* HistorialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorialTableViewCell.swift; sourceTree = "<group>"; };
 		B7C4F0B82DB4172300769C8E /* HistorialDatos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorialDatos.swift; sourceTree = "<group>"; };
+		B7C8C7E32DB56F950065AFAD /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		B75921FD2DAC15EB00A31AEE /* SmallFriends */ = {
 			isa = PBXGroup;
 			children = (
+				B7C8C7E32DB56F950065AFAD /* NotificationViewController.swift */,
 				B7C4F0B82DB4172300769C8E /* HistorialDatos.swift */,
 				B7C4F0B22DB4102D00769C8E /* HistorialTableViewCell.swift */,
 				B7C4F0B02DB40E3900769C8E /* HistorialViewController.swift */,
@@ -242,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7C8C7E42DB56F950065AFAD /* NotificationViewController.swift in Sources */,
 				B7C4F0B42DB4102D00769C8E /* HistorialTableViewCell.swift in Sources */,
 				B7C4F0B92DB4172300769C8E /* HistorialDatos.swift in Sources */,
 				84AA35E42DADC35F007D2E86 /* UserViewController.swift in Sources */,
