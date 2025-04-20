@@ -9,6 +9,9 @@ import UIKit
 
 class InicioViewController: UIViewController {
 
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Inicio"
@@ -25,5 +28,24 @@ class InicioViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showUserViewController" {
+            if let userVC = segue.destination as? UserViewController {
+                // Recuperar los datos desde UserDefaults
+                let defaults = UserDefaults.standard
+                if let email = defaults.string(forKey: "email"),
+                   let providerString = defaults.string(forKey: "provider"),
+                   let provider = ProviderType(rawValue: providerString) {
+                    // Pasar los datos al UserViewController
+                    userVC.email = email
+                    userVC.provider = provider
+                }
+            }
+        }
+    }
 
+
+    @IBAction func perfilTapped(_ sender: UIButton) {
+        
+    }
 }

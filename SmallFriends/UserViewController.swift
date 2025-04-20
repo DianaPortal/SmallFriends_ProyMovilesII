@@ -22,57 +22,69 @@ class UserViewController: UIViewController {
     @IBOutlet weak var providerLabel: UILabel!    
     @IBOutlet weak var closeSessionButton: UIButton!
     
-    private let email: String
-    private let provider: ProviderType
+    var email: String?
+    var provider: ProviderType?
     
-    init(email: String, provider: ProviderType){
+    // Este inicializador será utilizado cuando se carga desde el Storyboard
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        // logica
+    }
+    
+    //
+    init(email: String, provider: ProviderType) {
         self.email = email
         self.provider = provider
         super.init(nibName: nil, bundle: nil)
     }
     
-    required init?(coder: NSCoder){
-        fatalError("init(coder:) has not been implemented")
-    }
-   
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Inicio"
-        
         navigationItem.setHidesBackButton(true, animated: false)
-        //Valores que llegan del constructor
         
+        
+                
+        // Mostrar datos
         correoLabel.text = email
-        providerLabel.text = provider.rawValue
-        //Guardamos los datos del usuario
+        providerLabel.text = provider?.rawValue
+
         
-        let defaults = UserDefaults.standard
-        defaults.set(email, forKey: "email")
-        defaults.set(provider.rawValue, forKey: "provider")
-        defaults.synchronize()
     }
 
 
     @IBAction func closeSessionButtonAction(_ sender: UIButton) {
         
         let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: "email")
-        defaults.removeObject(forKey: "provider")
-        defaults.synchronize()
-        
-        switch provider {
+            defaults.removeObject(forKey: "email")
+            defaults.removeObject(forKey: "provider")
+            defaults.synchronize()
             
-        case .basic:
-            firebaseLogOut()
-        case .google:
-            GIDSignIn.sharedInstance.signOut()
-            firebaseLogOut()
-        case .facebook:
-            LoginManager().logOut()
-            firebaseLogOut()
+            // Asegurarnos de que provider no sea nil
+            switch provider {
+            case .basic:
+                firebaseLogOut()
+            case .google:
+                GIDSignIn.sharedInstance.signOut()
+                firebaseLogOut()
+            case .facebook:
+                LoginManager().logOut()
+                firebaseLogOut()
+            case .none:
+                // En caso de que provider sea nil, no hacer nada o gestionar algún comportamiento
+                print("No provider, no se puede hacer log out.")
+            }
+            
+        // Redirigir al login
+           let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let authVC = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController {
+            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+               let window = sceneDelegate.window {
+                let nav = UINavigationController(rootViewController: authVC)
+                window.rootViewController = nav
+                window.makeKeyAndVisible()
+            }
         }
-        
-        navigationController?.popViewController(animated: true)
     }
     
     //
