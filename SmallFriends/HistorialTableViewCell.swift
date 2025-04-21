@@ -1,17 +1,17 @@
 //
-//  MascotaTableViewCell.swift
+//  HistorialTableViewCell.swift
 //  SmallFriends
 //
-//  Created by DAMII on 21/04/25.
+//  Created by DAMII on 19/04/25.
 //
 
 import UIKit
 
-class MascotaTableViewCell: UITableViewCell {
+class HistorialTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var nombreMascotaLabel: UILabel!
+    @IBOutlet weak var fechaRegistroLabel: UILabel!
     
-    @IBOutlet weak var razaMascotaLabel: UILabel!
+    @IBOutlet weak var tipoHistorialLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -23,5 +23,5 @@ class MascotaTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+    
 }
