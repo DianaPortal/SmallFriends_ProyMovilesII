@@ -1,5 +1,5 @@
 import UIKit
-import FirebaseAnalytics
+import CoreData
 import FirebaseAuth
 import GoogleSignIn
 import FirebaseCore
@@ -10,18 +10,14 @@ class AuthViewController: UIViewController {
     @IBOutlet weak var authStackView: UIStackView!
     @IBOutlet weak var correoTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var logInButton: UIButton!
-    @IBOutlet weak var signUpButton: UIButton!
-    @IBOutlet weak var googleButton: UIButton!
-    @IBOutlet weak var facebookButton: UIButton!
+ 
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Autenticación"
         correoTextField.isSecureTextEntry = false
 
-        // Analytics Event
-        Analytics.logEvent("InitScreen", parameters: ["message": "Integración de Firebase complete"])
+        
 
         // Comprobar sesión guardada
         let defaults = UserDefaults.standard
@@ -39,7 +35,7 @@ class AuthViewController: UIViewController {
     }
 
     // MARK: - Acciones
-
+    // Btn Iniciar sesión
     @IBAction func logInButtonAction(_ sender: UIButton) {
         guard let email = correoTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
@@ -49,8 +45,9 @@ class AuthViewController: UIViewController {
 
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
-                print("Error al iniciar sesión: \(error.localizedDescription)")
-                self.showAlert(title: "Error de autenticación", message: "Correo o contraseña incorrectos.")
+                    print("Error al iniciar sesión: \(error.localizedDescription)")
+                    self.showAlert(title: "Error de autenticación", message: "Correo o contraseña incorrectos.")
+                    return
             }
 
             // Aquí sí validamos bien el resultado
@@ -58,15 +55,17 @@ class AuthViewController: UIViewController {
         }
                  
     }
-
+    //Btn Registrar Usuario
     @IBAction func signUpButtonAction(_ sender: UIButton) {
-        if let email = correoTextField.text, let password = passwordTextField.text {
+        if let email = correoTextField.text,
+           let password = passwordTextField.text {
             Auth.auth().createUser(withEmail: email, password: password) { result, error in
                 self.showHome(result: result, error: error, provider: .basic)
             }
         }
     }
-
+    
+    //Autenticación con google
     @IBAction func googleButtonAction(_ sender: UIButton) {
         let presentingVC = self.presentingViewController ?? self.navigationController ?? self
 
@@ -91,6 +90,7 @@ class AuthViewController: UIViewController {
         }
     }
 
+    //Autenticación con facebook
     @IBAction func facebookButtonAction(_ sender: UIButton) {
         let loginManager = LoginManager()
         loginManager.logOut() // Cierra sesión previa
@@ -115,7 +115,7 @@ class AuthViewController: UIViewController {
         }
     }
 
-    // MARK: - Función de manejo post login
+    //- Función de manejo de inciar sesión
 
     private func showHome(result: AuthDataResult?, error: Error?, provider: ProviderType) {
         if let error = error as NSError? {
@@ -142,7 +142,7 @@ class AuthViewController: UIViewController {
             return
         }
 
-        // Autenticación exitosa
+        // Autenticación 
         guard let result = result else {
             showAlert(title: "Error", message: "No se pudo iniciar sesión. Intenta más tarde.")
             return
@@ -151,14 +151,17 @@ class AuthViewController: UIViewController {
         let defaults = UserDefaults.standard
         defaults.set(result.user.email, forKey: "email")
         defaults.set(provider.rawValue, forKey: "provider")
+        // Guardar usuario en Core Data
+        let uid = result.user.uid
+        let email = result.user.email
+        guardarUsuarioEnCoreData(uid: uid, email: email, provider: provider)
         
         authStackView.isHidden = true
         goToMainTabBar()
     }
 
 
-    // MARK: - Función para ir al TabBarController principal
-
+    // MARK: - Función para ir al TabBarController principal --> mostrar la pantalla de bienvenida
     
     private func goToMainTabBar() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -167,7 +170,7 @@ class AuthViewController: UIViewController {
             return
         }
         
-        // Usamos SceneDelegate para cambiar el rootViewController
+        // - SceneDelegate para cambiar el rootViewController
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
            let window = sceneDelegate.window {
             window.rootViewController = tabBarController
@@ -177,10 +180,38 @@ class AuthViewController: UIViewController {
         }
     }
     
+    // Func - Alertas
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)
     }
+    
+    // Función para guardar La sesió en core data
+    private func guardarUsuarioEnCoreData(uid: String, email: String?, provider: ProviderType) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let contexto = appDelegate.persistentContainer.viewContext
+
+        let fetchRequest: NSFetchRequest<Usuario> = Usuario.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "idUsuario == %@", uid)
+
+        do {
+            let resultados = try contexto.fetch(fetchRequest)
+            if resultados.isEmpty {
+                let nuevoUsuario = Usuario(context: contexto)
+                nuevoUsuario.idUsuario = uid
+                nuevoUsuario.email = email
+                nuevoUsuario.provider = provider.rawValue
+
+                try contexto.save()
+                print("Usuario guardado en Core Data")
+            } else {
+                print("Usuario ya estaba en Core Data")
+            }
+        } catch {
+            print("Error al guardar en Core Data: \(error.localizedDescription)")
+        }
+    }
+
 
 }
