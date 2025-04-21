@@ -40,10 +40,10 @@
 		B759220E2DAC15EC00A31AEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B759220C2DAC15EC00A31AEE /* LaunchScreen.storyboard */; };
 		B7726D0F2DB6A2B400CD4D9B /* Usuario+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D0D2DB6A2B400CD4D9B /* Usuario+CoreDataClass.swift */; };
 		B7726D102DB6A2B400CD4D9B /* Usuario+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D0E2DB6A2B400CD4D9B /* Usuario+CoreDataProperties.swift */; };
-		B7726D132DB6E80500CD4D9B /* Mascota+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D112DB6E80500CD4D9B /* Mascota+CoreDataClass.swift */; };
-		B7726D142DB6E80500CD4D9B /* Mascota+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D122DB6E80500CD4D9B /* Mascota+CoreDataProperties.swift */; };
 		B7726D172DB6E8F700CD4D9B /* Citas+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D152DB6E8F700CD4D9B /* Citas+CoreDataClass.swift */; };
 		B7726D182DB6E8F700CD4D9B /* Citas+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D162DB6E8F700CD4D9B /* Citas+CoreDataProperties.swift */; };
+		B7726D1B2DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D192DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift */; };
+		B7726D1C2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D1A2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,10 +64,10 @@
 		B759220F2DAC15EC00A31AEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7726D0D2DB6A2B400CD4D9B /* Usuario+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Usuario+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7726D0E2DB6A2B400CD4D9B /* Usuario+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Usuario+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		B7726D112DB6E80500CD4D9B /* Mascota+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mascota+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B7726D122DB6E80500CD4D9B /* Mascota+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mascota+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7726D152DB6E8F700CD4D9B /* Citas+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Citas+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7726D162DB6E8F700CD4D9B /* Citas+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Citas+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B7726D192DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mascota+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B7726D1A2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mascota+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,10 +110,10 @@
 		B75921F22DAC15EB00A31AEE = {
 			isa = PBXGroup;
 			children = (
+				B7726D192DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift */,
+				B7726D1A2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift */,
 				B7726D152DB6E8F700CD4D9B /* Citas+CoreDataClass.swift */,
 				B7726D162DB6E8F700CD4D9B /* Citas+CoreDataProperties.swift */,
-				B7726D112DB6E80500CD4D9B /* Mascota+CoreDataClass.swift */,
-				B7726D122DB6E80500CD4D9B /* Mascota+CoreDataProperties.swift */,
 				B7726D0D2DB6A2B400CD4D9B /* Usuario+CoreDataClass.swift */,
 				B7726D0E2DB6A2B400CD4D9B /* Usuario+CoreDataProperties.swift */,
 				B75921FD2DAC15EB00A31AEE /* SmallFriends */,
@@ -254,13 +254,13 @@
 				84AA35E42DADC35F007D2E86 /* UserViewController.swift in Sources */,
 				B745C9032DB41009001B8847 /* InicioViewController.swift in Sources */,
 				B75922032DAC15EB00A31AEE /* AuthViewController.swift in Sources */,
+				B7726D1B2DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift in Sources */,
+				B7726D1C2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift in Sources */,
 				B75922092DAC15EB00A31AEE /* SmallFriends.xcdatamodeld in Sources */,
 				B7726D102DB6A2B400CD4D9B /* Usuario+CoreDataProperties.swift in Sources */,
 				B7726D0F2DB6A2B400CD4D9B /* Usuario+CoreDataClass.swift in Sources */,
-				B7726D132DB6E80500CD4D9B /* Mascota+CoreDataClass.swift in Sources */,
 				B75921FF2DAC15EB00A31AEE /* AppDelegate.swift in Sources */,
 				B7726D182DB6E8F700CD4D9B /* Citas+CoreDataProperties.swift in Sources */,
-				B7726D142DB6E80500CD4D9B /* Mascota+CoreDataProperties.swift in Sources */,
 				B7726D172DB6E8F700CD4D9B /* Citas+CoreDataClass.swift in Sources */,
 				B75922012DAC15EB00A31AEE /* SceneDelegate.swift in Sources */,
 			);

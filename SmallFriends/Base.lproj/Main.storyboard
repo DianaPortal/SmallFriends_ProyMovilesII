@@ -517,8 +517,11 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eub-O6-ENT">
-                                <rect key="frame" x="100" y="680.66666666666663" width="193" height="34.333333333333371"/>
+                                <rect key="frame" x="100" y="675" width="193" height="40"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="owq-lq-QPi"/>
+                                </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Guardar">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -646,7 +649,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ik7-to-N5B" kind="show" id="GQ0-zH-VlB"/>
+                                            <segue destination="ik7-to-N5B" kind="show" identifier="mostrarDetCitaSeleccionada" id="GQ0-zH-VlB"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -666,7 +669,11 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Citas" image="cita-medica" id="PBS-7c-utD"/>
                     <navigationItem key="navigationItem" id="f6V-Ks-wZo">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="d2I-TJ-7EL"/>
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="d2I-TJ-7EL">
+                            <connections>
+                                <segue destination="Xcu-4c-IxZ" kind="show" identifier="mostrarRegistrarCita" id="qaT-bb-LJn"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                 </viewController>
@@ -915,7 +922,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pOC-0H-9ps">
                                 <rect key="frame" x="100" y="650" width="193" height="40"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="zsN-ve-6Ug"/>
                                 </constraints>
@@ -960,16 +967,99 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Detalle Cita" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ajo-l7-Skm">
-                                <rect key="frame" x="120" y="135" width="152" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalle Cita" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ajo-l7-Skm">
+                                <rect key="frame" x="20" y="123" width="353" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="X1G-Ji-1Ol"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gvI-ch-s5E">
+                                <rect key="frame" x="40" y="173" width="313" height="447"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfn-wT-caj">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="47"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/03/2025" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO4-6C-K6O">
+                                        <rect key="frame" x="0.0" y="57" width="313" height="47.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIJ-NM-RBH">
+                                        <rect key="frame" x="0.0" y="114.33333333333331" width="313" height="47"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Borja Av...." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiE-hh-ZoI">
+                                        <rect key="frame" x="0.0" y="171.33333333333331" width="313" height="47.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOp-Mo-meK">
+                                        <rect key="frame" x="0.0" y="228.66666666666669" width="313" height="47"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee8-ac-y2n">
+                                        <rect key="frame" x="0.0" y="285.66666666666669" width="313" height="47"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción Cita: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-sZ-giT">
+                                        <rect key="frame" x="0.0" y="342.66666666666663" width="313" height="47.333333333333314"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta Trimestral - Vacunas " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UB8-YY-1dH">
+                                        <rect key="frame" x="0.0" y="400" width="313" height="47"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brx-nt-GRY">
+                                <rect key="frame" x="100" y="640" width="193" height="40"/>
+                                <color key="backgroundColor" systemColor="systemYellowColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="dBo-YH-dNP"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Actualizar">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xxm-f9-fbB"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstItem="gvI-ch-s5E" firstAttribute="top" secondItem="Ajo-l7-Skm" secondAttribute="bottom" constant="10" id="5gE-QD-Jid"/>
+                            <constraint firstItem="Ajo-l7-Skm" firstAttribute="leading" secondItem="xxm-f9-fbB" secondAttribute="leading" constant="20" id="FqX-X7-YuH"/>
+                            <constraint firstItem="Brx-nt-GRY" firstAttribute="top" secondItem="gvI-ch-s5E" secondAttribute="bottom" constant="20" id="KQf-dO-xaY"/>
+                            <constraint firstItem="xxm-f9-fbB" firstAttribute="trailing" secondItem="Brx-nt-GRY" secondAttribute="trailing" constant="100" id="MRl-iV-Zh8"/>
+                            <constraint firstItem="gvI-ch-s5E" firstAttribute="leading" secondItem="xxm-f9-fbB" secondAttribute="leading" constant="40" id="VAN-yg-ekn"/>
+                            <constraint firstItem="Brx-nt-GRY" firstAttribute="leading" secondItem="xxm-f9-fbB" secondAttribute="leading" constant="100" id="WcZ-h3-STv"/>
+                            <constraint firstItem="xxm-f9-fbB" firstAttribute="bottom" secondItem="Brx-nt-GRY" secondAttribute="bottom" constant="40" id="l62-me-Kkn"/>
+                            <constraint firstItem="xxm-f9-fbB" firstAttribute="trailing" secondItem="gvI-ch-s5E" secondAttribute="trailing" constant="40" id="xbC-h4-RjJ"/>
+                            <constraint firstItem="Ajo-l7-Skm" firstAttribute="top" secondItem="xxm-f9-fbB" secondAttribute="top" constant="20" id="yA2-Qd-cnG"/>
+                            <constraint firstItem="xxm-f9-fbB" firstAttribute="trailing" secondItem="Ajo-l7-Skm" secondAttribute="trailing" constant="20" id="yfb-vz-ATX"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="i9a-W3-WpH"/>
                 </viewController>
@@ -984,9 +1074,97 @@
                     <view key="view" contentMode="scaleToFill" id="g9B-8Y-iN2">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registrar Cita" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6Y-Lr-cvw">
+                                <rect key="frame" x="20" y="123" width="353" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="f3L-x5-ekz"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0mi-0e-uLd">
+                                <rect key="frame" x="40" y="213" width="313" height="342"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzM-5a-0z2">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="34"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fecha programada de la cita" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Rf-Rw-ZOI">
+                                        <rect key="frame" x="0.0" y="44" width="313" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxw-vH-lR8">
+                                        <rect key="frame" x="0.0" y="88" width="313" height="34"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Direccion o nombre del lugar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2G-03-9It">
+                                        <rect key="frame" x="0.0" y="132" width="313" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo de Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKe-wx-uhk">
+                                        <rect key="frame" x="0.0" y="176" width="313" height="34"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Consulta, Vacunación, etc." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dg3-SB-5eZ">
+                                        <rect key="frame" x="0.0" y="220" width="313" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción de la Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H05-Ri-ZKa">
+                                        <rect key="frame" x="0.0" y="264" width="313" height="34"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Descripción a detalle de la cita" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-at-Dfa">
+                                        <rect key="frame" x="0.0" y="308" width="313" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvc-as-KQm">
+                                <rect key="frame" x="100" y="640" width="193" height="50"/>
+                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="nKI-lL-DlZ"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Guardar">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="JSb-ni-vUS"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstItem="JSb-ni-vUS" firstAttribute="trailing" secondItem="zvc-as-KQm" secondAttribute="trailing" constant="100" id="2bG-La-IG8"/>
+                            <constraint firstItem="N6Y-Lr-cvw" firstAttribute="top" secondItem="JSb-ni-vUS" secondAttribute="top" constant="20" id="7Zl-cb-RZ9"/>
+                            <constraint firstItem="JSb-ni-vUS" firstAttribute="trailing" secondItem="N6Y-Lr-cvw" secondAttribute="trailing" constant="20" id="AoQ-dm-NMu"/>
+                            <constraint firstItem="N6Y-Lr-cvw" firstAttribute="leading" secondItem="JSb-ni-vUS" secondAttribute="leading" constant="20" id="Kcp-Rg-AWf"/>
+                            <constraint firstItem="zvc-as-KQm" firstAttribute="leading" secondItem="JSb-ni-vUS" secondAttribute="leading" constant="100" id="OIw-Z4-hdt"/>
+                            <constraint firstItem="JSb-ni-vUS" firstAttribute="bottom" secondItem="zvc-as-KQm" secondAttribute="bottom" constant="30" id="Pa4-yw-brF"/>
+                            <constraint firstItem="JSb-ni-vUS" firstAttribute="trailing" secondItem="0mi-0e-uLd" secondAttribute="trailing" constant="40" id="loz-Eq-ked"/>
+                            <constraint firstItem="0mi-0e-uLd" firstAttribute="leading" secondItem="JSb-ni-vUS" secondAttribute="leading" constant="40" id="pfz-gD-4Jd"/>
+                            <constraint firstItem="0mi-0e-uLd" firstAttribute="top" secondItem="N6Y-Lr-cvw" secondAttribute="bottom" constant="50" id="vVR-6T-0Ry"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="llJ-ND-ZPw"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtx-KW-pUI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -999,14 +1177,98 @@
                     <view key="view" contentMode="scaleToFill" id="amK-Qw-s1H">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name evento Seleccionado" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3b-wv-UQA">
+                                <rect key="frame" x="20" y="123" width="353" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="Qy3-QI-g1G"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="BA2-Tf-XGq">
+                                <rect key="frame" x="40" y="213" width="313" height="194"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YQ1-re-kwY">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Parque Central" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZWr-R7-KX4">
+                                        <rect key="frame" x="0.0" y="34" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ky0-Qj-JvV">
+                                        <rect key="frame" x="0.0" y="68" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="01/06/2025" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wwZ-aV-JBE">
+                                        <rect key="frame" x="0.0" y="102" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hora:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CLW-pp-S6l">
+                                        <rect key="frame" x="0.0" y="136" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vkr-ZB-sKi">
+                                        <rect key="frame" x="0.0" y="170" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ubicación" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jiN-Qc-MKX">
+                                <rect key="frame" x="20" y="427" width="353" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="keN-Hv-lTD"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Da-Yy-O8U">
+                                <rect key="frame" x="20" y="490" width="353" height="200"/>
+                                <color key="backgroundColor" red="0.93325752019882202" green="0.8987237811088562" blue="0.69007402658462524" alpha="0.36099178625377637" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="7yR-DK-cF9"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="mapa"/>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="F86-pi-H0W"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <constraints>
+                            <constraint firstItem="0Da-Yy-O8U" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="20" id="1af-Su-SxP"/>
+                            <constraint firstItem="jiN-Qc-MKX" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="20" id="GuE-g4-XVE"/>
+                            <constraint firstItem="BA2-Tf-XGq" firstAttribute="top" secondItem="T3b-wv-UQA" secondAttribute="bottom" constant="50" id="Pp7-E8-bqO"/>
+                            <constraint firstItem="T3b-wv-UQA" firstAttribute="top" secondItem="F86-pi-H0W" secondAttribute="top" constant="20" id="Sgj-RM-CdH"/>
+                            <constraint firstItem="BA2-Tf-XGq" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="40" id="Xdy-qZ-EZO"/>
+                            <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="0Da-Yy-O8U" secondAttribute="trailing" constant="20" id="ZtS-yd-I9F"/>
+                            <constraint firstItem="T3b-wv-UQA" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="20" id="ial-MS-oz2"/>
+                            <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="BA2-Tf-XGq" secondAttribute="trailing" constant="40" id="mi5-3e-aqD"/>
+                            <constraint firstItem="F86-pi-H0W" firstAttribute="bottom" secondItem="0Da-Yy-O8U" secondAttribute="bottom" constant="30" id="nKJ-Ag-3CS"/>
+                            <constraint firstItem="jiN-Qc-MKX" firstAttribute="top" secondItem="BA2-Tf-XGq" secondAttribute="bottom" constant="20" id="rhR-gm-iiA"/>
+                            <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="T3b-wv-UQA" secondAttribute="trailing" constant="20" id="v2o-FQ-kA7"/>
+                            <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="jiN-Qc-MKX" secondAttribute="trailing" constant="20" id="yQt-J9-xfE"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPK-LL-0cn"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aan-JU-50y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4001" y="620"/>
+            <point key="canvasLocation" x="4000.7633587786258" y="619.71830985915494"/>
         </scene>
         <!--Item-->
         <scene sceneID="T1h-tK-ucC">
@@ -1097,6 +1359,9 @@
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

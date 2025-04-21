@@ -16,14 +16,14 @@ extension Mascota {
         return NSFetchRequest<Mascota>(entityName: "Mascota")
     }
 
+    @NSManaged public var edad: Int16
     @NSManaged public var nombre: String?
-    @NSManaged public var dniMascota: String?
-    @NSManaged public var edad: String?
-    @NSManaged public var peso: Double
+    @NSManaged public var tipo: String?
     @NSManaged public var descripcion: String?
-    @NSManaged public var estado: Int16
+    @NSManaged public var peso: NSDecimalNumber?
+    @NSManaged public var dni: String?
+    @NSManaged public var estado: String?
     @NSManaged public var idUsuario: String?
-    @NSManaged public var tipoMascota: String?
     @NSManaged public var raza: String?
 
 }
