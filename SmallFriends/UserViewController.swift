@@ -9,6 +9,7 @@ import UIKit
 import FirebaseAuth
 import GoogleSignIn
 import FacebookLogin
+import CoreData
 
 enum ProviderType: String{
     case basic
@@ -21,17 +22,18 @@ class UserViewController: UIViewController {
     @IBOutlet weak var correoLabel: UILabel!
     @IBOutlet weak var providerLabel: UILabel!    
     @IBOutlet weak var closeSessionButton: UIButton!
+    @IBOutlet weak var uidLabel: UILabel!
+    
     
     var email: String?
     var provider: ProviderType?
     
-    // Este inicializador será utilizado cuando se carga desde el Storyboard
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        // logica
+        
     }
     
-    //
+    
     init(email: String, provider: ProviderType) {
         self.email = email
         self.provider = provider
@@ -45,11 +47,33 @@ class UserViewController: UIViewController {
         
         
                 
-        // Mostrar datos
-        correoLabel.text = email
-        providerLabel.text = provider?.rawValue
+        // Mostrar datos del usuario logueado
+        cargarUsuarioDesdeCoreData()
 
         
+    }
+
+    private func cargarUsuarioDesdeCoreData() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let contexto = appDelegate.persistentContainer.viewContext
+
+        let request: NSFetchRequest<Usuario> = Usuario.fetchRequest()
+        request.predicate = NSPredicate(format: "idUsuario == %@", uid)
+
+        do {
+            if let usuario = try contexto.fetch(request).first {
+                correoLabel.text = usuario.email
+                providerLabel.text = usuario.provider
+                uidLabel.text = usuario.idUsuario
+                print("Usuario cargado desde Core Data: \(usuario.email ?? "")")
+            } else {
+                print("Usuario no encontrado en Core Data")
+            }
+        } catch {
+            print("Error al cargar usuario de Core Data: \(error.localizedDescription)")
+        }
     }
 
 
@@ -75,9 +99,9 @@ class UserViewController: UIViewController {
                 print("No provider, no se puede hacer log out.")
             }
             
-        // Redirigir al login
+        // Redirigir al login al cerrar sesion
            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let authVC = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController {
+            if let authVC = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController {
             if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
                let window = sceneDelegate.window {
                 let nav = UINavigationController(rootViewController: authVC)
@@ -98,4 +122,4 @@ class UserViewController: UIViewController {
         }
     }
 }
-/***/
+

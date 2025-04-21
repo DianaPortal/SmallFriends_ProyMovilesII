@@ -38,12 +38,7 @@
 		B75922092DAC15EB00A31AEE /* SmallFriends.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B75922072DAC15EB00A31AEE /* SmallFriends.xcdatamodeld */; };
 		B759220B2DAC15EC00A31AEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B759220A2DAC15EC00A31AEE /* Assets.xcassets */; };
 		B759220E2DAC15EC00A31AEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B759220C2DAC15EC00A31AEE /* LaunchScreen.storyboard */; };
-		B781729B2DB69D6D008BB4CC /* Mascota+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78172992DB69D6D008BB4CC /* Mascota+CoreDataClass.swift */; };
-		B781729C2DB69D6D008BB4CC /* Mascota+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B781729A2DB69D6D008BB4CC /* Mascota+CoreDataProperties.swift */; };
-		B78172A02DB6A20C008BB4CC /* MantenerMascotaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B781729F2DB6A20C008BB4CC /* MantenerMascotaViewController.swift */; };
-		B78172A42DB6B15C008BB4CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78172A32DB6B15C008BB4CC /* CoreDataManager.swift */; };
-		B78172A62DB6B4EB008BB4CC /* ListadoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78172A52DB6B4EB008BB4CC /* ListadoViewController.swift */; };
-		B78172A82DB6BC5C008BB4CC /* MascotaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78172A72DB6BC5C008BB4CC /* MascotaTableViewCell.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,12 +57,7 @@
 		B759220A2DAC15EC00A31AEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B759220D2DAC15EC00A31AEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B759220F2DAC15EC00A31AEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B78172992DB69D6D008BB4CC /* Mascota+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mascota+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B781729A2DB69D6D008BB4CC /* Mascota+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mascota+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		B781729F2DB6A20C008BB4CC /* MantenerMascotaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MantenerMascotaViewController.swift; sourceTree = "<group>"; };
-		B78172A32DB6B15C008BB4CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
-		B78172A52DB6B4EB008BB4CC /* ListadoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListadoViewController.swift; sourceTree = "<group>"; };
-		B78172A72DB6BC5C008BB4CC /* MascotaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotaTableViewCell.swift; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,8 +100,7 @@
 		B75921F22DAC15EB00A31AEE = {
 			isa = PBXGroup;
 			children = (
-				B78172992DB69D6D008BB4CC /* Mascota+CoreDataClass.swift */,
-				B781729A2DB69D6D008BB4CC /* Mascota+CoreDataProperties.swift */,
+
 				B75921FD2DAC15EB00A31AEE /* SmallFriends */,
 				B75921FC2DAC15EB00A31AEE /* Products */,
 				8422B3002DB243CD00A5D49B /* Frameworks */,
@@ -257,8 +246,7 @@
 				B78172A62DB6B4EB008BB4CC /* ListadoViewController.swift in Sources */,
 				B75922032DAC15EB00A31AEE /* AuthViewController.swift in Sources */,
 				B75922092DAC15EB00A31AEE /* SmallFriends.xcdatamodeld in Sources */,
-				B78172A42DB6B15C008BB4CC /* CoreDataManager.swift in Sources */,
-				B78172A02DB6A20C008BB4CC /* MantenerMascotaViewController.swift in Sources */,
+
 				B75921FF2DAC15EB00A31AEE /* AppDelegate.swift in Sources */,
 				B75922012DAC15EB00A31AEE /* SceneDelegate.swift in Sources */,
 				B78172A82DB6BC5C008BB4CC /* MascotaTableViewCell.swift in Sources */,
