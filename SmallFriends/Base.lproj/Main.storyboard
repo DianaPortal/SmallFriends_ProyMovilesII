@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="md1-Jh-2F4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
@@ -277,7 +277,7 @@
         <!--Mascotas-->
         <scene sceneID="fwh-e4-ZtE">
             <objects>
-                <viewController id="Bdw-Cr-xd1" sceneMemberID="viewController">
+                <viewController id="Bdw-Cr-xd1" customClass="ListadoViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Pg-X2-jkh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -295,7 +295,7 @@
                                 <rect key="frame" x="15" y="193" width="363" height="517"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="155" id="k07-v4-UuI">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="celdaMascota" rowHeight="155" id="k07-v4-UuI" customClass="MascotaTableViewCell" customModule="SmallFriends" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="363" height="155"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k07-v4-UuI" id="G29-G7-9VG">
@@ -345,6 +345,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="nombreMascotaLabel" destination="kUC-SB-7Mx" id="RBO-8b-9FN"/>
+                                            <outlet property="razaMascotaLabel" destination="Nan-j5-8G6" id="aBU-v4-Erz"/>
                                             <segue destination="zE0-wn-oAa" kind="show" identifier="mostrarDetalleMascota" id="pkB-Jp-R3n"/>
                                         </connections>
                                     </tableViewCell>
@@ -367,20 +369,24 @@
                     <navigationItem key="navigationItem" id="HDc-WY-KPJ">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="DGL-kb-olK">
                             <connections>
+                                <action selector="crearMascota:" destination="Bdw-Cr-xd1" id="LbO-7L-HZc"/>
                                 <segue destination="m1u-u2-iud" kind="show" identifier="RegistrarMascota" id="x6t-wv-rWe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mascotasTableView" destination="VGR-R3-opG" id="LQn-1g-iZm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oz6-GV-7GQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1171.7557251908397" y="-92.253521126760575"/>
         </scene>
-        <!--View Controller-->
+        <!--Mantener Mascota View Controller-->
         <scene sceneID="CDl-Q1-Ocx">
             <objects>
-                <viewController id="m1u-u2-iud" sceneMemberID="viewController">
+                <viewController id="m1u-u2-iud" customClass="MantenerMascotaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tkb-4y-Qbt">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -413,6 +419,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="txtNombre:" destination="V07-CE-kdj" eventType="editingDidEnd" id="a1V-fM-2rv"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40e-g9-u3T">
                                 <rect key="frame" x="20" y="323" width="353" height="20.333333333333314"/>
@@ -434,6 +443,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="txtEdad:" destination="V07-CE-kdj" eventType="editingDidEnd" id="QqM-Zu-YOY"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raza" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87d-Fx-mkp">
                                 <rect key="frame" x="20" y="467.66666666666669" width="353" height="30"/>
@@ -456,6 +468,9 @@
                                 <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="txtRaza:" destination="V07-CE-kdj" eventType="editingDidEnd" id="VWM-Aa-vp6"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNI de la mascota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaY-Ks-JUx">
                                 <rect key="frame" x="20" y="551.66666666666663" width="353" height="30"/>
@@ -476,6 +491,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="txtDni:" destination="V07-CE-kdj" eventType="editingDidEnd" id="JJC-pR-2hG"/>
+                                </connections>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HAD-D5-aHW">
                                 <rect key="frame" x="20" y="398.33333333333331" width="353" height="20.333333333333314"/>
@@ -507,6 +525,9 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="txtTipo:" destination="V07-CE-kdj" eventType="editingDidEnd" id="LYr-vO-oO8"/>
+                                        </connections>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="22.5" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="V98-q7-zGe">
                                         <rect key="frame" x="172.33333333333334" y="0.0" width="95.000000000000028" height="34"/>
@@ -518,6 +539,9 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="txtPeso:" destination="V07-CE-kdj" eventType="editingDidEnd" id="S7L-QM-nlf"/>
+                                        </connections>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="kg." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tbZ-U4-ccX">
                                         <rect key="frame" x="287.33333333333331" y="0.0" width="65.666666666666686" height="34"/>
@@ -539,6 +563,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="botonGuardarTapped:" destination="m1u-u2-iud" eventType="touchUpInside" id="nPA-8S-Zeh"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fWG-n1-nuA"/>
@@ -586,8 +613,17 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" id="iuQ-fB-bm3"/>
+                    <connections>
+                        <outlet property="dniField" destination="jmj-vm-k2f" id="vMP-Xe-J6v"/>
+                        <outlet property="edadField" destination="pCD-TY-rNL" id="IOK-DU-aWE"/>
+                        <outlet property="nombreField" destination="I0w-Sy-GzN" id="fdw-z2-nSE"/>
+                        <outlet property="pesoField" destination="V98-q7-zGe" id="9ik-Kb-RjL"/>
+                        <outlet property="razaField" destination="Sx4-TD-Gwz" id="SoV-PQ-1cm"/>
+                        <outlet property="tipoField" destination="5vz-RV-p55" id="V9V-CK-bCJ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPJ-12-m90" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="V07-CE-kdj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="816" y="625"/>
         </scene>
