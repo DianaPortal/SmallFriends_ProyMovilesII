@@ -273,7 +273,7 @@
         <!--Mascotas-->
         <scene sceneID="fwh-e4-ZtE">
             <objects>
-                <viewController id="Bdw-Cr-xd1" sceneMemberID="viewController">
+                <viewController id="Bdw-Cr-xd1" customClass="ListadoViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Pg-X2-jkh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -291,14 +291,14 @@
                                 <rect key="frame" x="15" y="193" width="363" height="517"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" rowHeight="155" id="k07-v4-UuI">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="celdaMascota" rowHeight="155" id="k07-v4-UuI" customClass="MascotaTableViewCell" customModule="SmallFriends" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="363" height="155"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="k07-v4-UuI" id="G29-G7-9VG">
                                             <rect key="frame" x="0.0" y="0.0" width="363" height="155"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3UI-eY-qOf">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mascotaswelcome" translatesAutoresizingMaskIntoConstraints="NO" id="3UI-eY-qOf">
                                                     <rect key="frame" x="40" y="16" width="100" height="126"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="100" id="fXa-Ow-Dzw"/>
@@ -339,6 +339,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="nombreMascotaLabel" destination="t7V-ko-47l" id="m6c-5V-3DS"/>
+                                            <outlet property="razaMascotaLabel" destination="V3d-k5-gUl" id="KiT-ea-ew7"/>
                                             <segue destination="zE0-wn-oAa" kind="show" identifier="mostrarDetalleMascota" id="pkB-Jp-R3n"/>
                                         </connections>
                                     </tableViewCell>
@@ -361,25 +363,29 @@
                     <navigationItem key="navigationItem" id="HDc-WY-KPJ">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="DGL-kb-olK">
                             <connections>
+                                <action selector="crearMascota:" destination="Bdw-Cr-xd1" id="yMC-Le-t1n"/>
                                 <segue destination="m1u-u2-iud" kind="show" identifier="RegistrarMascota" id="x6t-wv-rWe"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mascotasTableView" destination="VGR-R3-opG" id="1Wg-hh-8eW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oz6-GV-7GQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1171.7557251908397" y="-92.253521126760575"/>
         </scene>
-        <!--View Controller-->
+        <!--Mantener Mascota View Controller-->
         <scene sceneID="CDl-Q1-Ocx">
             <objects>
-                <viewController id="m1u-u2-iud" sceneMemberID="viewController">
+                <viewController id="m1u-u2-iud" customClass="MantenerMascotaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tkb-4y-Qbt">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="cNc-Sx-Sg9">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mascotaswelcome" translatesAutoresizingMaskIntoConstraints="NO" id="cNc-Sx-Sg9">
                                 <rect key="frame" x="146.66666666666666" y="113" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="gRy-yu-kDg"/>
@@ -531,6 +537,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="botonGuardarTapped:" destination="m1u-u2-iud" eventType="touchUpInside" id="hop-Ka-lKh"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="fWG-n1-nuA"/>
@@ -578,6 +587,14 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <navigationItem key="navigationItem" id="iuQ-fB-bm3"/>
+                    <connections>
+                        <outlet property="dniField" destination="jmj-vm-k2f" id="i2R-oc-gj0"/>
+                        <outlet property="edadField" destination="pCD-TY-rNL" id="wpx-F4-VZJ"/>
+                        <outlet property="nombreField" destination="I0w-Sy-GzN" id="DlC-UE-Sel"/>
+                        <outlet property="pesoField" destination="V98-q7-zGe" id="tFl-vs-E79"/>
+                        <outlet property="razaField" destination="Sx4-TD-Gwz" id="rC2-tX-p0p"/>
+                        <outlet property="tipoField" destination="5vz-RV-p55" id="tGY-2t-ZFW"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPJ-12-m90" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1340,25 +1357,25 @@
         <image name="perfil" width="32" height="32"/>
         <image name="ubicacion" width="32" height="32"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

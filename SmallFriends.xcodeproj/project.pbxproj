@@ -44,6 +44,10 @@
 		B7726D182DB6E8F700CD4D9B /* Citas+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D162DB6E8F700CD4D9B /* Citas+CoreDataProperties.swift */; };
 		B7726D1B2DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D192DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift */; };
 		B7726D1C2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D1A2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift */; };
+		B7CD11DE2DB6FBC50004D170 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11DD2DB6FBC50004D170 /* CoreDataManager.swift */; };
+		B7CD11E02DB6FC1A0004D170 /* ListadoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11DF2DB6FC1A0004D170 /* ListadoViewController.swift */; };
+		B7CD11E22DB6FC850004D170 /* MantenerMascotaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11E12DB6FC850004D170 /* MantenerMascotaViewController.swift */; };
+		B7CD11E42DB6FCF80004D170 /* MascotaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11E32DB6FCF80004D170 /* MascotaTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +72,10 @@
 		B7726D162DB6E8F700CD4D9B /* Citas+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Citas+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7726D192DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mascota+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7726D1A2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mascota+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B7CD11DD2DB6FBC50004D170 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		B7CD11DF2DB6FC1A0004D170 /* ListadoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListadoViewController.swift; sourceTree = "<group>"; };
+		B7CD11E12DB6FC850004D170 /* MantenerMascotaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MantenerMascotaViewController.swift; sourceTree = "<group>"; };
+		B7CD11E32DB6FCF80004D170 /* MascotaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotaTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +155,10 @@
 				84AA35E82DADD272007D2E86 /* UserViewController.xib */,
 				B745C9012DB41009001B8847 /* InicioViewController.swift */,
 				B745C9022DB41009001B8847 /* InicioViewController.xib */,
+				B7CD11DD2DB6FBC50004D170 /* CoreDataManager.swift */,
+				B7CD11DF2DB6FC1A0004D170 /* ListadoViewController.swift */,
+				B7CD11E12DB6FC850004D170 /* MantenerMascotaViewController.swift */,
+				B7CD11E32DB6FCF80004D170 /* MascotaTableViewCell.swift */,
 			);
 			path = SmallFriends;
 			sourceTree = "<group>";
@@ -251,13 +263,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7CD11E42DB6FCF80004D170 /* MascotaTableViewCell.swift in Sources */,
 				84AA35E42DADC35F007D2E86 /* UserViewController.swift in Sources */,
 				B745C9032DB41009001B8847 /* InicioViewController.swift in Sources */,
 				B75922032DAC15EB00A31AEE /* AuthViewController.swift in Sources */,
 				B7726D1B2DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift in Sources */,
+				B7CD11E22DB6FC850004D170 /* MantenerMascotaViewController.swift in Sources */,
 				B7726D1C2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift in Sources */,
+				B7CD11E02DB6FC1A0004D170 /* ListadoViewController.swift in Sources */,
 				B75922092DAC15EB00A31AEE /* SmallFriends.xcdatamodeld in Sources */,
 				B7726D102DB6A2B400CD4D9B /* Usuario+CoreDataProperties.swift in Sources */,
+				B7CD11DE2DB6FBC50004D170 /* CoreDataManager.swift in Sources */,
 				B7726D0F2DB6A2B400CD4D9B /* Usuario+CoreDataClass.swift in Sources */,
 				B75921FF2DAC15EB00A31AEE /* AppDelegate.swift in Sources */,
 				B7726D182DB6E8F700CD4D9B /* Citas+CoreDataProperties.swift in Sources */,
