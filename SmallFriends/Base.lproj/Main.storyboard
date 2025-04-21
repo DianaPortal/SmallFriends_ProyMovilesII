@@ -302,26 +302,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="363" height="155"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre de mascota" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUC-SB-7Mx">
-                                                    <rect key="frame" x="125" y="36" width="213" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="15" id="lfh-QY-O4F"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripcion" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nan-j5-8G6">
-                                                    <rect key="frame" x="125" y="61" width="213" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="15" id="aX2-Wk-yyO"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3UI-eY-qOf">
-                                                    <rect key="frame" x="20" y="5" width="100" height="100"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mascotaswelcome" translatesAutoresizingMaskIntoConstraints="NO" id="3UI-eY-qOf">
+                                                    <rect key="frame" x="40" y="5" width="100" height="145"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="100" id="jN9-oX-KKt"/>
                                                         <constraint firstAttribute="width" constant="100" id="k1y-2d-EOa"/>
@@ -332,21 +314,37 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="3L6-vm-zJJ">
+                                                    <rect key="frame" x="170" y="5" width="133" height="145"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre de mascota" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BES-z3-gvZ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="133" height="65"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripcion" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="64R-2t-Op7">
+                                                            <rect key="frame" x="0.0" y="80" width="133" height="65"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Nan-j5-8G6" firstAttribute="top" secondItem="kUC-SB-7Mx" secondAttribute="bottom" constant="10" id="DYZ-1I-sK2"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Nan-j5-8G6" secondAttribute="trailing" constant="5" id="EFi-3G-4pN"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="kUC-SB-7Mx" secondAttribute="trailing" constant="5" id="Hqy-Uz-cjx"/>
-                                                <constraint firstItem="Nan-j5-8G6" firstAttribute="leading" secondItem="3UI-eY-qOf" secondAttribute="trailing" constant="5" id="Xtd-s8-hRz"/>
-                                                <constraint firstItem="kUC-SB-7Mx" firstAttribute="leading" secondItem="3UI-eY-qOf" secondAttribute="trailing" constant="5" id="gYH-QN-gen"/>
-                                                <constraint firstItem="kUC-SB-7Mx" firstAttribute="top" secondItem="G29-G7-9VG" secondAttribute="topMargin" constant="25" id="mZo-KU-IXg"/>
-                                                <constraint firstItem="3UI-eY-qOf" firstAttribute="leading" secondItem="G29-G7-9VG" secondAttribute="leading" constant="20" id="qty-Cn-MFL"/>
-                                                <constraint firstItem="3UI-eY-qOf" firstAttribute="top" secondItem="G29-G7-9VG" secondAttribute="top" constant="5" id="rl1-mz-E8p"/>
+                                                <constraint firstAttribute="bottom" secondItem="3L6-vm-zJJ" secondAttribute="bottom" constant="5" id="EJ4-pu-j6Y"/>
+                                                <constraint firstItem="3UI-eY-qOf" firstAttribute="top" secondItem="G29-G7-9VG" secondAttribute="top" constant="5" id="LSQ-Yi-nwG"/>
+                                                <constraint firstItem="3L6-vm-zJJ" firstAttribute="leading" secondItem="3UI-eY-qOf" secondAttribute="trailing" constant="30" id="hT4-6H-TIl"/>
+                                                <constraint firstAttribute="trailing" secondItem="3L6-vm-zJJ" secondAttribute="trailing" constant="60" id="jfn-TJ-y2h"/>
+                                                <constraint firstItem="3UI-eY-qOf" firstAttribute="leading" secondItem="G29-G7-9VG" secondAttribute="leading" constant="40" id="qty-Cn-MFL"/>
+                                                <constraint firstItem="3L6-vm-zJJ" firstAttribute="top" secondItem="G29-G7-9VG" secondAttribute="top" constant="5" id="uAJ-TX-LXJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="3UI-eY-qOf" secondAttribute="bottom" constant="5" id="vCz-XG-hkT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="nombreMascotaLabel" destination="kUC-SB-7Mx" id="RBO-8b-9FN"/>
-                                            <outlet property="razaMascotaLabel" destination="Nan-j5-8G6" id="aBU-v4-Erz"/>
+                                            <outlet property="nombreMascotaLabel" destination="BES-z3-gvZ" id="v6I-6S-oIR"/>
+                                            <outlet property="razaMascotaLabel" destination="64R-2t-Op7" id="Dd7-B0-WuG"/>
                                             <segue destination="zE0-wn-oAa" kind="show" identifier="mostrarDetalleMascota" id="pkB-Jp-R3n"/>
                                         </connections>
                                     </tableViewCell>
@@ -367,10 +365,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Mascotas" image="huella" id="cZS-yr-I9T"/>
                     <navigationItem key="navigationItem" id="HDc-WY-KPJ">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="DGL-kb-olK">
+                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="DGL-kb-olK" customClass="crearMascotaBoton">
                             <connections>
                                 <action selector="crearMascota:" destination="Bdw-Cr-xd1" id="LbO-7L-HZc"/>
-                                <segue destination="m1u-u2-iud" kind="show" identifier="RegistrarMascota" id="x6t-wv-rWe"/>
+                                <segue destination="m1u-u2-iud" kind="show" id="smw-pd-y0q"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

@@ -44,9 +44,6 @@
 		B78172A42DB6B15C008BB4CC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78172A32DB6B15C008BB4CC /* CoreDataManager.swift */; };
 		B78172A62DB6B4EB008BB4CC /* ListadoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78172A52DB6B4EB008BB4CC /* ListadoViewController.swift */; };
 		B78172A82DB6BC5C008BB4CC /* MascotaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B78172A72DB6BC5C008BB4CC /* MascotaTableViewCell.swift */; };
-		B7C4F0B12DB40E3900769C8E /* HistorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C4F0B02DB40E3900769C8E /* HistorialViewController.swift */; };
-		B7C4F0B42DB4102D00769C8E /* HistorialTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C4F0B22DB4102D00769C8E /* HistorialTableViewCell.swift */; };
-		B7C4F0B92DB4172300769C8E /* HistorialDatos.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7C4F0B82DB4172300769C8E /* HistorialDatos.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,9 +68,6 @@
 		B78172A32DB6B15C008BB4CC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B78172A52DB6B4EB008BB4CC /* ListadoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListadoViewController.swift; sourceTree = "<group>"; };
 		B78172A72DB6BC5C008BB4CC /* MascotaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotaTableViewCell.swift; sourceTree = "<group>"; };
-		B7C4F0B02DB40E3900769C8E /* HistorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorialViewController.swift; sourceTree = "<group>"; };
-		B7C4F0B22DB4102D00769C8E /* HistorialTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorialTableViewCell.swift; sourceTree = "<group>"; };
-		B7C4F0B82DB4172300769C8E /* HistorialDatos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistorialDatos.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,9 +129,6 @@
 		B75921FD2DAC15EB00A31AEE /* SmallFriends */ = {
 			isa = PBXGroup;
 			children = (
-				B7C4F0B82DB4172300769C8E /* HistorialDatos.swift */,
-				B7C4F0B22DB4102D00769C8E /* HistorialTableViewCell.swift */,
-				B7C4F0B02DB40E3900769C8E /* HistorialViewController.swift */,
 				8422B2FF2DB22E4200A5D49B /* SmallFriends.entitlements */,
 				B75921FE2DAC15EB00A31AEE /* AppDelegate.swift */,
 				B75922002DAC15EB00A31AEE /* SceneDelegate.swift */,
@@ -260,8 +251,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B7C4F0B42DB4102D00769C8E /* HistorialTableViewCell.swift in Sources */,
-				B7C4F0B92DB4172300769C8E /* HistorialDatos.swift in Sources */,
 				84AA35E42DADC35F007D2E86 /* UserViewController.swift in Sources */,
 				B745C9032DB41009001B8847 /* InicioViewController.swift in Sources */,
 				B781729B2DB69D6D008BB4CC /* Mascota+CoreDataClass.swift in Sources */,
@@ -274,7 +263,6 @@
 				B75922012DAC15EB00A31AEE /* SceneDelegate.swift in Sources */,
 				B78172A82DB6BC5C008BB4CC /* MascotaTableViewCell.swift in Sources */,
 				B781729C2DB69D6D008BB4CC /* Mascota+CoreDataProperties.swift in Sources */,
-				B7C4F0B12DB40E3900769C8E /* HistorialViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,6 +23,9 @@ extension Mascota {
     @NSManaged public var peso: NSDecimalNumber?
     @NSManaged public var raza: String?
     @NSManaged public var dni: String?
+    @NSManaged public var descripcion: String?
+    @NSManaged public var estado: String?
+    @NSManaged public var idUsuario: String?
 
 }
 
