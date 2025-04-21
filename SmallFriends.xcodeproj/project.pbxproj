@@ -48,6 +48,13 @@
 		B7CD11E02DB6FC1A0004D170 /* ListadoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11DF2DB6FC1A0004D170 /* ListadoViewController.swift */; };
 		B7CD11E22DB6FC850004D170 /* MantenerMascotaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11E12DB6FC850004D170 /* MantenerMascotaViewController.swift */; };
 		B7CD11E42DB6FCF80004D170 /* MascotaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11E32DB6FCF80004D170 /* MascotaTableViewCell.swift */; };
+		B7CD11E62DB6FF640004D170 /* ListadoCitaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11E52DB6FF640004D170 /* ListadoCitaViewController.swift */; };
+		B7CD11EC2DB6FFF30004D170 /* DetalleMascotaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11EB2DB6FFF30004D170 /* DetalleMascotaViewController.swift */; };
+		B7CD11EE2DB700690004D170 /* DetalleCitaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11ED2DB700690004D170 /* DetalleCitaViewController.swift */; };
+		B7CD11F02DB700960004D170 /* MantenerCitaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11EF2DB700960004D170 /* MantenerCitaViewController.swift */; };
+		B7CD11F22DB7011E0004D170 /* ListaEventosAPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F12DB7011E0004D170 /* ListaEventosAPIViewController.swift */; };
+		B7CD11F42DB7013D0004D170 /* DetalleEventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F32DB7013D0004D170 /* DetalleEventoViewController.swift */; };
+		B7CD11F72DB701670004D170 /* NotificacionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F62DB701670004D170 /* NotificacionesViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +83,13 @@
 		B7CD11DF2DB6FC1A0004D170 /* ListadoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListadoViewController.swift; sourceTree = "<group>"; };
 		B7CD11E12DB6FC850004D170 /* MantenerMascotaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MantenerMascotaViewController.swift; sourceTree = "<group>"; };
 		B7CD11E32DB6FCF80004D170 /* MascotaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MascotaTableViewCell.swift; sourceTree = "<group>"; };
+		B7CD11E52DB6FF640004D170 /* ListadoCitaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListadoCitaViewController.swift; sourceTree = "<group>"; };
+		B7CD11EB2DB6FFF30004D170 /* DetalleMascotaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalleMascotaViewController.swift; sourceTree = "<group>"; };
+		B7CD11ED2DB700690004D170 /* DetalleCitaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalleCitaViewController.swift; sourceTree = "<group>"; };
+		B7CD11EF2DB700960004D170 /* MantenerCitaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MantenerCitaViewController.swift; sourceTree = "<group>"; };
+		B7CD11F12DB7011E0004D170 /* ListaEventosAPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListaEventosAPIViewController.swift; sourceTree = "<group>"; };
+		B7CD11F32DB7013D0004D170 /* DetalleEventoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalleEventoViewController.swift; sourceTree = "<group>"; };
+		B7CD11F62DB701670004D170 /* NotificacionesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificacionesViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +160,7 @@
 				B75922002DAC15EB00A31AEE /* SceneDelegate.swift */,
 				B75922022DAC15EB00A31AEE /* AuthViewController.swift */,
 				B75922042DAC15EB00A31AEE /* Main.storyboard */,
+				B7CD11E52DB6FF640004D170 /* ListadoCitaViewController.swift */,
 				B759220A2DAC15EC00A31AEE /* Assets.xcassets */,
 				B759220C2DAC15EC00A31AEE /* LaunchScreen.storyboard */,
 				B759220F2DAC15EC00A31AEE /* Info.plist */,
@@ -159,6 +174,12 @@
 				B7CD11DF2DB6FC1A0004D170 /* ListadoViewController.swift */,
 				B7CD11E12DB6FC850004D170 /* MantenerMascotaViewController.swift */,
 				B7CD11E32DB6FCF80004D170 /* MascotaTableViewCell.swift */,
+				B7CD11EB2DB6FFF30004D170 /* DetalleMascotaViewController.swift */,
+				B7CD11ED2DB700690004D170 /* DetalleCitaViewController.swift */,
+				B7CD11EF2DB700960004D170 /* MantenerCitaViewController.swift */,
+				B7CD11F12DB7011E0004D170 /* ListaEventosAPIViewController.swift */,
+				B7CD11F32DB7013D0004D170 /* DetalleEventoViewController.swift */,
+				B7CD11F62DB701670004D170 /* NotificacionesViewController.swift */,
 			);
 			path = SmallFriends;
 			sourceTree = "<group>";
@@ -264,13 +285,20 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7CD11E42DB6FCF80004D170 /* MascotaTableViewCell.swift in Sources */,
+				B7CD11EE2DB700690004D170 /* DetalleCitaViewController.swift in Sources */,
 				84AA35E42DADC35F007D2E86 /* UserViewController.swift in Sources */,
+				B7CD11F02DB700960004D170 /* MantenerCitaViewController.swift in Sources */,
 				B745C9032DB41009001B8847 /* InicioViewController.swift in Sources */,
 				B75922032DAC15EB00A31AEE /* AuthViewController.swift in Sources */,
 				B7726D1B2DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift in Sources */,
 				B7CD11E22DB6FC850004D170 /* MantenerMascotaViewController.swift in Sources */,
 				B7726D1C2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift in Sources */,
+				B7CD11EC2DB6FFF30004D170 /* DetalleMascotaViewController.swift in Sources */,
 				B7CD11E02DB6FC1A0004D170 /* ListadoViewController.swift in Sources */,
+				B7CD11F72DB701670004D170 /* NotificacionesViewController.swift in Sources */,
+				B7CD11E62DB6FF640004D170 /* ListadoCitaViewController.swift in Sources */,
+				B7CD11F22DB7011E0004D170 /* ListaEventosAPIViewController.swift in Sources */,
+				B7CD11F42DB7013D0004D170 /* DetalleEventoViewController.swift in Sources */,
 				B75922092DAC15EB00A31AEE /* SmallFriends.xcdatamodeld in Sources */,
 				B7726D102DB6A2B400CD4D9B /* Usuario+CoreDataProperties.swift in Sources */,
 				B7CD11DE2DB6FBC50004D170 /* CoreDataManager.swift in Sources */,

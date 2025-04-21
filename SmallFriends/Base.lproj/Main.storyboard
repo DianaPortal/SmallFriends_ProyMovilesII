@@ -45,20 +45,20 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pe6-6A-SjA">
-                                <rect key="frame" x="15" y="323" width="363" height="429"/>
+                                <rect key="frame" x="40" y="323" width="313" height="429"/>
                                 <subviews>
                                     <textField verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Correo electronico" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-Qv-347">
-                                        <rect key="frame" x="0.0" y="0.0" width="363" height="55"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="55"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <textField verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contraseña" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17u-JK-r5b">
-                                        <rect key="frame" x="0.0" y="75" width="363" height="54.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="75" width="313" height="54.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRr-Wb-7O2">
-                                        <rect key="frame" x="0.0" y="149.66666666666669" width="363" height="55"/>
+                                        <rect key="frame" x="0.0" y="149.66666666666669" width="313" height="55"/>
                                         <color key="backgroundColor" systemColor="systemBlueColor"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
@@ -74,16 +74,16 @@
                                         </connections>
                                     </button>
                                     <label verifyAmbiguity="ignoreSizes" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="o" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4i-By-nHD">
-                                        <rect key="frame" x="0.0" y="224.66666666666663" width="363" height="54.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="224.66666666666663" width="313" height="54.666666666666686"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="-100" translatesAutoresizingMaskIntoConstraints="NO" id="Rw0-EE-bhg">
-                                        <rect key="frame" x="0.0" y="299.33333333333337" width="363" height="55"/>
+                                        <rect key="frame" x="0.0" y="299.33333333333337" width="313" height="55"/>
                                         <subviews>
                                             <button verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtR-Gb-pIf">
-                                                <rect key="frame" x="0.0" y="0.0" width="231.66666666666666" height="55"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="206.66666666666666" height="55"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="iconGoogle"/>
                                                 <connections>
@@ -91,7 +91,7 @@
                                                 </connections>
                                             </button>
                                             <button verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Gz-N2-7p1">
-                                                <rect key="frame" x="131.66666666666663" y="0.0" width="231.33333333333337" height="55"/>
+                                                <rect key="frame" x="106.66666666666664" y="0.0" width="206.33333333333337" height="55"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="iconFacebook"/>
                                                 <connections>
@@ -101,7 +101,7 @@
                                         </subviews>
                                     </stackView>
                                     <button verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jR6-8G-dgL">
-                                        <rect key="frame" x="0.0" y="374.33333333333337" width="363" height="54.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="374.33333333333337" width="313" height="54.666666666666686"/>
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <state key="normal" title="Button"/>
                                         <buttonConfiguration key="configuration" style="plain" title="Registrarse"/>
@@ -118,14 +118,14 @@
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemGray6Color"/>
+                        <color key="backgroundColor" red="0.092534013092517853" green="0.65780490636825562" blue="0.6302751898765564" alpha="0.58686879139072845" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="pe6-6A-SjA" secondAttribute="bottom" constant="100" id="bZR-dY-TvT"/>
                             <constraint firstItem="2te-IK-B0A" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nUC-FD-e45"/>
                             <constraint firstItem="pe6-6A-SjA" firstAttribute="top" secondItem="2te-IK-B0A" secondAttribute="bottom" constant="20" id="pRf-gY-0hL"/>
                             <constraint firstItem="2te-IK-B0A" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="qPZ-Q2-Vvx"/>
-                            <constraint firstItem="pe6-6A-SjA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="15" id="r9N-kE-sFy"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pe6-6A-SjA" secondAttribute="trailing" constant="15" id="y32-2q-pBE"/>
+                            <constraint firstItem="pe6-6A-SjA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="r9N-kE-sFy"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="pe6-6A-SjA" secondAttribute="trailing" constant="40" id="y32-2q-pBE"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
@@ -598,7 +598,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPJ-12-m90" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="816" y="625"/>
+            <point key="canvasLocation" x="824" y="745"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="wZi-8A-7rF">
@@ -640,7 +640,7 @@
         <!--Citas-->
         <scene sceneID="tDU-1y-MHL">
             <objects>
-                <viewController id="VBV-SC-ptH" sceneMemberID="viewController">
+                <viewController id="VBV-SC-ptH" customClass="ListadoCitaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dg7-CA-X5m">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -688,7 +688,7 @@
                     <navigationItem key="navigationItem" id="f6V-Ks-wZo">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="d2I-TJ-7EL">
                             <connections>
-                                <segue destination="Xcu-4c-IxZ" kind="show" identifier="mostrarRegistrarCita" id="qaT-bb-LJn"/>
+                                <segue destination="Xcu-4c-IxZ" kind="show" id="0mL-VC-DgL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -701,7 +701,7 @@
         <!--Eventos-->
         <scene sceneID="BnV-UI-9yh">
             <objects>
-                <viewController id="CXx-Ec-xUu" sceneMemberID="viewController">
+                <viewController id="CXx-Ec-xUu" customClass="ListaEventosAPIViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dnz-nk-D7b">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -753,10 +753,10 @@
             </objects>
             <point key="canvasLocation" x="3580.9160305343512" y="-92.253521126760575"/>
         </scene>
-        <!--View Controller-->
+        <!--Notificaciones View Controller-->
         <scene sceneID="LWN-8r-9jW">
             <objects>
-                <viewController id="xeJ-Ui-axe" sceneMemberID="viewController">
+                <viewController id="xeJ-Ui-axe" customClass="NotificacionesViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="guU-u5-Vhc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -843,10 +843,10 @@
             </objects>
             <point key="canvasLocation" x="-245" y="599"/>
         </scene>
-        <!--View Controller-->
+        <!--Detalle Mascota View Controller-->
         <scene sceneID="Ps3-Rl-1Tg">
             <objects>
-                <viewController id="zE0-wn-oAa" sceneMemberID="viewController">
+                <viewController id="zE0-wn-oAa" customClass="DetalleMascotaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="THb-8I-Byi">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -952,6 +952,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="m1u-u2-iud" kind="show" identifier="mostrarActMascota" id="S5r-Rk-PbX"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Wrp-4m-CSr"/>
@@ -976,10 +979,10 @@
             </objects>
             <point key="canvasLocation" x="1538" y="625"/>
         </scene>
-        <!--View Controller-->
+        <!--Detalle Cita View Controller-->
         <scene sceneID="OTT-yz-GMl">
             <objects>
-                <viewController id="ik7-to-N5B" sceneMemberID="viewController">
+                <viewController id="ik7-to-N5B" customClass="DetalleCitaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pu8-t7-9Uh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1061,6 +1064,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Xcu-4c-IxZ" kind="show" identifier="mostrarActCita" id="Obs-Zb-sdy"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xxm-f9-fbB"/>
@@ -1082,12 +1088,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bb1-qB-3Ui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2313.740458015267" y="624.64788732394368"/>
+            <point key="canvasLocation" x="3051" y="625"/>
         </scene>
-        <!--View Controller-->
+        <!--Mantener Cita View Controller-->
         <scene sceneID="C8z-5c-SKa">
             <objects>
-                <viewController id="Xcu-4c-IxZ" sceneMemberID="viewController">
+                <viewController id="Xcu-4c-IxZ" customClass="MantenerCitaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g9B-8Y-iN2">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1185,12 +1191,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtx-KW-pUI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3108" y="625"/>
+            <point key="canvasLocation" x="2265" y="682"/>
         </scene>
-        <!--View Controller-->
+        <!--Detalle Evento View Controller-->
         <scene sceneID="owU-ZD-mRg">
             <objects>
-                <viewController id="udm-Rd-oBT" sceneMemberID="viewController">
+                <viewController id="udm-Rd-oBT" customClass="DetalleEventoViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="amK-Qw-s1H">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1340,9 +1346,11 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="Obs-Zb-sdy"/>
         <segue reference="LBC-OS-krG"/>
-        <segue reference="XqQ-v8-d5H"/>
-        <segue reference="fP3-N7-4ek"/>
+        <segue reference="yLb-FB-oHz"/>
+        <segue reference="x6t-wv-rWe"/>
+        <segue reference="Sz5-1v-YmZ"/>
         <segue reference="M5x-bG-74I"/>
     </inferredMetricsTieBreakers>
     <resources>
