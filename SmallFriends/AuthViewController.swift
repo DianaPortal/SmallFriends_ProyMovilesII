@@ -14,10 +14,7 @@ class AuthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Autenticación"
-        correoTextField.isSecureTextEntry = false
-
-        
+        title = "Autenticación"  
 
         // Comprobar sesión guardada
         let defaults = UserDefaults.standard
@@ -51,10 +48,13 @@ class AuthViewController: UIViewController {
             }
 
             // Aquí sí validamos bien el resultado
+           self.goToMainTabBar()
             self.showHome(result: result, error: error, provider: .basic)
+
         }
                  
     }
+    
     //Btn Registrar Usuario
     @IBAction func signUpButtonAction(_ sender: UIButton) {
         if let email = correoTextField.text,
@@ -115,7 +115,7 @@ class AuthViewController: UIViewController {
         }
     }
 
-    //- Función de manejo de inciar sesión
+    // Función de manejo de inciar sesión
 
     private func showHome(result: AuthDataResult?, error: Error?, provider: ProviderType) {
         if let error = error as NSError? {
