@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G513" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Citas" representedClassName=".Citas" syncable="YES">
-        <attribute name="doctor" optional="YES" attributeType="String"/>
-        <attribute name="estado" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    <entity name="CitasCD" representedClassName=".CitasCD" syncable="YES">
+        <attribute name="descripcionCita" optional="YES" attributeType="String"/>
         <attribute name="fechaCita" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="idCita" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lugarCita" optional="YES" attributeType="String"/>
         <attribute name="tipoCita" optional="YES" attributeType="String"/>
+        <relationship name="usuario" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Usuario" inverseName="citas" inverseEntity="Usuario"/>
     </entity>
     <entity name="Mascota" representedClassName=".Mascota" syncable="YES">
         <attribute name="descripcion" optional="YES" attributeType="String"/>
@@ -23,5 +23,6 @@
         <attribute name="email" optional="YES" attributeType="String"/>
         <attribute name="idUsuario" optional="YES" attributeType="String"/>
         <attribute name="provider" optional="YES" attributeType="String"/>
+        <relationship name="citas" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CitasCD" inverseName="usuario" inverseEntity="CitasCD"/>
     </entity>
 </model>

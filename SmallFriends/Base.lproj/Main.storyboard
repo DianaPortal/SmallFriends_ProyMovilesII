@@ -660,15 +660,41 @@
                                 <rect key="frame" x="15" y="193" width="363" height="566"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mostrarDetalle" rowHeight="163" id="R5D-RK-6ir">
-                                        <rect key="frame" x="0.0" y="50" width="363" height="163"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="celdaMostrarCitas" rowHeight="150" id="R5D-RK-6ir" customClass="CitasTableViewCell" customModule="SmallFriends" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="363" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="R5D-RK-6ir" id="KPF-Cw-ZOO">
-                                            <rect key="frame" x="0.0" y="0.0" width="363" height="163"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="363" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0QT-py-TSP">
+                                                    <rect key="frame" x="35" y="16" width="293" height="118"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cita" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXo-A3-5iZ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="293" height="56.666666666666664"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32G-cz-dZB">
+                                                            <rect key="frame" x="0.0" y="61.666666666666671" width="293" height="56.333333333333329"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottomMargin" secondItem="0QT-py-TSP" secondAttribute="bottom" constant="5" id="QrB-fO-EiE"/>
+                                                <constraint firstItem="0QT-py-TSP" firstAttribute="top" secondItem="KPF-Cw-ZOO" secondAttribute="topMargin" constant="5" id="YHx-yn-Jsc"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="0QT-py-TSP" secondAttribute="trailing" constant="15" id="jTr-ht-lWZ"/>
+                                                <constraint firstItem="0QT-py-TSP" firstAttribute="leading" secondItem="KPF-Cw-ZOO" secondAttribute="leadingMargin" constant="15" id="xmV-YM-OlI"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="ik7-to-N5B" kind="show" identifier="mostrarDetCitaSeleccionada" id="GQ0-zH-VlB"/>
+                                            <outlet property="citaLabel" destination="wXo-A3-5iZ" id="z3Z-B5-YIy"/>
+                                            <outlet property="detalleCita" destination="32G-cz-dZB" id="OAr-6t-7ja"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -695,6 +721,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tablaCitas" destination="PpY-1y-scX" id="wnj-zX-fqf"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X8O-UD-reN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -980,6 +1009,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="actualizarTapped:" destination="UYg-5a-ShW" eventType="touchUpInside" id="WjO-tL-nGO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Wrp-4m-CSr"/>
@@ -1001,19 +1033,20 @@
                     <navigationItem key="navigationItem" id="ih4-bZ-Sq2"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17u-le-LUc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="UYg-5a-ShW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1642" y="744"/>
         </scene>
         <!--Detalle Cita View Controller-->
         <scene sceneID="OTT-yz-GMl">
             <objects>
-                <viewController id="ik7-to-N5B" customClass="DetalleCitaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="detalleCita" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ik7-to-N5B" customClass="DetalleCitaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pu8-t7-9Uh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalle Cita" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ajo-l7-Skm">
-                                <rect key="frame" x="20" y="123" width="353" height="40"/>
+                                <rect key="frame" x="20" y="79" width="353" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="X1G-Ji-1Ol"/>
                                 </constraints>
@@ -1022,52 +1055,52 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gvI-ch-s5E">
-                                <rect key="frame" x="40" y="173" width="313" height="496"/>
+                                <rect key="frame" x="40" y="129" width="313" height="589"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfn-wT-caj">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="53.333333333333336"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="65"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/03/2025" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO4-6C-K6O">
-                                        <rect key="frame" x="0.0" y="63.333333333333343" width="313" height="53.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="75" width="313" height="64.666666666666686"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIJ-NM-RBH">
-                                        <rect key="frame" x="0.0" y="126.66666666666669" width="313" height="53"/>
+                                        <rect key="frame" x="0.0" y="149.66666666666669" width="313" height="65"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Borja Av...." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiE-hh-ZoI">
-                                        <rect key="frame" x="0.0" y="189.66666666666669" width="313" height="53.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="224.66666666666669" width="313" height="65"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOp-Mo-meK">
-                                        <rect key="frame" x="0.0" y="253.00000000000003" width="313" height="53.333333333333343"/>
+                                        <rect key="frame" x="0.0" y="299.66666666666669" width="313" height="64.666666666666686"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee8-ac-y2n">
-                                        <rect key="frame" x="0.0" y="316.33333333333331" width="313" height="53.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="374.33333333333331" width="313" height="65"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción Cita: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-sZ-giT">
-                                        <rect key="frame" x="0.0" y="379.66666666666663" width="313" height="53"/>
+                                        <rect key="frame" x="0.0" y="449.33333333333337" width="313" height="64.666666666666629"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta Trimestral - Vacunas " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UB8-YY-1dH">
-                                        <rect key="frame" x="0.0" y="442.66666666666663" width="313" height="53.333333333333314"/>
+                                        <rect key="frame" x="0.0" y="524" width="313" height="65"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1075,7 +1108,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brx-nt-GRY">
-                                <rect key="frame" x="100" y="689" width="193" height="40"/>
+                                <rect key="frame" x="100" y="738" width="193" height="40"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dBo-YH-dNP"/>
@@ -1089,6 +1122,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="Xcu-4c-IxZ" kind="show" identifier="showMantenerCita" id="7yy-0E-yFQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xxm-f9-fbB"/>
@@ -1107,21 +1143,27 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="i9a-W3-WpH"/>
+                    <connections>
+                        <outlet property="descripCitaLabel" destination="UB8-YY-1dH" id="S6d-BY-e3I"/>
+                        <outlet property="fechaCitaLabel" destination="TO4-6C-K6O" id="5SQ-gg-MPF"/>
+                        <outlet property="lugarCitaLabel" destination="aiE-hh-ZoI" id="7eD-p7-sWF"/>
+                        <outlet property="tipoCitaLabel" destination="ee8-ac-y2n" id="qZ0-jQ-RD2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bb1-qB-3Ui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3698" y="744"/>
+            <point key="canvasLocation" x="3685" y="643"/>
         </scene>
         <!--Mantener Cita View Controller-->
         <scene sceneID="C8z-5c-SKa">
             <objects>
-                <viewController id="Xcu-4c-IxZ" customClass="MantenerCitaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="showMantenerCita" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Xcu-4c-IxZ" customClass="MantenerCitaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="g9B-8Y-iN2">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registrar Cita" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6Y-Lr-cvw">
-                                <rect key="frame" x="20" y="123" width="353" height="40"/>
+                                <rect key="frame" x="20" y="20" width="353" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="f3L-x5-ekz"/>
                                 </constraints>
@@ -1129,57 +1171,62 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0mi-0e-uLd">
-                                <rect key="frame" x="40" y="213" width="313" height="342"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0mi-0e-uLd">
+                                <rect key="frame" x="40" y="110" width="313" height="394"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzM-5a-0z2">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="34"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Fecha programada de la cita" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7Rf-Rw-ZOI">
-                                        <rect key="frame" x="0.0" y="44" width="313" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" datePickerMode="date" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTr-WQ-cwd">
+                                        <rect key="frame" x="0.0" y="44" width="313" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="OUT-w5-FtN"/>
+                                        </constraints>
+                                        <date key="date" timeIntervalSinceReferenceDate="767466108.38481104">
+                                            <!--2025-04-27 17:01:48 +0000-->
+                                        </date>
+                                    </datePicker>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxw-vH-lR8">
-                                        <rect key="frame" x="0.0" y="88" width="313" height="34"/>
+                                        <rect key="frame" x="0.0" y="104" width="313" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Direccion o nombre del lugar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2G-03-9It">
-                                        <rect key="frame" x="0.0" y="132" width="313" height="34"/>
+                                        <rect key="frame" x="0.0" y="148" width="313" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo de Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKe-wx-uhk">
-                                        <rect key="frame" x="0.0" y="176" width="313" height="34"/>
+                                        <rect key="frame" x="0.0" y="202" width="313" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Consulta, Vacunación, etc." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Dg3-SB-5eZ">
-                                        <rect key="frame" x="0.0" y="220" width="313" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
+                                    <pickerView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="3iL-Gt-gDO">
+                                        <rect key="frame" x="0.0" y="246" width="313" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="K2d-GP-07j"/>
+                                        </constraints>
+                                    </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción de la Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H05-Ri-ZKa">
-                                        <rect key="frame" x="0.0" y="264" width="313" height="34"/>
+                                        <rect key="frame" x="0.0" y="316" width="313" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Descripción a detalle de la cita" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-at-Dfa">
-                                        <rect key="frame" x="0.0" y="308" width="313" height="34"/>
+                                        <rect key="frame" x="0.0" y="360" width="313" height="34"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvc-as-KQm">
-                                <rect key="frame" x="100" y="689" width="193" height="50"/>
+                                <rect key="frame" x="100" y="772" width="193" height="50"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="nKI-lL-DlZ"/>
@@ -1193,6 +1240,9 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="guardarTapped:" destination="Xcu-4c-IxZ" eventType="touchUpInside" id="eO4-EW-1sd"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JSb-ni-vUS"/>
@@ -1203,17 +1253,27 @@
                             <constraint firstItem="JSb-ni-vUS" firstAttribute="trailing" secondItem="N6Y-Lr-cvw" secondAttribute="trailing" constant="20" id="AoQ-dm-NMu"/>
                             <constraint firstItem="N6Y-Lr-cvw" firstAttribute="leading" secondItem="JSb-ni-vUS" secondAttribute="leading" constant="20" id="Kcp-Rg-AWf"/>
                             <constraint firstItem="zvc-as-KQm" firstAttribute="leading" secondItem="JSb-ni-vUS" secondAttribute="leading" constant="100" id="OIw-Z4-hdt"/>
-                            <constraint firstItem="JSb-ni-vUS" firstAttribute="bottom" secondItem="zvc-as-KQm" secondAttribute="bottom" constant="30" id="Pa4-yw-brF"/>
+                            <constraint firstItem="JSb-ni-vUS" firstAttribute="bottom" secondItem="zvc-as-KQm" secondAttribute="bottom" constant="20" id="Pa4-yw-brF"/>
                             <constraint firstItem="JSb-ni-vUS" firstAttribute="trailing" secondItem="0mi-0e-uLd" secondAttribute="trailing" constant="40" id="loz-Eq-ked"/>
                             <constraint firstItem="0mi-0e-uLd" firstAttribute="leading" secondItem="JSb-ni-vUS" secondAttribute="leading" constant="40" id="pfz-gD-4Jd"/>
                             <constraint firstItem="0mi-0e-uLd" firstAttribute="top" secondItem="N6Y-Lr-cvw" secondAttribute="bottom" constant="50" id="vVR-6T-0Ry"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="llJ-ND-ZPw"/>
+                    <connections>
+                        <outlet property="descripCitaLabel" destination="H05-Ri-ZKa" id="uqK-Sh-7YR"/>
+                        <outlet property="descripCitaTextField" destination="qmP-at-Dfa" id="HQE-Pu-UCw"/>
+                        <outlet property="fechaDatePicker" destination="dTr-WQ-cwd" id="ieE-9v-FX4"/>
+                        <outlet property="fechaLabel" destination="dzM-5a-0z2" id="eYg-2B-5JK"/>
+                        <outlet property="lugarLabel" destination="Dxw-vH-lR8" id="3xA-C2-M50"/>
+                        <outlet property="lugarTextField" destination="h2G-03-9It" id="NhE-lw-4Le"/>
+                        <outlet property="tipoCitaLabel" destination="UKe-wx-uhk" id="foW-pK-3LX"/>
+                        <outlet property="tipoCitaPickerView" destination="3iL-Gt-gDO" id="a83-Dq-doh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtx-KW-pUI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2576" y="744"/>
+            <point key="canvasLocation" x="2574.8091603053435" y="743.66197183098598"/>
         </scene>
         <!--Detalle Evento View Controller-->
         <scene sceneID="owU-ZD-mRg">
@@ -1368,6 +1428,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="7yy-0E-yFQ"/>
         <segue reference="LBC-OS-krG"/>
         <segue reference="XqQ-v8-d5H"/>
         <segue reference="fP3-N7-4ek"/>
@@ -1384,28 +1445,28 @@
         <image name="perfil" width="32" height="32"/>
         <image name="ubicacion" width="32" height="32"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

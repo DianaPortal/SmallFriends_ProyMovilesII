@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>top-level-items</key>
+	<array>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>Timestamp</key>
+					<string>767471851.9963207</string>
+					<key>XcodeLocation</key>
+					<string>{"Selection":"[{\"key\":\"entities\",\"name\":\"CitasCD\",\"className\":\"CDMModel\"},{\"key\":\"relationships\",\"name\":\"idUsuario\",\"className\":\"CDMEntity\"}]"}</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>SmallFriends/SmallFriends.xcdatamodeld/SmallFriends.xcdatamodel</string>
+					</dict>
+				</dict>
+				<key>type</key>
+				<string>IDEDMDocumentLocation</string>
+			</dict>
+			<key>title</key>
+			<string>Warning: CitasCD.idUsuario does not have an inverse; this is an advanced setting (no object can be in multiple destinations for a specific relationship)</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+	</array>
+</dict>
+</plist>
