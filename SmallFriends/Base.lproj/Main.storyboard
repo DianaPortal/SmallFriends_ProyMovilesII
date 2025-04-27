@@ -718,15 +718,41 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="tAw-4S-2QP">
-                                <rect key="frame" x="15" y="193" width="363" height="517"/>
+                                <rect key="frame" x="15" y="193" width="363" height="566"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mostrarDescripcionEvento" rowHeight="189" id="Ksc-Am-t6s">
-                                        <rect key="frame" x="0.0" y="50" width="363" height="189"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mostrarDescripcionEvento" rowHeight="117" id="Ksc-Am-t6s">
+                                        <rect key="frame" x="0.0" y="50" width="363" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ksc-Am-t6s" id="d3w-0l-fT1">
-                                            <rect key="frame" x="0.0" y="0.0" width="363" height="189"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="363" height="117"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre evento" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F66-3e-2OE">
+                                                    <rect key="frame" x="36" y="19" width="291" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="Dta-ek-8aJ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <color key="textColor" systemColor="systemBlueColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7w9-w7-GmR">
+                                                    <rect key="frame" x="36" y="43" width="291" height="55"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="F66-3e-2OE" firstAttribute="top" secondItem="d3w-0l-fT1" secondAttribute="topMargin" constant="8" id="0s7-bx-xae"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="7w9-w7-GmR" secondAttribute="bottom" constant="8" id="GnG-pt-eZz"/>
+                                                <constraint firstItem="7w9-w7-GmR" firstAttribute="leading" secondItem="d3w-0l-fT1" secondAttribute="leadingMargin" constant="16" id="GsL-bf-9G5"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="F66-3e-2OE" secondAttribute="trailing" constant="16" id="R7g-ji-eCy"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="7w9-w7-GmR" secondAttribute="trailing" constant="16" id="h9P-0o-1Sl"/>
+                                                <constraint firstItem="7w9-w7-GmR" firstAttribute="top" secondItem="F66-3e-2OE" secondAttribute="bottom" constant="4" id="uk5-rD-agE"/>
+                                                <constraint firstItem="F66-3e-2OE" firstAttribute="leading" secondItem="d3w-0l-fT1" secondAttribute="leadingMargin" constant="16" id="wPX-oh-yce"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <segue destination="udm-Rd-oBT" kind="show" id="xYq-5L-nwM"/>
@@ -1257,7 +1283,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Da-Yy-O8U">
-                                <rect key="frame" x="20" y="490" width="353" height="200"/>
+                                <rect key="frame" x="20" y="539" width="353" height="200"/>
                                 <color key="backgroundColor" red="0.93325752019882202" green="0.8987237811088562" blue="0.69007402658462524" alpha="0.36099178625377637" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="200" id="7yR-DK-cF9"/>
@@ -1358,22 +1384,28 @@
         <image name="perfil" width="32" height="32"/>
         <image name="ubicacion" width="32" height="32"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
