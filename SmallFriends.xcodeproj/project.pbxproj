@@ -56,6 +56,7 @@
 		B7CD11F22DB7011E0004D170 /* ListaEventosAPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F12DB7011E0004D170 /* ListaEventosAPIViewController.swift */; };
 		B7CD11F42DB7013D0004D170 /* DetalleEventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F32DB7013D0004D170 /* DetalleEventoViewController.swift */; };
 		B7CD11F72DB701670004D170 /* NotificacionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F62DB701670004D170 /* NotificacionesViewController.swift */; };
+		B7F53A392DBEDE340095E64A /* CeldaEventoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F53A382DBEDE340095E64A /* CeldaEventoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +93,7 @@
 		B7CD11F12DB7011E0004D170 /* ListaEventosAPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListaEventosAPIViewController.swift; sourceTree = "<group>"; };
 		B7CD11F32DB7013D0004D170 /* DetalleEventoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalleEventoViewController.swift; sourceTree = "<group>"; };
 		B7CD11F62DB701670004D170 /* NotificacionesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificacionesViewController.swift; sourceTree = "<group>"; };
+		B7F53A382DBEDE340095E64A /* CeldaEventoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CeldaEventoTableViewCell.swift; path = ../../../SmallFriends_ProyMovilesII/SmallFriends/CeldaEventoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +185,7 @@
 				B7CD11F32DB7013D0004D170 /* DetalleEventoViewController.swift */,
 				B7CD11F62DB701670004D170 /* NotificacionesViewController.swift */,
 				B74A8B9A2DBEC083002F1E8E /* CitasTableViewCell.swift */,
+				B7F53A382DBEDE340095E64A /* CeldaEventoTableViewCell.swift */,
 			);
 			path = SmallFriends;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 			files = (
 				B74A8B952DBEBECD002F1E8E /* CitasCD+CoreDataProperties.swift in Sources */,
 				B7CD11E42DB6FCF80004D170 /* MascotaTableViewCell.swift in Sources */,
+				B7F53A392DBEDE340095E64A /* CeldaEventoTableViewCell.swift in Sources */,
 				B74A8B9B2DBEC083002F1E8E /* CitasTableViewCell.swift in Sources */,
 				B7CD11EE2DB700690004D170 /* DetalleCitaViewController.swift in Sources */,
 				84AA35E42DADC35F007D2E86 /* UserViewController.swift in Sources */,

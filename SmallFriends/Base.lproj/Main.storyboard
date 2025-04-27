@@ -1060,7 +1060,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalle Cita" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ajo-l7-Skm">
-                                <rect key="frame" x="20" y="79" width="353" height="40"/>
+                                <rect key="frame" x="20" y="109" width="353" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="X1G-Ji-1Ol"/>
                                 </constraints>
@@ -1068,61 +1068,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gvI-ch-s5E">
-                                <rect key="frame" x="40" y="129" width="313" height="589"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfn-wT-caj">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="65"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/03/2025" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO4-6C-K6O">
-                                        <rect key="frame" x="0.0" y="75" width="313" height="64.666666666666686"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIJ-NM-RBH">
-                                        <rect key="frame" x="0.0" y="149.66666666666669" width="313" height="65"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Borja Av...." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiE-hh-ZoI">
-                                        <rect key="frame" x="0.0" y="224.66666666666669" width="313" height="65"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOp-Mo-meK">
-                                        <rect key="frame" x="0.0" y="299.66666666666669" width="313" height="64.666666666666686"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee8-ac-y2n">
-                                        <rect key="frame" x="0.0" y="374.33333333333331" width="313" height="65"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción Cita: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-sZ-giT">
-                                        <rect key="frame" x="0.0" y="449.33333333333337" width="313" height="64.666666666666629"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta Trimestral - Vacunas " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UB8-YY-1dH">
-                                        <rect key="frame" x="0.0" y="524" width="313" height="65"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                            </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Brx-nt-GRY">
-                                <rect key="frame" x="100" y="738" width="193" height="40"/>
+                                <rect key="frame" x="40" y="501" width="313" height="40"/>
                                 <color key="backgroundColor" systemColor="systemYellowColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="dBo-YH-dNP"/>
@@ -1140,20 +1087,72 @@
                                     <segue destination="Xcu-4c-IxZ" kind="show" identifier="showMantenerCita" id="7yy-0E-yFQ"/>
                                 </connections>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gvI-ch-s5E">
+                                <rect key="frame" x="40" y="199" width="313" height="262"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfn-wT-caj">
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20/03/2025" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TO4-6C-K6O">
+                                        <rect key="frame" x="0.0" y="34" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIJ-NM-RBH">
+                                        <rect key="frame" x="0.0" y="68" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Borja Av...." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiE-hh-ZoI">
+                                        <rect key="frame" x="0.0" y="102" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOp-Mo-meK">
+                                        <rect key="frame" x="0.0" y="136" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee8-ac-y2n">
+                                        <rect key="frame" x="0.0" y="170" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción Cita: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-sZ-giT">
+                                        <rect key="frame" x="0.0" y="204" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta Trimestral - Vacunas " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UB8-YY-1dH">
+                                        <rect key="frame" x="0.0" y="238" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="xxm-f9-fbB"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstItem="gvI-ch-s5E" firstAttribute="top" secondItem="Ajo-l7-Skm" secondAttribute="bottom" constant="10" id="5gE-QD-Jid"/>
-                            <constraint firstItem="Ajo-l7-Skm" firstAttribute="leading" secondItem="xxm-f9-fbB" secondAttribute="leading" constant="20" id="FqX-X7-YuH"/>
-                            <constraint firstItem="Brx-nt-GRY" firstAttribute="top" secondItem="gvI-ch-s5E" secondAttribute="bottom" constant="20" id="KQf-dO-xaY"/>
-                            <constraint firstItem="xxm-f9-fbB" firstAttribute="trailing" secondItem="Brx-nt-GRY" secondAttribute="trailing" constant="100" id="MRl-iV-Zh8"/>
-                            <constraint firstItem="gvI-ch-s5E" firstAttribute="leading" secondItem="xxm-f9-fbB" secondAttribute="leading" constant="40" id="VAN-yg-ekn"/>
-                            <constraint firstItem="Brx-nt-GRY" firstAttribute="leading" secondItem="xxm-f9-fbB" secondAttribute="leading" constant="100" id="WcZ-h3-STv"/>
-                            <constraint firstItem="xxm-f9-fbB" firstAttribute="bottom" secondItem="Brx-nt-GRY" secondAttribute="bottom" constant="40" id="l62-me-Kkn"/>
-                            <constraint firstItem="xxm-f9-fbB" firstAttribute="trailing" secondItem="gvI-ch-s5E" secondAttribute="trailing" constant="40" id="xbC-h4-RjJ"/>
-                            <constraint firstItem="Ajo-l7-Skm" firstAttribute="top" secondItem="xxm-f9-fbB" secondAttribute="top" constant="20" id="yA2-Qd-cnG"/>
-                            <constraint firstItem="xxm-f9-fbB" firstAttribute="trailing" secondItem="Ajo-l7-Skm" secondAttribute="trailing" constant="20" id="yfb-vz-ATX"/>
+                            <constraint firstItem="Ajo-l7-Skm" firstAttribute="leading" secondItem="xxm-f9-fbB" secondAttribute="leading" constant="20" id="0H1-r2-7DX"/>
+                            <constraint firstItem="Brx-nt-GRY" firstAttribute="leading" secondItem="xxm-f9-fbB" secondAttribute="leading" constant="40" id="0ej-bf-tTN"/>
+                            <constraint firstItem="xxm-f9-fbB" firstAttribute="trailing" secondItem="Ajo-l7-Skm" secondAttribute="trailing" constant="20" id="1Xi-wd-fY5"/>
+                            <constraint firstItem="gvI-ch-s5E" firstAttribute="top" secondItem="Ajo-l7-Skm" secondAttribute="bottom" constant="50" id="C2c-30-NgH"/>
+                            <constraint firstItem="Brx-nt-GRY" firstAttribute="top" secondItem="gvI-ch-s5E" secondAttribute="bottom" constant="40" id="Gyx-n2-Z3m"/>
+                            <constraint firstItem="xxm-f9-fbB" firstAttribute="trailing" secondItem="Brx-nt-GRY" secondAttribute="trailing" constant="40" id="Kvu-6B-ebw"/>
+                            <constraint firstItem="xxm-f9-fbB" firstAttribute="trailing" secondItem="gvI-ch-s5E" secondAttribute="trailing" constant="40" id="Mrl-M4-etI"/>
+                            <constraint firstItem="Ajo-l7-Skm" firstAttribute="top" secondItem="xxm-f9-fbB" secondAttribute="top" constant="50" id="mlG-gc-yAb"/>
+                            <constraint firstItem="gvI-ch-s5E" firstAttribute="leading" secondItem="xxm-f9-fbB" secondAttribute="leading" constant="40" id="zqV-FB-dog"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="i9a-W3-WpH"/>
@@ -1443,11 +1442,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-<<<<<<< Updated upstream
+        <segue reference="xYq-5L-nwM"/>
         <segue reference="7yy-0E-yFQ"/>
-=======
-        <segue reference="zLu-pU-afm"/>
->>>>>>> Stashed changes
         <segue reference="LBC-OS-krG"/>
         <segue reference="XqQ-v8-d5H"/>
         <segue reference="5Ns-bJ-7kV"/>
@@ -1465,28 +1461,28 @@
         <image name="perfil" width="32" height="32"/>
         <image name="ubicacion" width="32" height="32"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
