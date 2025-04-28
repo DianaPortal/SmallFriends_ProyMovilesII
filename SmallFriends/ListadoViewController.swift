@@ -12,6 +12,7 @@ class ListadoViewController: UIViewController {
     @IBOutlet weak var mascotasTableView: UITableView!
 
     var mascotas: [Mascota] = []
+    var mascotaSeleccionada: Mascota?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,16 @@ class ListadoViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cargarMascotas()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "RegistrarMascota",
+           let destino = segue.destination as? MantenerMascotaViewController {
+            destino.mascotaAEditar = nil // Para registrar una nueva mascota
+            let backItem = UIBarButtonItem()
+            backItem.title = "Listado"
+            navigationItem.backBarButtonItem = backItem
+        }
     }
     
     func cargarMascotas() {
@@ -43,6 +54,7 @@ class ListadoViewController: UIViewController {
         let registroVC = MantenerMascotaViewController()
         navigationController?.pushViewController(registroVC, animated: true)
     }
+    
 }
 
 extension ListadoViewController: UITableViewDataSource {
@@ -55,14 +67,14 @@ extension ListadoViewController: UITableViewDataSource {
         let mascota = mascotas[indexPath.row]
         celda.nombreMascotaLabel.text = mascota.nombre
         celda.razaMascotaLabel.text = "Raza: \(mascota.raza ?? "Sin raza")"
+        
+        // Mostrar foto o imagen por defecto
+            if let datosFoto = mascota.foto {
+                celda.fotoMascotaIV.image = UIImage(data: datosFoto)
+            } else {
+                celda.fotoMascotaIV.image = UIImage(named: "Mascotaswelcome") // Asegúrate que esté en Assets
+            }
         return celda
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let registroVC = storyboard.instantiateViewController(withIdentifier: "MantenerMascotaViewController") as! MantenerMascotaViewController
-        registroVC.mascotaAEditar = mascotas[indexPath.row]
-        navigationController?.pushViewController(registroVC, animated: true)
     }
 }
 
@@ -74,6 +86,16 @@ extension ListadoViewController: UITableViewDelegate {
                 CoreDataManager.shared.deleteMascota(mascotaAEliminar)
                 cargarMascotas()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        mascotaSeleccionada = mascotas[indexPath.row]
+        let detalleMascotaVC = storyboard?.instantiateViewController(withIdentifier: "detalleMascota") as! DetalleMascotaViewController
+        detalleMascotaVC.mascota = mascotaSeleccionada
+        navigationController?.pushViewController(detalleMascotaVC, animated: true)
+        let backItem = UIBarButtonItem()
+        backItem.title = "Listado"
+        navigationItem.backBarButtonItem = backItem
     }
 }
 

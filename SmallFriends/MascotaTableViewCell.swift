@@ -9,8 +9,8 @@ import UIKit
 
 class MascotaTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var fotoMascotaIV: UIImageView!
     @IBOutlet weak var nombreMascotaLabel: UILabel!
-    
     @IBOutlet weak var razaMascotaLabel: UILabel!
     
     override func awakeFromNib() {

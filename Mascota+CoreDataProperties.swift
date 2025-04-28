@@ -25,6 +25,7 @@ extension Mascota {
     @NSManaged public var estado: String?
     @NSManaged public var idUsuario: String?
     @NSManaged public var raza: String?
+    @NSManaged public var foto: Data?
 
 }
 
