@@ -795,9 +795,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="eventoLabel" destination="F66-3e-2OE" id="s7S-i9-kbV"/>
-                                            <outlet property="fechaEventoLabel" destination="7w9-w7-GmR" id="Un2-IB-E0y"/>
-                                            <outlet property="nombreEventoLabel" destination="F66-3e-2OE" id="qdV-jf-28g"/>
+                                            <outlet property="eventoLabel" destination="F66-3e-2OE" id="7zf-01-W0l"/>
+                                            <outlet property="fechaEventoLabel" destination="7w9-w7-GmR" id="w4b-xA-wdy"/>
                                             <segue destination="udm-Rd-oBT" kind="show" id="xYq-5L-nwM"/>
                                         </connections>
                                     </tableViewCell>
@@ -839,27 +838,61 @@
         <!--Notificaciones View Controller-->
         <scene sceneID="LWN-8r-9jW">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AEc-XK-JkV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <viewController id="xeJ-Ui-axe" customClass="NotificacionesViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="guU-u5-Vhc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Notificaciones" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iHI-Vv-3IQ">
-                                <rect key="frame" x="142" y="124" width="109" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notifaciones" translatesAutoresizingMaskIntoConstraints="NO" id="Gw7-zq-Gcd">
+                                <rect key="frame" x="20" y="143" width="353" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="kFr-hE-AZJ"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titulo" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RAw-HB-B88">
+                                <rect key="frame" x="20" y="313" width="353" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="u8O-tB-pJO"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="¿Desea agregar una noti?, agregala y yo te aviso :)" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="i5p-Fk-ykr">
+                                <rect key="frame" x="30" y="381" width="333" height="72"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="AoS-Wb-5JF"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="fYi-LF-hDE">
+                                <rect key="frame" x="10" y="493" width="373" height="36"/>
+                            </datePicker>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="qnm-KW-XW9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fYi-LF-hDE" firstAttribute="leading" secondItem="qnm-KW-XW9" secondAttribute="leading" constant="10" id="1Sa-dC-ui1"/>
+                            <constraint firstItem="RAw-HB-B88" firstAttribute="leading" secondItem="qnm-KW-XW9" secondAttribute="leading" constant="20" id="Hfg-Zc-nCR"/>
+                            <constraint firstItem="RAw-HB-B88" firstAttribute="top" secondItem="Gw7-zq-Gcd" secondAttribute="bottom" constant="20" id="K2A-Yx-wcF"/>
+                            <constraint firstItem="qnm-KW-XW9" firstAttribute="trailing" secondItem="i5p-Fk-ykr" secondAttribute="trailing" constant="30" id="L25-qW-Afb"/>
+                            <constraint firstItem="fYi-LF-hDE" firstAttribute="top" secondItem="i5p-Fk-ykr" secondAttribute="bottom" constant="40" id="Zup-MV-KAQ"/>
+                            <constraint firstItem="Gw7-zq-Gcd" firstAttribute="top" secondItem="qnm-KW-XW9" secondAttribute="top" constant="40" id="fao-LE-hKh"/>
+                            <constraint firstItem="i5p-Fk-ykr" firstAttribute="top" secondItem="RAw-HB-B88" secondAttribute="bottom" constant="30" id="jUV-ne-ivl"/>
+                            <constraint firstItem="i5p-Fk-ykr" firstAttribute="leading" secondItem="qnm-KW-XW9" secondAttribute="leading" constant="30" id="lD5-bY-2IE"/>
+                            <constraint firstItem="Gw7-zq-Gcd" firstAttribute="leading" secondItem="qnm-KW-XW9" secondAttribute="leading" constant="20" id="mgV-bG-Lp2"/>
+                            <constraint firstItem="qnm-KW-XW9" firstAttribute="trailing" secondItem="Gw7-zq-Gcd" secondAttribute="trailing" constant="20" id="sDa-Se-K23"/>
+                            <constraint firstItem="qnm-KW-XW9" firstAttribute="trailing" secondItem="RAw-HB-B88" secondAttribute="trailing" constant="20" id="v7n-4F-Jdu"/>
+                            <constraint firstAttribute="trailing" secondItem="fYi-LF-hDE" secondAttribute="trailing" constant="10" id="xIP-qs-kcb"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Cf0-7o-e4s"/>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AEc-XK-JkV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-424" y="744"/>
+            <point key="canvasLocation" x="-425.19083969465646" y="743.66197183098598"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="EI1-6T-XoY">
@@ -1493,10 +1526,14 @@
         <image name="huella" width="32" height="32"/>
         <image name="iconFacebook" width="48" height="48"/>
         <image name="iconGoogle" width="48" height="48"/>
+        <image name="notifaciones" width="241" height="209"/>
         <image name="notificacion" width="32" height="32"/>
         <image name="perfil" width="32" height="32"/>
         <image name="perfil_default" width="225" height="225"/>
         <image name="ubicacion" width="32" height="32"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
