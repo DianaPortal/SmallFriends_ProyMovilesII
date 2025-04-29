@@ -9,7 +9,7 @@ import UIKit
 
 struct EventoCD: Codable {
     let descripcion: String
-        let fecha: Date 
+        let fecha: Date
         let hora: String
         let id: Int
         let latitud: Double
