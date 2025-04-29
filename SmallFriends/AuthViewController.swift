@@ -55,6 +55,42 @@ class AuthViewController: UIViewController {
                  
     }
     
+    @IBAction func olvidastePasswordTapped(_ sender: UIButton) {
+        // Mostrar un alert para que el usuario ingrese su correo electrónico
+          let alert = UIAlertController(title: "Recuperar Contraseña", message: "Ingresa tu correo para enviar un enlace de recuperación.", preferredStyle: .alert)
+          
+          alert.addTextField { textField in
+              textField.placeholder = "Correo electrónico"
+              textField.keyboardType = .emailAddress
+          }
+          
+          let resetAction = UIAlertAction(title: "Enviar enlace", style: .default) { _ in
+              guard let email = alert.textFields?.first?.text, !email.isEmpty else {
+                  self.showAlert(title: "Campo vacío", message: "Por favor ingresa un correo electrónico.")
+                  return
+              }
+              
+              // Enviar enlace de restablecimiento de contraseña
+              Auth.auth().sendPasswordReset(withEmail: email) { error in
+                  if let error = error {
+                      // Si hay un error al enviar el enlace
+                      self.showAlert(title: "Error", message: "Hubo un problema al enviar el enlace. Verifica el correo o intenta más tarde.")
+                      return
+                  }
+                  
+                  // Si todo está bien, mostrar mensaje de éxito
+                  self.showAlert(title: "Enlace Enviado", message: "Revisa tu correo para restablecer tu contraseña.")
+              }
+          }
+          
+          alert.addAction(resetAction)
+          alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+          
+          present(alert, animated: true, completion: nil)
+                
+    }	
+    
+    
     //Btn Registrar Usuario
     @IBAction func registrarseTapped(_ sender: UIButton) {
         //Mostrar alerta para registrar Usuario

@@ -23,6 +23,8 @@ class UserViewController: UIViewController {
     @IBOutlet weak var providerLabel: UILabel!    
     @IBOutlet weak var closeSessionButton: UIButton!
     @IBOutlet weak var uidLabel: UILabel!
+    @IBOutlet weak var nombreLabel: UILabel!
+    @IBOutlet weak var ApellidosLabel: UILabel!
     
     
     var email: String?
@@ -64,6 +66,8 @@ class UserViewController: UIViewController {
 
         do {
             if let usuario = try contexto.fetch(request).first {
+                ApellidosLabel.text = usuario.apellidos
+                nombreLabel.text = usuario.nombre
                 correoLabel.text = usuario.email
                 providerLabel.text = usuario.provider
                 uidLabel.text = usuario.idUsuario
