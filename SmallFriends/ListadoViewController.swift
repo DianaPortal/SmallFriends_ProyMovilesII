@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ListadoViewController: UIViewController {
     
@@ -40,7 +41,15 @@ class ListadoViewController: UIViewController {
     }
     
     func cargarMascotas() {
-        mascotas = CoreDataManager.shared.fetchMascotas()
+        // VERIFICA SI EL USUARIO ESTA LOGUEADO
+        guard let usuario = obtenerUsuarioLogueado() else {
+                print("No hay usuario logueado.")
+                mascotas = []
+                mascotasTableView.reloadData()
+                return
+            }
+        
+        mascotas = CoreDataManager.shared.fetchMascotasDelUsuario(usuario)
         mascotasTableView.reloadData()
         
         if mascotas.isEmpty {
@@ -55,6 +64,21 @@ class ListadoViewController: UIViewController {
         navigationController?.pushViewController(registroVC, animated: true)
     }
     
+    // BUSCAR USUARIO LOGUEADO
+    func obtenerUsuarioLogueado() -> Usuario? {
+        guard let correo = UserDefaults.standard.string(forKey: "correoUsuarioLogueado") else { return nil }
+
+        let request: NSFetchRequest<Usuario> = Usuario.fetchRequest()
+        request.predicate = NSPredicate(format: "email == %@", correo)
+
+        do {
+            return try CoreDataManager.shared.context.fetch(request).first
+        } catch {
+            print("Error al obtener usuario logueado: \(error)")
+            return nil
+        }
+    }
+    
 }
 
 extension ListadoViewController: UITableViewDataSource {
@@ -66,13 +90,13 @@ extension ListadoViewController: UITableViewDataSource {
         let celda = tableView.dequeueReusableCell(withIdentifier: "celdaMascota", for: indexPath) as! MascotaTableViewCell
         let mascota = mascotas[indexPath.row]
         celda.nombreMascotaLabel.text = mascota.nombre
-        celda.razaMascotaLabel.text = "Raza: \(mascota.raza ?? "Sin raza")"
+        celda.detallesMascota.text = "Edad: \(mascota.edad) \(mascota.edad == 1 ? "año" : "años")\nRaza: \(mascota.raza ?? "Sin raza")"
         
-        // Mostrar foto o imagen por defecto
+        // MOSTRAR FOTO O IMAGEN POR DEFECTO
             if let datosFoto = mascota.foto {
                 celda.fotoMascotaIV.image = UIImage(data: datosFoto)
             } else {
-                celda.fotoMascotaIV.image = UIImage(named: "Mascotaswelcome") // Asegúrate que esté en Assets
+                celda.fotoMascotaIV.image = UIImage(named: "Mascotaswelcome")
             }
         return celda
     }
@@ -82,10 +106,23 @@ extension ListadoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
                    forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let mascotaAEliminar = mascotas[indexPath.row]
-                CoreDataManager.shared.deleteMascota(mascotaAEliminar)
-                cargarMascotas()
-        }
+                let mascotaAEliminar = mascotas[indexPath.row]
+                
+                let alerta = UIAlertController(title: "Eliminar Mascota", message: "¿Estás seguro de que deseas eliminar de tus mascotas a \"\(mascotaAEliminar.nombre ?? "esta mascota")\"?",
+                                               preferredStyle: .alert)
+                
+                let confirmar = UIAlertAction(title: "Eliminar", style: .destructive) { _ in
+                    CoreDataManager.shared.deleteMascota(mascotaAEliminar)
+                    self.cargarMascotas()
+                }
+                
+                let cancelar = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+                
+                alerta.addAction(confirmar)
+                alerta.addAction(cancelar)
+                
+                present(alerta, animated: true, completion: nil)
+            }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

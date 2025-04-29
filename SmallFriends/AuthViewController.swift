@@ -221,6 +221,16 @@ class AuthViewController: UIViewController {
             showAlert(title: "Error de autenticación", message: message)
             return
         }
+        
+        // OBTIENE USUARIO
+        if let user = Auth.auth().currentUser {
+            // Usuario autenticado
+            let uid = user.uid
+            // Proceder con operaciones que requieren el UID
+        } else {
+            // No hay usuario autenticado
+            print("No hay usuario autenticado")
+        }
 
         // Autenticación 
         guard let result = result else {
@@ -231,6 +241,10 @@ class AuthViewController: UIViewController {
         let defaults = UserDefaults.standard
         defaults.set(result.user.email, forKey: "email")
         defaults.set(provider.rawValue, forKey: "provider")
+        
+        defaults.set(result.user.email, forKey: "correoUsuarioLogueado")
+        
+        verificarYGuardarUsuarioSiNoExiste(uid: result.user.uid, email: result.user.email, provider: provider)
        
         //Redigir al MainTabBarController después de iniciar sesión correctamente
         authStackView.isHidden = true
@@ -292,5 +306,30 @@ class AuthViewController: UIViewController {
         }
     }
 
+    private func verificarYGuardarUsuarioSiNoExiste(uid: String, email: String?, provider: ProviderType) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let contexto = appDelegate.persistentContainer.viewContext
+
+        let fetchRequest: NSFetchRequest<Usuario> = Usuario.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "idUsuario == %@", uid)
+
+        do {
+            let resultados = try contexto.fetch(fetchRequest)
+            if resultados.isEmpty {
+                let nuevoUsuario = Usuario(context: contexto)
+                nuevoUsuario.idUsuario = uid
+                nuevoUsuario.email = email
+                nuevoUsuario.provider = provider.rawValue
+                nuevoUsuario.nombre = "Sin nombre"
+                nuevoUsuario.apellidos = "Sin apellidos"
+                try contexto.save()
+                print("Usuario guardado al iniciar sesión")
+            } else {
+                print("Usuario ya existe en Core Data")
+            }
+        } catch {
+            print("Error al guardar usuario desde login: \(error.localizedDescription)")
+        }
+    }
 
 }

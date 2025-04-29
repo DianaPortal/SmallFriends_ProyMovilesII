@@ -45,6 +45,19 @@ class CoreDataManager {
             }
         }
     
+    // LISTAR MASCOTAS POR USUARIO LOGUEADO
+    func fetchMascotasDelUsuario(_ usuario: Usuario) -> [Mascota] {
+        let request: NSFetchRequest<Mascota> = Mascota.fetchRequest()
+        request.predicate = NSPredicate(format: "usuario == %@", usuario)
+
+        do {
+            return try CoreDataManager.shared.context.fetch(request)
+        } catch {
+            print("Error al obtener mascotas del usuario: \(error)")
+            return []
+        }
+    }
+    
     func deleteMascota(_ mascota: Mascota) {
             context.delete(mascota)
             saveContext()

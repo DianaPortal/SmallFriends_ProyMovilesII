@@ -29,9 +29,19 @@ class DetalleMascotaViewController: UIViewController {
             if let datosFoto = mascota.foto {
                 fotoMascotaIV.image = UIImage(data: datosFoto)
             } else {
-                fotoMascotaIV.image = UIImage(named: "Mascotaswelcome")
+                fotoMascotaIV.image = UIImage(named: "perfil_default")
             }
-            nombreMascotaLB.text = "🐶 \(mascota.nombre ?? "Sin nombre") 🐶"
+            // RODEAR EL NOMBRE CON 🐶 SI ES PERRO, SINO CON 🐱
+            let nombre = mascota.nombre ?? "Sin nombre"
+            let tipo = mascota.tipo?.lowercased() ?? ""
+
+            if tipo == "perro" {
+                nombreMascotaLB.text = "🐶 \(nombre) 🐶"
+            } else if tipo == "gato" {
+                nombreMascotaLB.text = "🐱 \(nombre) 🐱"
+            } else {
+                nombreMascotaLB.text = nombre
+            }
             // PRINT DE EDAD POR SI ES MAYOR A 1 ANIO
             let edad = mascota.edad
             if edad > 1 {
@@ -48,7 +58,7 @@ class DetalleMascotaViewController: UIViewController {
             razaMascotaTF.text = mascota.raza ?? "Sin raza"
             dniMascotaTF.text = mascota.dni ?? "DNI no disponible"
             
-        }
+    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "actualizarMascota",

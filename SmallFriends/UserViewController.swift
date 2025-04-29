@@ -45,7 +45,7 @@ class UserViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Inicio"
-        navigationItem.setHidesBackButton(true, animated: false)
+        // navigationItem.setHidesBackButton(true, animated: false)
         
         
                 

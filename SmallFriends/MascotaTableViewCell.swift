@@ -11,7 +11,7 @@ class MascotaTableViewCell: UITableViewCell {
 
     @IBOutlet weak var fotoMascotaIV: UIImageView!
     @IBOutlet weak var nombreMascotaLabel: UILabel!
-    @IBOutlet weak var razaMascotaLabel: UILabel!
+    @IBOutlet weak var detallesMascota: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
 
@@ -26,15 +27,27 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // CAMBIO DE TITLE DEPENDIENDO DE LA ACCION
         title = mascotaAEditar == nil ? "🐶 Registrar Mascota 🐱" : "🐶 Actualizar Mascota 🐱"
         
+        // FUNCIONALIDAD PARA IMPORTAR FOTO DESDE GALERIA
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(seleccionarFoto))
             fotoImageView.addGestureRecognizer(tapGesture)
             fotoImageView.isUserInteractionEnabled = true
         
+        // COMBOBOX PARA TIPO MASCOTA
         tipoField.inputView = pickerTipo
+        tipoField.tintColor = .clear
         pickerTipo.delegate = self
         pickerTipo.dataSource = self
+        
+        // BARRA DE HERRAMIENTAS CON BOTON "LISTO"
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        let doneButton = UIBarButtonItem(title: "Listo", style: .done, target: self, action: #selector(cerrarPicker))
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        toolbar.setItems([flexibleSpace, doneButton], animated: false)
+        tipoField.inputAccessoryView = toolbar
         
         cargarDatosParaEditar()
     }
@@ -62,7 +75,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
             if let datosFoto = mascota.foto {
                 fotoImageView.image = UIImage(data: datosFoto)
             } else {
-                fotoImageView.image = UIImage(named: "Mascotaswelcome")
+                fotoImageView.image = UIImage(named: "perfil_default")
             }
         
             // MOSTRAR EL VALOR SE LE EIGIO AL CREAR
@@ -76,12 +89,20 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
             let nombre = campo(nombreField, nombre: "Nombre"),
             let edadTexto = campo(edadField, nombre: "Edad"),
             let edad = Int16(edadTexto),
-            let tipo = tipoField.text,
+        
             let pesoTexto = campo(pesoField, nombre: "Peso"),
-            let raza = campo(razaField, nombre: "Raza"),
             let dni = campo(dniField, nombre: "DNI")
         else { return }
 
+        // ADICION DE VALOR POR DEFECTO "MESTIZO"
+        let raza = razaField.text?.isEmpty == false ? razaField.text! : "Mestizo"
+        
+        // VALIDAR TIPO DE MASCOTA
+        guard let tipo = tipoField.text, tipos.contains(tipo) else {
+            mostrarAlerta(mensaje: "Seleccione un tipo de mascota")
+            return
+        }
+        
         // VALIDAR PESO
         guard let pesoDecimal = NSDecimalNumber(string: pesoTexto).isEqual(to: NSDecimalNumber.notANumber) ? nil : NSDecimalNumber(string: pesoTexto) else {
             mostrarAlerta(mensaje: "Peso inválido")
@@ -90,7 +111,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
 
         // VALIDAR DNI
         guard validarDNI(dni) else {
-            mostrarAlerta(mensaje: "El DNI debe contener exactamente 8 dígitos numéricos.")
+            mostrarAlerta(mensaje: "El DNI debe contener exactamente 8 dígitos numéricos")
             return
         }
 
@@ -102,7 +123,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
             mascota = Mascota(context: CoreDataManager.shared.context)
         }
 
-        // Asignar campos
+        // ASIGNA CAMPOS
         mascota.nombre = nombre
         mascota.edad = edad
         mascota.tipo = tipo
@@ -110,18 +131,33 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
         mascota.raza = raza
         mascota.dni = dni
 
-        // Asignar foto
+        // ASIGNAR FOTO (SOLO SI SE HA SELECCIONADO UNA NUEVA IMAGEN, SINO MANTENER LA QUE YA ESTABA REGISTRADA
         if let imagen = imagenSeleccionada,
-           let imagenData = imagen.jpegData(compressionQuality: 0.8) {
-            mascota.foto = imagenData
-        } else if let imagenPorDefecto = UIImage(named: "Mascotaswelcome"),
-                  let dataPorDefecto = imagenPorDefecto.jpegData(compressionQuality: 0.8) {
-            mascota.foto = dataPorDefecto
-        }
+               let imagenData = imagen.jpegData(compressionQuality: 0.8) {
+                mascota.foto = imagenData
+            } else if let mascotaExistente = mascotaAEditar,
+                      let fotoExistente = mascotaExistente.foto {
+                // SI NO SE SELECCIONO UNA IMAGEN, MANTENER LA EXISTENTE
+                mascota.foto = fotoExistente
+            } else {
+                // SI NO SE SELECCIONO UNA IMAGEN, Y NO HAY IMAGEN PREVIA, ASIGNA FOTO POR DEFECTO
+                if let imagenPorDefecto = UIImage(named: "perfil_default"),
+                   let dataPorDefecto = imagenPorDefecto.jpegData(compressionQuality: 0.8) {
+                    mascota.foto = dataPorDefecto
+                }
+            }
+        
+        // ASIGNA USUARIO OBTENIDO
+        if let usuarioLogueado = obtenerUsuarioLogueado() {
+                mascota.usuario = usuarioLogueado
+            } else {
+                mostrarAlerta(mensaje: "No hay usuario logueado")
+                return
+            }
 
         CoreDataManager.shared.saveContext()
 
-        mostrarAlerta(titulo: "Éxito", mensaje: mascotaAEditar != nil ? "Mascota actualizada correctamente." : "Mascota registrada correctamente.") {
+        mostrarAlerta(titulo: "Éxito", mensaje: mascotaAEditar != nil ? "Mascota actualizada correctamente" : "Mascota registrada correctamente") {
             self.navigationController?.popViewController(animated: true)
         }
     }
@@ -137,7 +173,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
     // FUNCION PARA MOSTRAR ALERTA DE ERROR EN CASO HAYA CAMPOS VACIOS
     func campo(_ textField: UITextField, nombre: String) -> String? {
         guard let texto = textField.text, !texto.isEmpty else {
-            mostrarAlerta(mensaje: "El campo \(nombre) no puede estar vacío.")
+            mostrarAlerta(mensaje: "El campo \(nombre) no puede estar vacío")
             return nil
         }
         return texto
@@ -173,6 +209,30 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         tipoField.text = tipos[row]
     }
+    
+    @objc func cerrarPicker() {
+        tipoField.resignFirstResponder()
+    }
+    
+    // FUNCION PARA OBTENER EL USUARIO LOGUEADO
+    func obtenerUsuarioLogueado() -> Usuario? {
+        guard let correoGuardado = UserDefaults.standard.string(forKey: "correoUsuarioLogueado") else {
+            print("No hay usuario logueado en UserDefaults")
+            return nil
+        }
+        
+        let fetchRequest: NSFetchRequest<Usuario> = Usuario.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "email == %@", correoGuardado)
+        
+        do {
+            let usuarios = try CoreDataManager.shared.context.fetch(fetchRequest)
+            return usuarios.first
+        } catch {
+            print("Error al obtener el usuario logueado: \(error)")
+            return nil
+        }
+    }
+
 }
 
 extension MantenerMascotaViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

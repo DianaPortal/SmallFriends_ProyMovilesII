@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22H527" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G436" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CitasCD" representedClassName=".CitasCD" syncable="YES">
         <attribute name="descripcionCita" optional="YES" attributeType="String"/>
         <attribute name="fechaCita" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
@@ -19,6 +19,7 @@
         <attribute name="peso" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="raza" optional="YES" attributeType="String"/>
         <attribute name="tipo" optional="YES" attributeType="String"/>
+        <relationship name="usuario" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Usuario" inverseName="mascota" inverseEntity="Usuario"/>
     </entity>
     <entity name="Usuario" representedClassName=".Usuario" syncable="YES">
         <attribute name="apellidos" optional="YES" attributeType="String"/>
@@ -27,5 +28,6 @@
         <attribute name="nombre" optional="YES" attributeType="String"/>
         <attribute name="provider" optional="YES" attributeType="String"/>
         <relationship name="citas" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CitasCD" inverseName="usuario" inverseEntity="CitasCD"/>
+        <relationship name="mascota" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Mascota" inverseName="usuario" inverseEntity="Mascota"/>
     </entity>
 </model>
