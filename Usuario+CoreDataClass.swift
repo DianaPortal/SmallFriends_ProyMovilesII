@@ -2,7 +2,7 @@
 //  Usuario+CoreDataClass.swift
 //  SmallFriends
 //
-//  Created by DAMII on 27/04/25.
+//  Created by Diana on 28/04/25.
 //
 //
 

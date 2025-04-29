@@ -2,7 +2,7 @@
 //  Usuario+CoreDataProperties.swift
 //  SmallFriends
 //
-//  Created by DAMII on 27/04/25.
+//  Created by Diana on 28/04/25.
 //
 //
 
@@ -19,6 +19,8 @@ extension Usuario {
     @NSManaged public var email: String?
     @NSManaged public var idUsuario: String?
     @NSManaged public var provider: String?
+    @NSManaged public var nombre: String?
+    @NSManaged public var apellidos: String?
     @NSManaged public var citas: NSSet?
 
 }

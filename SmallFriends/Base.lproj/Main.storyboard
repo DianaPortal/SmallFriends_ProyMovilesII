@@ -48,19 +48,19 @@
                                 <rect key="frame" x="40" y="393" width="313" height="319"/>
                                 <subviews>
                                     <textField verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Correo electronico" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bdE-Qv-347">
-                                        <rect key="frame" x="0.0" y="0.0" width="313" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="313" height="37"/>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <textField verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Contraseña" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="17u-JK-r5b">
-                                        <rect key="frame" x="0.0" y="55" width="313" height="44.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="47" width="313" height="37"/>
                                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HRr-Wb-7O2">
-                                        <rect key="frame" x="0.0" y="109.66666666666669" width="313" height="45"/>
+                                        <rect key="frame" x="0.0" y="94" width="313" height="37"/>
                                         <color key="backgroundColor" red="0.42352941176470588" green="0.38823529411764707" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="Button"/>
@@ -71,38 +71,44 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="logInButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qav-vh-OcF"/>
+                                            <action selector="iniciarSesionTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qav-vh-OcF"/>
                                         </connections>
                                     </button>
                                     <label verifyAmbiguity="ignoreSizes" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="o" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4i-By-nHD">
-                                        <rect key="frame" x="0.0" y="164.66666666666663" width="313" height="44.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="141" width="313" height="37"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="-100" translatesAutoresizingMaskIntoConstraints="NO" id="Rw0-EE-bhg">
-                                        <rect key="frame" x="0.0" y="219.33333333333337" width="313" height="45"/>
+                                        <rect key="frame" x="0.0" y="188" width="313" height="37"/>
                                         <subviews>
                                             <button verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZtR-Gb-pIf">
-                                                <rect key="frame" x="0.0" y="0.0" width="206.66666666666666" height="45"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="206.66666666666666" height="37"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="iconGoogle"/>
                                                 <connections>
-                                                    <action selector="googleButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uls-o3-qXP"/>
+                                                    <action selector="googleTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uls-o3-qXP"/>
                                                 </connections>
                                             </button>
                                             <button verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Gz-N2-7p1">
-                                                <rect key="frame" x="106.66666666666664" y="0.0" width="206.33333333333337" height="45"/>
+                                                <rect key="frame" x="106.66666666666664" y="0.0" width="206.33333333333337" height="37"/>
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="iconFacebook"/>
                                                 <connections>
-                                                    <action selector="facebookButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4pQ-nP-a4g"/>
+                                                    <action selector="facebookTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4pQ-nP-a4g"/>
                                                 </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sOg-Am-CRB">
+                                        <rect key="frame" x="0.0" y="235" width="313" height="37"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="¿Olvidaste tu contraseña?"/>
+                                    </button>
                                     <button verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jR6-8G-dgL">
-                                        <rect key="frame" x="0.0" y="274.33333333333337" width="313" height="44.666666666666686"/>
+                                        <rect key="frame" x="0.0" y="282" width="313" height="37"/>
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <color key="tintColor" red="0.42352941176470588" green="0.38823529411764707" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <state key="normal" title="Button"/>
@@ -113,7 +119,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="signUpButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nku-NN-Ls9"/>
+                                            <action selector="registrarseTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nku-NN-Ls9"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -751,7 +757,7 @@
                                 <rect key="frame" x="15" y="193" width="363" height="566"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mostrarDescripcionEvento" rowHeight="117" id="Ksc-Am-t6s" customClass="CeldaEventoTableViewCell" customModule="SmallFriends" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mostrarDescripcionEvento" rowHeight="117" id="Ksc-Am-t6s" customClass="CeldaEventosTableViewCell" customModule="SmallFriends" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="363" height="117"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ksc-Am-t6s" id="d3w-0l-fT1">
@@ -785,7 +791,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="fechaEventoLabel" destination="7w9-w7-GmR" id="FRF-3v-Se3"/>
+                                            <outlet property="eventoLabel" destination="F66-3e-2OE" id="s7S-i9-kbV"/>
+                                            <outlet property="fechaEventoLabel" destination="7w9-w7-GmR" id="Un2-IB-E0y"/>
                                             <outlet property="nombreEventoLabel" destination="F66-3e-2OE" id="qdV-jf-28g"/>
                                             <segue destination="udm-Rd-oBT" kind="show" id="xYq-5L-nwM"/>
                                         </connections>

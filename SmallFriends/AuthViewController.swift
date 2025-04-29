@@ -33,7 +33,7 @@ class AuthViewController: UIViewController {
 
     // MARK: - Acciones
     // Btn Iniciar sesión
-    @IBAction func logInButtonAction(_ sender: UIButton) {
+    @IBAction func iniciarSesionTapped(_ sender: UIButton) {
         guard let email = correoTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
             showAlert(title: "Campos vacíos", message: "Por favor ingresa correo y contraseña.")
@@ -56,17 +56,61 @@ class AuthViewController: UIViewController {
     }
     
     //Btn Registrar Usuario
-    @IBAction func signUpButtonAction(_ sender: UIButton) {
-        if let email = correoTextField.text,
-           let password = passwordTextField.text {
-            Auth.auth().createUser(withEmail: email, password: password) { result, error in
-                self.showHome(result: result, error: error, provider: .basic)
+    @IBAction func registrarseTapped(_ sender: UIButton) {
+        //Mostrar alerta para registrar Usuario
+        let alert = UIAlertController(title: "Registro Usuario", message: "Ingresa tus datos", preferredStyle: .alert)
+        
+        alert.addTextField { textField in
+            textField.placeholder = "Correo electrónico"
+            textField.keyboardType = .emailAddress
+        }
+        alert.addTextField { textField in
+            textField.placeholder = "Contraseña"
+            textField.isSecureTextEntry = true
+        }
+           
+        alert.addTextField { textField in
+            textField.placeholder = "Nombre"
+        }
+           
+        alert.addTextField { textField in
+            textField.placeholder = "Apellido"
+        }
+        
+        let registerAction = UIAlertAction(title: "Registrar", style: .default) { _ in
+        // Obtener datos de la alerta
+            guard let email = alert.textFields?[0].text, !email.isEmpty,
+                  let password = alert.textFields?[1].text, !password.isEmpty,
+                  let nombre = alert.textFields?[2].text, !nombre.isEmpty,
+                  let apellidos = alert.textFields?[3].text, !apellidos.isEmpty else {
+                self.showAlert(title: "Campos vacíos", message: "Por favor ingresa todos los datos.")
+                return
+            }
+            // Crear usuario en Firebase
+        Auth.auth().createUser(withEmail: email, password: password) { result, error in
+        if let error = error {
+            print("Error al registrar usuario: \(error.localizedDescription)")
+        self.showAlert(title: "Error de registro", message: "Hubo un problema al registrar el usuario.")
+        return
+        }
+       // Guardar el usuario en Firebase y en Core Data
+       self.showHome(result: result, error: error, provider: .basic)
+        
+        // Aquí puedes guardar en core data
+            let uid = result?.user.uid
+        self.guardarUsuarioEnCoreData(uid: uid ?? "", email: email, provider: .basic, nombre: nombre, apellidos: apellidos)
             }
         }
+        alert.addAction(registerAction)
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+            
+        present(alert, animated: true, completion: nil)
+
+
     }
     
     //Autenticación con google
-    @IBAction func googleButtonAction(_ sender: UIButton) {
+    @IBAction func googleTapped(_ sender: UIButton) {
         let presentingVC = self.presentingViewController ?? self.navigationController ?? self
 
         GIDSignIn.sharedInstance.signIn(withPresenting: presentingVC) { signInResult, error in
@@ -91,7 +135,7 @@ class AuthViewController: UIViewController {
     }
 
     //Autenticación con facebook
-    @IBAction func facebookButtonAction(_ sender: UIButton) {
+    @IBAction func facebookTapped(_ sender: UIButton) {
         let loginManager = LoginManager()
         loginManager.logOut() // Cierra sesión previa
 
@@ -151,11 +195,8 @@ class AuthViewController: UIViewController {
         let defaults = UserDefaults.standard
         defaults.set(result.user.email, forKey: "email")
         defaults.set(provider.rawValue, forKey: "provider")
-        // Guardar usuario en Core Data
-        let uid = result.user.uid
-        let email = result.user.email
-        guardarUsuarioEnCoreData(uid: uid, email: email, provider: provider)
-        
+       
+        //Redigir al MainTabBarController después de iniciar sesión correctamente
         authStackView.isHidden = true
         goToMainTabBar()
     }
@@ -188,7 +229,7 @@ class AuthViewController: UIViewController {
     }
     
     // Función para guardar La sesió en core data
-    private func guardarUsuarioEnCoreData(uid: String, email: String?, provider: ProviderType) {
+    private func guardarUsuarioEnCoreData(uid: String, email: String?, provider: ProviderType, nombre: String, apellidos: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let contexto = appDelegate.persistentContainer.viewContext
 
@@ -202,6 +243,8 @@ class AuthViewController: UIViewController {
                 nuevoUsuario.idUsuario = uid
                 nuevoUsuario.email = email
                 nuevoUsuario.provider = provider.rawValue
+                nuevoUsuario.nombre = nombre
+                nuevoUsuario.apellidos = apellidos
 
                 try contexto.save()
                 print("Usuario guardado en Core Data")

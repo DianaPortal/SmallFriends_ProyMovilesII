@@ -103,9 +103,9 @@ extension ListaEventosAPIViewController: UITableViewDelegate, UITableViewDataSou
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let celda = tablaEventos.dequeueReusableCell(withIdentifier: "mostrarDescripcionEvento", for: indexPath)as! CeldaEventoTableViewCell
+        let celda = tablaEventos.dequeueReusableCell(withIdentifier: "mostrarDescripcionEvento", for: indexPath)as! CeldaEventosTableViewCell
         //Asignar el nombre del evento
-        celda.nombreEventoLabel.text = eventos[indexPath.row].titulo
+        celda.eventoLabel.text = eventos[indexPath.row].titulo
         
         // Verificar el tipo de 'fecha' y convertirla si es necesario
         let dateFormatter = DateFormatter()
