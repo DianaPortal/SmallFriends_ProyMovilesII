@@ -13,6 +13,7 @@
 		8422B2FC2DB22A7800A5D49B /* FacebookGamingServices in Frameworks */ = {isa = PBXBuildFile; productRef = 8422B2FB2DB22A7800A5D49B /* FacebookGamingServices */; };
 		8422B2FE2DB22A7800A5D49B /* FacebookLogin in Frameworks */ = {isa = PBXBuildFile; productRef = 8422B2FD2DB22A7800A5D49B /* FacebookLogin */; };
 		8422B3022DB243E100A5D49B /* FacebookShare in Frameworks */ = {isa = PBXBuildFile; productRef = 8422B3012DB243E100A5D49B /* FacebookShare */; };
+		8487B8BB2DC19AA000759101 /* 1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8487B8BA2DC19AA000759101 /* 1.mp3 */; };
 		849A67532DC0773A000EC7AC /* CeldaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 849A67522DC0773A000EC7AC /* CeldaTableViewCell.swift */; };
 		84AA102E2DAD635D00E5D78E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 84AA102D2DAD635D00E5D78E /* FirebaseAnalytics */; };
 		84AA10302DAD635D00E5D78E /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 84AA102F2DAD635D00E5D78E /* FirebaseAnalyticsOnDeviceConversion */; };
@@ -61,6 +62,7 @@
 
 /* Begin PBXFileReference section */
 		8422B2FF2DB22E4200A5D49B /* SmallFriends.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmallFriends.entitlements; sourceTree = "<group>"; };
+		8487B8BA2DC19AA000759101 /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
 		849A67522DC0773A000EC7AC /* CeldaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CeldaTableViewCell.swift; sourceTree = "<group>"; };
 		84AA35E22DADC35F007D2E86 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		84AA35E82DADD272007D2E86 /* UserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 		B75921FD2DAC15EB00A31AEE /* SmallFriends */ = {
 			isa = PBXGroup;
 			children = (
+				8487B8BA2DC19AA000759101 /* 1.mp3 */,
 				8422B2FF2DB22E4200A5D49B /* SmallFriends.entitlements */,
 				B75921FE2DAC15EB00A31AEE /* AppDelegate.swift */,
 				B75922002DAC15EB00A31AEE /* SceneDelegate.swift */,
@@ -276,6 +279,7 @@
 			files = (
 				B759220E2DAC15EC00A31AEE /* LaunchScreen.storyboard in Resources */,
 				84AA35E92DADD272007D2E86 /* UserViewController.xib in Resources */,
+				8487B8BB2DC19AA000759101 /* 1.mp3 in Resources */,
 				84E9D9282DB1E18900EFA233 /* GoogleService-Info.plist in Resources */,
 				B745C9042DB41009001B8847 /* InicioViewController.xib in Resources */,
 				B759220B2DAC15EC00A31AEE /* Assets.xcassets in Resources */,
