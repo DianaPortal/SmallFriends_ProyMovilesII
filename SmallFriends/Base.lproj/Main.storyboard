@@ -908,8 +908,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="Cf0-7o-e4s"/>
                     <connections>
-                        <outlet property="datePicker" destination="fYi-LF-hDE" id="S8I-Q1-SNj"/>
-                        <outlet property="mensaje" destination="i5p-Fk-ykr" id="MV2-13-5T0"/>
+                        <outlet property="datePicker" destination="fYi-LF-hDE" id="uBO-zc-SeS"/>
+                        <outlet property="mensaje" destination="i5p-Fk-ykr" id="bD8-ph-uWh"/>
                         <outlet property="titulo" destination="RAw-HB-B88" id="KQZ-q7-XBr"/>
                     </connections>
                 </viewController>
