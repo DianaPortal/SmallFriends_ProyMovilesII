@@ -22,6 +22,7 @@ extension CitasCD {
     @NSManaged public var lugarCita: String?
     @NSManaged public var tipoCita: String?
     @NSManaged public var usuario: Usuario?
+    @NSManaged public var estadoCita: String?
 
 }
 

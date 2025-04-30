@@ -75,9 +75,28 @@ class DetalleCitaViewController: UIViewController {
     
     
     //Acciones
+    /*
     @IBAction func actualizarTapped(_ sender: UIButton) {
     // Cuando se toque el botón "Actualizar", navegar a MantenerCitaViewController
         performSegue(withIdentifier: "showMantenerCita", sender: self)
+    }
+    */
+    
+    @IBAction func botonActualizarTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let mantenerCitaVC = storyboard.instantiateViewController(withIdentifier: "showMantenerCita") as? MantenerCitaViewController {
+                
+                // Pasar la mascota
+                mantenerCitaVC.citaAActualizar = self.cita
+
+                // Opcional: cambiar título del botón de back
+                let backItem = UIBarButtonItem()
+                backItem.title = "Detalle"
+                navigationItem.backBarButtonItem = backItem
+
+                // Mostrar la vista (usando navigationController)
+                self.navigationController?.pushViewController(mantenerCitaVC, animated: true)
+            }
     }
     
     // Preparar la transición a MantenerCitaViewController
@@ -89,11 +108,19 @@ class DetalleCitaViewController: UIViewController {
             }
         }
        }
+    
     func formatearFecha(_ fecha: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .short  // Puedes cambiar a .long, .medium según prefieras
-        dateFormatter.timeStyle = .short  // O puedes configurar la hora si lo necesitas
-        return dateFormatter.string(from: fecha)
+        let formatterFecha = DateFormatter()
+            formatterFecha.locale = Locale(identifier: "es_ES") // Español
+            formatterFecha.dateFormat = "d 'de' MMMM 'de' yyyy" // Ej: 27 de abril de 2025
+
+            let formatterHora = DateFormatter()
+            formatterHora.locale = Locale(identifier: "es_ES")
+            formatterHora.dateFormat = "hh:mm a" // Ej: 12:01 p. m.
+
+            let fechaFormateada = formatterFecha.string(from: fecha)
+            let horaFormateada = formatterHora.string(from: fecha)
+
+            return "\(fechaFormateada) | \(horaFormateada)"
     }
-  
 }

@@ -59,6 +59,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
         cargarDatosParaEditar()
     }
     
+    // FUNCION PARA IMPORTAR FOTO DESDE GALERIA
     @objc func seleccionarFoto() {
         let picker = UIImagePickerController()
             picker.delegate = self
@@ -132,12 +133,13 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
         }
 
         // ASIGNA CAMPOS
-        mascota.nombre = nombre
+        mascota.nombre = nombre.capitalizedFirstLetter
         mascota.edad = edad
         mascota.tipo = tipo
         mascota.peso = pesoDecimal
-        mascota.raza = raza
+        mascota.raza = raza.capitalizedFirstLetter
         mascota.dni = dni
+        mascota.estadoMascota = "Activa"
 
         // ASIGNAR FOTO (SOLO SI SE HA SELECCIONADO UNA NUEVA IMAGEN, SINO MANTENER LA QUE YA ESTABA REGISTRADA
         if let imagen = imagenSeleccionada,
@@ -269,5 +271,12 @@ extension MantenerMascotaViewController: UITextFieldDelegate {
             return false
         }
         return true
+    }
+}
+
+// EXTENSION PARA APLICAR MAYUSCULAS A la PRIMERA LETRA DEL VALOR Y MINUSCULAS AL RESTO
+extension String {
+    var capitalizedFirstLetter: String {
+        return prefix(1).uppercased() + dropFirst().lowercased()
     }
 }

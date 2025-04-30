@@ -129,27 +129,47 @@ extension ListadoViewController: UITableViewDataSource {
 }
 
 extension ListadoViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-                let mascotaAEliminar = mascotas[indexPath.row]
-                
-                let alerta = UIAlertController(title: "Eliminar Mascota", message: "¿Estás seguro de que deseas eliminar de tus mascotas a \"\(mascotaAEliminar.nombre ?? "esta mascota")\"?",
-                                               preferredStyle: .alert)
-                
-                let confirmar = UIAlertAction(title: "Eliminar", style: .destructive) { _ in
-                    CoreDataManager.shared.deleteMascota(mascotaAEliminar)
-                    self.cargarMascotas()
+    func tableView(_ tableView: UITableView,
+                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+    -> UISwipeActionsConfiguration? {
+
+        let cancelarAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
+            completionHandler(false)
+            let mascotaAEliminar = self.mascotas[indexPath.row]
+            
+            let alerta = UIAlertController(
+                title: "Eliminar Mascota",
+                message: "¿Estás seguro de que deseas eliminar de tus mascotas a \"\(mascotaAEliminar.nombre ?? "esta mascota")\"?",
+                preferredStyle: .alert
+            )
+            
+            let confirmar = UIAlertAction(title: "Eliminar", style: .destructive) { _ in
+                mascotaAEliminar.estadoMascota = "Inactiva"
+                do {
+                    try CoreDataManager.shared.context.save()
+                    self.mascotas.remove(at: indexPath.row)
+                    self.mascotasTableView.deleteRows(at: [indexPath], with: .automatic)
+                } catch {
+                    print("Error al cancelar la cita: \(error)")
                 }
-                
-                let cancelar = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
-                
-                alerta.addAction(confirmar)
-                alerta.addAction(cancelar)
-                
-                present(alerta, animated: true, completion: nil)
             }
+            
+            let cancelar = UIAlertAction(title: "Mantener", style: .cancel, handler: nil)
+            
+            alerta.addAction(confirmar)
+            alerta.addAction(cancelar)
+            
+            self.present(alerta, animated: true, completion: nil)
+            
+        }
+
+        // Agrega un ícono de tacho de basura (opcional)
+        cancelarAction.image = UIImage(systemName: "trash")
+        cancelarAction.backgroundColor = .red
+
+        return UISwipeActionsConfiguration(actions: [cancelarAction])
     }
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mascotaSeleccionada = mascotas[indexPath.row]

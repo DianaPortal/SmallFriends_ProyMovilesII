@@ -49,7 +49,10 @@ class CoreDataManager {
     // LISTAR MASCOTAS REGISTRADAS POR USUARIO LOGUEADO
     func fetchMascotasDelUsuario(_ usuario: Usuario) -> [Mascota] {
         let request: NSFetchRequest<Mascota> = Mascota.fetchRequest()
-        request.predicate = NSPredicate(format: "usuario == %@", usuario)
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+                NSPredicate(format: "usuario == %@", usuario),
+                NSPredicate(format: "estadoMascota != %@", "Inactiva")
+            ])
 
         do {
             return try CoreDataManager.shared.context.fetch(request)
@@ -62,7 +65,10 @@ class CoreDataManager {
     // LISTAR MASCOTAS REGISTRADAS POR USUARIO LOGUEADO
     func fetchCitasDelUsuario(_ usuario: Usuario) -> [CitasCD] {
         let request: NSFetchRequest<CitasCD> = CitasCD.fetchRequest()
-        request.predicate = NSPredicate(format: "usuario == %@", usuario)
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+                NSPredicate(format: "usuario == %@", usuario),
+                NSPredicate(format: "estadoCita != %@", "Cancelada")
+            ])
 
         do {
             return try CoreDataManager.shared.context.fetch(request)

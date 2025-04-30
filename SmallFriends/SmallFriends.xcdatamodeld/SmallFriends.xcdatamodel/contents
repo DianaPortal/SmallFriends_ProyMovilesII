@@ -2,6 +2,7 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G436" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CitasCD" representedClassName=".CitasCD" syncable="YES">
         <attribute name="descripcionCita" optional="YES" attributeType="String"/>
+        <attribute name="estadoCita" optional="YES" attributeType="String"/>
         <attribute name="fechaCita" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="idCita" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lugarCita" optional="YES" attributeType="String"/>
@@ -13,6 +14,7 @@
         <attribute name="dni" optional="YES" attributeType="String"/>
         <attribute name="edad" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="estado" optional="YES" attributeType="String"/>
+        <attribute name="estadoMascota" optional="YES" attributeType="String"/>
         <attribute name="foto" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES"/>
         <attribute name="idUsuario" optional="YES" attributeType="String"/>
         <attribute name="nombre" optional="YES" attributeType="String"/>

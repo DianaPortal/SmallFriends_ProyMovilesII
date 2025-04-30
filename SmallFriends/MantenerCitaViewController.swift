@@ -51,12 +51,14 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
     
     @IBAction func guardarTapped(_ sender: UIButton) {
         guard
-            let lugar = lugarTextField.text, !lugar.isEmpty,
-            let descripcion = descripCitaTextField.text, !descripcion.isEmpty
+            let lugar = campo(lugarTextField, nombre: "Lugar")
         else {
             print("Error: Campos inválidos")
             return
             }
+        
+        // ADICION DE VALOR POR DEFECTO PARA EL CAMPO DESCRIPCION
+        let descripcion = descripCitaTextField.text?.isEmpty == false ? descripCitaTextField.text! : "Sin descripcion"
                
         // Obtener la fecha seleccionada del UIDatePicker
             let fecha = fechaDatePicker.date
@@ -122,6 +124,7 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                     nuevaCita.tipoCita = tipoCita
                     nuevaCita.descripcionCita = descripcion
                     nuevaCita.idCita = nuevoIdCita
+                    nuevaCita.estadoCita = "Activa"
                     
                     // OBTENER USUARIO LOGUEADO
                     let fetchRequestUsuario: NSFetchRequest<Usuario> = Usuario.fetchRequest()
@@ -150,7 +153,7 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                 }
         }
     
-    // Función para limpiar los campos del formulario
+    // Función para limpiar los campos del formulario (LA FUNCION YA NO ES NECESARIA, PORQUE LUEGO DE MANTENER, REDIRIGE A UNA VISTA DISTINTA)
     func limpiarCampos() {
             lugarTextField.text = ""
             descripCitaTextField.text = ""

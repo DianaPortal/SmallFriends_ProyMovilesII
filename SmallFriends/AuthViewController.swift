@@ -74,7 +74,7 @@ class AuthViewController: UIViewController {
               Auth.auth().sendPasswordReset(withEmail: email) { error in
                   if let error = error {
                       // Si hay un error al enviar el enlace
-                      self.showAlert(title: "Error", message: "Hubo un problema al enviar el enlace. Verifica el correo o intenta más tarde.")
+                      self.showAlert(title: "Error", message: error.localizedDescription)
                       return
                   }
                   
