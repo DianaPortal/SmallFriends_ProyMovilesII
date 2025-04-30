@@ -23,7 +23,7 @@ class DetalleMascotaViewController: UIViewController {
             super.viewWillAppear(animated)
             // Verificamos si la propiedad 'mascota' tiene valor
             guard let mascota = mascota else {
-                print("La mascota no está asignada.")
+                print("La mascota no está asignada")
                 return
             }
             if let datosFoto = mascota.foto {

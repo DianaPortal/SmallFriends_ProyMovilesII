@@ -221,7 +221,7 @@ class AuthViewController: UIViewController {
             showAlert(title: "Error de autenticación", message: message)
             return
         }
-        
+    
         // OBTIENE USUARIO
         if let user = Auth.auth().currentUser {
             // Usuario autenticado
@@ -243,8 +243,9 @@ class AuthViewController: UIViewController {
         defaults.set(provider.rawValue, forKey: "provider")
         
         defaults.set(result.user.email, forKey: "correoUsuarioLogueado")
-        
-        verificarYGuardarUsuarioSiNoExiste(uid: result.user.uid, email: result.user.email, provider: provider)
+        /*
+        verificarYGuardarUsuarioSiNoExiste(uid: result.user.uid, email: result.user.email, provider: provider) */
+        imprimirDatosGuardados(uid: result.user.uid)
        
         //Redigir al MainTabBarController después de iniciar sesión correctamente
         authStackView.isHidden = true
@@ -305,8 +306,8 @@ class AuthViewController: UIViewController {
             print("Error al guardar en Core Data: \(error.localizedDescription)")
         }
     }
-
-    private func verificarYGuardarUsuarioSiNoExiste(uid: String, email: String?, provider: ProviderType) {
+    /*
+    private func verificarYGuardarUsuarioSiNoExiste(uid: String, email: String?, provider: ProviderType, nombre: String = "Sin nombre", apellidos: String = "Sin apellidos") {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let contexto = appDelegate.persistentContainer.viewContext
 
@@ -320,10 +321,10 @@ class AuthViewController: UIViewController {
                 nuevoUsuario.idUsuario = uid
                 nuevoUsuario.email = email
                 nuevoUsuario.provider = provider.rawValue
-                nuevoUsuario.nombre = "Sin nombre"
-                nuevoUsuario.apellidos = "Sin apellidos"
+                nuevoUsuario.nombre = nombre
+                nuevoUsuario.apellidos = apellidos
                 try contexto.save()
-                print("Usuario guardado al iniciar sesión")
+                print("Usuario guardado al iniciar sesión o registrarse")
             } else {
                 print("Usuario ya existe en Core Data")
             }
@@ -331,5 +332,30 @@ class AuthViewController: UIViewController {
             print("Error al guardar usuario desde login: \(error.localizedDescription)")
         }
     }
+     */
 
+    private func imprimirDatosGuardados(uid: String) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let contexto = appDelegate.persistentContainer.viewContext
+
+        let fetchRequest: NSFetchRequest<Usuario> = Usuario.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "idUsuario == %@", uid)
+
+        do {
+            let resultados = try contexto.fetch(fetchRequest)
+            
+            if let usuarioGuardado = resultados.first {
+                print("Datos guardados en Core Data: ")
+                print("UID: \(usuarioGuardado.idUsuario ?? "No UID")")
+                print("Correo: \(usuarioGuardado.email ?? "No correo")")
+                print("Proveedor: \(usuarioGuardado.provider ?? "No proveedor")")
+                print("Nombre: \(usuarioGuardado.nombre ?? "No nombre")")
+                print("Apellidos: \(usuarioGuardado.apellidos ?? "No apellidos")")
+            } else {
+                print("No se encontró el usuario con UID: \(uid)")
+            }
+        } catch {
+            print("Error al recuperar datos de Core Data: \(error.localizedDescription)")
+        }
+    }
 }

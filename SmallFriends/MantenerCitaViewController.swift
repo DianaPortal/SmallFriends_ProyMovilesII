@@ -68,8 +68,20 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
     guardarEnCoreData(fecha: fecha, lugar: lugar, tipoCita: tipoCitaSeleccionado, descripcion: descripcion)
                
     // Limpiar los campos
-    limpiarCampos()
+    //limpiarCampos()
+        
+        mostrarAlerta(titulo: "Éxito", mensaje: citaAActualizar != nil ? "Cita actualizada correctamente" : "Cita registrada correctamente") {
+            self.navigationController?.popViewController(animated: true)
+        }
    }
+    
+    func mostrarAlerta(titulo: String, mensaje: String, alAceptar: (() -> Void)? = nil) {
+        let alerta = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
+        alerta.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            alAceptar?()
+        })
+        present(alerta, animated: true, completion: nil)
+    }
     
     func guardarEnCoreData(fecha: Date, lugar: String, tipoCita: String, descripcion: String){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }

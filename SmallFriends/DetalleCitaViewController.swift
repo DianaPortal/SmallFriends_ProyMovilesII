@@ -17,10 +17,11 @@ class DetalleCitaViewController: UIViewController {
     
     
     var cita: CitasCD?  // Aquí se almacenará la cita seleccionada
-        
+    
+    /*
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        /*
         // Asegurarse de que la cita esté disponible
         if let cita = cita {
         // Asignar los valores de la cita a los UILabels correspondientes
@@ -31,6 +32,44 @@ class DetalleCitaViewController: UIViewController {
             tipoCitaLabel.text = cita.tipoCita
             descripCitaLabel.text = cita.descripcionCita
         }
+        */
+        guard let cita = cita else {
+            print("La cita no está asignada")
+            return
+        }
+        if let fecha = cita.fechaCita {
+            fechaCitaLabel.text = formatearFecha(fecha)
+        }
+        lugarCitaLabel.text = cita.lugarCita
+        tipoCitaLabel.text = cita.tipoCita
+        descripCitaLabel.text = cita.descripcionCita
+    }
+    */
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        /*
+        // Asegurarse de que la cita esté disponible
+        if let cita = cita {
+        // Asignar los valores de la cita a los UILabels correspondientes
+            if let fecha = cita.fechaCita {
+                fechaCitaLabel.text = formatearFecha(fecha)
+            }
+            lugarCitaLabel.text = cita.lugarCita
+            tipoCitaLabel.text = cita.tipoCita
+            descripCitaLabel.text = cita.descripcionCita
+        }
+        */
+        guard let cita = cita else {
+            print("La cita no está asignada")
+            return
+        }
+        if let fecha = cita.fechaCita {
+            fechaCitaLabel.text = formatearFecha(fecha)
+        }
+        lugarCitaLabel.text = cita.lugarCita
+        tipoCitaLabel.text = cita.tipoCita
+        descripCitaLabel.text = cita.descripcionCita
     }
     
     
@@ -53,7 +92,7 @@ class DetalleCitaViewController: UIViewController {
     func formatearFecha(_ fecha: Date) -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .short  // Puedes cambiar a .long, .medium según prefieras
-        dateFormatter.timeStyle = .none  // O puedes configurar la hora si lo necesitas
+        dateFormatter.timeStyle = .short  // O puedes configurar la hora si lo necesitas
         return dateFormatter.string(from: fecha)
     }
   
