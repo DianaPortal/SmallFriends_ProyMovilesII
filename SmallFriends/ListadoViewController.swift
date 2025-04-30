@@ -30,14 +30,21 @@ class ListadoViewController: UIViewController {
         cargarMascotas()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "RegistrarMascota",
-           let destino = segue.destination as? MantenerMascotaViewController {
-            destino.mascotaAEditar = nil // Para registrar una nueva mascota
-            let backItem = UIBarButtonItem()
-            backItem.title = "Listado"
-            navigationItem.backBarButtonItem = backItem
-        }
+    @IBAction func botonRegistrarTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let mantenerMascotaVC = storyboard.instantiateViewController(withIdentifier: "MantenerMascotaVC") as? MantenerMascotaViewController {
+                
+                // SE PASA UN NULO PARA QUE LA VISTA "MANTENER" ENTIENDA QUE ES UN REGISTRO
+                mantenerMascotaVC.mascotaAEditar = nil
+
+                // BOTON BACK
+                let backItem = UIBarButtonItem()
+                backItem.title = "Listado"
+                navigationItem.backBarButtonItem = backItem
+
+                // NAVEGACION A LA VISTA
+                self.navigationController?.pushViewController(mantenerMascotaVC, animated: true)
+            }
     }
     
     func cargarMascotas() {
@@ -59,14 +66,9 @@ class ListadoViewController: UIViewController {
         }
     }
     
-    @IBAction func crearMascota(_ sender: Any) {
-        let registroVC = MantenerMascotaViewController()
-        navigationController?.pushViewController(registroVC, animated: true)
-    }
-    
     // BUSCAR USUARIO LOGUEADO
     func obtenerUsuarioLogueado() -> Usuario? {
-        guard let correo = UserDefaults.standard.string(forKey: "correoUsuarioLogueado") else { return nil }
+        guard let correo = UserDefaults.standard.string(forKey: "email") else { return nil }
 
         let request: NSFetchRequest<Usuario> = Usuario.fetchRequest()
         request.predicate = NSPredicate(format: "email == %@", correo)
@@ -89,9 +91,33 @@ extension ListadoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "celdaMascota", for: indexPath) as! MascotaTableViewCell
         let mascota = mascotas[indexPath.row]
-        celda.nombreMascotaLabel.text = mascota.nombre
-        celda.detallesMascota.text = "Edad: \(mascota.edad) \(mascota.edad == 1 ? "año" : "años")\nRaza: \(mascota.raza ?? "Sin raza")"
         
+        // MARK: ESTRUCTURACION DEL DETALLE DE MASCOTA EN EL LISTADO
+        
+        // DIVIDE EL DETALLE EN PARTES
+        let nombre = mascota.nombre ?? "Sin nombre"
+        let edadTexto = "Edad: \(mascota.edad) \(mascota.edad == 1 ? "año" : "años")"
+        let razaTexto = "Raza: \(mascota.raza ?? "Sin raza")"
+        
+        // ESTRUCTURA EL DETALLE JUNTANDO LAS PARTES
+        let textoCompleto = "\(nombre)\n\(edadTexto)\n\(razaTexto)"
+
+        // CREA NSMutableAttributedString PARA ESTILIZAR PARTES ESPECIFICAS DEL DETALLE
+        let textoAtributado = NSMutableAttributedString(string: textoCompleto)
+
+        // DEFINE RANGO PARA ESTILIZAR
+        let rangoNombre = (textoCompleto as NSString).range(of: nombre)
+
+        // APLICA ESTILO ITALIC A TODO MENOS AL NOMBRE
+        let fuenteNormal = UIFont.italicSystemFont(ofSize: 16)
+        textoAtributado.addAttribute(.font, value: fuenteNormal, range: NSMakeRange(0, textoCompleto.count))
+
+        // APLICA ESTILO BOLD AL NOMBRE
+        textoAtributado.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: rangoNombre)
+
+        // ASIGNA EL TEXTO ESTILIZADO AL LABEL
+        celda.detalleMascotaLabel.attributedText = textoAtributado
+         
         // MOSTRAR FOTO O IMAGEN POR DEFECTO
             if let datosFoto = mascota.foto {
                 celda.fotoMascotaIV.image = UIImage(data: datosFoto)

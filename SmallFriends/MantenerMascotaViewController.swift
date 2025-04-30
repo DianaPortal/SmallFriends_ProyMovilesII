@@ -38,6 +38,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
         // COMBOBOX PARA TIPO MASCOTA
         tipoField.inputView = pickerTipo
         tipoField.tintColor = .clear
+        tipoField.delegate = self
         pickerTipo.delegate = self
         pickerTipo.dataSource = self
         
@@ -48,6 +49,12 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         toolbar.setItems([flexibleSpace, doneButton], animated: false)
         tipoField.inputAccessoryView = toolbar
+        
+        // ESTABLECER LA PRIMERA OPCION DEL PICKER COMO LA OPCION POR DEFECTO
+        if mascotaAEditar == nil {
+            tipoField.text = tipos.first
+            pickerTipo.selectRow(0, inComponent: 0, animated: false)
+        }
         
         cargarDatosParaEditar()
     }
@@ -89,13 +96,14 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
             let nombre = campo(nombreField, nombre: "Nombre"),
             let edadTexto = campo(edadField, nombre: "Edad"),
             let edad = Int16(edadTexto),
-        
-            let pesoTexto = campo(pesoField, nombre: "Peso"),
-            let dni = campo(dniField, nombre: "DNI")
+            let pesoTexto = campo(pesoField, nombre: "Peso")
         else { return }
 
-        // ADICION DE VALOR POR DEFECTO "MESTIZO"
+        // ADICION DE VALOR POR DEFECTO PARA EL CAMPO RAZA
         let raza = razaField.text?.isEmpty == false ? razaField.text! : "Mestizo"
+        
+        // ADICION DE VALOR POR DEFECTO PARA EL CAMPO DNI
+        let dni = dniField.text?.isEmpty == false ? dniField.text! : "Sin dni"
         
         // VALIDAR TIPO DE MASCOTA
         guard let tipo = tipoField.text, tipos.contains(tipo) else {
@@ -180,11 +188,20 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
     }
     
     // FUNCION PARA VALIDAR DNI
-    func validarDNI(_ dni: String) -> Bool {
-        let caracteresNoNumericos = CharacterSet.decimalDigits.inverted
-        return dni.count == 8 && dni.rangeOfCharacter(from: caracteresNoNumericos) == nil
+    func validarDNI(_ dni: String?) -> Bool {
+        guard let dni = dni else { return false }
+            
+            // SI EL DNI ES EL VALOR POR DEFECTO, NO SE HACE VALIDACION DE CARACTERES NUMERICOS
+            if dni == "Sin dni" {
+                return true
+            }
+
+            // VALIDACION DE CARACTERES NUMERICOS Y RANGO DE CARACTERES
+            let caracteresNoNumericos = CharacterSet.decimalDigits.inverted
+            return dni.count == 8 && dni.rangeOfCharacter(from: caracteresNoNumericos) == nil
     }
     
+    // FUNCION PARA MOSTRAR ALERTA PERSONALIZADA
     func mostrarAlerta(titulo: String, mensaje: String, alAceptar: (() -> Void)? = nil) {
         let alerta = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
         alerta.addAction(UIAlertAction(title: "OK", style: .default) { _ in
@@ -216,7 +233,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
     
     // FUNCION PARA OBTENER EL USUARIO LOGUEADO
     func obtenerUsuarioLogueado() -> Usuario? {
-        guard let correoGuardado = UserDefaults.standard.string(forKey: "correoUsuarioLogueado") else {
+        guard let correoGuardado = UserDefaults.standard.string(forKey: "email") else {
             print("No hay usuario logueado en UserDefaults")
             return nil
         }
@@ -242,5 +259,15 @@ extension MantenerMascotaViewController: UIImagePickerControllerDelegate, UINavi
             fotoImageView.image = imagen
         }
         picker.dismiss(animated: true)
+    }
+}
+
+extension MantenerMascotaViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        // BLOQUE LA EDICION EN EL CAMPO DE TEXTO TIPO MASCOTA
+        if textField == tipoField {
+            return false
+        }
+        return true
     }
 }

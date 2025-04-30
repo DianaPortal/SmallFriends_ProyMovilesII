@@ -10,29 +10,59 @@ import CoreData
 class ListadoCitaViewController: UIViewController {
 
     @IBOutlet weak var tablaCitas: UITableView!
+    
     var citas: [CitasCD] = []
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Listado de Citas"
 
         tablaCitas.dataSource = self
         tablaCitas.delegate = self
                 
+        print("Pantalla de listado de citas cargada")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         cargarCitas()
     }
     
-    // Función para cargar las citas desde CoreData
+    // Función para cargar las citas desde CoreData (UPDATE - AHORA LA FUNCION BUSCA LAS CITAS FILTRANDO POR USUARIO LOGUEADO)
     func cargarCitas() {
-        let request: NSFetchRequest<CitasCD> = CitasCD.fetchRequest()
-        do {
-            citas = try context.fetch(request)
-            tablaCitas.reloadData()
-        } catch {
-            print("Error al cargar citas: \(error.localizedDescription)")
+        // VERIFICA SI EL USUARIO ESTA LOGUEADO
+        guard let usuario = obtenerUsuarioLogueado() else {
+                print("No hay usuario logueado.")
+                citas = []
+                tablaCitas.reloadData()
+                return
+            }
+        
+        citas = CoreDataManager.shared.fetchCitasDelUsuario(usuario)
+        tablaCitas.reloadData()
+        
+        if citas.isEmpty {
+            tablaCitas.setEmptyMessage("No hay citas registradas")
+        } else {
+            tablaCitas.restore()
         }
     }
    
+    // BUSCAR USUARIO LOGUEADO
+    func obtenerUsuarioLogueado() -> Usuario? {
+        guard let correo = UserDefaults.standard.string(forKey: "email") else { return nil }
+
+        let request: NSFetchRequest<Usuario> = Usuario.fetchRequest()
+        request.predicate = NSPredicate(format: "email == %@", correo)
+
+        do {
+            return try CoreDataManager.shared.context.fetch(request).first
+        } catch {
+            print("Error al obtener usuario logueado: \(error)")
+            return nil
+        }
+    }
 }
 
 

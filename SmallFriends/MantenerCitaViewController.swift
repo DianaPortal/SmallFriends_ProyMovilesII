@@ -64,24 +64,16 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         // Obtener el tipo de cita seleccionado del UIPickerView
             let tipoCitaSeleccionado = tipoCita[tipoCitaPickerView.selectedRow(inComponent: 0)]
                
-    // Guardar en Core Data
-    guardarEnCoreData(fecha: fecha, lugar: lugar, tipoCita: tipoCitaSeleccionado, descripcion: descripcion)
+        // Guardar en Core Data
+        guardarEnCoreData(fecha: fecha, lugar: lugar, tipoCita: tipoCitaSeleccionado, descripcion: descripcion)
                
-    // Limpiar los campos
-    //limpiarCampos()
+        // Limpiar los campos
+        //limpiarCampos()
         
         mostrarAlerta(titulo: "Éxito", mensaje: citaAActualizar != nil ? "Cita actualizada correctamente" : "Cita registrada correctamente") {
             self.navigationController?.popViewController(animated: true)
         }
    }
-    
-    func mostrarAlerta(titulo: String, mensaje: String, alAceptar: (() -> Void)? = nil) {
-        let alerta = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
-        alerta.addAction(UIAlertAction(title: "OK", style: .default) { _ in
-            alAceptar?()
-        })
-        present(alerta, animated: true, completion: nil)
-    }
     
     func guardarEnCoreData(fecha: Date, lugar: String, tipoCita: String, descripcion: String){
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -131,6 +123,23 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                     nuevaCita.descripcionCita = descripcion
                     nuevaCita.idCita = nuevoIdCita
                     
+                    // OBTENER USUARIO LOGUEADO
+                    let fetchRequestUsuario: NSFetchRequest<Usuario> = Usuario.fetchRequest()
+                    if let correoGuardado = UserDefaults.standard.string(forKey: "email") {
+                        fetchRequestUsuario.predicate = NSPredicate(format: "email == %@", correoGuardado)
+                        
+                        do {
+                            let usuarios = try context.fetch(fetchRequestUsuario)
+                            if let usuario = usuarios.first {
+                                nuevaCita.usuario = usuario
+                            } else {
+                                print("No se encontró el usuario logueado")
+                            }
+                        } catch {
+                            print("Error al obtener el usuario logueado: \(error.localizedDescription)")
+                        }
+                    }
+                    
                     // Guardar cambios en core data
                     do {
                         try context.save()
@@ -142,12 +151,12 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         }
     
     // Función para limpiar los campos del formulario
-        func limpiarCampos() {
+    func limpiarCampos() {
             lugarTextField.text = ""
             descripCitaTextField.text = ""
             tipoCitaPickerView.selectRow(0, inComponent: 0, animated: true)  // Restablecer el PickerView a la primera opción
             fechaDatePicker.date = Date()  // Restablecer la fecha al valor actual
-        }
+    }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -156,8 +165,34 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return tipoCita.count
     }
+    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         // Mostrar las opciones en el Picker
         return tipoCita[row]
+    }
+    
+    // FUNCION PARA MOSTRAR ALERTA POR ERRORES EN LOS CAMPOS
+    func mostrarAlerta(mensaje: String) {
+        let alerta = UIAlertController(title: "Error", message: mensaje, preferredStyle: .alert)
+        alerta.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alerta, animated: true, completion: nil)
+    }
+    
+    // FUNCION PARA MOSTRAR ALERTA DE ERROR EN CASO HAYA CAMPOS VACIOS
+    func campo(_ textField: UITextField, nombre: String) -> String? {
+        guard let texto = textField.text, !texto.isEmpty else {
+            mostrarAlerta(mensaje: "El campo \(nombre) no puede estar vacío")
+            return nil
+        }
+        return texto
+    }
+    
+    // FUNCION PARA MOSTRAR ALERTA PERSONALIZADA
+    func mostrarAlerta(titulo: String, mensaje: String, alAceptar: (() -> Void)? = nil) {
+        let alerta = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
+        alerta.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            alAceptar?()
+        })
+        present(alerta, animated: true, completion: nil)
     }
 }

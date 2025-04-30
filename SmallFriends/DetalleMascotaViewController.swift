@@ -59,15 +59,22 @@ class DetalleMascotaViewController: UIViewController {
             dniMascotaTF.text = mascota.dni ?? "DNI no disponible"
             
     }
+    
+    @IBAction func botonActualizarTapped(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            if let mantenerMascotaVC = storyboard.instantiateViewController(withIdentifier: "MantenerMascotaVC") as? MantenerMascotaViewController {
+                
+                // Pasar la mascota
+                mantenerMascotaVC.mascotaAEditar = self.mascota
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "actualizarMascota",
-           let destino = segue.destination as? MantenerMascotaViewController {
-            destino.mascotaAEditar = mascota
-            let backItem = UIBarButtonItem()
-                    backItem.title = "Detalle"
-                    navigationItem.backBarButtonItem = backItem
-        }
+                // Opcional: cambiar título del botón de back
+                let backItem = UIBarButtonItem()
+                backItem.title = "Detalle"
+                navigationItem.backBarButtonItem = backItem
+
+                // Mostrar la vista (usando navigationController)
+                self.navigationController?.pushViewController(mantenerMascotaVC, animated: true)
+            }
     }
 
 }

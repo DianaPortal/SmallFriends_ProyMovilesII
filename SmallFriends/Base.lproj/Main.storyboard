@@ -325,15 +325,9 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MYB-mG-5fz">
                                                     <rect key="frame" x="155" y="5" width="203" height="145"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre de mascota" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7V-ko-47l">
-                                                            <rect key="frame" x="0.0" y="0.0" width="203" height="67.666666666666671"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalles" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tL7-Xh-Xe3">
-                                                            <rect key="frame" x="0.0" y="77.666666666666686" width="203" height="67.333333333333314"/>
-                                                            <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre de mascota" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t7V-ko-47l">
+                                                            <rect key="frame" x="0.0" y="0.0" width="203" height="145"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -351,9 +345,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="detallesMascota" destination="tL7-Xh-Xe3" id="deR-BF-Ici"/>
+                                            <outlet property="detalleMascotaLabel" destination="t7V-ko-47l" id="5Aw-ec-COn"/>
                                             <outlet property="fotoMascotaIV" destination="3UI-eY-qOf" id="BGR-ub-LRn"/>
-                                            <outlet property="nombreMascotaLabel" destination="t7V-ko-47l" id="m6c-5V-3DS"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -375,8 +368,7 @@
                     <navigationItem key="navigationItem" id="HDc-WY-KPJ">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="DGL-kb-olK">
                             <connections>
-                                <action selector="crearMascota:" destination="Bdw-Cr-xd1" id="yMC-Le-t1n"/>
-                                <segue destination="m1u-u2-iud" kind="show" identifier="RegistrarMascota" id="x6t-wv-rWe"/>
+                                <action selector="botonRegistrarTapped:" destination="Bdw-Cr-xd1" id="bQz-Nz-p1P"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -392,13 +384,13 @@
         <!--Mantener Mascota View Controller-->
         <scene sceneID="CDl-Q1-Ocx">
             <objects>
-                <viewController id="m1u-u2-iud" customClass="MantenerMascotaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MantenerMascotaVC" id="m1u-u2-iud" customClass="MantenerMascotaViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Tkb-4y-Qbt">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="perfil_default" translatesAutoresizingMaskIntoConstraints="NO" id="cNc-Sx-Sg9">
-                                <rect key="frame" x="146.66666666666666" y="30" width="100" height="100"/>
+                                <rect key="frame" x="146.66666666666666" y="89" width="100" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="100" id="gRy-yu-kDg"/>
                                     <constraint firstAttribute="height" constant="100" id="lio-Fw-EOE"/>
@@ -410,7 +402,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm9-o6-aoL">
-                                <rect key="frame" x="20" y="140" width="353" height="40"/>
+                                <rect key="frame" x="20" y="199" width="353" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="zK4-CS-dnS"/>
                                 </constraints>
@@ -419,7 +411,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Nombre de mascota" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="I0w-Sy-GzN">
-                                <rect key="frame" x="20" y="190" width="353" height="40"/>
+                                <rect key="frame" x="20" y="249" width="353" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="MM3-gS-ZIh"/>
                                 </constraints>
@@ -427,13 +419,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40e-g9-u3T">
-                                <rect key="frame" x="20" y="240" width="353" height="20.333333333333314"/>
+                                <rect key="frame" x="20" y="299" width="353" height="20.333333333333314"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Edad" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pCD-TY-rNL">
-                                <rect key="frame" x="20" y="270.33333333333331" width="90" height="40"/>
+                                <rect key="frame" x="20" y="329.33333333333331" width="90" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="90" id="DZQ-yb-Vq8"/>
                                     <constraint firstAttribute="height" constant="40" id="Z3r-YW-94e"/>
@@ -447,7 +439,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raza" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87d-Fx-mkp">
-                                <rect key="frame" x="20" y="384.66666666666669" width="353" height="30"/>
+                                <rect key="frame" x="20" y="443.66666666666669" width="353" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="s2c-7M-L2n"/>
                                 </constraints>
@@ -463,12 +455,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Mestizo" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Sx4-TD-Gwz">
-                                <rect key="frame" x="20" y="424.66666666666669" width="353" height="34"/>
+                                <rect key="frame" x="20" y="483.66666666666669" width="353" height="34.000000000000057"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNI de la mascota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaY-Ks-JUx">
-                                <rect key="frame" x="20" y="468.66666666666669" width="353" height="30"/>
+                                <rect key="frame" x="20" y="527.66666666666663" width="353" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="vsH-Gl-Hmg"/>
                                 </constraints>
@@ -477,7 +469,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="77635472" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jmj-vm-k2f">
-                                <rect key="frame" x="20" y="508.66666666666674" width="353" height="34"/>
+                                <rect key="frame" x="20" y="567.66666666666663" width="353" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <userDefinedRuntimeAttributes>
@@ -487,7 +479,7 @@
                                 </userDefinedRuntimeAttributes>
                             </textField>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HAD-D5-aHW">
-                                <rect key="frame" x="20" y="315.33333333333331" width="353" height="20.333333333333314"/>
+                                <rect key="frame" x="20" y="374.33333333333331" width="353" height="20.333333333333314"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02W-ti-ajS">
                                         <rect key="frame" x="0.0" y="0.0" width="174" height="20.333333333333332"/>
@@ -504,7 +496,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="k8Z-RA-Vdl">
-                                <rect key="frame" x="20" y="340.66666666666669" width="353" height="34"/>
+                                <rect key="frame" x="20" y="399.66666666666669" width="353" height="34"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Perro" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5vz-RV-p55">
                                         <rect key="frame" x="0.0" y="0.0" width="121.66666666666667" height="34"/>
@@ -535,7 +527,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eub-O6-ENT">
-                                <rect key="frame" x="100" y="752" width="193" height="40"/>
+                                <rect key="frame" x="100" y="728" width="193" height="40"/>
                                 <color key="backgroundColor" systemColor="linkColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="owq-lq-QPi"/>
@@ -1105,7 +1097,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="actualizarTapped:" destination="UYg-5a-ShW" eventType="touchUpInside" id="WjO-tL-nGO"/>
-                                    <segue destination="m1u-u2-iud" kind="show" identifier="actualizarMascota" id="5Ns-bJ-7kV"/>
+                                    <action selector="botonActualizarTapped:" destination="zE0-wn-oAa" eventType="touchUpInside" id="y7l-ov-9B0"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1536,8 +1528,7 @@
         <segue reference="0mL-VC-DgL"/>
         <segue reference="LBC-OS-krG"/>
         <segue reference="XqQ-v8-d5H"/>
-        <segue reference="5Ns-bJ-7kV"/>
-        <segue reference="fP3-N7-4ek"/>
+        <segue reference="Sz5-1v-YmZ"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="LogoSmallFriends" width="1024" height="1024"/>
@@ -1556,28 +1547,28 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

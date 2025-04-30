@@ -35,6 +35,7 @@ class CoreDataManager {
             }
         }
     
+    // LISTAR MASCOTAS REGISTRADAS
     func fetchMascotas() -> [Mascota] {
             let request: NSFetchRequest<Mascota> = Mascota.fetchRequest()
             do {
@@ -45,9 +46,22 @@ class CoreDataManager {
             }
         }
     
-    // LISTAR MASCOTAS POR USUARIO LOGUEADO
+    // LISTAR MASCOTAS REGISTRADAS POR USUARIO LOGUEADO
     func fetchMascotasDelUsuario(_ usuario: Usuario) -> [Mascota] {
         let request: NSFetchRequest<Mascota> = Mascota.fetchRequest()
+        request.predicate = NSPredicate(format: "usuario == %@", usuario)
+
+        do {
+            return try CoreDataManager.shared.context.fetch(request)
+        } catch {
+            print("Error al obtener mascotas del usuario: \(error)")
+            return []
+        }
+    }
+    
+    // LISTAR MASCOTAS REGISTRADAS POR USUARIO LOGUEADO
+    func fetchCitasDelUsuario(_ usuario: Usuario) -> [CitasCD] {
+        let request: NSFetchRequest<CitasCD> = CitasCD.fetchRequest()
         request.predicate = NSPredicate(format: "usuario == %@", usuario)
 
         do {
