@@ -25,6 +25,10 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate{
         super.viewDidLoad()
         
         mensaje.delegate = self
+        mensaje.text = "Escribe tu mensaje aquí..."
+        mensaje.textColor = .lightGray
+        
+
         
         notificacionesCenter.requestAuthorization(options: [.alert, .sound]) { permiso, error in
             if (!permiso){
@@ -36,12 +40,17 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate{
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        mensaje.text = ""
+        if mensaje.textColor == .lightGray {
+            mensaje.text = ""
+            mensaje.textColor = .black
+        }
     }
+    
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
+    
     
     func habilitarNotificaciones(){
         let ac = UIAlertController(title: "¿Habilitar las notificaciones.", message: "Para poder utilizar esta caracteristica, deberas de permitir las notificaciones", preferredStyle: .alert)
@@ -49,28 +58,41 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate{
             
             if (UIApplication.shared.canOpenURL(settingsURL)){
                 UIApplication.shared.open(settingsURL) { _ in
-                    
-                    
                 }
             }
         }
         ac.addAction(abrirConfiguracion)
-                     self.present(ac, animated: true)
+        ac.addAction(UIAlertAction(title: "Cancelar", style: .cancel))
+                self.present(ac, animated: true)
     }
     
     
     @IBAction func programarButton(_ sender: UIButton) {
         notificacionesCenter.getNotificationSettings { settings in
             DispatchQueue.main.async {
-                let title = self.titulo.text ?? ""
-                let message = self.mensaje.text ?? ""
+                let title = self.titulo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                let message = self.mensaje.text.trimmingCharacters(in: .whitespacesAndNewlines)
                 let date = self.datePicker.date
+                
+                guard !title.isEmpty, !message.isEmpty else {
+                let alerta = UIAlertController(title: "Campos vacíos", message: "Por favor, completa el título y el mensaje.", preferredStyle: .alert)
+                alerta.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alerta, animated: true)
+                    return
+                }
+                
+                if date <= Date() {
+                let alerta = UIAlertController(title: "Fecha inválida", message: "Selecciona una fecha y hora futura.", preferredStyle: .alert)
+                alerta.addAction(UIAlertAction(title: "OK", style: .default))
+                self.present(alerta, animated: true)
+                    return
+                }
                 
                 if settings.authorizationStatus == .authorized {
                     let content = UNMutableNotificationContent()
                     content.title = title
                     content.body = message
-                    
+                    content.sound = UNNotificationSound.default
                     
                     
                     let dateComp = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from : date)
@@ -79,7 +101,7 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate{
                     
                     self.notificacionesCenter.add(request) {error in
                         if error != nil {
-                            print("Error \(error!.localizedDescription)")
+                            print("Error al agregar notificación: \(error!.localizedDescription)")
                             return
                         }
                     }
@@ -87,7 +109,8 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate{
                     let ac = UIAlertController(title: "Notificacion Programada", message: "Para el dia : \(self.formattedDate(date: date))", preferredStyle: .alert)
                     ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
                         self.titulo.text = ""
-                        self.mensaje.text = ""
+                        self.mensaje.text = "Escribe tu mensaje aquí..."
+                        self.mensaje.textColor = .lightGray
                         self.datePicker.date = Date()
                     }))
                     self.present(ac, animated: true)
@@ -103,6 +126,4 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate{
         formatter.dateFormat = "d MMM y HH:mm"
         return formatter.string(from: date)
     }
-    
-
 }
