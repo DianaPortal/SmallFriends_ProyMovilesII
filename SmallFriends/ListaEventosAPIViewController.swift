@@ -8,7 +8,7 @@
 import UIKit
 
 struct Eventos: Codable{
-    
+        let id: Int
         let titulo: String
         let fecha: String
    
@@ -24,7 +24,7 @@ class ListaEventosAPIViewController: UIViewController {
         override func viewDidLoad() {
             super.viewDidLoad()
             tablaEventos.dataSource = self
-            tablaEventos.dataSource = self
+            tablaEventos.delegate = self
             obtenerEventos()
 
     }
@@ -76,3 +76,26 @@ extension ListaEventosAPIViewController: UITableViewDataSource {
         return cell
     }
 }
+
+
+extension ListaEventosAPIViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Obtener el evento seleccionado
+        let eventoSeleccionado = eventos[indexPath.row]
+               
+        // Instanciar el DetalleEventoViewController manualmente
+        let detalleEventoVC = storyboard?.instantiateViewController(withIdentifier: "mostrarDetalleEvento") as! DetalleEventoViewController
+               
+        // Pasar la información del evento seleccionado
+        detalleEventoVC.eventoID = eventoSeleccionado.id
+               
+        // Realizar la navegación
+        navigationController?.pushViewController(detalleEventoVC, animated: true)
+               
+        // Deseleccionar la celda
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+}
+
+

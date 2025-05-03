@@ -782,7 +782,6 @@
                                         <connections>
                                             <outlet property="eventoLabel" destination="F66-3e-2OE" id="7zf-01-W0l"/>
                                             <outlet property="fechaEventoLabel" destination="7w9-w7-GmR" id="w4b-xA-wdy"/>
-                                            <segue destination="udm-Rd-oBT" kind="show" identifier="mostrarDescripcionEvento" id="xYq-5L-nwM"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1359,13 +1358,13 @@
         <!--Detalle Evento View Controller-->
         <scene sceneID="owU-ZD-mRg">
             <objects>
-                <viewController storyboardIdentifier="mostrarDescripcionEvento" useStoryboardIdentifierAsRestorationIdentifier="YES" id="udm-Rd-oBT" customClass="DetalleEventoViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mostrarDetalleEvento" useStoryboardIdentifierAsRestorationIdentifier="YES" id="udm-Rd-oBT" customClass="DetalleEventoViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="amK-Qw-s1H">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name evento Seleccionado" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3b-wv-UQA">
-                                <rect key="frame" x="20" y="123" width="337" height="40"/>
+                                <rect key="frame" x="20" y="79" width="337" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="189-pO-2WS"/>
                                 </constraints>
@@ -1374,53 +1373,42 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="pNs-fY-mao">
-                                <rect key="frame" x="20" y="183" width="353" height="256"/>
+                                <rect key="frame" x="20" y="139" width="353" height="96"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83e-0O-Fwg">
-                                        <rect key="frame" x="0.0" y="0.0" width="353" height="64"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="24"/>
                                         <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha del evento" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2D-kE-jbe">
-                                        <rect key="frame" x="0.0" y="64" width="353" height="64"/>
+                                        <rect key="frame" x="0.0" y="24" width="353" height="24"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hora del Evento:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Co4-Wt-giR">
-                                        <rect key="frame" x="0.0" y="128" width="353" height="64"/>
+                                        <rect key="frame" x="0.0" y="48" width="353" height="24"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar del Evento:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0I-IT-o10">
-                                        <rect key="frame" x="0.0" y="192" width="353" height="64"/>
+                                        <rect key="frame" x="0.0" y="72" width="353" height="24"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GyL-7f-nPS" customClass="WKWebView">
-                                <rect key="frame" x="21.666666666666657" y="459" width="350" height="300"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="350" id="Xnm-cm-zhZ"/>
-                                    <constraint firstAttribute="height" constant="300" id="wnI-cR-8jc"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="F86-pi-H0W"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstItem="GyL-7f-nPS" firstAttribute="centerX" secondItem="amK-Qw-s1H" secondAttribute="centerX" id="CM6-lF-MnF"/>
                             <constraint firstItem="T3b-wv-UQA" firstAttribute="top" secondItem="F86-pi-H0W" secondAttribute="top" constant="20" id="Hjq-Wr-5bH"/>
-                            <constraint firstItem="F86-pi-H0W" firstAttribute="bottom" secondItem="GyL-7f-nPS" secondAttribute="bottom" constant="10" id="KcH-LG-w9G"/>
                             <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="pNs-fY-mao" secondAttribute="trailing" constant="20" id="T9c-AT-z6w"/>
                             <constraint firstItem="T3b-wv-UQA" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="20" id="YcL-WW-YCb"/>
                             <constraint firstItem="pNs-fY-mao" firstAttribute="top" secondItem="T3b-wv-UQA" secondAttribute="bottom" constant="20" id="bMA-HA-zzd"/>
-                            <constraint firstItem="GyL-7f-nPS" firstAttribute="top" secondItem="pNs-fY-mao" secondAttribute="bottom" constant="20" id="dXb-rx-8FO"/>
                             <constraint firstItem="pNs-fY-mao" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="20" id="naK-tL-eCw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="T3b-wv-UQA" secondAttribute="trailing" constant="20" id="pRn-E8-O9K"/>
                         </constraints>
@@ -1431,7 +1419,6 @@
                         <outlet property="fechaEventoLabel" destination="M2D-kE-jbe" id="idh-vy-1RV"/>
                         <outlet property="horaEventoLabel" destination="Co4-Wt-giR" id="7GY-vm-7nb"/>
                         <outlet property="lugarEventoLabel" destination="G0I-IT-o10" id="HxW-bV-AnC"/>
-                        <outlet property="mapaWKWebView" destination="GyL-7f-nPS" id="4z4-il-abP"/>
                         <outlet property="tituloEventoLabel" destination="T3b-wv-UQA" id="JzT-Tb-ev2"/>
                     </connections>
                 </viewController>
@@ -1492,7 +1479,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="HOy-qn-3Zf"/>
+        <segue reference="LBC-OS-krG"/>
         <segue reference="XqQ-v8-d5H"/>
         <segue reference="Sz5-1v-YmZ"/>
     </inferredMetricsTieBreakers>
@@ -1513,28 +1500,28 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

@@ -2,7 +2,7 @@
 //  DetalleEvento.swift
 //  SmallFriends
 //
-//  Created by Diana on 2/05/25.
+//  Created by DAMII on 3/05/25.
 //
 
 struct DetalleEvento: Codable {
@@ -15,4 +15,3 @@ struct DetalleEvento: Codable {
     let latitud: Double
     let longitud: Double
 }
-
