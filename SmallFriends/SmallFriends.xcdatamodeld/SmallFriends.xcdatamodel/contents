@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G436" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G513" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CitasCD" representedClassName=".CitasCD" syncable="YES">
         <attribute name="descripcionCita" optional="YES" attributeType="String"/>
         <attribute name="estadoCita" optional="YES" attributeType="String"/>
@@ -8,6 +8,7 @@
         <attribute name="lugarCita" optional="YES" attributeType="String"/>
         <attribute name="tipoCita" optional="YES" attributeType="String"/>
         <relationship name="mascota" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Mascota" inverseName="citas" inverseEntity="Mascota"/>
+        <relationship name="notificaciones" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NotificacionCD" inverseName="cita" inverseEntity="NotificacionCD"/>
         <relationship name="usuario" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Usuario" inverseName="citas" inverseEntity="Usuario"/>
     </entity>
     <entity name="Mascota" representedClassName=".Mascota" syncable="YES">
@@ -24,6 +25,14 @@
         <attribute name="tipo" optional="YES" attributeType="String"/>
         <relationship name="citas" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CitasCD" inverseName="mascota" inverseEntity="CitasCD"/>
         <relationship name="usuario" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Usuario" inverseName="mascota" inverseEntity="Usuario"/>
+    </entity>
+    <entity name="NotificacionCD" representedClassName=".NotificacionCD" syncable="YES">
+        <attribute name="cuerpo" optional="YES" attributeType="String"/>
+        <attribute name="fechaProgramada" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="idUsuario" optional="YES" attributeType="String"/>
+        <attribute name="titulo" optional="YES" attributeType="String"/>
+        <relationship name="cita" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CitasCD" inverseName="notificaciones" inverseEntity="CitasCD"/>
     </entity>
     <entity name="Usuario" representedClassName=".Usuario" syncable="YES">
         <attribute name="apellidos" optional="YES" attributeType="String"/>

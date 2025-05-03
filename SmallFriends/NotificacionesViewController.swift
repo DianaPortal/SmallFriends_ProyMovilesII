@@ -11,7 +11,7 @@ import UserNotifications
 
 class NotificacionesViewController: UIViewController, UITextViewDelegate{
     
-    
+   /*
     
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var titulo: UITextField!
@@ -125,5 +125,5 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate{
         let formatter  = DateFormatter()
         formatter.dateFormat = "d MMM y HH:mm"
         return formatter.string(from: date)
-    }
+    }*/
 }

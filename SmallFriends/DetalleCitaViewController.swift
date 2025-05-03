@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import CoreData
+import UserNotifications
 
 class DetalleCitaViewController: UIViewController {
 
@@ -126,5 +129,62 @@ class DetalleCitaViewController: UIViewController {
             let horaFormateada = formatterHora.string(from: fecha)
 
             return "\(fechaFormateada) | \(horaFormateada)"
+    }
+    
+    @IBAction func programarNotifTapped(_ sender: UIButton) {
+        guard let cita = cita, let fecha = cita.fechaCita else {
+            print("Cita inválida")
+            return
+        }
+        
+        if fecha <= Date() {
+            let alerta = UIAlertController(title: "Fecha inválida", message: "La cita ya ocurrió.", preferredStyle: .alert)
+            alerta.addAction(UIAlertAction(title: "OK", style: .default))
+            self.present(alerta, animated: true)
+            return
+        }
+        
+        let content = UNMutableNotificationContent()
+        content.title = "Recordatorio de cita: \(cita.tipoCita ?? "Sin tipo")"
+        content.body = "Lugar: \(cita.lugarCita ?? "No especificado"). Descripción: \(cita.descripcionCita ?? "")."
+        content.sound = UNNotificationSound.default
+        
+        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fecha)
+        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+        
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        UNUserNotificationCenter.current().add(request) { error in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error al programar la notificación: \(error.localizedDescription)")
+                    let alerta = UIAlertController(title: "Error", message: "No se pudo programar la notificación.", preferredStyle: .alert)
+                    alerta.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alerta, animated: true)
+                } else {
+                    // Guardar en Core Data
+                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+                    let context = appDelegate.persistentContainer.viewContext
+                    let nuevaNotif = NotificacionCD(context: context)
+                    
+                    nuevaNotif.id = UUID()
+                    nuevaNotif.titulo = content.title
+                    nuevaNotif.cuerpo = content.body
+                    nuevaNotif.fechaProgramada = fecha
+                    nuevaNotif.idUsuario = Auth.auth().currentUser?.uid
+                    
+                    do {
+                        try context.save()
+                        print("Notificación guardada en Core Data.")
+                    } catch {
+                        print("Error al guardar la notificación: \(error.localizedDescription)")
+                    }
+                    
+                    let alerta = UIAlertController(title: "Notificación programada", message: "La notificación ha sido agendada.", preferredStyle: .alert)
+                    alerta.addAction(UIAlertAction(title: "OK", style: .default))
+                    self.present(alerta, animated: true)
+                }
+            }
+        }
     }
 }
