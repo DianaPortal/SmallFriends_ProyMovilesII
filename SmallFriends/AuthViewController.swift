@@ -95,53 +95,75 @@ class AuthViewController: UIViewController {
     @IBAction func registrarseTapped(_ sender: UIButton) {
         //Mostrar alerta para registrar Usuario
         let alert = UIAlertController(title: "Registro Usuario", message: "Ingresa tus datos", preferredStyle: .alert)
-        
-        alert.addTextField { textField in
-            textField.placeholder = "Correo electrónico"
-            textField.keyboardType = .emailAddress
-        }
-        alert.addTextField { textField in
-            textField.placeholder = "Contraseña"
-            textField.isSecureTextEntry = true
-        }
-           
-        alert.addTextField { textField in
-            textField.placeholder = "Nombre"
-        }
-           
-        alert.addTextField { textField in
-            textField.placeholder = "Apellido"
-        }
-        
-        let registerAction = UIAlertAction(title: "Registrar", style: .default) { _ in
-        // Obtener datos de la alerta
-            guard let email = alert.textFields?[0].text, !email.isEmpty,
-                  let password = alert.textFields?[1].text, !password.isEmpty,
-                  let nombre = alert.textFields?[2].text, !nombre.isEmpty,
-                  let apellidos = alert.textFields?[3].text, !apellidos.isEmpty else {
-                self.showAlert(title: "Campos vacíos", message: "Por favor ingresa todos los datos.")
-                return
-            }
-            // Crear usuario en Firebase
-        Auth.auth().createUser(withEmail: email, password: password) { result, error in
-        if let error = error {
-            print("Error al registrar usuario: \(error.localizedDescription)")
-        self.showAlert(title: "Error de registro", message: "Hubo un problema al registrar el usuario.")
-        return
-        }
-       // Guardar el usuario en Firebase y en Core Data
-       self.showHome(result: result, error: error, provider: .basic)
-        
-        // Aquí puedes guardar en core data
-            let uid = result?.user.uid
-        self.guardarUsuarioEnCoreData(uid: uid ?? "", email: email, provider: .basic, nombre: nombre, apellidos: apellidos)
-            }
-        }
-        alert.addAction(registerAction)
-        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
             
-        present(alert, animated: true, completion: nil)
+            alert.addTextField { textField in
+                textField.placeholder = "Correo electrónico"
+                textField.keyboardType = .emailAddress
+            }
+            alert.addTextField { textField in
+                textField.placeholder = "Contraseña"
+                textField.isSecureTextEntry = true
+            }
+            alert.addTextField { textField in
+                textField.placeholder = "Nombre"
+            }
+            alert.addTextField { textField in
+                textField.placeholder = "Apellido"
+            }
+            
+            let registerAction = UIAlertAction(title: "Registrar", style: .default) { _ in
+                guard let email = alert.textFields?[0].text, !email.isEmpty,
+                      let password = alert.textFields?[1].text, !password.isEmpty,
+                      let nombre = alert.textFields?[2].text, !nombre.isEmpty,
+                      let apellidos = alert.textFields?[3].text, !apellidos.isEmpty else {
+                    self.showAlert(title: "Campos vacíos", message: "Por favor ingresa todos los datos.")
+                    return
+                }
+                
+                // Validación de correo electrónico
+                let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}"
+                let emailPred = NSPredicate(format: "SELF MATCHES %@", emailRegEx)
+                if !emailPred.evaluate(with: email) {
+                    self.showAlert(title: "Correo inválido", message: "Ingresa un correo electrónico válido.")
+                    return
+                }
+                
+                // Validación de longitud de contraseña
+                if password.count < 6 {
+                    self.showAlert(title: "Contraseña débil", message: "La contraseña debe tener al menos 6 caracteres.")
+                    return
+                }
+                
+                // Capitalizar nombre y apellidos
+                let nombreCapitalizado = nombre.capitalized
+                let apellidosCapitalizados = apellidos.capitalized
+                
+                // Crear usuario en Firebase
+                Auth.auth().createUser(withEmail: email, password: password) { result, error in
+                    if let error = error {
+                        print("Error al registrar usuario: \(error.localizedDescription)")
+                        self.showAlert(title: "Error de registro", message: "Hubo un problema al registrar el usuario.")
+                        return
+                    }
 
+                    let uid = result?.user.uid ?? ""
+                    self.guardarUsuarioEnCoreData(uid: uid, email: email, provider: .basic, nombre: nombreCapitalizado, apellidos: apellidosCapitalizados)
+
+                    // Mostrar alerta de éxito antes de redirigir
+                    let successAlert = UIAlertController(title: "¡Registro exitoso!", message: "Bienvenid@, \(nombreCapitalizado).", preferredStyle: .alert)
+                    successAlert.addAction(UIAlertAction(title: "Ir al inicio", style: .default) { _ in
+                        // Redirige al MainTabBarController
+                        self.showHome(result: result, error: error, provider: .basic)
+                    })
+                    self.present(successAlert, animated: true, completion: nil)
+                }
+
+            }
+            
+            alert.addAction(registerAction)
+            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+            
+            present(alert, animated: true, completion: nil)
 
     }
     
