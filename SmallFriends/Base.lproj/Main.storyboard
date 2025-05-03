@@ -663,17 +663,17 @@
                                             <rect key="frame" x="0.0" y="0.0" width="363" height="150"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="0QT-py-TSP">
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="0QT-py-TSP">
                                                     <rect key="frame" x="35" y="16" width="293" height="118"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cita" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXo-A3-5iZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="293" height="56.666666666666664"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wXo-A3-5iZ">
+                                                            <rect key="frame" x="0.0" y="0.0" width="293" height="59"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32G-cz-dZB">
-                                                            <rect key="frame" x="0.0" y="61.666666666666671" width="293" height="56.333333333333329"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Detalle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32G-cz-dZB">
+                                                            <rect key="frame" x="0.0" y="59" width="293" height="59"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -1153,7 +1153,7 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gvI-ch-s5E">
-                                <rect key="frame" x="40" y="199" width="313" height="262"/>
+                                <rect key="frame" x="40" y="199" width="313" height="330"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qfn-wT-caj">
                                         <rect key="frame" x="0.0" y="0.0" width="313" height="24"/>
@@ -1167,38 +1167,50 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIJ-NM-RBH">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mascota:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JHy-Z3-z4D">
                                         <rect key="frame" x="0.0" y="68" width="313" height="24"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Borja Av...." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiE-hh-ZoI">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hEb-q9-RHE">
                                         <rect key="frame" x="0.0" y="102" width="313" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOp-Mo-meK">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KIJ-NM-RBH">
                                         <rect key="frame" x="0.0" y="136" width="313" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee8-ac-y2n">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="San Borja Av...." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aiE-hh-ZoI">
                                         <rect key="frame" x="0.0" y="170" width="313" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción Cita: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-sZ-giT">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rOp-Mo-meK">
                                         <rect key="frame" x="0.0" y="204" width="313" height="24"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta Trimestral - Vacunas " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UB8-YY-1dH">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ee8-ac-y2n">
                                         <rect key="frame" x="0.0" y="238" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción Cita: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TWC-sZ-giT">
+                                        <rect key="frame" x="0.0" y="272" width="313" height="24"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Consulta Trimestral - Vacunas " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UB8-YY-1dH">
+                                        <rect key="frame" x="0.0" y="306" width="313" height="24"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1225,6 +1237,7 @@
                         <outlet property="descripCitaLabel" destination="UB8-YY-1dH" id="S6d-BY-e3I"/>
                         <outlet property="fechaCitaLabel" destination="TO4-6C-K6O" id="5SQ-gg-MPF"/>
                         <outlet property="lugarCitaLabel" destination="aiE-hh-ZoI" id="7eD-p7-sWF"/>
+                        <outlet property="mascotaLabel" destination="hEb-q9-RHE" id="PeV-d7-0gO"/>
                         <outlet property="tipoCitaLabel" destination="ee8-ac-y2n" id="qZ0-jQ-RD2"/>
                     </connections>
                 </viewController>
@@ -1240,103 +1253,122 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registrar Cita" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6Y-Lr-cvw">
-                                <rect key="frame" x="20" y="79" width="353" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="f3L-x5-ekz"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="28"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0mi-0e-uLd">
-                                <rect key="frame" x="40" y="169" width="313" height="414"/>
+                                <rect key="frame" x="40" y="79" width="313" height="600"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dzM-5a-0z2">
-                                        <rect key="frame" x="0.0" y="0.0" width="63" height="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="63" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="nj8-8E-LUW"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" datePickerMode="dateAndTime" translatesAutoresizingMaskIntoConstraints="NO" id="dTr-WQ-cwd">
-                                        <rect key="frame" x="0.0" y="44" width="313" height="40"/>
+                                        <rect key="frame" x="0.0" y="40" width="313" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="OUT-w5-FtN"/>
                                         </constraints>
                                         <locale key="locale" localeIdentifier="es_PE"/>
                                     </datePicker>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mascota:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMH-VP-AY2">
+                                        <rect key="frame" x="0.0" y="100" width="86.666666666666671" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="MG7-KT-FUN"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sc5-eB-xbd">
+                                        <rect key="frame" x="0.0" y="140" width="313" height="70"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="70" id="sA0-1E-hHw"/>
+                                        </constraints>
+                                    </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dxw-vH-lR8">
-                                        <rect key="frame" x="0.0" y="104" width="60.333333333333336" height="24"/>
+                                        <rect key="frame" x="0.0" y="230" width="60.333333333333336" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="lGL-fk-z0X"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Direccion o nombre del lugar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2G-03-9It">
-                                        <rect key="frame" x="0.0" y="148" width="313" height="34"/>
+                                        <rect key="frame" x="0.0" y="270" width="313" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="RF2-vV-VU2"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo de Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UKe-wx-uhk">
-                                        <rect key="frame" x="0.0" y="202" width="118" height="24"/>
+                                        <rect key="frame" x="0.0" y="330" width="118" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="3rk-jH-h7K"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <pickerView contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="3iL-Gt-gDO">
-                                        <rect key="frame" x="0.0" y="246" width="313" height="70"/>
+                                        <rect key="frame" x="0.0" y="370" width="313" height="70"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="70" id="K2d-GP-07j"/>
                                         </constraints>
                                     </pickerView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción de la Cita:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H05-Ri-ZKa">
-                                        <rect key="frame" x="0.0" y="336" width="209.66666666666666" height="24"/>
+                                        <rect key="frame" x="0.0" y="460" width="209.66666666666666" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="TIF-oz-VEF"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Descripción a detalle de la cita" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qmP-at-Dfa">
-                                        <rect key="frame" x="0.0" y="380" width="313" height="34"/>
+                                        <rect key="frame" x="0.0" y="500" width="313" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="cIN-Yb-Uxs"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvc-as-KQm">
+                                        <rect key="frame" x="0.0" y="560" width="313" height="40"/>
+                                        <color key="backgroundColor" systemColor="linkColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="nKI-lL-DlZ"/>
+                                        </constraints>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Guardar">
+                                            <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </buttonConfiguration>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="10"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="guardarTapped:" destination="Xcu-4c-IxZ" eventType="touchUpInside" id="eO4-EW-1sd"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="qmP-at-Dfa" secondAttribute="trailing" id="0O0-LH-K7A"/>
-                                    <constraint firstAttribute="trailing" secondItem="h2G-03-9It" secondAttribute="trailing" id="C8m-LW-TiN"/>
+                                    <constraint firstItem="zvc-as-KQm" firstAttribute="centerX" secondItem="0mi-0e-uLd" secondAttribute="centerX" id="7xv-Bb-6eI"/>
+                                    <constraint firstAttribute="trailing" secondItem="qmP-at-Dfa" secondAttribute="trailing" id="MwF-xd-PIc"/>
+                                    <constraint firstAttribute="trailing" secondItem="h2G-03-9It" secondAttribute="trailing" id="fKv-8b-61L"/>
                                 </constraints>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zvc-as-KQm">
-                                <rect key="frame" x="100" y="748" width="193" height="50"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="nKI-lL-DlZ"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Guardar">
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="10"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="guardarTapped:" destination="Xcu-4c-IxZ" eventType="touchUpInside" id="eO4-EW-1sd"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="JSb-ni-vUS"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstItem="JSb-ni-vUS" firstAttribute="trailing" secondItem="zvc-as-KQm" secondAttribute="trailing" constant="100" id="2bG-La-IG8"/>
-                            <constraint firstItem="N6Y-Lr-cvw" firstAttribute="top" secondItem="JSb-ni-vUS" secondAttribute="top" constant="20" id="7Zl-cb-RZ9"/>
-                            <constraint firstItem="JSb-ni-vUS" firstAttribute="trailing" secondItem="N6Y-Lr-cvw" secondAttribute="trailing" constant="20" id="AoQ-dm-NMu"/>
-                            <constraint firstItem="N6Y-Lr-cvw" firstAttribute="leading" secondItem="JSb-ni-vUS" secondAttribute="leading" constant="20" id="Kcp-Rg-AWf"/>
-                            <constraint firstItem="zvc-as-KQm" firstAttribute="leading" secondItem="JSb-ni-vUS" secondAttribute="leading" constant="100" id="OIw-Z4-hdt"/>
-                            <constraint firstItem="JSb-ni-vUS" firstAttribute="bottom" secondItem="zvc-as-KQm" secondAttribute="bottom" constant="20" id="Pa4-yw-brF"/>
+                            <constraint firstItem="0mi-0e-uLd" firstAttribute="top" secondItem="JSb-ni-vUS" secondAttribute="top" constant="20" id="WCk-gN-wBC"/>
                             <constraint firstItem="JSb-ni-vUS" firstAttribute="trailing" secondItem="0mi-0e-uLd" secondAttribute="trailing" constant="40" id="loz-Eq-ked"/>
                             <constraint firstItem="0mi-0e-uLd" firstAttribute="leading" secondItem="JSb-ni-vUS" secondAttribute="leading" constant="40" id="pfz-gD-4Jd"/>
-                            <constraint firstItem="0mi-0e-uLd" firstAttribute="top" secondItem="N6Y-Lr-cvw" secondAttribute="bottom" constant="50" id="vVR-6T-0Ry"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="llJ-ND-ZPw"/>
@@ -1347,6 +1379,7 @@
                         <outlet property="fechaLabel" destination="dzM-5a-0z2" id="eYg-2B-5JK"/>
                         <outlet property="lugarLabel" destination="Dxw-vH-lR8" id="3xA-C2-M50"/>
                         <outlet property="lugarTextField" destination="h2G-03-9It" id="NhE-lw-4Le"/>
+                        <outlet property="mascotaPickerView" destination="Sc5-eB-xbd" id="T3N-mt-i9k"/>
                         <outlet property="tipoCitaLabel" destination="UKe-wx-uhk" id="foW-pK-3LX"/>
                         <outlet property="tipoCitaPickerView" destination="3iL-Gt-gDO" id="a83-Dq-doh"/>
                     </connections>
@@ -1480,8 +1513,13 @@
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="LBC-OS-krG"/>
+<<<<<<< Updated upstream
         <segue reference="XqQ-v8-d5H"/>
         <segue reference="Sz5-1v-YmZ"/>
+=======
+        <segue reference="yLb-FB-oHz"/>
+        <segue reference="fP3-N7-4ek"/>
+>>>>>>> Stashed changes
     </inferredMetricsTieBreakers>
     <resources>
         <image name="LogoSmallFriends" width="1024" height="1024"/>
