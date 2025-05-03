@@ -243,7 +243,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="bol-Zg-Zvm" kind="show" id="xs6-iK-3wt"/>
+                                            <segue destination="bol-Zg-Zvm" kind="show" identifier="mostrarNotificaciones" id="xs6-iK-3wt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -864,7 +864,19 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" id="xjb-Nh-wOw"/>
+                    <navigationItem key="navigationItem" id="xjb-Nh-wOw">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="Rtz-dn-R7k">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="cXs-tz-Kg8" userLabel="Notificaciones">
+                                <rect key="frame" x="244.33333333333337" y="5" width="132.66666666666663" height="34.333333333333336"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Notificaciones"/>
+                                <connections>
+                                    <segue destination="aRt-yn-xsD" kind="show" id="wCA-Su-LiU"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableNotificacionesTableView" destination="87y-aP-s9g" id="oDI-V9-x78"/>
                     </connections>
@@ -1547,13 +1559,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notifaciones" translatesAutoresizingMaskIntoConstraints="NO" id="KdQ-ij-Vzq">
-                                <rect key="frame" x="20" y="99" width="353" height="150"/>
+                                <rect key="frame" x="20" y="143" width="353" height="150"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="Epi-lE-rRj"/>
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titulo" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lnC-pU-OfG">
-                                <rect key="frame" x="20" y="269" width="353" height="38"/>
+                                <rect key="frame" x="20" y="313" width="353" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="QON-zS-o4c"/>
                                 </constraints>
@@ -1561,7 +1573,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="¿Desea agregar una noti?, agregala y yo te aviso :)" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Uj2-PN-Gau">
-                                <rect key="frame" x="30" y="337" width="333" height="72"/>
+                                <rect key="frame" x="30" y="381" width="333" height="72"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="72" id="o9D-sq-JlM"/>
@@ -1571,10 +1583,10 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="3Z9-NI-Wfw">
-                                <rect key="frame" x="10" y="449" width="373" height="36"/>
+                                <rect key="frame" x="10" y="493" width="373" height="36"/>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0m2-jO-aTc">
-                                <rect key="frame" x="40" y="525" width="313" height="35"/>
+                                <rect key="frame" x="40" y="569" width="313" height="35"/>
                                 <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="Button"/>
@@ -1618,7 +1630,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="olN-ve-Rfv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1376" y="1593"/>
+            <point key="canvasLocation" x="-608" y="744"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
