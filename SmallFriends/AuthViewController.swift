@@ -187,7 +187,24 @@ class AuthViewController: UIViewController {
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
 
             Auth.auth().signIn(with: credential) { result, error in
-                self.showHome(result: result, error: error, provider: .google)
+                // Obtener nombre y apellidos desde Google
+               let fullName = user.profile?.name ?? "Sin nombre"
+               let nameComponents = fullName.split(separator: " ", maxSplits: 1).map { String($0) }
+               let nombre = nameComponents.first ?? "Sin nombre"
+               let apellidos = nameComponents.count > 1 ? nameComponents[1] : "Sin apellidos"
+
+               if let uid = result?.user.uid {
+                    self.guardarUsuarioEnCoreData(uid: uid, email: result?.user.email, provider: .google, nombre: nombre, apellidos: apellidos)
+                }
+                // Capitalizar nombre y apellidos
+                let nombreCapitalizado = nombre.capitalized
+                
+                let successAlert = UIAlertController(title: "¡SmallFriends!", message: "Bienvenid@, \(nombreCapitalizado).", preferredStyle: .alert)
+                            successAlert.addAction(UIAlertAction(title: "Ir al inicio", style: .default) { _ in
+                    self.showHome(result: result, error: error, provider: .google)
+                            })
+
+                self.present(successAlert, animated: true, completion: nil)
             }
         }
     }
@@ -212,6 +229,15 @@ class AuthViewController: UIViewController {
             let credential = FacebookAuthProvider.credential(withAccessToken: token)
 
             Auth.auth().signIn(with: credential) { result, error in
+                // Obtener nombre desde el usuario autenticado
+                let nombreCompleto = result?.user.displayName ?? "Sin nombre"
+                let components = nombreCompleto.split(separator: " ", maxSplits: 1).map { String($0) }
+                let nombre = components.first ?? "Sin nombre"
+                let apellidos = components.count > 1 ? components[1] : "Sin apellidos"
+
+                if let uid = result?.user.uid {
+                self.guardarUsuarioEnCoreData(uid: uid, email: result?.user.email, provider: .facebook, nombre: nombre, apellidos: apellidos)
+                }
                 self.showHome(result: result, error: error, provider: .facebook)
             }
         }

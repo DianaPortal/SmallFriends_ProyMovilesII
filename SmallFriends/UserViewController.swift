@@ -22,7 +22,6 @@ class UserViewController: UIViewController {
     @IBOutlet weak var correoLabel: UILabel!
     @IBOutlet weak var providerLabel: UILabel!    
     @IBOutlet weak var closeSessionButton: UIButton!
-    @IBOutlet weak var uidLabel: UILabel!
     @IBOutlet weak var nombreLabel: UILabel!
     @IBOutlet weak var ApellidosLabel: UILabel!
     
@@ -44,11 +43,8 @@ class UserViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Inicio"
-        // navigationItem.setHidesBackButton(true, animated: false)
+        title = "USER"
         
-        
-                
         // Mostrar datos del usuario logueado
         cargarUsuarioDesdeCoreData()
 
@@ -70,7 +66,7 @@ class UserViewController: UIViewController {
                 nombreLabel.text = usuario.nombre
                 correoLabel.text = usuario.email
                 providerLabel.text = usuario.provider
-                uidLabel.text = usuario.idUsuario
+                //uidLabel.text = usuario.idUsuario
                 print("Usuario cargado desde Core Data: \(usuario.email ?? "")")
             } else {
                 print("Usuario no encontrado en Core Data")

@@ -78,7 +78,7 @@ class DetalleEventoViewController: UIViewController {
            descripcionLabel.sizeToFit()
            fechaEventoLabel.text = "Fecha: \(evento.fecha)"
            horaEventoLabel.text = "Hora: \(evento.hora)"
-           lugarEventoLabel.text = evento.ubicacion
+           lugarEventoLabel.text = "📍 \(evento.ubicacion)"
 
            mostrarMapaConMapbox(lat: evento.latitud, lng: evento.longitud)
        }

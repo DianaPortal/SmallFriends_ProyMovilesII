@@ -45,6 +45,10 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         cargarMascotasDelUsuario()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        cargarMascotasDelUsuario()
+    }
     //Acciones
     
     func cargarMascotasDelUsuario() {
