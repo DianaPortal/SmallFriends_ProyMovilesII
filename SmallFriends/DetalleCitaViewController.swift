@@ -10,6 +10,7 @@ import UIKit
 class DetalleCitaViewController: UIViewController {
 
     @IBOutlet weak var fechaCitaLabel: UILabel!
+    @IBOutlet weak var mascotaLabel: UILabel!
     @IBOutlet weak var lugarCitaLabel: UILabel!
     @IBOutlet weak var tipoCitaLabel: UILabel!
     @IBOutlet weak var descripCitaLabel: UILabel!
@@ -67,6 +68,7 @@ class DetalleCitaViewController: UIViewController {
         if let fecha = cita.fechaCita {
             fechaCitaLabel.text = formatearFecha(fecha)
         }
+        mascotaLabel.text = cita.mascota?.nombre
         lugarCitaLabel.text = cita.lugarCita
         tipoCitaLabel.text = cita.tipoCita
         descripCitaLabel.text = cita.descripcionCita
@@ -99,6 +101,7 @@ class DetalleCitaViewController: UIViewController {
             }
     }
     
+    /*
     // Preparar la transición a MantenerCitaViewController
        override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showMantenerCita" {
@@ -107,7 +110,8 @@ class DetalleCitaViewController: UIViewController {
                 destinationVC.citaAActualizar = cita
             }
         }
-       }
+    }
+    */
     
     func formatearFecha(_ fecha: Date) -> String {
         let formatterFecha = DateFormatter()

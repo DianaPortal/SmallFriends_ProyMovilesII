@@ -21,26 +21,26 @@ extension Usuario {
     @NSManaged public var provider: String?
     @NSManaged public var nombre: String?
     @NSManaged public var apellidos: String?
-    @NSManaged public var citas: NSSet?
+    @NSManaged public var mascota: NSSet?
 
 }
 
-// MARK: Generated accessors for citas
+// MARK: Generated accessors for mascota
 extension Usuario {
 
-    @objc(addCitasObject:)
-    @NSManaged public func addToCitas(_ value: CitasCD)
+    @objc(addMascotaObject:)
+    @NSManaged public func addToMascota(_ value: Mascota)
 
-    @objc(removeCitasObject:)
-    @NSManaged public func removeFromCitas(_ value: CitasCD)
+    @objc(removeMascotaObject:)
+    @NSManaged public func removeFromMascota(_ value: Mascota)
 
-    @objc(addCitas:)
-    @NSManaged public func addToCitas(_ values: NSSet)
+    @objc(addMascota:)
+    @NSManaged public func addToMascota(_ values: NSSet)
 
-    @objc(removeCitas:)
-    @NSManaged public func removeFromCitas(_ values: NSSet)
-
+    @objc(removeMascota:)
+    @NSManaged public func removeFromMascota(_ values: NSSet)
 }
+
 
 extension Usuario : Identifiable {
 

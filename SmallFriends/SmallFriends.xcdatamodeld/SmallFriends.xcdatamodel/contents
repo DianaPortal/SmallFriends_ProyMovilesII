@@ -7,6 +7,7 @@
         <attribute name="idCita" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="lugarCita" optional="YES" attributeType="String"/>
         <attribute name="tipoCita" optional="YES" attributeType="String"/>
+        <relationship name="mascota" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Mascota" inverseName="citas" inverseEntity="Mascota"/>
         <relationship name="usuario" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Usuario" inverseName="citas" inverseEntity="Usuario"/>
     </entity>
     <entity name="Mascota" representedClassName=".Mascota" syncable="YES">
@@ -21,6 +22,7 @@
         <attribute name="peso" optional="YES" attributeType="Decimal" defaultValueString="0.0"/>
         <attribute name="raza" optional="YES" attributeType="String"/>
         <attribute name="tipo" optional="YES" attributeType="String"/>
+        <relationship name="citas" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CitasCD" inverseName="mascota" inverseEntity="CitasCD"/>
         <relationship name="usuario" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Usuario" inverseName="mascota" inverseEntity="Usuario"/>
     </entity>
     <entity name="Usuario" representedClassName=".Usuario" syncable="YES">

@@ -28,7 +28,23 @@ extension Mascota {
     @NSManaged public var foto: Data?
     @NSManaged public var usuario: Usuario?
     @NSManaged public var estadoMascota: String?
+    @NSManaged public var citas: NSSet?
 
+}
+
+// MARK: Generated accessors for citas
+extension Mascota {
+    @objc(addCitasObject:)
+    @NSManaged public func addToCitas(_ value: CitasCD)
+
+    @objc(removeCitasObject:)
+    @NSManaged public func removeFromCitas(_ value: CitasCD)
+
+    @objc(addCitas:)
+    @NSManaged public func addToCitas(_ values: NSSet)
+
+    @objc(removeCitas:)
+    @NSManaged public func removeFromCitas(_ values: NSSet)
 }
 
 extension Mascota : Identifiable {
