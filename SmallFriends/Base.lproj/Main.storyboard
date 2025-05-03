@@ -243,7 +243,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="bol-Zg-Zvm" kind="show" id="K0I-so-T9R"/>
+                                            <segue destination="bol-Zg-Zvm" kind="show" id="xs6-iK-3wt"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -871,7 +871,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bV3-B7-pyO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="110.68702290076335" y="754.92957746478874"/>
+            <point key="canvasLocation" x="259" y="690"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="EI1-6T-XoY">
@@ -1538,6 +1538,88 @@
             </objects>
             <point key="canvasLocation" x="3479" y="-828"/>
         </scene>
+        <!--Notificaciones View Controller-->
+        <scene sceneID="e5j-xd-Y6i">
+            <objects>
+                <viewController id="aRt-yn-xsD" customClass="NotificacionesViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GTX-UE-Zzl">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="notifaciones" translatesAutoresizingMaskIntoConstraints="NO" id="KdQ-ij-Vzq">
+                                <rect key="frame" x="20" y="99" width="353" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Epi-lE-rRj"/>
+                                </constraints>
+                            </imageView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Titulo" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lnC-pU-OfG">
+                                <rect key="frame" x="20" y="269" width="353" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="38" id="QON-zS-o4c"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="¿Desea agregar una noti?, agregala y yo te aviso :)" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Uj2-PN-Gau">
+                                <rect key="frame" x="30" y="337" width="333" height="72"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="72" id="o9D-sq-JlM"/>
+                                </constraints>
+                                <color key="textColor" systemColor="labelColor"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="3Z9-NI-Wfw">
+                                <rect key="frame" x="10" y="449" width="373" height="36"/>
+                            </datePicker>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0m2-jO-aTc">
+                                <rect key="frame" x="40" y="525" width="313" height="35"/>
+                                <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Programar Notificacion"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="programarButton:" destination="aRt-yn-xsD" eventType="touchUpInside" id="6lH-qm-016"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="npc-Xe-sDw"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="3Z9-NI-Wfw" firstAttribute="top" secondItem="Uj2-PN-Gau" secondAttribute="bottom" constant="40" id="1Sr-4c-bhM"/>
+                            <constraint firstItem="Uj2-PN-Gau" firstAttribute="leading" secondItem="npc-Xe-sDw" secondAttribute="leading" constant="30" id="1aY-Yz-Se1"/>
+                            <constraint firstItem="npc-Xe-sDw" firstAttribute="trailing" secondItem="lnC-pU-OfG" secondAttribute="trailing" constant="20" id="5VT-rZ-eAI"/>
+                            <constraint firstItem="npc-Xe-sDw" firstAttribute="trailing" secondItem="0m2-jO-aTc" secondAttribute="trailing" constant="40" id="7NI-ho-1Gj"/>
+                            <constraint firstAttribute="trailing" secondItem="3Z9-NI-Wfw" secondAttribute="trailing" constant="10" id="IHH-RX-ybi"/>
+                            <constraint firstItem="KdQ-ij-Vzq" firstAttribute="leading" secondItem="npc-Xe-sDw" secondAttribute="leading" constant="20" id="Lvc-6W-idg"/>
+                            <constraint firstItem="3Z9-NI-Wfw" firstAttribute="leading" secondItem="npc-Xe-sDw" secondAttribute="leading" constant="10" id="Ner-yl-Zug"/>
+                            <constraint firstItem="npc-Xe-sDw" firstAttribute="trailing" secondItem="Uj2-PN-Gau" secondAttribute="trailing" constant="30" id="Nut-F0-HyC"/>
+                            <constraint firstItem="Uj2-PN-Gau" firstAttribute="top" secondItem="lnC-pU-OfG" secondAttribute="bottom" constant="30" id="YwZ-hJ-nd3"/>
+                            <constraint firstItem="0m2-jO-aTc" firstAttribute="leading" secondItem="npc-Xe-sDw" secondAttribute="leading" constant="40" id="ZfG-NA-MlU"/>
+                            <constraint firstItem="KdQ-ij-Vzq" firstAttribute="top" secondItem="npc-Xe-sDw" secondAttribute="top" constant="40" id="cIu-DM-RqY"/>
+                            <constraint firstItem="npc-Xe-sDw" firstAttribute="trailing" secondItem="KdQ-ij-Vzq" secondAttribute="trailing" constant="20" id="i8U-3R-tmn"/>
+                            <constraint firstItem="0m2-jO-aTc" firstAttribute="top" secondItem="3Z9-NI-Wfw" secondAttribute="bottom" constant="40" id="nlA-Yf-acb"/>
+                            <constraint firstItem="lnC-pU-OfG" firstAttribute="leading" secondItem="npc-Xe-sDw" secondAttribute="leading" constant="20" id="zPx-AZ-tJb"/>
+                            <constraint firstItem="lnC-pU-OfG" firstAttribute="top" secondItem="KdQ-ij-Vzq" secondAttribute="bottom" constant="20" id="zYQ-iD-seo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="dI9-I2-Yga"/>
+                    <connections>
+                        <outlet property="datePicker" destination="3Z9-NI-Wfw" id="8US-Ju-Nhz"/>
+                        <outlet property="mensaje" destination="Uj2-PN-Gau" id="7NQ-fj-3oq"/>
+                        <outlet property="titulo" destination="lnC-pU-OfG" id="zhl-Go-GJZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="olN-ve-Rfv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1376" y="1593"/>
+        </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="LBC-OS-krG"/>
@@ -1552,10 +1634,14 @@
         <image name="huella" width="32" height="32"/>
         <image name="iconFacebook" width="48" height="48"/>
         <image name="iconGoogle" width="48" height="48"/>
+        <image name="notifaciones" width="241" height="209"/>
         <image name="notificacion" width="32" height="32"/>
         <image name="perfil" width="32" height="32"/>
         <image name="perfil_default" width="225" height="225"/>
         <image name="ubicacion" width="32" height="32"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
