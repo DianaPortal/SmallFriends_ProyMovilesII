@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		840D70B22DC5295800266F7E /* DetalleEvento.swift in Sources */ = {isa = PBXBuildFile; fileRef = 840D70B12DC5295800266F7E /* DetalleEvento.swift */; };
 		8422B2F62DB22A7800A5D49B /* FacebookAEM in Frameworks */ = {isa = PBXBuildFile; productRef = 8422B2F52DB22A7800A5D49B /* FacebookAEM */; };
 		8422B2F82DB22A7800A5D49B /* FacebookBasics in Frameworks */ = {isa = PBXBuildFile; productRef = 8422B2F72DB22A7800A5D49B /* FacebookBasics */; };
 		8422B2FA2DB22A7800A5D49B /* FacebookCore in Frameworks */ = {isa = PBXBuildFile; productRef = 8422B2F92DB22A7800A5D49B /* FacebookCore */; };
@@ -61,6 +62,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		840D70B12DC5295800266F7E /* DetalleEvento.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalleEvento.swift; sourceTree = "<group>"; };
 		8422B2FF2DB22E4200A5D49B /* SmallFriends.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SmallFriends.entitlements; sourceTree = "<group>"; };
 		8487B8BA2DC19AA000759101 /* 1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = 1.mp3; sourceTree = "<group>"; };
 		849A67522DC0773A000EC7AC /* CeldaTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CeldaTableViewCell.swift; sourceTree = "<group>"; };
@@ -189,6 +191,7 @@
 				B7CD11F62DB701670004D170 /* NotificacionesViewController.swift */,
 				B74A8B9A2DBEC083002F1E8E /* CitasTableViewCell.swift */,
 				849A67522DC0773A000EC7AC /* CeldaTableViewCell.swift */,
+				840D70B12DC5295800266F7E /* DetalleEvento.swift */,
 			);
 			path = SmallFriends;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				B7CD11EE2DB700690004D170 /* DetalleCitaViewController.swift in Sources */,
 				84AA35E42DADC35F007D2E86 /* UserViewController.swift in Sources */,
 				849A67532DC0773A000EC7AC /* CeldaTableViewCell.swift in Sources */,
+				840D70B22DC5295800266F7E /* DetalleEvento.swift in Sources */,
 				B7CD11F02DB700960004D170 /* MantenerCitaViewController.swift in Sources */,
 				B745C9032DB41009001B8847 /* InicioViewController.swift in Sources */,
 				B75922032DAC15EB00A31AEE /* AuthViewController.swift in Sources */,

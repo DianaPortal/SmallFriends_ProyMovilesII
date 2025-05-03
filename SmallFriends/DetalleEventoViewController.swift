@@ -6,44 +6,66 @@
 //
 
 import UIKit
-
+import WebKit
 class DetalleEventoViewController: UIViewController {
+    var eventoID: Int?
+    @IBOutlet weak var tituloEventoLabel: UILabel!
+    @IBOutlet weak var descripcionLabel: UILabel!
+    @IBOutlet weak var fechaEventoLabel: UILabel!
+    @IBOutlet weak var horaEventoLabel: UILabel!
+    @IBOutlet weak var lugarEventoLabel: UILabel!
+    @IBOutlet weak var mapaWKWebView: WKWebView!
     
-    
-    
-    @IBOutlet weak var mapaImagen: UIImageView!
-    
+   
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // Coordenadas de ejemplo
-        
-        /*let latitude: Double = -12.04646
-        
-        let longitude: Double = -77.02945*/
-        
-        let urlString = "https://nominatim.openstreetmap.org/ui/reverse.html?lat=-12.04646&lon=-77.02945&zoom=18"
-        
-        /*"https://staticmap.openstreetmap.de/staticmap.php?center=\(latitude),\(longitude)&zoom=15&size=600x400&markers=\(latitude),\(longitude)"*/
-        
-        if let url = URL(string: urlString) {downloadImage(from: url)
-      
+           super.viewDidLoad()
+           if let id = eventoID {
+               obtenerDetalleEvento(id: id)
         }
     }
     
-    func downloadImage(from url: URL) {
+    func obtenerDetalleEvento(id: Int) {
+           guard let url = URL(string: "https://apieventos-17cx.onrender.com/api/eventos/\(id)") else { return }
 
-        let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
-          if let data = data, let image = UIImage(data: data) {
-            DispatchQueue.main.async {
-                self.mapaImagen.image = image
-            }
+           let task = URLSession.shared.dataTask(with: url) { data, response, error in
+               if let error = error {
+                   print("Error: \(error)")
+                   return
+               }
 
-          } else {
-            print("Error al obtener la imagen: \(error?.localizedDescription ?? "Desconocido")")
-          }
+               guard let data = data else {
+                   print("No se recibió data")
+                   return
+               }
+
+               do {
+                   let detalleEvento = try JSONDecoder().decode(DetalleEvento.self, from: data)
+                   DispatchQueue.main.async {
+                       self.actualizarUIConEvento(evento: detalleEvento)
+                   }
+               } catch {
+                   print("Error al decodificar: \(error)")
+               }
+           }
+           task.resume()
+       }
+    
+    func actualizarUIConEvento(evento: DetalleEvento) {
+        tituloEventoLabel.text = evento.titulo
+        descripcionLabel.text = evento.descripcion
+        fechaEventoLabel.text = "Fecha: \(evento.fecha)"
+        horaEventoLabel.text = "Hora: \(evento.hora)"
+        lugarEventoLabel.text = "Lugar: \(evento.ubicacion)"
+
+        // Construir URL para Google Maps con coordenadas
+        let urlString = "https://www.google.com/maps?q=\(evento.latitud),\(evento.longitud)"
+        
+        if let url = URL(string: urlString) {
+            let request = URLRequest(url: url)
+            print(mapaWKWebView)
+            mapaWKWebView.load(request)
         }
-        task.resume()
-
-      }
     }
+
+    
+}
