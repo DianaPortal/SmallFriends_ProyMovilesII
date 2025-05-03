@@ -72,53 +72,69 @@ class DetalleEventoViewController: UIViewController {
        }
 
        func actualizarUIConEvento(evento: DetalleEvento) {
-           print("ID: \(evento.id)")
-               print("Título: \(evento.titulo)")
-               print("Descripción: \(evento.descripcion)")
-               print("Fecha: \(evento.fecha)")
-               print("Hora: \(evento.hora)")
-               print("Ubicación: \(evento.ubicacion)")
-               print("Latitud: \(evento.latitud)")
-               print("Longitud: \(evento.longitud)")
-           tituloEventoLabel.text = evento.titulo
+           
+           tituloEventoLabel.text = "📅\(evento.titulo)🐾"
            descripcionLabel.text = evento.descripcion
-           fechaEventoLabel.text = evento.fecha
-           horaEventoLabel.text = evento.hora
+           descripcionLabel.sizeToFit()
+           fechaEventoLabel.text = "Fecha: \(evento.fecha)"
+           horaEventoLabel.text = "Hora: \(evento.hora)"
            lugarEventoLabel.text = evento.ubicacion
 
            mostrarMapaConMapbox(lat: evento.latitud, lng: evento.longitud)
        }
 
-       func mostrarMapaConMapbox(lat: Double, lng: Double) {
-           let html = """
-           <!DOCTYPE html>
-           <html>
-           <head>
-               <meta name='viewport' content='initial-scale=1.0, user-scalable=no' />
-               <style>
-                   body, html { height: 100%; margin: 0; padding: 0; }
-                   #map { position:absolute; top:0; bottom:0; width:100%; }
-               </style>
-               <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
-               <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
-           </head>
-           <body>
-               <div id='map'></div>
-               <script>
-                   mapboxgl.accessToken = 'agregar el token';
-                   const map = new mapboxgl.Map({
-                       container: 'map',
-                       style: 'mapbox://styles/mapbox/streets-v12',
-                       center: [\(lng), \(lat)],
-                       zoom: 14
-                   });
-                   new mapboxgl.Marker().setLngLat([\(lng), \(lat)]).addTo(map);
-               </script>
-           </body>
-           </html>
-           """
+    func mostrarMapaConMapbox(lat: Double, lng: Double) {
+        let html = """
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta name='viewport' content='initial-scale=1.0, user-scalable=no' />
+            <style>
+                body, html { height: 100%; margin: 0; padding: 0; }
+                #map { position:absolute; top:0; bottom:0; width:100%; }
+                #recenter {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    background-color: white;
+                    border: none;
+                    border-radius: 5px;
+                    padding: 10px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    z-index: 1;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                }
+            </style>
+            <script src='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js'></script>
+            <link href='https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css' rel='stylesheet' />
+        </head>
+        <body>
+            <button id="recenter">📍</button>
+            <div id='map'></div>
+            <script>
+                mapboxgl.accessToken = 'pk.eyJ1IjoiZGlhbmFwb3J0YWwiLCJhIjoiY21hODd2NTd6MWVjODJrb281bmJrczNhMSJ9.kn30nowhR02vxckw71iTWg';
+                const center = [\(lng), \(lat)];
 
-           mapaWKWebView.loadHTMLString(html, baseURL: nil)
-       }
+                const map = new mapboxgl.Map({
+                    container: 'map',
+                    style: 'mapbox://styles/mapbox/streets-v12',
+                    center: center,
+                    zoom: 14
+                });
+
+                new mapboxgl.Marker().setLngLat(center).addTo(map);
+
+                document.getElementById('recenter').addEventListener('click', function() {
+                    map.flyTo({ center: center, zoom: 14 });
+                });
+            </script>
+        </body>
+        </html>
+        """
+
+        mapaWKWebView.loadHTMLString(html, baseURL: nil)
+    }
+
     
 }

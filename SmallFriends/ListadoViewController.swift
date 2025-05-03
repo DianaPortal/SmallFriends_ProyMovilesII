@@ -17,7 +17,6 @@ class ListadoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Listado de Mascotas"
         
         mascotasTableView.dataSource = self
         mascotasTableView.delegate = self

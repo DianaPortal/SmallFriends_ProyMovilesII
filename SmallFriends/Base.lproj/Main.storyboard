@@ -621,6 +621,7 @@
         <!--item-->
         <scene sceneID="dRu-dg-X7f">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UPZ-Um-LCk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="mG9-qS-SVt" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="item" id="ozw-tF-Je6"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="X8E-dQ-69J">
@@ -631,7 +632,6 @@
                         <segue destination="VY1-ZO-tst" kind="relationship" relationship="rootViewController" id="bdY-2S-XDy"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UPZ-Um-LCk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="596" y="-813"/>
         </scene>
@@ -1396,38 +1396,46 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name evento Seleccionado" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3b-wv-UQA">
-                                <rect key="frame" x="20" y="79" width="337" height="40"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="189-pO-2WS"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="pNs-fY-mao">
-                                <rect key="frame" x="20" y="139" width="353" height="96"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="tXX-mB-fDc">
+                                <rect key="frame" x="20" y="99" width="353" height="24"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83e-0O-Fwg">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name evento Seleccionado" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T3b-wv-UQA">
                                         <rect key="frame" x="0.0" y="0.0" width="353" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pNs-fY-mao">
+                                <rect key="frame" x="15" y="143" width="363" height="183"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción :" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83e-0O-Fwg">
+                                        <rect key="frame" x="0.0" y="0.0" width="363" height="20.333333333333332"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha del evento" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2D-kE-jbe">
-                                        <rect key="frame" x="0.0" y="24" width="353" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                        <rect key="frame" x="0.0" y="40.333333333333343" width="363" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hora del Evento:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Co4-Wt-giR">
-                                        <rect key="frame" x="0.0" y="48" width="353" height="24"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                        <rect key="frame" x="0.0" y="80.666666666666657" width="363" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar del Evento:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0I-IT-o10">
-                                        <rect key="frame" x="0.0" y="72" width="353" height="24"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar del Evento:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kR5-nA-JRk">
+                                        <rect key="frame" x="0.0" y="120.99999999999999" width="363" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar del Evento:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0I-IT-o10">
+                                        <rect key="frame" x="0.0" y="161.33333333333331" width="363" height="21.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -1438,12 +1446,12 @@
                         <viewLayoutGuide key="safeArea" id="F86-pi-H0W"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
-                            <constraint firstItem="T3b-wv-UQA" firstAttribute="top" secondItem="F86-pi-H0W" secondAttribute="top" constant="20" id="Hjq-Wr-5bH"/>
-                            <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="pNs-fY-mao" secondAttribute="trailing" constant="20" id="T9c-AT-z6w"/>
-                            <constraint firstItem="T3b-wv-UQA" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="20" id="YcL-WW-YCb"/>
-                            <constraint firstItem="pNs-fY-mao" firstAttribute="top" secondItem="T3b-wv-UQA" secondAttribute="bottom" constant="20" id="bMA-HA-zzd"/>
-                            <constraint firstItem="pNs-fY-mao" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="20" id="naK-tL-eCw"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="T3b-wv-UQA" secondAttribute="trailing" constant="20" id="pRn-E8-O9K"/>
+                            <constraint firstItem="tXX-mB-fDc" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="20" id="FNY-qn-fUg"/>
+                            <constraint firstItem="tXX-mB-fDc" firstAttribute="top" secondItem="F86-pi-H0W" secondAttribute="top" constant="40" id="FtW-nk-W2W"/>
+                            <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="pNs-fY-mao" secondAttribute="trailing" constant="15" id="T9c-AT-z6w"/>
+                            <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="tXX-mB-fDc" secondAttribute="trailing" constant="20" id="TkP-x1-6Gg"/>
+                            <constraint firstItem="pNs-fY-mao" firstAttribute="top" secondItem="tXX-mB-fDc" secondAttribute="bottom" constant="20" id="ZBe-ZH-3Jd"/>
+                            <constraint firstItem="pNs-fY-mao" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="15" id="naK-tL-eCw"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPK-LL-0cn"/>
@@ -1457,11 +1465,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aan-JU-50y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4566" y="-92"/>
+            <point key="canvasLocation" x="4565.6488549618316" y="-92.253521126760575"/>
         </scene>
         <!--Item-->
         <scene sceneID="T1h-tK-ucC">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1EI-Hc-tYO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="aAB-2a-Xa0" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="DpT-xN-riu"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AhE-8A-dUy">
@@ -1472,13 +1481,13 @@
                         <segue destination="Bdw-Cr-xd1" kind="relationship" relationship="rootViewController" id="Sz5-1v-YmZ"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="1EI-Hc-tYO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1503" y="-828"/>
         </scene>
         <!--Item-->
         <scene sceneID="BCh-XW-6Gx">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8D4-SN-pIV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="PVP-ub-bsg" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="MK2-2g-lWn"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="1Y5-RR-K2d">
@@ -1489,13 +1498,13 @@
                         <segue destination="VBV-SC-ptH" kind="relationship" relationship="rootViewController" id="yLb-FB-oHz"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="8D4-SN-pIV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2453" y="-828"/>
         </scene>
         <!--Item-->
         <scene sceneID="h4d-mM-08Z">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oly-QX-fcC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <navigationController id="mJR-fc-kXl" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="rFS-0Z-giS"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qma-DQ-6D4">
@@ -1506,20 +1515,13 @@
                         <segue destination="CXx-Ec-xUu" kind="relationship" relationship="rootViewController" id="HOy-qn-3Zf"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="oly-QX-fcC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3479" y="-828"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="LBC-OS-krG"/>
-<<<<<<< Updated upstream
-        <segue reference="XqQ-v8-d5H"/>
-        <segue reference="Sz5-1v-YmZ"/>
-=======
-        <segue reference="yLb-FB-oHz"/>
-        <segue reference="fP3-N7-4ek"/>
->>>>>>> Stashed changes
+
     </inferredMetricsTieBreakers>
     <resources>
         <image name="LogoSmallFriends" width="1024" height="1024"/>

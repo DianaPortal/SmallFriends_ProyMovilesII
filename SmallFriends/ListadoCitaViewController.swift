@@ -16,7 +16,7 @@ class ListadoCitaViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Listado de Citas"
+        
 
         tablaCitas.dataSource = self
         tablaCitas.delegate = self
