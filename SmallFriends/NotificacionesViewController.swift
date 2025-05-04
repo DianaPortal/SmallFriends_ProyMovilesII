@@ -71,78 +71,86 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate{
     
     @IBAction func programarButton(_ sender: UIButton) {
         notificacionesCenter.getNotificationSettings { settings in
-                DispatchQueue.main.async {
-                    let title = self.titulo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-                    let message = self.mensaje.text.trimmingCharacters(in: .whitespacesAndNewlines)
-                    let date = self.datePicker.date
-                    
-                    guard !title.isEmpty, !message.isEmpty else {
-                        let alerta = UIAlertController(title: "Campos vacíos", message: "Por favor, completa el título y el mensaje.", preferredStyle: .alert)
-                        alerta.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(alerta, animated: true)
-                        return
-                    }
-                    
-                    if date <= Date() {
-                        let alerta = UIAlertController(title: "Fecha inválida", message: "Selecciona una fecha y hora futura.", preferredStyle: .alert)
-                        alerta.addAction(UIAlertAction(title: "OK", style: .default))
-                        self.present(alerta, animated: true)
-                        return
-                    }
-                    
-                    if settings.authorizationStatus == .authorized {
-                        let content = UNMutableNotificationContent()
-                        content.title = title
-                        content.body = message
-                        content.sound = UNNotificationSound.default
+                    DispatchQueue.main.async {
                         
-                        let dateComp = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
-                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                        guard let usuarioID = Auth.auth().currentUser?.uid else {
+                            let alerta = UIAlertController(title: "Error", message: "No hay usuario autenticado. Inicia sesión para programar una notificación.", preferredStyle: .alert)
+                            alerta.addAction(UIAlertAction(title: "OK", style: .default))
+                            self.present(alerta, animated: true)
+                            return
+                        }
                         
-                        self.notificacionesCenter.add(request) { error in
-                            if error != nil {
-                                print("Error al agregar notificación: \(error!.localizedDescription)")
-                                return
-                            }
+                        let title = self.titulo.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+                        let message = self.mensaje.text.trimmingCharacters(in: .whitespacesAndNewlines)
+                        let date = self.datePicker.date
+                        
+                        guard !title.isEmpty, !message.isEmpty else {
+                            let alerta = UIAlertController(title: "Campos vacíos", message: "Por favor, completa el título y el mensaje.", preferredStyle: .alert)
+                            alerta.addAction(UIAlertAction(title: "OK", style: .default))
+                            self.present(alerta, animated: true)
+                            return
                         }
-
-                        // GUARDAR EN CORE DATA
-                        if let appDelegate = UIApplication.shared.delegate as? AppDelegate,
-                           let usuarioID = Auth.auth().currentUser?.uid {
-                            
-                            let context = appDelegate.persistentContainer.viewContext
-                            let nuevaNotificacion = NotificacionCD(context: context)
-                            nuevaNotificacion.titulo = title
-                            nuevaNotificacion.cuerpo = message
-                            nuevaNotificacion.fechaProgramada = date
-                            nuevaNotificacion.idUsuario = usuarioID
-                            
-                            do {
-                                try context.save()
-                                print("✅ Notificación guardada en Core Data")
-                            } catch {
-                                print("❌ Error al guardar notificación en Core Data: \(error.localizedDescription)")
-                            }
+                        
+                        if date <= Date() {
+                            let alerta = UIAlertController(title: "Fecha inválida", message: "Selecciona una fecha y hora futura.", preferredStyle: .alert)
+                            alerta.addAction(UIAlertAction(title: "OK", style: .default))
+                            self.present(alerta, animated: true)
+                            return
                         }
-
-                        // Mostrar alerta y regresar
-                        let ac = UIAlertController(title: "Notificación Programada", message: "Para el día: \(self.formattedDate(date: date))", preferredStyle: .alert)
-                        ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                            self.titulo.text = ""
-                            self.mensaje.text = "Escribe tu mensaje aquí..."
-                            self.mensaje.textColor = .lightGray
-                            self.datePicker.date = Date()
+                        
+                        if settings.authorizationStatus == .authorized {
+                            let content = UNMutableNotificationContent()
+                            content.title = title
+                            content.body = message
+                            content.sound = UNNotificationSound.default
                             
-                            self.navigationController?.popViewController(animated: true)
-                        }))
-                        self.present(ac, animated: true)
-                    } else {
-                        self.habilitarNotificaciones()
+                            let dateComp = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
+                            let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
+                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                            
+                            self.notificacionesCenter.add(request) { error in
+                                if let error = error {
+                                    print("Error al agregar notificación: \(error.localizedDescription)")
+                                    return
+                                }
+                            }
+                            if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                                let context = appDelegate.persistentContainer.viewContext
+                                let nuevaNotificacion = NotificacionCD(context: context)
+                                nuevaNotificacion.titulo = title
+                                nuevaNotificacion.cuerpo = message
+                                nuevaNotificacion.fechaProgramada = date
+                                nuevaNotificacion.idUsuario = usuarioID
+                                
+                                do {
+                                    try context.save()
+                                    print("✅ Notificación guardada en Core Data")
+                                } catch {
+                                    print("❌ Error al guardar en Core Data: \(error.localizedDescription)")
+                                }
+                            }
+                            
+                            let ac = UIAlertController(
+                                title: "Notificación Programada",
+                                message: "Para el día: \(self.formattedDate(date: date))",
+                                preferredStyle: .alert
+                            )
+                            ac.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                                self.titulo.text = ""
+                                self.mensaje.text = "Escribe tu mensaje aquí..."
+                                self.mensaje.textColor = .lightGray
+                                self.datePicker.date = Date()
+                                
+                                self.navigationController?.popViewController(animated: true)
+                            }))
+                            self.present(ac, animated: true)
+                            
+                        } else {
+                            self.habilitarNotificaciones()
+                        }
                     }
                 }
             }
-        }
     
     func formattedDate(date: Date) -> String {
         let formatter  = DateFormatter()

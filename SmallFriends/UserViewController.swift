@@ -78,30 +78,31 @@ class UserViewController: UIViewController {
 
 
     @IBAction func closeSessionButtonAction(_ sender: UIButton) {
-        
+
         let defaults = UserDefaults.standard
-            defaults.removeObject(forKey: "email")
-            defaults.removeObject(forKey: "provider")
-            defaults.synchronize()
-            
-            // Asegurarnos de que provider no sea nil
-            switch provider {
-            case .basic:
-                firebaseLogOut()
-            case .google:
-                GIDSignIn.sharedInstance.signOut()
-                firebaseLogOut()
-            case .facebook:
-                LoginManager().logOut()
-                firebaseLogOut()
-            case .none:
-                // En caso de que provider sea nil, no hacer nada o gestionar algún comportamiento
-                print("No provider, no se puede hacer log out.")
-            }
-            
-        // Redirigir al login al cerrar sesion
-           let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let authVC = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController {
+        defaults.removeObject(forKey: "email")
+        defaults.removeObject(forKey: "provider")
+        defaults.synchronize()
+
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+
+        // Asegurarnos de que provider no sea nil
+        switch provider {
+        case .basic:
+            firebaseLogOut()
+        case .google:
+            GIDSignIn.sharedInstance.signOut()
+            firebaseLogOut()
+        case .facebook:
+            LoginManager().logOut()
+            firebaseLogOut()
+        case .none:
+            print("No provider, no se puede hacer log out.")
+        }
+
+        // Redirigir al login al cerrar sesión
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        if let authVC = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController {
             if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
                let window = sceneDelegate.window {
                 let nav = UINavigationController(rootViewController: authVC)
