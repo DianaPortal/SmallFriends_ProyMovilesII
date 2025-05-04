@@ -50,6 +50,8 @@
 		B759220E2DAC15EC00A31AEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B759220C2DAC15EC00A31AEE /* LaunchScreen.storyboard */; };
 		B7726D1B2DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D192DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift */; };
 		B7726D1C2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7726D1A2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift */; };
+		B7933CAE2DC7FCE900814B8B /* NotificacionCD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7933CAC2DC7FCE900814B8B /* NotificacionCD+CoreDataClass.swift */; };
+		B7933CAF2DC7FCE900814B8B /* NotificacionCD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7933CAD2DC7FCE900814B8B /* NotificacionCD+CoreDataProperties.swift */; };
 		B7CD11DE2DB6FBC50004D170 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11DD2DB6FBC50004D170 /* CoreDataManager.swift */; };
 		B7CD11E02DB6FC1A0004D170 /* ListadoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11DF2DB6FC1A0004D170 /* ListadoViewController.swift */; };
 		B7CD11E22DB6FC850004D170 /* MantenerMascotaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11E12DB6FC850004D170 /* MantenerMascotaViewController.swift */; };
@@ -61,8 +63,6 @@
 		B7CD11F22DB7011E0004D170 /* ListaEventosAPIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F12DB7011E0004D170 /* ListaEventosAPIViewController.swift */; };
 		B7CD11F42DB7013D0004D170 /* DetalleEventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F32DB7013D0004D170 /* DetalleEventoViewController.swift */; };
 		B7CD11F72DB701670004D170 /* NotificacionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F62DB701670004D170 /* NotificacionesViewController.swift */; };
-		B7D266012DC7F50200998405 /* NotificacionCD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D265FF2DC7F50200998405 /* NotificacionCD+CoreDataClass.swift */; };
-		B7D266022DC7F50200998405 /* NotificacionCD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7D266002DC7F50200998405 /* NotificacionCD+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -93,6 +93,8 @@
 		B759220F2DAC15EC00A31AEE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B7726D192DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mascota+CoreDataClass.swift"; sourceTree = "<group>"; };
 		B7726D1A2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Mascota+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		B7933CAC2DC7FCE900814B8B /* NotificacionCD+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificacionCD+CoreDataClass.swift"; sourceTree = "<group>"; };
+		B7933CAD2DC7FCE900814B8B /* NotificacionCD+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificacionCD+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		B7CD11DD2DB6FBC50004D170 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		B7CD11DF2DB6FC1A0004D170 /* ListadoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListadoViewController.swift; sourceTree = "<group>"; };
 		B7CD11E12DB6FC850004D170 /* MantenerMascotaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MantenerMascotaViewController.swift; sourceTree = "<group>"; };
@@ -104,8 +106,6 @@
 		B7CD11F12DB7011E0004D170 /* ListaEventosAPIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListaEventosAPIViewController.swift; sourceTree = "<group>"; };
 		B7CD11F32DB7013D0004D170 /* DetalleEventoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalleEventoViewController.swift; sourceTree = "<group>"; };
 		B7CD11F62DB701670004D170 /* NotificacionesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificacionesViewController.swift; sourceTree = "<group>"; };
-		B7D265FF2DC7F50200998405 /* NotificacionCD+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificacionCD+CoreDataClass.swift"; sourceTree = "<group>"; };
-		B7D266002DC7F50200998405 /* NotificacionCD+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificacionCD+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -148,8 +148,8 @@
 		B75921F22DAC15EB00A31AEE = {
 			isa = PBXGroup;
 			children = (
-				B7D265FF2DC7F50200998405 /* NotificacionCD+CoreDataClass.swift */,
-				B7D266002DC7F50200998405 /* NotificacionCD+CoreDataProperties.swift */,
+				B7933CAC2DC7FCE900814B8B /* NotificacionCD+CoreDataClass.swift */,
+				B7933CAD2DC7FCE900814B8B /* NotificacionCD+CoreDataProperties.swift */,
 				84AE7EA32DC02D4C0001ABE4 /* Usuario+CoreDataClass.swift */,
 				84AE7EA42DC02D4C0001ABE4 /* Usuario+CoreDataProperties.swift */,
 				B74A8B922DBEBECD002F1E8E /* CitasCD+CoreDataClass.swift */,
@@ -315,7 +315,7 @@
 				B74A8B9B2DBEC083002F1E8E /* CitasTableViewCell.swift in Sources */,
 				B7CD11EE2DB700690004D170 /* DetalleCitaViewController.swift in Sources */,
 				84AA35E42DADC35F007D2E86 /* UserViewController.swift in Sources */,
-				B7D266012DC7F50200998405 /* NotificacionCD+CoreDataClass.swift in Sources */,
+				B7933CAE2DC7FCE900814B8B /* NotificacionCD+CoreDataClass.swift in Sources */,
 				849A67532DC0773A000EC7AC /* CeldaTableViewCell.swift in Sources */,
 				B74713312DC645080003EE97 /* DetalleEvento.swift in Sources */,
 				B7CD11F02DB700960004D170 /* MantenerCitaViewController.swift in Sources */,
@@ -323,7 +323,7 @@
 				B75922032DAC15EB00A31AEE /* AuthViewController.swift in Sources */,
 				B7726D1B2DB6FA2700CD4D9B /* Mascota+CoreDataClass.swift in Sources */,
 				B7CD11E22DB6FC850004D170 /* MantenerMascotaViewController.swift in Sources */,
-				B7D266022DC7F50200998405 /* NotificacionCD+CoreDataProperties.swift in Sources */,
+				B7933CAF2DC7FCE900814B8B /* NotificacionCD+CoreDataProperties.swift in Sources */,
 				B7726D1C2DB6FA2700CD4D9B /* Mascota+CoreDataProperties.swift in Sources */,
 				B7CD11EC2DB6FFF30004D170 /* DetalleMascotaViewController.swift in Sources */,
 				B7CD11E02DB6FC1A0004D170 /* ListadoViewController.swift in Sources */,
