@@ -153,18 +153,10 @@ extension ListadoCitaViewController: UITableViewDataSource {
     }
     
     func formatearFecha(_ fecha: Date) -> String {
-        let formatterFecha = DateFormatter()
-            formatterFecha.locale = Locale(identifier: "es_ES") // Español
-            formatterFecha.dateFormat = "d 'de' MMMM 'de' yyyy" // Ej: 27 de abril de 2025
-
-            let formatterHora = DateFormatter()
-            formatterHora.locale = Locale(identifier: "es_ES")
-            formatterHora.dateFormat = "hh:mm a" // Ej: 12:01 p. m.
-
-            let fechaFormateada = formatterFecha.string(from: fecha)
-            let horaFormateada = formatterHora.string(from: fecha)
-
-            return "\(fechaFormateada) | \(horaFormateada)"
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "es_ES") // Español
+        formatter.dateFormat = "HH:mm 'del' d 'de' MMMM 'de' yyyy" // Ej: 14:30 del 4 de mayo de 2025
+        return formatter.string(from: fecha)
     }
 }
 

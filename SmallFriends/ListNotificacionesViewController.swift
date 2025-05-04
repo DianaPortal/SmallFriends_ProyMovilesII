@@ -3,7 +3,7 @@ import CoreData
 import FirebaseAuth
 
 class ListNotificacionesViewController: UIViewController {
-   
+    
     @IBOutlet var tableNotificacionesTableView: UITableView!
     
     var notificacionesProgramadas: [NotificacionCD] = []
@@ -18,18 +18,18 @@ class ListNotificacionesViewController: UIViewController {
             print("❌ No se pudo instanciar NotificacionesViewController. Verifica el Storyboard ID.")
             return
         }
-
+        
         self.navigationController?.pushViewController(notificacionesVC, animated: true)
     }
-
     
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableNotificacionesTableView.delegate = self
         tableNotificacionesTableView.dataSource = self
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,26 +38,26 @@ class ListNotificacionesViewController: UIViewController {
         cargarNotificacionesProgramadas()
         
     }
-
+    
     // Cargar citas programadas del usuario logueado
     func cargarNotificacionesProgramadas() {
         guard let usuarioID = Auth.auth().currentUser?.uid else {
             print("No se pudo obtener el ID del usuario logueado.")
             return
         }
-
+        
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             print("No se pudo acceder al AppDelegate.")
             return
         }
-
+        
         let context = appDelegate.persistentContainer.viewContext
         let fetchRequest: NSFetchRequest<NotificacionCD> = NotificacionCD.fetchRequest()
         let predicate = NSPredicate(format: "idUsuario == %@ AND fechaProgramada > %@", usuarioID, Date() as NSDate)
         fetchRequest.predicate = predicate
         let sort = NSSortDescriptor(key: "fechaProgramada", ascending: true)
         fetchRequest.sortDescriptors = [sort]
-
+        
         do {
             let notifs = try context.fetch(fetchRequest)
             self.notificacionesProgramadas = notifs
@@ -72,15 +72,14 @@ class ListNotificacionesViewController: UIViewController {
             tableNotificacionesTableView.restore()
         }
     }
-
+    
     func formatearFecha(_ fecha: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
-        formatter.timeStyle = .short
+        formatter.locale = Locale(identifier: "es_ES") // Español
+        formatter.dateFormat = "HH:mm 'del' d 'de' MMMM 'de' yyyy" // Ej: 14:30 del 4 de mayo de 2025
         return formatter.string(from: fecha)
     }
 }
-
 // MARK: - UITableViewDataSource
 extension ListNotificacionesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -94,7 +93,6 @@ extension ListNotificacionesViewController: UITableViewDataSource {
 
         let notif = notificacionesProgramadas[indexPath.row]
         cell.tituloLabel.text = notif.titulo
-        cell.descripcionLabel.text = notif.cuerpo
         cell.fechaLabel.text = formatearFecha(notif.fechaProgramada ?? Date())
 
         return cell

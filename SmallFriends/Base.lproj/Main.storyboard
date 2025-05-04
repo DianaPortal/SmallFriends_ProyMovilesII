@@ -844,19 +844,13 @@
                                                     <rect key="frame" x="13" y="13" width="303" height="54"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titulo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pWW-id-qVn">
-                                                            <rect key="frame" x="0.0" y="0.0" width="303" height="15.333333333333334"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="303" height="24"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QeC-OU-qSm">
-                                                            <rect key="frame" x="0.0" y="20.333333333333336" width="303" height="15.666666666666664"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2d-rU-Brg">
-                                                            <rect key="frame" x="0.0" y="41" width="303" height="13"/>
+                                                            <rect key="frame" x="0.0" y="29" width="303" height="25"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -882,7 +876,6 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="containerView" destination="ceU-dp-QTm" id="KH0-ab-J7a"/>
-                                    <outlet property="descripcionLabel" destination="M2d-rU-Brg" id="ag6-Q2-LSY"/>
                                     <outlet property="fechaLabel" destination="QeC-OU-qSm" id="hDa-SA-WXc"/>
                                     <outlet property="tituloLabel" destination="pWW-id-qVn" id="BoJ-Q6-KLr"/>
                                 </connections>
