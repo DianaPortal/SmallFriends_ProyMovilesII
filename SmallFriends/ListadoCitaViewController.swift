@@ -148,7 +148,7 @@ extension ListadoCitaViewController: UITableViewDataSource {
         // Asumiendo que tu modelo de Cita tiene las propiedades `nombre`, `detalle` y `fecha`
         cell.citaLabel.text = cita.tipoCita
         cell.detalleCita.text = "\(formatearFecha(cita.fechaCita ?? Date()))\n\(mascotaNombre)"
-        
+        cell.prepararAnimacion()
         return cell
     }
     
