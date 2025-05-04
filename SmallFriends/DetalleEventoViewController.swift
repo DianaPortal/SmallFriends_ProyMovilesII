@@ -20,12 +20,14 @@ class DetalleEventoViewController: UIViewController {
     @IBOutlet weak var fechaEventoLabel: UILabel!
     @IBOutlet weak var horaEventoLabel: UILabel!
     @IBOutlet weak var lugarEventoLabel: UILabel!
-        
+    @IBOutlet weak var recuerdameButton: UIButton!
     
     override func viewDidLoad() {
            super.viewDidLoad()
            configurarWebView()
 
+        animarElementos()
+        
            if let id = eventoID {
                obtenerDetalleEvento(id: id)
            }
@@ -67,6 +69,7 @@ class DetalleEventoViewController: UIViewController {
                    let detalleEvento = try JSONDecoder().decode(DetalleEvento.self, from: data)
                    DispatchQueue.main.async {
                        self.actualizarUIConEvento(evento: detalleEvento)
+                       self.animarMapa()
                    }
                } catch {
                    print("Error al decodificar: \(error)")
@@ -83,7 +86,7 @@ class DetalleEventoViewController: UIViewController {
            descripcionLabel.sizeToFit()
            fechaEventoLabel.text = "Fecha: \(evento.fecha)"
            horaEventoLabel.text = "Hora: \(evento.hora)"
-           lugarEventoLabel.text = "📍 \(evento.ubicacion)"
+           lugarEventoLabel.text = "Lugar: 📍 \(evento.ubicacion)"
 
            mostrarMapaConMapbox(lat: evento.latitud, lng: evento.longitud)
        }
@@ -141,7 +144,7 @@ class DetalleEventoViewController: UIViewController {
         mapaWKWebView.loadHTMLString(html, baseURL: nil)
     }
 //GERAB
-    @IBOutlet weak var recuerdameButton: UIButton!
+    
     @IBAction func recuerdame(_ sender: UIButton) {
         print("✅ Botón presionado")
 
@@ -240,7 +243,7 @@ class DetalleEventoViewController: UIViewController {
 
     func combinarFechaYHora(fecha: String, hora: String) -> Date? {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm" // Ajusta si el formato de tu backend es distinto
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
 
         // Extrae partes
         let fechaLimpia = fecha.replacingOccurrences(of: "Fecha: ", with: "").trimmingCharacters(in: .whitespaces)
@@ -249,5 +252,45 @@ class DetalleEventoViewController: UIViewController {
         let combinada = "\(fechaLimpia) \(horaLimpia)"
         return formatter.date(from: combinada)
     }
+    
+    // Animar los elementos al cargar
+        func animarElementos() {
+            let delay: TimeInterval = 0.3
+
+            // Animaciones
+            UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
+                self.tituloEventoLabel.transform = CGAffineTransform(translationX: 0, y: -20)
+                self.tituloEventoLabel.alpha = 1.0
+            })
+            
+            UIView.animate(withDuration: 1.0, delay: delay, options: .curveEaseOut, animations: {
+                self.descripcionLabel.transform = CGAffineTransform(translationX: 0, y: -20)
+                self.descripcionLabel.alpha = 1.0
+            })
+            
+            UIView.animate(withDuration: 1.0, delay: delay * 2, options: .curveEaseOut, animations: {
+                self.fechaEventoLabel.transform = CGAffineTransform(translationX: 0, y: -20)
+                self.fechaEventoLabel.alpha = 1.0
+            })
+            
+            UIView.animate(withDuration: 1.0, delay: delay * 3, options: .curveEaseOut, animations: {
+                self.horaEventoLabel.transform = CGAffineTransform(translationX: 0, y: -20)
+                self.horaEventoLabel.alpha = 1.0
+            })
+            
+            UIView.animate(withDuration: 1.0, delay: delay * 4, options: .curveEaseOut, animations: {
+                self.lugarEventoLabel.transform = CGAffineTransform(translationX: 0, y: -20)
+                self.lugarEventoLabel.alpha = 1.0
+            })
+        }
+
+        // Animación del mapa al cargar
+        func animarMapa() {
+            mapaWKWebView.alpha = 0
+            UIView.animate(withDuration: 1.0) {
+                self.mapaWKWebView.alpha = 1
+            }
+        }
+
     
 }

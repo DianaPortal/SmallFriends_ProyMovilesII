@@ -1458,8 +1458,8 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillProportionally" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="pNs-fY-mao">
-                                <rect key="frame" x="25" y="143" width="343" height="183"/>
+                            <stackView opaque="NO" contentMode="scaleAspectFit" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="pNs-fY-mao">
+                                <rect key="frame" x="25" y="143" width="343" height="111.33333333333331"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Descripción :" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="83e-0O-Fwg">
                                         <rect key="frame" x="0.0" y="0.0" width="343" height="20.333333333333332"/>
@@ -1468,26 +1468,20 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha del evento" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M2D-kE-jbe">
-                                        <rect key="frame" x="0.0" y="40.333333333333343" width="343" height="20.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="30.333333333333343" width="343" height="20.333333333333329"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hora del Evento:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Co4-Wt-giR">
-                                        <rect key="frame" x="0.0" y="80.666666666666657" width="343" height="20.333333333333329"/>
+                                        <rect key="frame" x="0.0" y="60.666666666666664" width="343" height="20.333333333333336"/>
                                         <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar del Evento:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kR5-nA-JRk">
-                                        <rect key="frame" x="0.0" y="120.99999999999999" width="343" height="20.333333333333329"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lugar del Evento:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0I-IT-o10">
-                                        <rect key="frame" x="0.0" y="161.33333333333331" width="343" height="21.666666666666657"/>
-                                        <fontDescription key="fontDescription" type="system" weight="light" pointSize="18"/>
+                                        <rect key="frame" x="0.0" y="91" width="343" height="20.333333333333329"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -1509,7 +1503,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="recuerdame:" destination="udm-Rd-oBT" eventType="touchUpInside" id="FIc-po-Fnh"/>
+                                    <action selector="recuerdame:" destination="udm-Rd-oBT" eventType="touchUpInside" id="MfY-RU-mle"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1533,7 +1527,7 @@
                         <outlet property="fechaEventoLabel" destination="M2D-kE-jbe" id="idh-vy-1RV"/>
                         <outlet property="horaEventoLabel" destination="Co4-Wt-giR" id="7GY-vm-7nb"/>
                         <outlet property="lugarEventoLabel" destination="G0I-IT-o10" id="HxW-bV-AnC"/>
-                        <outlet property="recuerdameButton" destination="apS-uo-CDr" id="00a-BO-ypc"/>
+                        <outlet property="recuerdameButton" destination="apS-uo-CDr" id="ftH-Kj-tU4"/>
                         <outlet property="tituloEventoLabel" destination="T3b-wv-UQA" id="JzT-Tb-ev2"/>
                     </connections>
                 </viewController>
