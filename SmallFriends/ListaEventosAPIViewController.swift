@@ -68,9 +68,7 @@ class ListaEventosAPIViewController: UIViewController {
     
     
     
-    @IBAction func buscarTapped(_ sender: UIButton) {
-        
-    }
+ 
     
 }
 
@@ -81,9 +79,26 @@ class ListaEventosAPIViewController: UIViewController {
 
 extension ListaEventosAPIViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return estaBuscando ? eventosFiltrados.count : eventos.count
-    }
-    
+            return estaBuscando ? eventosFiltrados.count : eventos.count
+        }
+
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mostrarDescripcionEvento", for: indexPath) as! CeldaEventosTableViewCell
+
+        // Usa eventos directamente, no sobreescribas la variable.
+        let evento = estaBuscando ? eventosFiltrados[indexPath.row] : eventos[indexPath.row]
+
+        // Configura los labels de la celda con el evento correspondiente.
+        cell.eventoLabel.text = "🆕📍\(evento.titulo)"
+        cell.fechaEventoLabel.text = "📅 Fecha: \(evento.fecha)"
+
+        // Configura el título del botón de regreso para la pantalla de detalle.
+        let backItem = UIBarButtonItem()
+        backItem.title = "Eventos"
+        navigationItem.backBarButtonItem = backItem
+
+        return cell
+        }
     
 }
 
