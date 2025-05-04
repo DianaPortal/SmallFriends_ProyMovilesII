@@ -3,6 +3,7 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -366,7 +367,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Mascotas" image="huella" id="cZS-yr-I9T"/>
                     <navigationItem key="navigationItem" id="HDc-WY-KPJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="DGL-kb-olK">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="DGL-kb-olK">
                             <connections>
                                 <action selector="botonRegistrarTapped:" destination="Bdw-Cr-xd1" id="bQz-Nz-p1P"/>
                             </connections>
@@ -878,20 +879,21 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" id="xjb-Nh-wOw">
-                        <barButtonItem key="rightBarButtonItem" image="light.beacon.min.fill" catalog="system" style="done" id="mxO-uH-sQV">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="uHU-pd-Udv" userLabel="Notificaciones">
-                                <rect key="frame" x="290" y="5" width="87" height="34.333333333333336"/>
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="mxO-uH-sQV">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uHU-pd-Udv" userLabel="Notificaciones">
+                                <rect key="frame" x="345" y="6" width="32" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="bell.badge.fill" catalog="system"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="bell.badge.fill" catalog="system" symbolScale="large"/>
+                                </state>
                                 <connections>
-                                    <action selector="notificaciones:" destination="bol-Zg-Zvm" eventType="touchUpInside" id="yye-Cm-mzK"/>
+                                    <action selector="notificaciones:" destination="bol-Zg-Zvm" eventType="touchUpInside" id="q74-B8-ASu"/>
                                 </connections>
                             </button>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableNotificacionesTableView" destination="87y-aP-s9g" id="oDI-V9-x78"/>
+                        <outlet property="tableNotificacionesTableView" destination="87y-aP-s9g" id="joa-f1-ZgB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bV3-B7-pyO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1673,11 +1675,11 @@
         <image name="huella" width="32" height="32"/>
         <image name="iconFacebook" width="48" height="48"/>
         <image name="iconGoogle" width="48" height="48"/>
-        <image name="light.beacon.min.fill" catalog="system" width="128" height="106"/>
         <image name="notifaciones" width="241" height="209"/>
         <image name="notificacion" width="32" height="32"/>
         <image name="perfil" width="32" height="32"/>
         <image name="perfil_default" width="225" height="225"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="ubicacion" width="32" height="32"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

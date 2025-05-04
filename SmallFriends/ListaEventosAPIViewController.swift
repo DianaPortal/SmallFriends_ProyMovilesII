@@ -55,8 +55,8 @@ class ListaEventosAPIViewController: UIViewController {
                 }
               }
               task.resume()
-            }
-        }
+    }
+}
 
     
     

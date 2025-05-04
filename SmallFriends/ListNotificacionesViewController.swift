@@ -4,6 +4,10 @@ import FirebaseAuth
 
 class ListNotificacionesViewController: UIViewController {
    
+    @IBOutlet var tableNotificacionesTableView: UITableView!
+    
+    var notificacionesProgramadas: [NotificacionCD] = []
+    
     @IBAction func notificaciones(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let id = "NotificacionesViewController" // Asegúrate de que coincida con el Storyboard ID
@@ -17,10 +21,8 @@ class ListNotificacionesViewController: UIViewController {
 
         self.navigationController?.pushViewController(notificacionesVC, animated: true)
     }
+
     
-    @IBOutlet var tableNotificacionesTableView: UITableView!
-    
-    var notificacionesProgramadas: [NotificacionCD] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +30,10 @@ class ListNotificacionesViewController: UIViewController {
         tableNotificacionesTableView.delegate = self
         tableNotificacionesTableView.dataSource = self
 
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         // Cargar las citas programadas
         cargarNotificacionesProgramadas()
         
@@ -58,6 +64,12 @@ class ListNotificacionesViewController: UIViewController {
             self.tableNotificacionesTableView.reloadData()
         } catch {
             print("Error al cargar notificaciones: \(error.localizedDescription)")
+        }
+        
+        if notificacionesProgramadas.isEmpty {
+            tableNotificacionesTableView.setEmptyMessage("No hay notificaciones registradas")
+        } else {
+            tableNotificacionesTableView.restore()
         }
     }
 
