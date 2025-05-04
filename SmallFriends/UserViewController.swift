@@ -23,6 +23,7 @@ class UserViewController: UIViewController {
     @IBOutlet weak var closeSessionButton: UIButton!
     @IBOutlet weak var nombreLabel: UILabel!
     @IBOutlet weak var ApellidosLabel: UILabel!
+    @IBOutlet weak var usuarioStackView: UIStackView!
     
     var email: String?
     var provider: ProviderType?
@@ -41,6 +42,19 @@ class UserViewController: UIViewController {
         super.viewDidLoad()
         title = "Informacion del Usuario"
         cargarUsuarioDesdeCoreData()
+        
+        // Estilizar stack
+        usuarioStackView.layer.cornerRadius = 16
+        usuarioStackView.layer.borderWidth = 0.5
+        usuarioStackView.layer.borderColor = UIColor.systemGray4.cgColor
+        usuarioStackView.layer.backgroundColor = UIColor.systemGray6.withAlphaComponent(0.7).cgColor
+        usuarioStackView.layer.shadowColor = UIColor.black.cgColor
+        usuarioStackView.layer.shadowOpacity = 0.1
+        usuarioStackView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        usuarioStackView.layer.shadowRadius = 4
+
+        usuarioStackView.isLayoutMarginsRelativeArrangement = true
+        usuarioStackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 16)
     }
 
     private func cargarUsuarioDesdeCoreData() {

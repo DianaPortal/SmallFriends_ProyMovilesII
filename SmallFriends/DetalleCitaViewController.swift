@@ -17,11 +17,27 @@ class DetalleCitaViewController: UIViewController {
     @IBOutlet weak var lugarCitaLabel: UILabel!
     @IBOutlet weak var tipoCitaLabel: UILabel!
     @IBOutlet weak var descripCitaLabel: UILabel!
+    @IBOutlet weak var citaStackView: UIStackView!
     
     
     
     var cita: CitasCD?  // Aquí se almacenará la cita seleccionada
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Estilizar stack
+        citaStackView.layer.cornerRadius = 16
+        citaStackView.layer.borderWidth = 0.5
+        citaStackView.layer.borderColor = UIColor.systemGray4.cgColor
+        citaStackView.layer.backgroundColor = UIColor.systemGray6.withAlphaComponent(0.7).cgColor
+        citaStackView.layer.shadowColor = UIColor.black.cgColor
+        citaStackView.layer.shadowOpacity = 0.1
+        citaStackView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        citaStackView.layer.shadowRadius = 4
+
+        citaStackView.isLayoutMarginsRelativeArrangement = true
+        citaStackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 16)
+    }
     /*
     override func viewDidLoad() {
         super.viewDidLoad()

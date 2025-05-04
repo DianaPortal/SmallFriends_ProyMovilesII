@@ -9,6 +9,7 @@ import UIKit
 
 class DetalleMascotaViewController: UIViewController {
 
+    @IBOutlet weak var mascotaStackView: UIStackView!
     @IBOutlet weak var fotoMascotaIV: UIImageView!
     @IBOutlet weak var nombreMascotaLB: UILabel!
     @IBOutlet weak var edadMascotaTF: UILabel!
@@ -19,8 +20,31 @@ class DetalleMascotaViewController: UIViewController {
     
     var mascota: Mascota?
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Estilizar stack
+        mascotaStackView.layer.cornerRadius = 16
+        mascotaStackView.layer.borderWidth = 0.5
+        mascotaStackView.layer.borderColor = UIColor.systemGray4.cgColor
+        mascotaStackView.layer.backgroundColor = UIColor.systemGray6.withAlphaComponent(0.7).cgColor
+        mascotaStackView.layer.shadowColor = UIColor.black.cgColor
+        mascotaStackView.layer.shadowOpacity = 0.1
+        mascotaStackView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        mascotaStackView.layer.shadowRadius = 4
+
+        mascotaStackView.isLayoutMarginsRelativeArrangement = true
+        mascotaStackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 16)
+
+    }
+    
+
     override func viewWillAppear(_ animated: Bool) {
             super.viewWillAppear(animated)
+        
+        mascotaStackView.alpha = 0
+            UIView.animate(withDuration: 0.8, delay: 0.1, options: [.curveEaseInOut], animations: {
+                self.mascotaStackView.alpha = 1
+            }, completion: nil)
             // Verificamos si la propiedad 'mascota' tiene valor
             guard let mascota = mascota else {
                 print("La mascota no está asignada")

@@ -155,7 +155,7 @@ extension ListadoCitaViewController: UITableViewDataSource {
     func formatearFecha(_ fecha: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "es_ES") // Español
-        formatter.dateFormat = "hh:mm a 'del' d 'de' MMMM 'de' yyyy" // Ej: 03:00 p. m. del 4 de mayo de 2025
+        formatter.dateFormat = "d 'de' MMMM 'de' yyyy '|' hh:mm a"
         return formatter.string(from: fecha)
     }
 }

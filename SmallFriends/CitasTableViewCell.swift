@@ -18,6 +18,7 @@ class CitasTableViewCell: UITableViewCell {
         estilizarCelda()
     }
 
+   
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -35,6 +36,7 @@ class CitasTableViewCell: UITableViewCell {
                 }
             }
         }
+  
 
         // Función para estilizar las etiquetas y la celda
         func estilizarCelda() {
@@ -78,4 +80,6 @@ class CitasTableViewCell: UITableViewCell {
         func prepararAnimacion() {
             animarCelda()
         }
+    
+    
 }
