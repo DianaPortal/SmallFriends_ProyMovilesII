@@ -101,35 +101,60 @@ class UserViewController: UIViewController {
     }
 //Acciones
     @IBAction func closeSessionButtonAction(_ sender: UIButton) {
-        let defaults = UserDefaults.standard
-        defaults.removeObject(forKey: "email")
-        defaults.removeObject(forKey: "provider")
-        defaults.synchronize()
+        let alert = UIAlertController(
+               title: "¿Cerrar sesión?",
+               message: "¿Estás segur@ de que deseas cerrar sesión?",
+               preferredStyle: .alert
+           )
+           
+        alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
+        
+        alert.addAction(UIAlertAction(title: "Cerrar sesión", style: .destructive, handler: { _ in
+                // Elimina la sesión guardada
+                let defaults = UserDefaults.standard
+                defaults.removeObject(forKey: "email")
+                defaults.removeObject(forKey: "provider")
+                defaults.synchronize()
+                
+                // Cancelar notificaciones pendientes
+                UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
 
-        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+                // Cerrar sesión en Firebase y proveedor
+                switch self.provider {
+                case .basic:
+                    self.firebaseLogOut()
+                case .google:
+                    GIDSignIn.sharedInstance.signOut()
+                    self.firebaseLogOut()
+                case .facebook:
+                    LoginManager().logOut()
+                    self.firebaseLogOut()
+                case .none:
+                    print("No provider, no se puede hacer log out.")
+                }
 
-        switch provider {
-        case .basic:
-            firebaseLogOut()
-        case .google:
-            GIDSignIn.sharedInstance.signOut()
-            firebaseLogOut()
-        case .facebook:
-            LoginManager().logOut()
-            firebaseLogOut()
-        case .none:
-            print("No provider, no se puede hacer log out.")
-        }
-
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        if let authVC = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController {
-            if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
-               let window = sceneDelegate.window {
-                let nav = UINavigationController(rootViewController: authVC)
-                window.rootViewController = nav
-                window.makeKeyAndVisible()
-            }
-        }
+                // Navegar al AuthViewController
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                if let authVC = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController {
+                    if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
+                       let window = sceneDelegate.window {
+                        let nav = UINavigationController(rootViewController: authVC)
+                        
+                        // Agregamos animación de transición
+                        UIView.transition(with: window,
+                                          duration: 1,
+                                          options: .transitionFlipFromLeft,
+                                          animations: {
+                                            window.rootViewController = nav
+                                          },
+                                          completion: nil)
+                    }
+                }
+            }))
+            
+            self.present(alert, animated: true, completion: nil)
+        
+        
     }
     
     
@@ -196,9 +221,10 @@ class UserViewController: UIViewController {
 
     private func firebaseLogOut() {
         do {
-            try Auth.auth().signOut()
-        } catch {
-            // Error al cerrar sesión
-        }
+               try Auth.auth().signOut()
+               print("Cerró sesión correctamente.")
+           } catch {
+               print("Error al cerrar sesión en Firebase: \(error.localizedDescription)")
+           }
     }
 }

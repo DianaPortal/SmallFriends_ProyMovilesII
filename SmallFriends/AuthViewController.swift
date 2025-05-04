@@ -306,12 +306,21 @@ class AuthViewController: UIViewController {
         // - SceneDelegate para cambiar el rootViewController
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
            let window = sceneDelegate.window {
-            window.rootViewController = tabBarController
-            window.makeKeyAndVisible()
+            
+            // Animación de transición (fade)
+            UIView.transition(with: window,
+                              duration: 1,
+                              options: .transitionFlipFromRight,
+                              animations: {
+                                window.rootViewController = tabBarController
+                              }, completion: { _ in
+                                window.makeKeyAndVisible()
+                              })
         } else {
             print("No se pudo acceder al SceneDelegate o al window.")
         }
     }
+
     
     // Func - Alertas
     private func showAlert(title: String, message: String) {
