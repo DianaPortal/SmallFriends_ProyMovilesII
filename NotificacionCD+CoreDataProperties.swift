@@ -2,7 +2,7 @@
 //  NotificacionCD+CoreDataProperties.swift
 //  SmallFriends
 //
-//  Created by DAMII on 3/05/25.
+//  Created by DAMII on 4/05/25.
 //
 //
 
@@ -16,11 +16,11 @@ extension NotificacionCD {
         return NSFetchRequest<NotificacionCD>(entityName: "NotificacionCD")
     }
 
-    @NSManaged public var id: UUID?
-    @NSManaged public var titulo: String?
     @NSManaged public var cuerpo: String?
     @NSManaged public var fechaProgramada: Date?
+    @NSManaged public var idNotificacion: String?
     @NSManaged public var idUsuario: String?
+    @NSManaged public var titulo: String?
     @NSManaged public var cita: CitasCD?
 
 }
