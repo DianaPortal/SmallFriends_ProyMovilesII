@@ -108,32 +108,38 @@ extension ListNotificacionesViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Acceder al contexto de Core Data
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-            let context = appDelegate.persistentContainer.viewContext
+            let alerta = UIAlertController(
+                title: "Eliminar Notificación",
+                message: "¿Estás seguro de que deseas eliminar esta notificación?",
+                preferredStyle: .alert
+            )
             
-            // Obtener la notificación a eliminar
-            let notificacionAEliminar = notificacionesProgramadas[indexPath.row]
+            alerta.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
             
-            // 🔸 Cancelar notificación del sistema utilizando el identificador (id)
-            if let id = notificacionAEliminar.idNotificacion {
-                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
-                print("🗑️ Notificación con ID \(id) eliminada de UNUserNotificationCenter")
-            }
-            
-            // 🔸 Eliminar de Core Data
-            context.delete(notificacionAEliminar)
-            
-            do {
-                try context.save()  // Guardamos los cambios en Core Data
-                print("✅ Notificación eliminada de Core Data")
+            alerta.addAction(UIAlertAction(title: "Eliminar", style: .destructive, handler: { _ in
+                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+                let context = appDelegate.persistentContainer.viewContext
                 
-                // Eliminar de la lista que se muestra en la tabla
-                notificacionesProgramadas.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
-            } catch {
-                print("❌ Error al eliminar notificación: \(error.localizedDescription)")
-            }
+                let notificacionAEliminar = self.notificacionesProgramadas[indexPath.row]
+                
+                if let id = notificacionAEliminar.idNotificacion {
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+                    UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [id])
+                    print("🗑️ Eliminadas notificación pendiente y entregada con ID: \(id)")
+                }
+                
+                context.delete(notificacionAEliminar)
+                do {
+                    try context.save()
+                    self.notificacionesProgramadas.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                    print("✅ Notificación eliminada de Core Data y UI")
+                } catch {
+                    print("❌ Error al eliminar de Core Data: \(error.localizedDescription)")
+                }
+            }))
+            
+            self.present(alerta, animated: true)
         }
     }
 }

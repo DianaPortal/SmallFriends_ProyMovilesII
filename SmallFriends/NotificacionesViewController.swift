@@ -114,6 +114,7 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate, UNUser
                             let dateComp = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
                             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
                             let request = UNNotificationRequest(identifier: identificador, content: content, trigger: trigger)
+                            UNUserNotificationCenter.current().add(request)
 
                             self.notificacionesCenter.add(request) { error in
                                 if let error = error {

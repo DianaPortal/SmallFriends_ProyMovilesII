@@ -194,8 +194,8 @@ class DetalleCitaViewController: UIViewController {
 
                                    let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fecha)
                                    let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-                                   let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
+                                   let idNotificacion = UUID().uuidString  // ✅ Crear el ID una vez
+                                   let request = UNNotificationRequest(identifier: idNotificacion, content: content, trigger: trigger)
                                    UNUserNotificationCenter.current().add(request) { error in
                                        if let error = error {
                                            print("❌ Error al programar notificación: \(error.localizedDescription)")
@@ -207,7 +207,8 @@ class DetalleCitaViewController: UIViewController {
                                    nuevaNotif.cuerpo = content.body
                                    nuevaNotif.fechaProgramada = fecha
                                    nuevaNotif.idUsuario = usuarioID
-
+                                   nuevaNotif.idNotificacion = idNotificacion
+                                   
                                    try context.save()
                                    print("✅ Notificación guardada en Core Data")
 
