@@ -174,7 +174,8 @@ class DetalleCitaViewController: UIViewController {
                                let fetchRequest: NSFetchRequest<NotificacionCD> = NotificacionCD.fetchRequest()
                                fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
                                    NSPredicate(format: "titulo == %@", "Recordatorio de cita: \(tipo)"),
-                                   NSPredicate(format: "idUsuario == %@", usuarioID)
+                                   NSPredicate(format: "idUsuario == %@", usuarioID),
+                                   NSPredicate(format: "fechaProgramada == %@", fecha as NSDate)
                                ])
 
                                do {
@@ -239,3 +240,5 @@ class DetalleCitaViewController: UIViewController {
                return formatter.string(from: date)
            }
        }
+
+
