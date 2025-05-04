@@ -11,7 +11,7 @@ import UserNotifications
 import CoreData
 import FirebaseAuth
 
-class NotificacionesViewController: UIViewController, UITextViewDelegate{
+class NotificacionesViewController: UIViewController, UITextViewDelegate, UNUserNotificationCenterDelegate{
     
 
     
@@ -30,7 +30,6 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate{
         mensaje.text = "Escribe tu mensaje aquí..."
         mensaje.textColor = .lightGray
         
-
         
         notificacionesCenter.requestAuthorization(options: [.alert, .sound]) { permiso, error in
             if (!permiso){
@@ -40,6 +39,14 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate{
             }
         }
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        // Mostrar alerta y sonido incluso si la app está abierta
+        completionHandler([.alert, .sound])
+    }
+
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         if mensaje.textColor == .lightGray {
