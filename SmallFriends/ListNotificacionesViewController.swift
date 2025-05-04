@@ -105,25 +105,35 @@ extension ListNotificacionesViewController: UITableViewDelegate {
         let notif = notificacionesProgramadas[indexPath.row]
         print("Notificación seleccionada: \(notif.titulo ?? "Sin título")")
     }
-
-       func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-           if editingStyle == .delete {
-               guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-               let context = appDelegate.persistentContainer.viewContext
-
-               let notificacionAEliminar = notificacionesProgramadas[indexPath.row]
-
-               context.delete(notificacionAEliminar)
-
-               do {
-                   try context.save()
-                   print("✅ Notificación eliminada de Core Data")
-                   
-                   notificacionesProgramadas.remove(at: indexPath.row)
-                   tableView.deleteRows(at: [indexPath], with: .automatic)
-               } catch {
-                   print("❌ Error al eliminar notificación: \(error.localizedDescription)")
-               }
-           }
-       }
-   }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Acceder al contexto de Core Data
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+            let context = appDelegate.persistentContainer.viewContext
+            
+            // Obtener la notificación a eliminar
+            let notificacionAEliminar = notificacionesProgramadas[indexPath.row]
+            
+            // 🔸 Cancelar notificación del sistema utilizando el identificador (id)
+            if let id = notificacionAEliminar.idNotificacion {
+                UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+                print("🗑️ Notificación con ID \(id) eliminada de UNUserNotificationCenter")
+            }
+            
+            // 🔸 Eliminar de Core Data
+            context.delete(notificacionAEliminar)
+            
+            do {
+                try context.save()  // Guardamos los cambios en Core Data
+                print("✅ Notificación eliminada de Core Data")
+                
+                // Eliminar de la lista que se muestra en la tabla
+                notificacionesProgramadas.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            } catch {
+                print("❌ Error al eliminar notificación: \(error.localizedDescription)")
+            }
+        }
+    }
+}

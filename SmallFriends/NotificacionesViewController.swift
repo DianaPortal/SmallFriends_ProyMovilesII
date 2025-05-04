@@ -44,7 +44,7 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate, UNUser
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         // Mostrar alerta y sonido incluso si la app está abierta
-        completionHandler([.alert, .sound])
+        completionHandler([.banner, .list, .sound])
     }
 
     
@@ -54,8 +54,7 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate, UNUser
             mensaje.textColor = .black
         }
     }
-    
-    
+ 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
@@ -111,10 +110,11 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate, UNUser
                             content.body = message
                             content.sound = UNNotificationSound.default
                             
+                            let identificador = UUID().uuidString
                             let dateComp = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: date)
                             let trigger = UNCalendarNotificationTrigger(dateMatching: dateComp, repeats: false)
-                            let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-                            
+                            let request = UNNotificationRequest(identifier: identificador, content: content, trigger: trigger)
+
                             self.notificacionesCenter.add(request) { error in
                                 if let error = error {
                                     print("Error al agregar notificación: \(error.localizedDescription)")
@@ -128,7 +128,8 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate, UNUser
                                 nuevaNotificacion.cuerpo = message
                                 nuevaNotificacion.fechaProgramada = date
                                 nuevaNotificacion.idUsuario = usuarioID
-                                
+                                nuevaNotificacion.idNotificacion = identificador  // << GUARDAR IDENTIFICADOR
+
                                 do {
                                     try context.save()
                                     print("✅ Notificación guardada en Core Data")

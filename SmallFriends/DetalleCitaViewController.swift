@@ -132,59 +132,94 @@ class DetalleCitaViewController: UIViewController {
     }
     
     @IBAction func programarNotifTapped(_ sender: UIButton) {
-        guard let cita = cita, let fecha = cita.fechaCita else {
-            print("Cita inválida")
-            return
-        }
-        
-        if fecha <= Date() {
-            let alerta = UIAlertController(title: "Fecha inválida", message: "La cita ya ocurrió.", preferredStyle: .alert)
-            alerta.addAction(UIAlertAction(title: "OK", style: .default))
-            self.present(alerta, animated: true)
-            return
-        }
-        
-        let content = UNMutableNotificationContent()
-        content.title = "Recordatorio de cita: \(cita.tipoCita ?? "Sin tipo")"
-        content.body = "Lugar: \(cita.lugarCita ?? "No especificado"). Descripción: \(cita.descripcionCita ?? "")."
-        content.sound = UNNotificationSound.default
-        
-        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fecha)
-        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-        
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-        
-        UNUserNotificationCenter.current().add(request) { error in
-            DispatchQueue.main.async {
-                if let error = error {
-                    print("Error al programar la notificación: \(error.localizedDescription)")
-                    let alerta = UIAlertController(title: "Error", message: "No se pudo programar la notificación.", preferredStyle: .alert)
-                    alerta.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alerta, animated: true)
-                } else {
-                    // Guardar en Core Data
-                    guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-                    let context = appDelegate.persistentContainer.viewContext
-                    let nuevaNotif = NotificacionCD(context: context)
-                    
-                    nuevaNotif.id = UUID()
-                    nuevaNotif.titulo = content.title
-                    nuevaNotif.cuerpo = content.body
-                    nuevaNotif.fechaProgramada = fecha
-                    nuevaNotif.idUsuario = Auth.auth().currentUser?.uid
-                    
-                    do {
-                        try context.save()
-                        print("Notificación guardada en Core Data.")
-                    } catch {
-                        print("Error al guardar la notificación: \(error.localizedDescription)")
-                    }
-                    
-                    let alerta = UIAlertController(title: "Notificación programada", message: "La notificación ha sido agendada.", preferredStyle: .alert)
-                    alerta.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alerta, animated: true)
-                }
-            }
-        }
-    }
-}
+        print("✅ Botón presionado")
+
+               UNUserNotificationCenter.current().getNotificationSettings { settings in
+                   DispatchQueue.main.async {
+                       guard let cita = self.cita,
+                             let fecha = cita.fechaCita,
+                             let tipo = cita.tipoCita,
+                             let lugar = cita.lugarCita,
+                             let descripcion = cita.descripcionCita,
+                             let usuarioID = Auth.auth().currentUser?.uid else {
+                           self.mostrarAlerta(titulo: "Error", mensaje: "Faltan datos o no has iniciado sesión.")
+                           return
+                       }
+
+                       if fecha <= Date() {
+                           self.mostrarAlerta(titulo: "Fecha inválida", mensaje: "La fecha ya pasó.")
+                           return
+                       }
+
+                       if settings.authorizationStatus == .authorized {
+                           if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                               let context = appDelegate.persistentContainer.viewContext
+
+                               let fetchRequest: NSFetchRequest<NotificacionCD> = NotificacionCD.fetchRequest()
+                               fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+                                   NSPredicate(format: "titulo == %@", "Recordatorio de cita: \(tipo)"),
+                                   NSPredicate(format: "idUsuario == %@", usuarioID)
+                               ])
+
+                               do {
+                                   let resultados = try context.fetch(fetchRequest)
+                                   if resultados.count > 0 {
+                                       self.mostrarAlerta(titulo: "Ya registrado", mensaje: "Esta notificación ya fue programada.")
+                                       return
+                                   }
+
+                                   sender.backgroundColor = .systemGreen
+
+                                   let content = UNMutableNotificationContent()
+                                   content.title = "Recordatorio de cita: \(tipo)"
+                                   content.body = "Lugar: \(lugar). Descripción: \(descripcion)."
+                                   content.sound = .default
+
+                                   let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fecha)
+                                   let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                                   let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                                   UNUserNotificationCenter.current().add(request) { error in
+                                       if let error = error {
+                                           print("❌ Error al programar notificación: \(error.localizedDescription)")
+                                       }
+                                   }
+
+                                   let nuevaNotif = NotificacionCD(context: context)
+                                   nuevaNotif.titulo = content.title
+                                   nuevaNotif.cuerpo = content.body
+                                   nuevaNotif.fechaProgramada = fecha
+                                   nuevaNotif.idUsuario = usuarioID
+
+                                   try context.save()
+                                   print("✅ Notificación guardada en Core Data")
+
+                                   sender.setTitle("✅ Recordatorio guardado", for: .normal)
+                                   sender.isEnabled = false
+
+                                   self.mostrarAlerta(titulo: "Notificación programada", mensaje: "Se ha agendado la cita para \(self.formattedDate(date: fecha))")
+                               } catch {
+                                   print("❌ Error al guardar en Core Data: \(error.localizedDescription)")
+                               }
+                           }
+                       } else {
+                           self.mostrarAlerta(titulo: "Permiso requerido", mensaje: "Activa las notificaciones en Configuración para usar esta función.")
+                       }
+                   }
+               }
+           }
+
+           func mostrarAlerta(titulo: String, mensaje: String) {
+               let alert = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
+               alert.addAction(UIAlertAction(title: "OK", style: .default))
+               self.present(alert, animated: true)
+           }
+
+           func formattedDate(date: Date) -> String {
+               let formatter = DateFormatter()
+               formatter.locale = Locale(identifier: "es_ES")
+               formatter.dateStyle = .medium
+               formatter.timeStyle = .short
+               return formatter.string(from: date)
+           }
+       }

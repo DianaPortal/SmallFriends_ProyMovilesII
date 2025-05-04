@@ -29,7 +29,7 @@
     <entity name="NotificacionCD" representedClassName=".NotificacionCD" syncable="YES">
         <attribute name="cuerpo" optional="YES" attributeType="String"/>
         <attribute name="fechaProgramada" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="idNotificacion" optional="YES" attributeType="String"/>
         <attribute name="idUsuario" optional="YES" attributeType="String"/>
         <attribute name="titulo" optional="YES" attributeType="String"/>
         <relationship name="cita" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CitasCD" inverseName="notificaciones" inverseEntity="CitasCD"/>
