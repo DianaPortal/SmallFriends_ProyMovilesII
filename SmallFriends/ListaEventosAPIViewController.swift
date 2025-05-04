@@ -19,10 +19,19 @@ class ListaEventosAPIViewController: UIViewController {
     
     @IBOutlet weak var tablaEventos: UITableView!
     
+    @IBOutlet weak var buscarUISearchBar: UISearchBar!
+    
+    
+    
     var eventos: [Eventos] = []
+    var eventosFiltrados: [Eventos] = []
+    var estaBuscando: Bool = false
+
         
         override func viewDidLoad() {
             super.viewDidLoad()
+            buscarUISearchBar.delegate = self
+            buscarUISearchBar.showsCancelButton = true
             tablaEventos.dataSource = self
             tablaEventos.delegate = self
             obtenerEventos()
@@ -56,6 +65,13 @@ class ListaEventosAPIViewController: UIViewController {
               }
               task.resume()
     }
+    
+    
+    
+    @IBAction func buscarTapped(_ sender: UIButton) {
+        
+    }
+    
 }
 
     
@@ -65,26 +81,17 @@ class ListaEventosAPIViewController: UIViewController {
 
 extension ListaEventosAPIViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return eventos.count
+        return estaBuscando ? eventosFiltrados.count : eventos.count
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "mostrarDescripcionEvento", for: indexPath) as! CeldaEventosTableViewCell
-        let eventos = eventos[indexPath.row]
-        let backItem = UIBarButtonItem()
-        backItem.title = "Eventos"
-        navigationItem.backBarButtonItem = backItem
-        cell.eventoLabel.text = "🆕📍\(eventos.titulo)"
-        cell.fechaEventoLabel.text = "📅 Fecha: \(eventos.fecha)"
-        return cell
-    }
+    
 }
 
 
 extension ListaEventosAPIViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Obtener el evento seleccionado
-        let eventoSeleccionado = eventos[indexPath.row]
+        let eventoSeleccionado = estaBuscando ? eventosFiltrados[indexPath.row] : eventos[indexPath.row]
                
         // Instanciar el DetalleEventoViewController manualmente
         let detalleEventoVC = storyboard?.instantiateViewController(withIdentifier: "mostrarDetalleEvento") as! DetalleEventoViewController
@@ -101,4 +108,26 @@ extension ListaEventosAPIViewController: UITableViewDelegate {
     
 }
 
+extension ListaEventosAPIViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            estaBuscando = false
+            tablaEventos.reloadData()
+        } else {
+            estaBuscando = true
+            eventosFiltrados = eventos.filter { evento in
+                return evento.titulo.lowercased().contains(searchText.lowercased()) ||
+                       evento.fecha.lowercased().contains(searchText.lowercased())
+            }
+            tablaEventos.reloadData()
+        }
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+        estaBuscando = false
+        tablaEventos.reloadData()
+        searchBar.resignFirstResponder()
+    }
+}
 
