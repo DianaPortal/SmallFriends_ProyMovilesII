@@ -71,6 +71,9 @@ extension ListaEventosAPIViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "mostrarDescripcionEvento", for: indexPath) as! CeldaEventosTableViewCell
         let eventos = eventos[indexPath.row]
+        let backItem = UIBarButtonItem()
+        backItem.title = "Eventos"
+        navigationItem.backBarButtonItem = backItem
         cell.eventoLabel.text = "🆕📍\(eventos.titulo)"
         cell.fechaEventoLabel.text = "📅 Fecha: \(eventos.fecha)"
         return cell
