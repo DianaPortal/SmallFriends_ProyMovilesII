@@ -366,7 +366,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Mascotas" image="huella" id="cZS-yr-I9T"/>
                     <navigationItem key="navigationItem" id="HDc-WY-KPJ">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="DGL-kb-olK">
+                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="DGL-kb-olK">
                             <connections>
                                 <action selector="botonRegistrarTapped:" destination="Bdw-Cr-xd1" id="bQz-Nz-p1P"/>
                             </connections>
@@ -879,7 +879,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="xjb-Nh-wOw">
                         <barButtonItem key="rightBarButtonItem" style="done" id="Rtz-dn-R7k">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="cXs-tz-Kg8" userLabel="Notificaciones">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="cXs-tz-Kg8" userLabel="Notificaciones">
                                 <rect key="frame" x="244.33333333333337" y="5" width="132.66666666666663" height="34.333333333333336"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
@@ -891,7 +891,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="tableNotificacionesTableView" destination="87y-aP-s9g" id="oDI-V9-x78"/>
+                        <outlet property="tableNotificacionesTableView" destination="87y-aP-s9g" id="joa-f1-ZgB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bV3-B7-pyO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1663,6 +1663,7 @@
         <image name="notificacion" width="32" height="32"/>
         <image name="perfil" width="32" height="32"/>
         <image name="perfil_default" width="225" height="225"/>
+        <image name="plus" catalog="system" width="128" height="113"/>
         <image name="ubicacion" width="32" height="32"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
