@@ -1501,7 +1501,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apS-uo-CDr" userLabel="Recuerdame">
-                                <rect key="frame" x="100" y="783" width="193" height="40"/>
+                                <rect key="frame" x="80" y="778" width="233" height="40"/>
                                 <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="8ZL-Js-iRG"/>
@@ -1524,14 +1524,14 @@
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstItem="tXX-mB-fDc" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="20" id="FNY-qn-fUg"/>
-                            <constraint firstItem="apS-uo-CDr" firstAttribute="bottom" secondItem="F86-pi-H0W" secondAttribute="bottom" constant="5" id="Fci-XX-sj3"/>
+                            <constraint firstItem="apS-uo-CDr" firstAttribute="bottom" secondItem="F86-pi-H0W" secondAttribute="bottom" id="Fci-XX-sj3"/>
                             <constraint firstItem="tXX-mB-fDc" firstAttribute="top" secondItem="F86-pi-H0W" secondAttribute="top" constant="40" id="FtW-nk-W2W"/>
                             <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="pNs-fY-mao" secondAttribute="trailing" constant="25" id="T9c-AT-z6w"/>
                             <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="tXX-mB-fDc" secondAttribute="trailing" constant="20" id="TkP-x1-6Gg"/>
                             <constraint firstItem="pNs-fY-mao" firstAttribute="top" secondItem="tXX-mB-fDc" secondAttribute="bottom" constant="20" id="ZBe-ZH-3Jd"/>
                             <constraint firstItem="pNs-fY-mao" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="25" id="naK-tL-eCw"/>
-                            <constraint firstItem="apS-uo-CDr" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="100" id="wPS-Oo-J9r"/>
-                            <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="apS-uo-CDr" secondAttribute="trailing" constant="100" id="yYu-7r-baT"/>
+                            <constraint firstItem="apS-uo-CDr" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="80" id="wPS-Oo-J9r"/>
+                            <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="apS-uo-CDr" secondAttribute="trailing" constant="80" id="yYu-7r-baT"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="DPK-LL-0cn"/>
@@ -1540,6 +1540,7 @@
                         <outlet property="fechaEventoLabel" destination="M2D-kE-jbe" id="idh-vy-1RV"/>
                         <outlet property="horaEventoLabel" destination="Co4-Wt-giR" id="7GY-vm-7nb"/>
                         <outlet property="lugarEventoLabel" destination="G0I-IT-o10" id="HxW-bV-AnC"/>
+                        <outlet property="recuerdameButton" destination="apS-uo-CDr" id="00a-BO-ypc"/>
                         <outlet property="tituloEventoLabel" destination="T3b-wv-UQA" id="JzT-Tb-ev2"/>
                     </connections>
                 </viewController>

@@ -141,71 +141,90 @@ class DetalleEventoViewController: UIViewController {
         mapaWKWebView.loadHTMLString(html, baseURL: nil)
     }
 //GERAB
+    @IBOutlet weak var recuerdameButton: UIButton!
     @IBAction func recuerdame(_ sender: UIButton) {
-        sender.backgroundColor = .systemGreen
         print("✅ Botón presionado")
-        UNUserNotificationCenter.current().getNotificationSettings { settings in
-                DispatchQueue.main.async {
-                    guard let usuarioID = Auth.auth().currentUser?.uid else {
-                        self.mostrarAlerta(titulo: "Error", mensaje: "Inicia sesión para poder programar recordatorios.")
-                        return
-                    }
 
-                    guard let titulo = self.tituloEventoLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                          let mensaje = self.descripcionLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines),
-                          let fechaTexto = self.fechaEventoLabel.text,
-                          let horaTexto = self.horaEventoLabel.text else {
-                        self.mostrarAlerta(titulo: "Error", mensaje: "Faltan datos del evento.")
-                        return
-                    }
+           UNUserNotificationCenter.current().getNotificationSettings { settings in
+               DispatchQueue.main.async {
+                   guard let usuarioID = Auth.auth().currentUser?.uid else {
+                       self.mostrarAlerta(titulo: "Error", mensaje: "Inicia sesión para poder programar recordatorios.")
+                       return
+                   }
 
-                    let fechaFinal = self.combinarFechaYHora(fecha: fechaTexto, hora: horaTexto)
+                   guard let titulo = self.tituloEventoLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                         let mensaje = self.descripcionLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines),
+                         let fechaTexto = self.fechaEventoLabel.text,
+                         let horaTexto = self.horaEventoLabel.text else {
+                       self.mostrarAlerta(titulo: "Error", mensaje: "Faltan datos del evento.")
+                       return
+                   }
 
-                    guard let fecha = fechaFinal, fecha > Date() else {
-                        self.mostrarAlerta(titulo: "Fecha inválida", mensaje: "La fecha del evento ya pasó o no es válida.")
-                        return
-                    }
+                   let fechaFinal = self.combinarFechaYHora(fecha: fechaTexto, hora: horaTexto)
 
-                    if settings.authorizationStatus == .authorized {
-                        // Crear notificación local
-                        let content = UNMutableNotificationContent()
-                        content.title = titulo
-                        content.body = mensaje
-                        content.sound = .default
+                   guard let fecha = fechaFinal, fecha > Date() else {
+                       self.mostrarAlerta(titulo: "Fecha inválida", mensaje: "La fecha del evento ya pasó o no es válida.")
+                       return
+                   }
 
-                        let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fecha)
-                        let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-                        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+                   if settings.authorizationStatus == .authorized {
+                       if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
+                           let context = appDelegate.persistentContainer.viewContext
 
-                        UNUserNotificationCenter.current().add(request) { error in
-                            if let error = error {
-                                print("❌ Error al programar notificación: \(error.localizedDescription)")
-                            }
-                        }
+                           let fetchRequest: NSFetchRequest<NotificacionCD> = NotificacionCD.fetchRequest()
+                           fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
+                               NSPredicate(format: "titulo == %@", titulo),
+                               NSPredicate(format: "idUsuario == %@", usuarioID)
+                           ])
 
-                        // Guardar en Core Data
-                        if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
-                            let context = appDelegate.persistentContainer.viewContext
-                            let nuevaNotif = NotificacionCD(context: context)
-                            nuevaNotif.titulo = titulo
-                            nuevaNotif.cuerpo = mensaje
-                            nuevaNotif.fechaProgramada = fecha
-                            nuevaNotif.idUsuario = usuarioID
+                           do {
+                               let resultados = try context.fetch(fetchRequest)
+                               if resultados.count > 0 {
+                                   self.mostrarAlerta(titulo: "Ya registrado", mensaje: "Este evento ya ha sido agendado anteriormente.")
+                                   return
+                               }
 
-                            do {
-                                try context.save()
-                                print("✅ Notificación guardada en Core Data")
-                                self.mostrarAlerta(titulo: "Recordatorio programado", mensaje: "Se ha agendado el evento correctamente para el día \(self.formattedDate(date: fecha))")
-                            } catch {
-                                print("❌ Error al guardar en Core Data: \(error.localizedDescription)")
-                            }
-                        }
-                    } else {
-                        self.mostrarAlerta(titulo: "Permiso requerido", mensaje: "Activa las notificaciones en Configuración para usar esta función.")
-                    }
-                }
-            }
-        }
+                               // ✅ Cambiar color solo cuando sí se agenda
+                               sender.backgroundColor = .systemGreen
+
+                               let content = UNMutableNotificationContent()
+                               content.title = titulo
+                               content.body = mensaje
+                               content.sound = .default
+
+                               let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fecha)
+                               let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+                               let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+
+                               UNUserNotificationCenter.current().add(request) { error in
+                                   if let error = error {
+                                       print("❌ Error al programar notificación: \(error.localizedDescription)")
+                                   }
+                               }
+
+                               let nuevaNotif = NotificacionCD(context: context)
+                               nuevaNotif.titulo = titulo
+                               nuevaNotif.cuerpo = mensaje
+                               nuevaNotif.fechaProgramada = fecha
+                               nuevaNotif.idUsuario = usuarioID
+
+                               try context.save()
+                               print("✅ Notificación guardada en Core Data")
+
+                               self.recuerdameButton.setTitle("✅ Recordatorio guardado", for: .normal)
+                               self.recuerdameButton.isEnabled = false
+
+                               self.mostrarAlerta(titulo: "Recordatorio programado", mensaje: "Se ha agendado el evento correctamente para el día \(self.formattedDate(date: fecha))")
+                           } catch {
+                               print("❌ Error al guardar en Core Data: \(error.localizedDescription)")
+                           }
+                       }
+                   } else {
+                       self.mostrarAlerta(titulo: "Permiso requerido", mensaje: "Activa las notificaciones en Configuración para usar esta función.")
+                   }
+               }
+           }
+       }
     func mostrarAlerta(titulo: String, mensaje: String) {
         let alert = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
