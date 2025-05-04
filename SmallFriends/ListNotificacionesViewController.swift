@@ -7,7 +7,9 @@ class ListNotificacionesViewController: UIViewController {
     @IBAction func notificaciones(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let id = "NotificacionesViewController" // Asegúrate de que coincida con el Storyboard ID
-
+        let backItem = UIBarButtonItem()
+        backItem.title = "Listado"
+        navigationItem.backBarButtonItem = backItem
         guard let notificacionesVC = storyboard.instantiateViewController(withIdentifier: id) as? NotificacionesViewController else {
             print("❌ No se pudo instanciar NotificacionesViewController. Verifica el Storyboard ID.")
             return
@@ -15,7 +17,7 @@ class ListNotificacionesViewController: UIViewController {
 
         self.navigationController?.pushViewController(notificacionesVC, animated: true)
     }
-
+    
     @IBOutlet var tableNotificacionesTableView: UITableView!
     
     var notificacionesProgramadas: [NotificacionCD] = []
@@ -28,6 +30,7 @@ class ListNotificacionesViewController: UIViewController {
 
         // Cargar las citas programadas
         cargarNotificacionesProgramadas()
+        
     }
 
     // Cargar citas programadas del usuario logueado

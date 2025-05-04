@@ -878,14 +878,14 @@
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" id="xjb-Nh-wOw">
-                        <barButtonItem key="rightBarButtonItem" style="done" id="Rtz-dn-R7k">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="cXs-tz-Kg8" userLabel="Notificaciones">
-                                <rect key="frame" x="244.33333333333337" y="5" width="132.66666666666663" height="34.333333333333336"/>
+                        <barButtonItem key="rightBarButtonItem" image="light.beacon.min.fill" catalog="system" style="done" id="mxO-uH-sQV">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="uHU-pd-Udv" userLabel="Notificaciones">
+                                <rect key="frame" x="290" y="5" width="87" height="34.333333333333336"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Notificaciones"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="bell.badge.fill" catalog="system"/>
                                 <connections>
-                                    <action selector="notificaciones:" destination="bol-Zg-Zvm" eventType="touchUpInside" id="22u-Dz-eBC"/>
+                                    <action selector="notificaciones:" destination="bol-Zg-Zvm" eventType="touchUpInside" id="yye-Cm-mzK"/>
                                 </connections>
                             </button>
                         </barButtonItem>
@@ -1487,6 +1487,19 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apS-uo-CDr">
+                                <rect key="frame" x="234" y="56" width="148" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" systemColor="groupTableViewBackgroundColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Recuerdame 🔔"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="F86-pi-H0W"/>
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
@@ -1654,16 +1667,21 @@
     <resources>
         <image name="LogoSmallFriends" width="1024" height="1024"/>
         <image name="Mascotaswelcome" width="740" height="740"/>
+        <image name="bell.badge.fill" catalog="system" width="117" height="128"/>
         <image name="cita-medica" width="32" height="32"/>
         <image name="hogar" width="24" height="24"/>
         <image name="huella" width="32" height="32"/>
         <image name="iconFacebook" width="48" height="48"/>
         <image name="iconGoogle" width="48" height="48"/>
+        <image name="light.beacon.min.fill" catalog="system" width="128" height="106"/>
         <image name="notifaciones" width="241" height="209"/>
         <image name="notificacion" width="32" height="32"/>
         <image name="perfil" width="32" height="32"/>
         <image name="perfil_default" width="225" height="225"/>
         <image name="ubicacion" width="32" height="32"/>
+        <systemColor name="groupTableViewBackgroundColor">
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
