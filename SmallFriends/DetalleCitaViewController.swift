@@ -21,11 +21,10 @@ class DetalleCitaViewController: UIViewController {
     
     
     
-    var cita: CitasCD?  // Aquí se almacenará la cita seleccionada
+    var cita: CitasCD?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Estilizar stack
         citaStackView.layer.cornerRadius = 16
         citaStackView.layer.borderWidth = 0.5
         citaStackView.layer.borderColor = UIColor.systemGray4.cgColor
@@ -240,6 +239,7 @@ class DetalleCitaViewController: UIViewController {
                formatter.timeStyle = .short
                return formatter.string(from: date)
            }
+    
        }
 
 

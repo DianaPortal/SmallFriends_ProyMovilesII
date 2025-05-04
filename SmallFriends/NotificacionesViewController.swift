@@ -43,7 +43,6 @@ class NotificacionesViewController: UIViewController, UITextViewDelegate, UNUser
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        // Mostrar alerta y sonido incluso si la app está abierta
         completionHandler([.banner, .list, .sound])
     }
 

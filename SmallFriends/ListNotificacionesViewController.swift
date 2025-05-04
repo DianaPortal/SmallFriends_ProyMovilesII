@@ -10,9 +10,9 @@ class ListNotificacionesViewController: UIViewController {
     
     @IBAction func notificaciones(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let id = "NotificacionesViewController" // Asegúrate de que coincida con el Storyboard ID
+        let id = "NotificacionesViewController"
         let backItem = UIBarButtonItem()
-        backItem.title = "Listado"
+        backItem.title = "Notificaciones"
         navigationItem.backBarButtonItem = backItem
         guard let notificacionesVC = storyboard.instantiateViewController(withIdentifier: id) as? NotificacionesViewController else {
             print("❌ No se pudo instanciar NotificacionesViewController. Verifica el Storyboard ID.")

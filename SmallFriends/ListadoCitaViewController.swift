@@ -39,7 +39,7 @@ class ListadoCitaViewController: UIViewController {
 
                 // BOTON BACK
                 let backItem = UIBarButtonItem()
-                backItem.title = "Listado"
+                backItem.title = "Citas"
                 navigationItem.backBarButtonItem = backItem
 
                 // NAVEGACION A LA VISTA

@@ -187,7 +187,6 @@ class DetalleEventoViewController: UIViewController {
                                    return
                                }
 
-                               // ✅ Cambiar color solo cuando sí se agenda
                                sender.backgroundColor = .systemGreen
 
                                let content = UNMutableNotificationContent()
@@ -245,7 +244,6 @@ class DetalleEventoViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
 
-        // Extrae partes
         let fechaLimpia = fecha.replacingOccurrences(of: "Fecha: ", with: "").trimmingCharacters(in: .whitespaces)
         let horaLimpia = hora.replacingOccurrences(of: "Hora: ", with: "").trimmingCharacters(in: .whitespaces)
 
@@ -253,7 +251,6 @@ class DetalleEventoViewController: UIViewController {
         return formatter.date(from: combinada)
     }
     
-    // Animar los elementos al cargar
         func animarElementos() {
             let delay: TimeInterval = 0.3
 

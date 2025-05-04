@@ -88,15 +88,12 @@ class DetalleMascotaViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let mantenerMascotaVC = storyboard.instantiateViewController(withIdentifier: "MantenerMascotaVC") as? MantenerMascotaViewController {
                 
-                // Pasar la mascota
                 mantenerMascotaVC.mascotaAEditar = self.mascota
 
-                // Opcional: cambiar título del botón de back
                 let backItem = UIBarButtonItem()
                 backItem.title = "Detalle"
                 navigationItem.backBarButtonItem = backItem
 
-                // Mostrar la vista (usando navigationController)
                 self.navigationController?.pushViewController(mantenerMascotaVC, animated: true)
             }
     }

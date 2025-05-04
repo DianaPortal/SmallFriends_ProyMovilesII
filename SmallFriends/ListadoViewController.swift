@@ -38,7 +38,7 @@ class ListadoViewController: UIViewController {
 
                 // BOTON BACK
                 let backItem = UIBarButtonItem()
-                backItem.title = "Listado"
+                backItem.title = "Mascotas"
                 navigationItem.backBarButtonItem = backItem
 
                 // NAVEGACION A LA VISTA
@@ -162,7 +162,6 @@ extension ListadoViewController: UITableViewDelegate {
             
         }
 
-        // Agrega un ícono de tacho de basura (opcional)
         cancelarAction.image = UIImage(systemName: "trash")
         cancelarAction.backgroundColor = .red
 
