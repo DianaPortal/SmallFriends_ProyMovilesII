@@ -174,8 +174,9 @@ extension ListadoViewController: UITableViewDelegate {
         let detalleMascotaVC = storyboard?.instantiateViewController(withIdentifier: "detalleMascota") as! DetalleMascotaViewController
         detalleMascotaVC.mascota = mascotaSeleccionada
         navigationController?.pushViewController(detalleMascotaVC, animated: true)
+        // BOTON BACK PERSONALIZADO
         let backItem = UIBarButtonItem()
-        backItem.title = "Listado"
+        backItem.title = "Mascotas"
         navigationItem.backBarButtonItem = backItem
     }
 }

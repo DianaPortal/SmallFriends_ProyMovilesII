@@ -24,6 +24,7 @@ extension CitasCD {
     @NSManaged public var mascota: Mascota?
     @NSManaged public var estadoCita: String?
     @NSManaged public var usuario: Usuario?
+    @NSManaged public var notificaciones: NotificacionCD?
 
 }
 

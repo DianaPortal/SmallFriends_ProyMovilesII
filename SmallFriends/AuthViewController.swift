@@ -14,7 +14,7 @@ class AuthViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Autenticación"
+        // title = "Autenticación"
         
         // Comprobar sesión guardada
         let defaults = UserDefaults.standard
@@ -142,8 +142,8 @@ class AuthViewController: UIViewController {
             }
             
             // Capitalizar nombre y apellidos
-            let nombreCapitalizado = nombre.capitalized
-            let apellidosCapitalizados = apellidos.capitalized
+            let nombreCapitalizado = nombre.capitalizedFirstLetter
+            let apellidosCapitalizados = apellidos.capitalizedFirstLetter
             
             // Crear usuario en Firebase
             Auth.auth().createUser(withEmail: email, password: password) { result, error in

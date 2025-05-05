@@ -56,6 +56,11 @@ class UserViewController: UIViewController {
         usuarioStackView.isLayoutMarginsRelativeArrangement = true
         usuarioStackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 16)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        cargarUsuarioDesdeCoreData()
+    }
 
     private func cargarUsuarioDesdeCoreData() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -71,7 +76,14 @@ class UserViewController: UIViewController {
                 let nombre = usuario.nombre ?? "Sin nombre"
                 let apellidos = usuario.apellidos ?? "Vacio"
                 let correo = usuario.email ?? "Sin correo"
-
+                
+                print("==== Usuario cargado desde Core Data ====")
+                            print("ID Usuario: \(usuario.idUsuario ?? "nil")")
+                            print("Nombre: \(usuario.nombre ?? "nil")")
+                            print("Apellidos: \(usuario.apellidos ?? "nil")")
+                            print("Email: \(usuario.email ?? "nil")")
+                            print("=========================================")
+                
                 nombreLabel.attributedText = formatearTextoEnNegrita(titulo: " Nombre: ", valor: nombre)
                 ApellidosLabel.attributedText = formatearTextoEnNegrita(titulo: " Apellidos: ", valor: apellidos)
                 correoLabel.attributedText = formatearTextoEnNegrita(titulo: " Correo: ", valor: correo)
@@ -157,7 +169,6 @@ class UserViewController: UIViewController {
         
     }
     
-    
     @IBAction func actualizarTapped(_ sender: UIButton) {
         // Crear un UIAlertController para que el usuario ingrese los nuevos valores
           let alert = UIAlertController(title: "Actualizar datos", message: "Modifica tu nombre y apellido", preferredStyle: .alert)
@@ -192,13 +203,17 @@ class UserViewController: UIViewController {
               
               do {
                   if let usuario = try contexto.fetch(request).first {
-                      usuario.nombre = nuevoNombre
-                      usuario.apellidos = nuevosApellidos
+                      usuario.nombre = nuevoNombre.trimmingCharacters(in: .whitespacesAndNewlines).capitalizedFirstLetter
+                      usuario.apellidos = nuevosApellidos.trimmingCharacters(in: .whitespacesAndNewlines).capitalizedFirstLetter
                       try contexto.save()
                       
                       // Actualizar las etiquetas en la interfaz
-                      self.nombreLabel.attributedText = self.formatearTextoEnNegrita(titulo: "Nombre: ", valor: nuevoNombre)
-                      self.ApellidosLabel.attributedText = self.formatearTextoEnNegrita(titulo: "Apellidos: ", valor: nuevosApellidos)
+                      let nombreFormateado = nuevoNombre.trimmingCharacters(in: .whitespacesAndNewlines).capitalizedFirstLetter
+                      let apellidosFormateado = nuevosApellidos.trimmingCharacters(in: .whitespacesAndNewlines).capitalizedFirstLetter
+
+                      self.nombreLabel.attributedText = self.formatearTextoEnNegrita(titulo: "Nombre: ", valor: nombreFormateado)
+                      self.ApellidosLabel.attributedText = self.formatearTextoEnNegrita(titulo: "Apellidos: ", valor: apellidosFormateado)
+
                       
                       print("Usuario actualizado correctamente")
                   }
@@ -217,7 +232,6 @@ class UserViewController: UIViewController {
           // Presentar el UIAlertController
           present(alert, animated: true, completion: nil)
     }
-    
 
     private func firebaseLogOut() {
         do {
@@ -228,3 +242,4 @@ class UserViewController: UIViewController {
            }
     }
 }
+

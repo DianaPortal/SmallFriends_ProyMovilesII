@@ -94,22 +94,34 @@ class ListadoCitaViewController: UIViewController {
                 tablaCitas.reloadData()
                 return
             }
-
+        
             let request: NSFetchRequest<CitasCD> = CitasCD.fetchRequest()
             request.predicate = NSPredicate(format: "usuario.email == %@ AND estadoCita != %@", correo, "Cancelada")
 
-            do {
-                citas = try context.fetch(request).sorted(by: { ($0.fechaCita ?? Date()) > ($1.fechaCita ?? Date()) })
-                tablaCitas.reloadData()
+        context.reset()
+        
+        do {
+            citas = try context.fetch(request).sorted(by: { ($0.fechaCita ?? Date()) > ($1.fechaCita ?? Date()) })
 
-                if citas.isEmpty {
-                    tablaCitas.setEmptyMessage("No hay citas registradas")
-                } else {
-                    tablaCitas.restore()
+            // Refrescar cada cita y su mascota para asegurarte de que los datos estén actualizados
+            for cita in citas {
+                context.refresh(cita, mergeChanges: true)
+                if let mascota = cita.mascota {
+                    context.refresh(mascota, mergeChanges: true)
                 }
-            } catch {
-                print("Error al cargar citas: \(error)")
             }
+
+            tablaCitas.reloadData()
+
+            if citas.isEmpty {
+                tablaCitas.setEmptyMessage("No hay citas registradas")
+            } else {
+                tablaCitas.restore()
+            }
+        } catch {
+            print("Error al cargar citas: \(error)")
+        }
+
 
     }
 
@@ -175,6 +187,11 @@ extension ListadoCitaViewController: UITableViewDelegate {
            
            // Realizar la navegación
            navigationController?.pushViewController(detalleCitaVC, animated: true)
+        
+            // BOTON BACK PERSONALIZADO
+            let backItem = UIBarButtonItem()
+            backItem.title = "Citas"
+            navigationItem.backBarButtonItem = backItem
     }
     
     // FUNCION PARA CANCELAR CITAS (ELIMINAR LOGICO)

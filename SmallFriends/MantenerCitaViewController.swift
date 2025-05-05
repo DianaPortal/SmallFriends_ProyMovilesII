@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import FirebaseAuth
 
 class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -120,9 +121,9 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                
         // Guardar en Core Data
         guardarEnCoreData(fecha: fecha, lugar: lugar, tipoCita: tipoCitaSeleccionado, descripcion: descripcion)
-               
         
         mostrarAlerta(titulo: "Éxito", mensaje: citaAActualizar != nil ? "Cita actualizada correctamente" : "Cita registrada correctamente") {
+            NotificationCenter.default.post(name: Notification.Name("ActualizarListadoNotificaciones"), object: nil)
             self.navigationController?.popViewController(animated: true)
         }
    }
@@ -132,6 +133,9 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                 let context = appDelegate.persistentContainer.viewContext
                 
                 if let cita = citaAActualizar {
+                    
+                        eliminarNotificacion(cita: cita)
+                    
                         cita.fechaCita = fecha
                         cita.lugarCita = lugar
                         cita.tipoCita = tipoCita
@@ -139,6 +143,8 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                     do {
                         try context.save()
                         print("Cita actualizada exitosamente")
+                        
+                        programarNotificacion(cita: cita)
                     } catch {
                         print("Error al actualizar la cita: \(error.localizedDescription)")
                     }
@@ -167,9 +173,9 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                     let nuevaCita = CitasCD(context: context)
                     nuevaCita.fechaCita = fecha
                     nuevaCita.mascota = mascotaSeleccionada
-                    nuevaCita.lugarCita = lugar
+                    nuevaCita.lugarCita = lugar.capitalizedFirstLetter
                     nuevaCita.tipoCita = tipoCita
-                    nuevaCita.descripcionCita = descripcion
+                    nuevaCita.descripcionCita = descripcion.capitalizedFirstLetter
                     nuevaCita.idCita = nuevoIdCita
                     nuevaCita.estadoCita = "Activa"
                     
@@ -215,14 +221,6 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                 }
         }
     
-    // Función para limpiar los campos del formulario (LA FUNCION YA NO ES NECESARIA, PORQUE LUEGO DE MANTENER, REDIRIGE A UNA VISTA DISTINTA)
-    func limpiarCampos() {
-            lugarTextField.text = ""
-            descripCitaTextField.text = ""
-            tipoCitaPickerView.selectRow(0, inComponent: 0, animated: true)  // Restablecer el PickerView a la primera opción
-            fechaDatePicker.date = Date()  // Restablecer la fecha al valor actual
-    }
-    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -265,4 +263,107 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         })
         present(alerta, animated: true, completion: nil)
     }
+    
+    func eliminarNotificacion(cita: CitasCD) {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate,
+              let usuarioID = Auth.auth().currentUser?.uid else {
+            print("❌ No se pudo acceder a AppDelegate o al usuario logueado")
+            return
+        }
+
+        let context = appDelegate.persistentContainer.viewContext
+
+        // Buscar notificación asociada a la cita actual
+        let fetchRequest: NSFetchRequest<NotificacionCD> = NotificacionCD.fetchRequest()
+        let predicate = NSPredicate(format: "idUsuario == %@ AND fechaProgramada == %@", usuarioID, cita.fechaCita! as NSDate)
+        fetchRequest.predicate = predicate
+
+        do {
+            let notificaciones = try context.fetch(fetchRequest)
+
+            for notificacion in notificaciones {
+                if let id = notificacion.idNotificacion {
+                    UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: [id])
+                    UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [id])
+                    print("🗑️ Eliminadas del sistema con ID: \(id)")
+                }
+
+                context.delete(notificacion)
+                print("🗑️ Eliminada de Core Data")
+            }
+
+            // Asegúrate de guardar los cambios después de eliminar
+            try context.save()
+            print("✅ Cambios guardados tras eliminar notificación")
+
+            // Desvincular por si acaso
+            cita.notificaciones = nil
+
+        } catch {
+            print("❌ Error al eliminar notificación de Core Data: \(error.localizedDescription)")
+        }
+    }
+
+
+
+    func programarNotificacion(cita: CitasCD) {
+        guard let fechaCita = cita.fechaCita else { return }
+
+        // 1. Crear el contenido de la notificación
+        let content = UNMutableNotificationContent()
+        content.title = "Recordatorio de Cita"
+        content.body = "Tienes una cita programada para el \(fechaCita)"
+        content.sound = .default
+
+        // 2. Crear trigger
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: fechaCita.timeIntervalSinceNow, repeats: false)
+
+        // 3. Crear ID único
+        let nuevoID = UUID().uuidString
+
+        // 4. Crear solicitud
+        let request = UNNotificationRequest(identifier: nuevoID, content: content, trigger: trigger)
+
+        // 5. Agregar la notificación al centro
+        UNUserNotificationCenter.current().add(request) { error in
+            if let error = error {
+                print("❌ Error al agregar la notificación: \(error.localizedDescription)")
+            } else {
+                print("✅ Notificación programada con ID: \(nuevoID)")
+            }
+        }
+
+        // 6. Actualizar o crear la entidad NotificacionCD relacionada a la cita
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let context = appDelegate.persistentContainer.viewContext
+
+        let notificacion: NotificacionCD
+        if let existente = cita.notificaciones {
+            notificacion = existente
+        } else {
+            notificacion = NotificacionCD(context: context)
+            cita.notificaciones = notificacion
+        }
+
+        notificacion.idNotificacion = nuevoID
+        notificacion.fechaProgramada = fechaCita
+        notificacion.titulo = "\(cita.tipoCita ?? "Cita") - \(cita.mascota?.nombre ?? "")"
+        notificacion.idUsuario = cita.usuario?.idUsuario
+
+        do {
+            try context.save()
+            print("✅ Notificación guardada en Core Data")
+        } catch {
+            print("❌ Error al guardar notificación: \(error.localizedDescription)")
+        }
+    }
+
+    
+    func actualizarListadoDeNotificaciones() {
+        if let navigationController = self.navigationController,
+           let listNotificacionesVC = navigationController.viewControllers.first(where: { $0 is ListNotificacionesViewController }) as? ListNotificacionesViewController {
+            listNotificacionesVC.cargarNotificacionesProgramadas()
+        }
+    }
+
 }

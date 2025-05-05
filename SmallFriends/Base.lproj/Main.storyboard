@@ -23,7 +23,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A19-XL-VKQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1497" y="-92"/>
+            <point key="canvasLocation" x="2027" y="-3007"/>
         </scene>
         <!--Auth View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -152,7 +152,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-660.30534351145036" y="-92.253521126760575"/>
+            <point key="canvasLocation" x="2027" y="-2308"/>
         </scene>
         <!--Inicio-->
         <scene sceneID="0bE-2F-Wtr">
@@ -184,7 +184,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="perfilTapped:" destination="VY1-ZO-tst" eventType="touchUpInside" id="4jy-LX-lM4"/>
-                                            <segue destination="aGB-y4-4ZZ" kind="show" identifier="showUserViewController" id="iDs-0y-dpn"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Byy-QI-tXB">
@@ -199,7 +198,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="Bdw-Cr-xd1" kind="show" identifier="mostrarMascotas" id="fP3-N7-4ek"/>
+                                            <action selector="mascotasTapped:" destination="VY1-ZO-tst" eventType="touchUpInside" id="h9L-JZ-My2"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZKu-g3-9Lj">
@@ -214,7 +213,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="VBV-SC-ptH" kind="show" identifier="mostrarCitas" id="XqQ-v8-d5H"/>
+                                            <action selector="citasTapped:" destination="VY1-ZO-tst" eventType="touchUpInside" id="EGF-Tp-N5Z"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a6k-xb-5Te">
@@ -229,7 +228,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="CXx-Ec-xUu" kind="show" identifier="mostrarEventos" id="LBC-OS-krG"/>
+                                            <action selector="eventosTapped:" destination="VY1-ZO-tst" eventType="touchUpInside" id="Flt-gS-vUa"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Bj-JK-Gg7">
@@ -244,7 +243,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <segue destination="bol-Zg-Zvm" kind="show" identifier="mostrarNotificaciones" id="xs6-iK-3wt"/>
+                                            <action selector="notificacionesTapped:" destination="VY1-ZO-tst" eventType="touchUpInside" id="C7e-yz-xBv"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -278,20 +277,23 @@
                     <tabBarItem key="tabBarItem" title="Inicio" image="hogar" id="4yk-y3-RZl"/>
                     <navigationItem key="navigationItem" id="nIg-8h-IwS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tituloLabel" destination="QFP-XS-nMg" id="ZFH-bd-Di2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ecu-DL-QRr" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="260" y="-92"/>
+            <point key="canvasLocation" x="859" y="-92"/>
         </scene>
         <!--Mascotas-->
         <scene sceneID="fwh-e4-ZtE">
             <objects>
-                <viewController id="Bdw-Cr-xd1" customClass="ListadoViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="mascotaVC" id="Bdw-Cr-xd1" customClass="ListadoViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Pg-X2-jkh">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mis mascotas 🐶" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlb-JJ-h0P">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🐶 Mis mascotas 🐱" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hlb-JJ-h0P">
                                 <rect key="frame" x="10" y="123" width="373" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="SUx-GX-7M6"/>
@@ -380,7 +382,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Oz6-GV-7GQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1171.7557251908397" y="-92.253521126760575"/>
+            <point key="canvasLocation" x="1630" y="-92"/>
         </scene>
         <!--Mantener Mascota View Controller-->
         <scene sceneID="CDl-Q1-Ocx">
@@ -402,12 +404,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm9-o6-aoL">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nombre:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zm9-o6-aoL">
                                 <rect key="frame" x="20" y="199" width="353" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="zK4-CS-dnS"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -419,9 +421,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edad" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40e-g9-u3T">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edad:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="40e-g9-u3T">
                                 <rect key="frame" x="20" y="299" width="353" height="20.333333333333314"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -438,12 +440,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raza" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87d-Fx-mkp">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Raza:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87d-Fx-mkp">
                                 <rect key="frame" x="20" y="443.66666666666669" width="353" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="s2c-7M-L2n"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -452,12 +454,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNI de la mascota" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaY-Ks-JUx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DNI de la mascota:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jaY-Ks-JUx">
                                 <rect key="frame" x="20" y="527.66666666666663" width="353" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="vsH-Gl-Hmg"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -474,15 +476,15 @@
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="HAD-D5-aHW">
                                 <rect key="frame" x="20" y="374.33333333333331" width="283" height="20.333333333333314"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02W-ti-ajS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tipo:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="02W-ti-ajS">
                                         <rect key="frame" x="0.0" y="0.0" width="139" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Peso" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGh-3o-Mjm">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Peso:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FGh-3o-Mjm">
                                         <rect key="frame" x="144" y="0.0" width="139" height="20.333333333333332"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -597,12 +599,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LPJ-12-m90" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1172" y="1248"/>
+            <point key="canvasLocation" x="1630" y="1220"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Small Friends Tab Bar Controller-->
         <scene sceneID="wZi-8A-7rF">
             <objects>
-                <tabBarController storyboardIdentifier="MainTabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KDU-Cr-1O2" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="MainTabBarController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="KDU-Cr-1O2" customClass="SmallFriendsTabBarController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="unh-hW-ghc">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -634,7 +636,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UPZ-Um-LCk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="596" y="-813"/>
+            <point key="canvasLocation" x="859" y="-828"/>
         </scene>
         <!--Citas-->
         <scene sceneID="tDU-1y-MHL">
@@ -654,7 +656,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PpY-1y-scX">
-                                <rect key="frame" x="15" y="193" width="363" height="576"/>
+                                <rect key="frame" x="15" y="193" width="363" height="566"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="celdaMostrarCitas" rowHeight="150" id="R5D-RK-6ir" customClass="CitasTableViewCell" customModule="SmallFriends" customModuleProvider="target">
@@ -702,7 +704,7 @@
                         <constraints>
                             <constraint firstItem="ND6-nj-3sW" firstAttribute="top" secondItem="XUs-NW-o7T" secondAttribute="top" constant="20" id="9Gj-xW-E1Z"/>
                             <constraint firstItem="ND6-nj-3sW" firstAttribute="leading" secondItem="XUs-NW-o7T" secondAttribute="leading" constant="15" id="Drd-hR-5nc"/>
-                            <constraint firstItem="XUs-NW-o7T" firstAttribute="bottom" secondItem="PpY-1y-scX" secondAttribute="bottom" id="OeU-GY-efD"/>
+                            <constraint firstItem="XUs-NW-o7T" firstAttribute="bottom" secondItem="PpY-1y-scX" secondAttribute="bottom" constant="10" id="OeU-GY-efD"/>
                             <constraint firstItem="PpY-1y-scX" firstAttribute="leading" secondItem="XUs-NW-o7T" secondAttribute="leading" constant="15" id="bU8-3v-aiK"/>
                             <constraint firstItem="XUs-NW-o7T" firstAttribute="trailing" secondItem="ND6-nj-3sW" secondAttribute="trailing" constant="15" id="s2I-1Z-rvd"/>
                             <constraint firstItem="XUs-NW-o7T" firstAttribute="trailing" secondItem="PpY-1y-scX" secondAttribute="trailing" constant="15" id="sAP-hQ-9H8"/>
@@ -819,12 +821,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SOA-6I-OvU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3580.9160305343512" y="-92.253521126760575"/>
+            <point key="canvasLocation" x="3271" y="-92"/>
         </scene>
         <!--List Notificaciones View Controller-->
         <scene sceneID="CZc-gf-mXG">
             <objects>
-                <viewController id="bol-Zg-Zvm" customClass="ListNotificacionesViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="notificacionesVC" id="bol-Zg-Zvm" customClass="ListNotificacionesViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="87y-aP-s9g">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -902,18 +904,18 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bV3-B7-pyO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="259" y="690"/>
+            <point key="canvasLocation" x="860" y="1220"/>
         </scene>
         <!--User View Controller-->
         <scene sceneID="EI1-6T-XoY">
             <objects>
-                <viewController id="aGB-y4-4ZZ" customClass="UserViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="userVC" id="aGB-y4-4ZZ" customClass="UserViewController" customModule="SmallFriends" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yHy-aV-DhD">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="N8S-48-ePE">
-                                <rect key="frame" x="40" y="163" width="313" height="229"/>
+                                <rect key="frame" x="40" y="119" width="313" height="229"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Datos del Usuario" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dd-7z-jJe">
                                         <rect key="frame" x="0.0" y="0.0" width="313" height="40"/>
@@ -950,7 +952,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Correo:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="clh-ss-3XF">
-                                        <rect key="frame" x="0.0" y="128.33333333333331" width="313" height="40.666666666666657"/>
+                                        <rect key="frame" x="0.0" y="128.33333333333334" width="313" height="40.666666666666657"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -987,7 +989,7 @@
                                 </userDefinedRuntimeAttributes>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0H3-FB-oRl">
-                                <rect key="frame" x="40" y="452" width="313" height="50"/>
+                                <rect key="frame" x="40" y="408" width="313" height="50"/>
                                 <color key="backgroundColor" red="0.57808560924369734" green="0.55793817527010803" blue="0.8772587159863946" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="faZ-7M-eXE"/>
@@ -1027,7 +1029,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bfx-CK-aBj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1555" y="744"/>
+            <point key="canvasLocation" x="859" y="563"/>
         </scene>
         <!--Detalle Mascota View Controller-->
         <scene sceneID="Ps3-Rl-1Tg">
@@ -1175,7 +1177,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17u-le-LUc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <exit id="UYg-5a-ShW" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1172" y="564"/>
+            <point key="canvasLocation" x="1630" y="563"/>
         </scene>
         <!--Detalle Cita View Controller-->
         <scene sceneID="OTT-yz-GMl">
@@ -1328,7 +1330,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bb1-qB-3Ui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2473" y="563"/>
+            <point key="canvasLocation" x="2453" y="563"/>
         </scene>
         <!--Mantener Cita View Controller-->
         <scene sceneID="C8z-5c-SKa">
@@ -1381,7 +1383,7 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Direccion o nombre del lugar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2G-03-9It">
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Dirección o nombre del lugar" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2G-03-9It">
                                         <rect key="frame" x="0.0" y="280" width="313" height="40"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="40" id="RF2-vV-VU2"/>
@@ -1471,7 +1473,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dtx-KW-pUI" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2453" y="1237"/>
+            <point key="canvasLocation" x="2453" y="1220"/>
         </scene>
         <!--Detalle Evento View Controller-->
         <scene sceneID="owU-ZD-mRg">
@@ -1567,7 +1569,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aan-JU-50y" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4565.6488549618316" y="-92.253521126760575"/>
+            <point key="canvasLocation" x="3271" y="563"/>
         </scene>
         <!--Item-->
         <scene sceneID="T1h-tK-ucC">
@@ -1584,7 +1586,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1EI-Hc-tYO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1503" y="-828"/>
+            <point key="canvasLocation" x="1631" y="-828"/>
         </scene>
         <!--Item-->
         <scene sceneID="BCh-XW-6Gx">
@@ -1618,7 +1620,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oly-QX-fcC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3479" y="-828"/>
+            <point key="canvasLocation" x="3271" y="-828"/>
         </scene>
         <!--Notificaciones View Controller-->
         <scene sceneID="e5j-xd-Y6i">
@@ -1700,14 +1702,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="olN-ve-Rfv" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-608" y="744"/>
+            <point key="canvasLocation" x="859" y="1882"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="LBC-OS-krG"/>
-        <segue reference="XqQ-v8-d5H"/>
-        <segue reference="fP3-N7-4ek"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="LogoSmallFriends" width="1024" height="1024"/>
         <image name="Mascotaswelcome" width="740" height="740"/>

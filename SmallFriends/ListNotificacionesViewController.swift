@@ -30,6 +30,11 @@ class ListNotificacionesViewController: UIViewController {
         tableNotificacionesTableView.delegate = self
         tableNotificacionesTableView.dataSource = self
         
+        NotificationCenter.default.addObserver(self, selector: #selector(recargarNotificaciones), name: Notification.Name("ActualizarListadoNotificaciones"), object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ActualizarListadoNotificaciones"), object: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -59,6 +64,8 @@ class ListNotificacionesViewController: UIViewController {
         fetchRequest.sortDescriptors = [sort]
         
         do {
+            context.reset()
+            
             let notifs = try context.fetch(fetchRequest)
             self.notificacionesProgramadas = notifs
             self.tableNotificacionesTableView.reloadData()
@@ -79,6 +86,11 @@ class ListNotificacionesViewController: UIViewController {
         formatter.dateFormat = "hh:mm a 'del' d 'de' MMMM 'de' yyyy" // Ej: 03:00 p. m. del 4 de mayo de 2025
         return formatter.string(from: fecha)
     }
+    
+    @objc func recargarNotificaciones() {
+        cargarNotificacionesProgramadas()
+    }
+
 }
 // MARK: - UITableViewDataSource
 extension ListNotificacionesViewController: UITableViewDataSource {
@@ -92,7 +104,7 @@ extension ListNotificacionesViewController: UITableViewDataSource {
         }
 
         let notif = notificacionesProgramadas[indexPath.row]
-        cell.tituloLabel.text = notif.titulo
+        cell.tituloLabel.text = "📅 \(notif.titulo ?? "Sin titulo")"
         cell.fechaLabel.text = formatearFecha(notif.fechaProgramada ?? Date())
 
         return cell
