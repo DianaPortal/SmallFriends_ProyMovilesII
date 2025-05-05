@@ -11,7 +11,7 @@ import CoreData
 class ListadoViewController: UIViewController {
     
     @IBOutlet weak var mascotasTableView: UITableView!
-
+    
     var mascotas: [Mascota] = []
     var mascotaSeleccionada: Mascota?
     
@@ -31,29 +31,29 @@ class ListadoViewController: UIViewController {
     
     @IBAction func botonRegistrarTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let mantenerMascotaVC = storyboard.instantiateViewController(withIdentifier: "MantenerMascotaVC") as? MantenerMascotaViewController {
-                
-                // SE PASA UN NULO PARA QUE LA VISTA "MANTENER" ENTIENDA QUE ES UN REGISTRO
-                mantenerMascotaVC.mascotaAEditar = nil
-
-                // BOTON BACK
-                let backItem = UIBarButtonItem()
-                backItem.title = "Mascotas"
-                navigationItem.backBarButtonItem = backItem
-
-                // NAVEGACION A LA VISTA
-                self.navigationController?.pushViewController(mantenerMascotaVC, animated: true)
-            }
+        if let mantenerMascotaVC = storyboard.instantiateViewController(withIdentifier: "MantenerMascotaVC") as? MantenerMascotaViewController {
+            
+            // SE PASA UN NULO PARA QUE LA VISTA "MANTENER" ENTIENDA QUE ES UN REGISTRO
+            mantenerMascotaVC.mascotaAEditar = nil
+            
+            // BOTON BACK
+            let backItem = UIBarButtonItem()
+            backItem.title = "Mascotas"
+            navigationItem.backBarButtonItem = backItem
+            
+            // NAVEGACION A LA VISTA
+            self.navigationController?.pushViewController(mantenerMascotaVC, animated: true)
+        }
     }
     
     func cargarMascotas() {
         // VERIFICA SI EL USUARIO ESTA LOGUEADO
         guard let usuario = obtenerUsuarioLogueado() else {
-                print("No hay usuario logueado.")
-                mascotas = []
-                mascotasTableView.reloadData()
-                return
-            }
+            print("No hay usuario logueado.")
+            mascotas = []
+            mascotasTableView.reloadData()
+            return
+        }
         
         mascotas = CoreDataManager.shared.fetchMascotasDelUsuario(usuario)
         mascotasTableView.reloadData()
@@ -68,10 +68,10 @@ class ListadoViewController: UIViewController {
     // BUSCAR USUARIO LOGUEADO
     func obtenerUsuarioLogueado() -> Usuario? {
         guard let correo = UserDefaults.standard.string(forKey: "email") else { return nil }
-
+        
         let request: NSFetchRequest<Usuario> = Usuario.fetchRequest()
         request.predicate = NSPredicate(format: "email == %@", correo)
-
+        
         do {
             return try CoreDataManager.shared.context.fetch(request).first
         } catch {
@@ -86,7 +86,7 @@ extension ListadoViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mascotas.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "celdaMascota", for: indexPath) as! MascotaTableViewCell
         let mascota = mascotas[indexPath.row]
@@ -100,38 +100,38 @@ extension ListadoViewController: UITableViewDataSource {
         
         // ESTRUCTURA EL DETALLE JUNTANDO LAS PARTES
         let textoCompleto = "\(nombre)\n\(edadTexto)\n\(razaTexto)"
-
+        
         // CREA NSMutableAttributedString PARA ESTILIZAR PARTES ESPECIFICAS DEL DETALLE
         let textoAtributado = NSMutableAttributedString(string: textoCompleto)
-
+        
         // DEFINE RANGO PARA ESTILIZAR
         let rangoNombre = (textoCompleto as NSString).range(of: nombre)
-
+        
         // APLICA ESTILO ITALIC A TODO MENOS AL NOMBRE
         let fuenteNormal = UIFont.italicSystemFont(ofSize: 16)
         textoAtributado.addAttribute(.font, value: fuenteNormal, range: NSMakeRange(0, textoCompleto.count))
-
+        
         // APLICA ESTILO BOLD AL NOMBRE
         textoAtributado.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: rangoNombre)
-
+        
         // ASIGNA EL TEXTO ESTILIZADO AL LABEL
         celda.detalleMascotaLabel.attributedText = textoAtributado
-         
+        
         // MOSTRAR FOTO O IMAGEN POR DEFECTO
-            if let datosFoto = mascota.foto {
-                celda.fotoMascotaIV.image = UIImage(data: datosFoto)
-            } else {
-                celda.fotoMascotaIV.image = UIImage(named: "Mascotaswelcome")
-            }
+        if let datosFoto = mascota.foto {
+            celda.fotoMascotaIV.image = UIImage(data: datosFoto)
+        } else {
+            celda.fotoMascotaIV.image = UIImage(named: "Mascotaswelcome")
+        }
         return celda
     }
 }
 
 extension ListadoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView,
-                            trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
     -> UISwipeActionsConfiguration? {
-
+        
         let cancelarAction = UIContextualAction(style: .destructive, title: nil) { (_, _, completionHandler) in
             completionHandler(false)
             let mascotaAEliminar = self.mascotas[indexPath.row]
@@ -161,13 +161,13 @@ extension ListadoViewController: UITableViewDelegate {
             self.present(alerta, animated: true, completion: nil)
             
         }
-
+        
         cancelarAction.image = UIImage(systemName: "trash")
         cancelarAction.backgroundColor = .red
-
+        
         return UISwipeActionsConfiguration(actions: [cancelarAction])
     }
-
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mascotaSeleccionada = mascotas[indexPath.row]
@@ -193,7 +193,7 @@ extension UITableView {
         self.backgroundView = messageLabel
         self.separatorStyle = .none
     }
-
+    
     func restore() {
         self.backgroundView = nil
         self.separatorStyle = .singleLine

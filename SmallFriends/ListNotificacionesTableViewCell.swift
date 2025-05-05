@@ -8,20 +8,19 @@
 import UIKit
 
 class ListNotificacionesTableViewCell: UITableViewCell {
-
+    
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var tituloLabel: UILabel!
     @IBOutlet weak var fechaLabel: UILabel!
-    @IBOutlet weak var descripcionLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectionStyle = .none
-
+        
         // Fondo transparente en contentView
         self.backgroundColor = .clear
         self.contentView.backgroundColor = .clear
-
+        
         // Estilo visual moderno
         containerView.layer.cornerRadius = 12
         containerView.layer.shadowColor = UIColor.black.cgColor

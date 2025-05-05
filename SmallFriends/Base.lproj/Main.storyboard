@@ -369,7 +369,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Mascotas" image="huella" id="cZS-yr-I9T"/>
                     <navigationItem key="navigationItem" id="HDc-WY-KPJ">
-                        <barButtonItem key="rightBarButtonItem" image="plus" catalog="system" id="DGL-kb-olK">
+                        <barButtonItem key="rightBarButtonItem" title="Item" largeContentSizeImage="large" id="DGL-kb-olK">
+                            <imageReference key="image" image="plus.circle.fill" catalog="system" symbolScale="large"/>
+                            <color key="tintColor" systemColor="systemGreenColor"/>
                             <connections>
                                 <action selector="botonRegistrarTapped:" destination="Bdw-Cr-xd1" id="bQz-Nz-p1P"/>
                             </connections>
@@ -523,7 +525,7 @@
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eub-O6-ENT">
                                 <rect key="frame" x="100" y="728" width="193" height="40"/>
-                                <color key="backgroundColor" systemColor="linkColor"/>
+                                <color key="backgroundColor" red="0.48627454040000001" green="0.7607843876" blue="0.74509805439999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="owq-lq-QPi"/>
                                 </constraints>
@@ -713,7 +715,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Citas" image="cita-medica" id="PBS-7c-utD"/>
                     <navigationItem key="navigationItem" id="f6V-Ks-wZo">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="d2I-TJ-7EL">
+                        <barButtonItem key="rightBarButtonItem" title="Item" id="d2I-TJ-7EL">
+                            <imageReference key="image" image="plus.app.fill" catalog="system" symbolScale="large"/>
+                            <color key="tintColor" systemColor="systemGreenColor"/>
                             <connections>
                                 <action selector="botonRegistrarTapped:" destination="VBV-SC-ptH" id="s0q-n9-sqL"/>
                             </connections>
@@ -964,7 +968,7 @@
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zEy-hS-QqB">
                                         <rect key="frame" x="0.0" y="179" width="313" height="50"/>
-                                        <color key="backgroundColor" red="0.48634899831391115" green="0.75941482694949491" blue="0.74363057867475502" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" red="0.48627450980392156" green="0.76078431372549016" blue="0.74509803921568629" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="o5A-gh-SaZ"/>
                                         </constraints>
@@ -1524,7 +1528,7 @@
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="apS-uo-CDr" userLabel="Recuerdame">
-                                <rect key="frame" x="80" y="778" width="233" height="40"/>
+                                <rect key="frame" x="80" y="788" width="233" height="40"/>
                                 <color key="backgroundColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="8ZL-Js-iRG"/>
@@ -1547,7 +1551,7 @@
                         <color key="backgroundColor" systemColor="systemGray6Color"/>
                         <constraints>
                             <constraint firstItem="tXX-mB-fDc" firstAttribute="leading" secondItem="F86-pi-H0W" secondAttribute="leading" constant="20" id="FNY-qn-fUg"/>
-                            <constraint firstItem="apS-uo-CDr" firstAttribute="bottom" secondItem="F86-pi-H0W" secondAttribute="bottom" id="Fci-XX-sj3"/>
+                            <constraint firstItem="apS-uo-CDr" firstAttribute="bottom" secondItem="F86-pi-H0W" secondAttribute="bottom" constant="10" id="Fci-XX-sj3"/>
                             <constraint firstItem="tXX-mB-fDc" firstAttribute="top" secondItem="F86-pi-H0W" secondAttribute="top" constant="40" id="FtW-nk-W2W"/>
                             <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="pNs-fY-mao" secondAttribute="trailing" constant="25" id="T9c-AT-z6w"/>
                             <constraint firstItem="F86-pi-H0W" firstAttribute="trailing" secondItem="tXX-mB-fDc" secondAttribute="trailing" constant="20" id="TkP-x1-6Gg"/>
@@ -1656,6 +1660,7 @@
                             </textView>
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="3Z9-NI-Wfw">
                                 <rect key="frame" x="10" y="449" width="373" height="36"/>
+                                <locale key="locale" localeIdentifier="es_PE"/>
                             </datePicker>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0m2-jO-aTc">
                                 <rect key="frame" x="40" y="525" width="313" height="35"/>
@@ -1714,11 +1719,13 @@
         <image name="huella" width="32" height="32"/>
         <image name="iconFacebook" width="48" height="48"/>
         <image name="iconGoogle" width="48" height="48"/>
+        <image name="large" width="128" height="128"/>
         <image name="notifaciones" width="241" height="209"/>
         <image name="notificacion" width="32" height="32"/>
         <image name="perfil" width="32" height="32"/>
         <image name="perfil_default" width="225" height="225"/>
-        <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="plus.app.fill" catalog="system" width="128" height="114"/>
+        <image name="plus.circle.fill" catalog="system" width="128" height="123"/>
         <image name="ubicacion" width="32" height="32"/>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

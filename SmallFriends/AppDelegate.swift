@@ -14,28 +14,28 @@ import UserNotifications
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
-
+    
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-
+        
         // Firebase
         FirebaseApp.configure()
-
+        
         // Facebook
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
-
+        
         // Notificaciones locales
         UNUserNotificationCenter.current().delegate = self  // 👈 Habilita notificaciones en primer plano
-
+        
         return true
     }
-
+    
     // Google y Facebook
     func application(_ app: UIApplication, open url: URL,
                      options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-
+        
         let googleDidHandle = GIDSignIn.sharedInstance.handle(url)
         let facebookDidHandle = ApplicationDelegate.shared.application(
             app,
@@ -43,24 +43,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             sourceApplication: options[.sourceApplication] as? String,
             annotation: options[.annotation] as Any
         )
-
+        
         return googleDidHandle || facebookDidHandle
     }
-
+    
     // MARK: UISceneSession Lifecycle
-
+    
     func application(_ application: UIApplication,
                      configurationForConnecting connectingSceneSession: UISceneSession,
                      options: UIScene.ConnectionOptions) -> UISceneConfiguration {
         return UISceneConfiguration(name: "Default Configuration", sessionRole: connectingSceneSession.role)
     }
-
+    
     func application(_ application: UIApplication,
                      didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
     }
-
+    
     // MARK: - Core Data stack
-
+    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "SmallFriends")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -70,9 +70,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
-
+    
     // MARK: - Core Data Saving support
-
+    
     func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {

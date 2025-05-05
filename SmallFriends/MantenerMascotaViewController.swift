@@ -9,7 +9,7 @@ import UIKit
 import CoreData
 
 class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
-
+    
     var mascotaAEditar: Mascota?
     var imagenSeleccionada: UIImage?
     
@@ -33,8 +33,8 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
         
         // FUNCIONALIDAD PARA IMPORTAR FOTO DESDE GALERIA
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(seleccionarFoto))
-            fotoImageView.addGestureRecognizer(tapGesture)
-            fotoImageView.isUserInteractionEnabled = true
+        fotoImageView.addGestureRecognizer(tapGesture)
+        fotoImageView.isUserInteractionEnabled = true
         
         // COMBOBOX PARA TIPO MASCOTA
         tipoField.inputView = pickerTipo
@@ -63,10 +63,10 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
     // FUNCION PARA IMPORTAR FOTO DESDE GALERIA
     @objc func seleccionarFoto() {
         let picker = UIImagePickerController()
-            picker.delegate = self
-            picker.sourceType = .photoLibrary
-            picker.allowsEditing = true
-            present(picker, animated: true)
+        picker.delegate = self
+        picker.sourceType = .photoLibrary
+        picker.allowsEditing = true
+        present(picker, animated: true)
     }
     
     @IBAction func botonGuardarTapped(_ sender: UIButton) {
@@ -74,24 +74,24 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
     }
     
     func cargarDatosParaEditar() {
-            guard let mascota = mascotaAEditar else { return }
-            nombreField.text = mascota.nombre
-            edadField.text = "\(mascota.edad)"
-            tipoField.text = mascota.tipo
-            pesoField.text = mascota.peso?.stringValue
-            razaField.text = mascota.raza
-            dniField.text = mascota.dni
-            if let datosFoto = mascota.foto {
-                fotoImageView.image = UIImage(data: datosFoto)
-            } else {
-                fotoImageView.image = UIImage(named: "perfil_default")
-            }
-        
-            // MOSTRAR EL VALOR SE LE EIGIO AL CREAR
-            if let tipo = mascota.tipo, let index = tipos.firstIndex(of: tipo) {
-                    pickerTipo.selectRow(index, inComponent: 0, animated: false)
-            }
+        guard let mascota = mascotaAEditar else { return }
+        nombreField.text = mascota.nombre
+        edadField.text = "\(mascota.edad)"
+        tipoField.text = mascota.tipo
+        pesoField.text = mascota.peso?.stringValue
+        razaField.text = mascota.raza
+        dniField.text = mascota.dni
+        if let datosFoto = mascota.foto {
+            fotoImageView.image = UIImage(data: datosFoto)
+        } else {
+            fotoImageView.image = UIImage(named: "perfil_default")
         }
+        
+        // MOSTRAR EL VALOR SE LE EIGIO AL CREAR
+        if let tipo = mascota.tipo, let index = tipos.firstIndex(of: tipo) {
+            pickerTipo.selectRow(index, inComponent: 0, animated: false)
+        }
+    }
     
     @objc func guardarMascota() {
         guard
@@ -100,7 +100,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
             let edad = Int16(edadTexto),
             let pesoTexto = campo(pesoField, nombre: "Peso")
         else { return }
-
+        
         // ADICION DE VALOR POR DEFECTO PARA EL CAMPO RAZA
         let raza = razaField.text?.isEmpty == false ? razaField.text! : "Mestizo"
         
@@ -118,13 +118,13 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
             mostrarAlerta(mensaje: "Peso inválido")
             return
         }
-
+        
         // VALIDAR DNI
         guard validarDNI(dni) else {
             mostrarAlerta(mensaje: "El DNI debe contener exactamente 8 dígitos numéricos")
             return
         }
-
+        
         let mascota: Mascota
         if let mascotaExistente = mascotaAEditar {
             // EDITAR
@@ -132,7 +132,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
         } else {
             mascota = Mascota(context: CoreDataManager.shared.context)
         }
-
+        
         // ASIGNA CAMPOS
         mascota.nombre = nombre.capitalizedFirstLetter
         mascota.edad = edad
@@ -141,38 +141,38 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
         mascota.raza = raza.capitalizedFirstLetter
         mascota.dni = dni
         mascota.estadoMascota = "Activa"
-
+        
         // ASIGNAR FOTO (SOLO SI SE HA SELECCIONADO UNA NUEVA IMAGEN, SINO MANTENER LA QUE YA ESTABA REGISTRADA
         if let imagen = imagenSeleccionada,
-               let imagenData = imagen.jpegData(compressionQuality: 0.8) {
-                mascota.foto = imagenData
-            } else if let mascotaExistente = mascotaAEditar,
-                      let fotoExistente = mascotaExistente.foto {
-                // SI NO SE SELECCIONO UNA IMAGEN, MANTENER LA EXISTENTE
-                mascota.foto = fotoExistente
-            } else {
-                // SI NO SE SELECCIONO UNA IMAGEN, Y NO HAY IMAGEN PREVIA, ASIGNA FOTO POR DEFECTO
-                if let imagenPorDefecto = UIImage(named: "perfil_default"),
-                   let dataPorDefecto = imagenPorDefecto.jpegData(compressionQuality: 0.8) {
-                    mascota.foto = dataPorDefecto
-                }
+           let imagenData = imagen.jpegData(compressionQuality: 0.8) {
+            mascota.foto = imagenData
+        } else if let mascotaExistente = mascotaAEditar,
+                  let fotoExistente = mascotaExistente.foto {
+            // SI NO SE SELECCIONO UNA IMAGEN, MANTENER LA EXISTENTE
+            mascota.foto = fotoExistente
+        } else {
+            // SI NO SE SELECCIONO UNA IMAGEN, Y NO HAY IMAGEN PREVIA, ASIGNA FOTO POR DEFECTO
+            if let imagenPorDefecto = UIImage(named: "perfil_default"),
+               let dataPorDefecto = imagenPorDefecto.jpegData(compressionQuality: 0.8) {
+                mascota.foto = dataPorDefecto
             }
+        }
         
         // ASIGNA USUARIO OBTENIDO
         if let usuarioLogueado = obtenerUsuarioLogueado() {
-                mascota.usuario = usuarioLogueado
-            } else {
-                mostrarAlerta(mensaje: "No hay usuario logueado")
-                return
-            }
-
+            mascota.usuario = usuarioLogueado
+        } else {
+            mostrarAlerta(mensaje: "No hay usuario logueado")
+            return
+        }
+        
         CoreDataManager.shared.saveContext()
-
+        
         mostrarAlerta(titulo: "Éxito", mensaje: mascotaAEditar != nil ? "Mascota actualizada correctamente" : "Mascota registrada correctamente") {
             self.navigationController?.popViewController(animated: true)
         }
     }
-
+    
     
     // FUNCION PARA MOSTRAR ALERTA POR ERRORES EN LOS CAMPOS
     func mostrarAlerta(mensaje: String) {
@@ -193,15 +193,15 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
     // FUNCION PARA VALIDAR DNI
     func validarDNI(_ dni: String?) -> Bool {
         guard let dni = dni else { return false }
-            
-            // SI EL DNI ES EL VALOR POR DEFECTO, NO SE HACE VALIDACION DE CARACTERES NUMERICOS
-            if dni == "Sin dni" {
-                return true
-            }
-
-            // VALIDACION DE CARACTERES NUMERICOS Y RANGO DE CARACTERES
-            let caracteresNoNumericos = CharacterSet.decimalDigits.inverted
-            return dni.count == 8 && dni.rangeOfCharacter(from: caracteresNoNumericos) == nil
+        
+        // SI EL DNI ES EL VALOR POR DEFECTO, NO SE HACE VALIDACION DE CARACTERES NUMERICOS
+        if dni == "Sin dni" {
+            return true
+        }
+        
+        // VALIDACION DE CARACTERES NUMERICOS Y RANGO DE CARACTERES
+        let caracteresNoNumericos = CharacterSet.decimalDigits.inverted
+        return dni.count == 8 && dni.rangeOfCharacter(from: caracteresNoNumericos) == nil
     }
     
     // FUNCION PARA MOSTRAR ALERTA PERSONALIZADA
@@ -225,7 +225,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return tipos[row]
     }
-
+    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         tipoField.text = tipos[row]
     }
@@ -252,7 +252,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
             return nil
         }
     }
-
+    
 }
 
 extension MantenerMascotaViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {

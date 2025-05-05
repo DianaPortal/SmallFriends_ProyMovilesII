@@ -15,17 +15,17 @@ class ListNotificacionesViewController: UIViewController {
         backItem.title = "Notificaciones"
         navigationItem.backBarButtonItem = backItem
         guard let notificacionesVC = storyboard.instantiateViewController(withIdentifier: id) as? NotificacionesViewController else {
-            print("❌ No se pudo instanciar NotificacionesViewController. Verifica el Storyboard ID.")
+            print("No se pudo instanciar NotificacionesViewController. Verifica el Storyboard ID.")
             return
         }
         
         self.navigationController?.pushViewController(notificacionesVC, animated: true)
     }
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = "Notificaciones ‼️"
         
         tableNotificacionesTableView.delegate = self
         tableNotificacionesTableView.dataSource = self
@@ -82,31 +82,31 @@ class ListNotificacionesViewController: UIViewController {
     
     func formatearFecha(_ fecha: Date) -> String {
         let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "es_ES") // Español
-        formatter.dateFormat = "hh:mm a 'del' d 'de' MMMM 'de' yyyy" // Ej: 03:00 p. m. del 4 de mayo de 2025
+        formatter.locale = Locale(identifier: "es_ES")
+        formatter.dateFormat = "hh:mm a 'del' d 'de' MMMM 'de' yyyy"
         return formatter.string(from: fecha)
     }
     
     @objc func recargarNotificaciones() {
         cargarNotificacionesProgramadas()
     }
-
+    
 }
 // MARK: - UITableViewDataSource
 extension ListNotificacionesViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return notificacionesProgramadas.count
     }
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "celdaNotificacion", for: indexPath) as? ListNotificacionesTableViewCell else {
             fatalError("No se pudo dequeuar la celda NotificacionTableViewCell")
         }
-
+        
         let notif = notificacionesProgramadas[indexPath.row]
         cell.tituloLabel.text = "📅 \(notif.titulo ?? "Sin titulo")"
         cell.fechaLabel.text = formatearFecha(notif.fechaProgramada ?? Date())
-
+        
         return cell
     }
 }
@@ -145,9 +145,9 @@ extension ListNotificacionesViewController: UITableViewDelegate {
                     try context.save()
                     self.notificacionesProgramadas.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .automatic)
-                    print("✅ Notificación eliminada de Core Data y UI")
+                    print("Notificación eliminada de Core Data y UI")
                 } catch {
-                    print("❌ Error al eliminar de Core Data: \(error.localizedDescription)")
+                    print("Error al eliminar de Core Data: \(error.localizedDescription)")
                 }
             }))
             

@@ -10,7 +10,7 @@ import FirebaseAuth
 import CoreData
 
 class InicioViewController: UIViewController {
-
+    
     @IBOutlet weak var tituloLabel: UILabel!
     
     override func viewDidLoad() {
@@ -26,7 +26,7 @@ class InicioViewController: UIViewController {
             tituloLabel.text = "¡Hola!"
             return
         }
-
+        
         // Acceder al contexto de Core Data
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
             tituloLabel.text = "¡Hola!"
@@ -36,7 +36,7 @@ class InicioViewController: UIViewController {
         let contexto = appDelegate.persistentContainer.viewContext
         let request: NSFetchRequest<Usuario> = Usuario.fetchRequest()
         request.predicate = NSPredicate(format: "idUsuario == %@", uid)
-
+        
         do {
             if let usuario = try contexto.fetch(request).first {
                 let nombre = usuario.nombre?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
@@ -53,29 +53,29 @@ class InicioViewController: UIViewController {
             tituloLabel.text = "¡Hola! 👋🏻"
         }
     }
-
-
+    
+    
     @IBAction func perfilTapped(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let userVC = storyboard.instantiateViewController(withIdentifier: "userVC") as? UserViewController {
-                
-                // Recuperar los datos desde UserDefaults
-                let defaults = UserDefaults.standard
-                if let email = defaults.string(forKey: "email"),
-                   let providerString = defaults.string(forKey: "provider"),
-                   let provider = ProviderType(rawValue: providerString) {
-                    userVC.email = email
-                    userVC.provider = provider
-                }
-
-                // Si estás usando un NavigationController:
-                self.navigationController?.pushViewController(userVC, animated: true)
-                
-                // BOTON BACK
-                let backItem = UIBarButtonItem()
-                backItem.title = "Inicio"
-                navigationItem.backBarButtonItem = backItem
+        if let userVC = storyboard.instantiateViewController(withIdentifier: "userVC") as? UserViewController {
+            
+            // Recuperar los datos desde UserDefaults
+            let defaults = UserDefaults.standard
+            if let email = defaults.string(forKey: "email"),
+               let providerString = defaults.string(forKey: "provider"),
+               let provider = ProviderType(rawValue: providerString) {
+                userVC.email = email
+                userVC.provider = provider
             }
+            
+            // Si estás usando un NavigationController:
+            self.navigationController?.pushViewController(userVC, animated: true)
+            
+            // BOTON BACK
+            let backItem = UIBarButtonItem()
+            backItem.title = "Inicio"
+            navigationItem.backBarButtonItem = backItem
+        }
     }
     
     @IBAction func mascotasTapped(_ sender: UIButton) {
@@ -83,7 +83,7 @@ class InicioViewController: UIViewController {
             print("TabBarController es nil")
             return
         }
-
+        
         // Si ya estamos en la pestaña de "Mascotas", no hacer nada
         if tabBarController.selectedIndex == 1 {
             if let navigationController = tabBarController.viewControllers?[1] as? UINavigationController {
@@ -102,7 +102,7 @@ class InicioViewController: UIViewController {
             }
             return
         }
-
+        
         // Crear snapshot de la vista actual (sin afectar el tab bar)
         guard let currentView = tabBarController.selectedViewController?.view,
               let containerView = tabBarController.view else {
@@ -112,19 +112,19 @@ class InicioViewController: UIViewController {
         let snapshot = currentView.snapshotView(afterScreenUpdates: false)
         snapshot?.frame = containerView.bounds
         containerView.addSubview(snapshot!)
-
+        
         // Cambiar la pestaña seleccionada sin animación
         tabBarController.selectedIndex = 1
-
+        
         // Obtener la vista de destino (ya visible por selectedIndex)
         guard let targetVC = tabBarController.viewControllers?[1],
               let newView = targetVC.view else {
             print("No se puede obtener la vista de destino")
             return
         }
-
+        
         newView.alpha = 0
-
+        
         // Animar el fade
         UIView.animate(withDuration: 0.3, animations: {
             newView.alpha = 1
@@ -132,7 +132,7 @@ class InicioViewController: UIViewController {
         }, completion: { _ in
             snapshot?.removeFromSuperview()
         })
-
+        
         // Verificamos si ya estamos en el Listado de Mascotas
         if let navigationController = tabBarController.viewControllers?[1] as? UINavigationController {
             // Verificamos si ListadoViewController ya está en el stack
@@ -148,20 +148,20 @@ class InicioViewController: UIViewController {
                 }
             }
         }
-
+        
         // Reiniciar el stack de navegación si es necesario
         if let navigationController = tabBarController.viewControllers?[1] as? UINavigationController {
             navigationController.popToRootViewController(animated: false)
         }
     }
-
+    
     
     @IBAction func citasTapped(_ sender: UIButton) {
         guard let tabBarController = self.tabBarController else {
             print("TabBarController es nil")
             return
         }
-
+        
         // Si ya estamos en la pestaña de "Citas", no hacer nada
         if tabBarController.selectedIndex == 2 {
             if let navigationController = tabBarController.viewControllers?[2] as? UINavigationController {
@@ -180,7 +180,7 @@ class InicioViewController: UIViewController {
             }
             return
         }
-
+        
         // Crear snapshot de la vista actual (sin afectar el tab bar)
         guard let currentView = tabBarController.selectedViewController?.view,
               let containerView = tabBarController.view else {
@@ -190,19 +190,19 @@ class InicioViewController: UIViewController {
         let snapshot = currentView.snapshotView(afterScreenUpdates: false)
         snapshot?.frame = containerView.bounds
         containerView.addSubview(snapshot!)
-
+        
         // Cambiar la pestaña seleccionada sin animación
         tabBarController.selectedIndex = 2
-
+        
         // Obtener la vista de destino (ya visible por selectedIndex)
         guard let targetVC = tabBarController.viewControllers?[2],
               let newView = targetVC.view else {
             print("No se puede obtener la vista de destino")
             return
         }
-
+        
         newView.alpha = 0
-
+        
         // Animar el fade
         UIView.animate(withDuration: 0.3, animations: {
             newView.alpha = 1
@@ -210,14 +210,14 @@ class InicioViewController: UIViewController {
         }, completion: { _ in
             snapshot?.removeFromSuperview()
         })
-
+        
         // Verificamos si ya estamos en el Listado de Citas
         if let navigationController = tabBarController.viewControllers?[2] as? UINavigationController {
-            // Verificamos si CitasViewController ya está en el stack
-            if let citasVC = navigationController.viewControllers.first(where: { $0 is ListadoCitaViewController }) {
+            // Si ya está en el stack, no hacemos nada
+            if navigationController.viewControllers.contains(where: { $0 is ListadoCitaViewController }) {
                 print("Ya estamos en el Listado de Citas")
             } else {
-                // Si no está en el Listado de Citas, empujamos el controlador adecuado
+                // Si no está, lo instanciamos y empujamos
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let citasVC = storyboard.instantiateViewController(withIdentifier: "citasVC") as? ListadoCitaViewController {
                     navigationController.pushViewController(citasVC, animated: false)
@@ -226,20 +226,21 @@ class InicioViewController: UIViewController {
                 }
             }
         }
-
+        
+        
         // Reiniciar el stack de navegación si es necesario
         if let navigationController = tabBarController.viewControllers?[2] as? UINavigationController {
             navigationController.popToRootViewController(animated: false)
         }
     }
-
+    
     
     @IBAction func eventosTapped(_ sender: UIButton) {
         guard let tabBarController = self.tabBarController else {
             print("TabBarController es nil")
             return
         }
-
+        
         // Si ya estamos en la pestaña de "Eventos", no hacemos nada
         if tabBarController.selectedIndex == 3 {
             if let navigationController = tabBarController.viewControllers?[3] as? UINavigationController {
@@ -258,7 +259,7 @@ class InicioViewController: UIViewController {
             }
             return
         }
-
+        
         // Crear snapshot de la vista actual (sin afectar el tab bar)
         guard let currentView = tabBarController.selectedViewController?.view,
               let containerView = tabBarController.view else {
@@ -268,19 +269,19 @@ class InicioViewController: UIViewController {
         let snapshot = currentView.snapshotView(afterScreenUpdates: false)
         snapshot?.frame = containerView.bounds
         containerView.addSubview(snapshot!)
-
+        
         // Cambiar la pestaña seleccionada sin animación
         tabBarController.selectedIndex = 3
-
+        
         // Obtener la vista de destino (ya visible por selectedIndex)
         guard let targetVC = tabBarController.viewControllers?[3],
               let newView = targetVC.view else {
             print("No se puede obtener la vista de destino")
             return
         }
-
+        
         newView.alpha = 0
-
+        
         // Animar el fade
         UIView.animate(withDuration: 0.3, animations: {
             newView.alpha = 1
@@ -288,14 +289,14 @@ class InicioViewController: UIViewController {
         }, completion: { _ in
             snapshot?.removeFromSuperview()
         })
-
+        
         // Verificamos si ya estamos en el Listado de Eventos
         if let navigationController = tabBarController.viewControllers?[3] as? UINavigationController {
-            // Verificamos si EventosViewController ya está en el stack
-            if let eventosVC = navigationController.viewControllers.first(where: { $0 is ListaEventosAPIViewController }) {
+            // Si ya está en el stack, no hacemos nada
+            if navigationController.viewControllers.contains(where: { $0 is ListaEventosAPIViewController }) {
                 print("Ya estamos en el Listado de Eventos")
             } else {
-                // Si no está en el Listado de Eventos, empujamos el controlador adecuado
+                // Si no está en el stack, instanciamos y lo empujamos
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 if let eventosVC = storyboard.instantiateViewController(withIdentifier: "eventosVC") as? ListaEventosAPIViewController {
                     navigationController.pushViewController(eventosVC, animated: false)
@@ -304,25 +305,26 @@ class InicioViewController: UIViewController {
                 }
             }
         }
-
+        
+        
         // Reiniciar el stack de navegación si es necesario
         if let navigationController = tabBarController.viewControllers?[3] as? UINavigationController {
             navigationController.popToRootViewController(animated: false)
         }
     }
-
+    
     
     @IBAction func notificacionesTapped(_ sender: UIButton) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            if let notificacionesVC = storyboard.instantiateViewController(withIdentifier: "notificacionesVC") as? ListNotificacionesViewController {
-
-                // Si estás usando un NavigationController:
-                self.navigationController?.pushViewController(notificacionesVC, animated: true)
-                
-                // BOTON BACK
-                let backItem = UIBarButtonItem()
-                backItem.title = "Inicio"
-                navigationItem.backBarButtonItem = backItem
-            }
+        if let notificacionesVC = storyboard.instantiateViewController(withIdentifier: "notificacionesVC") as? ListNotificacionesViewController {
+            
+            // Si estás usando un NavigationController:
+            self.navigationController?.pushViewController(notificacionesVC, animated: true)
+            
+            // BOTON BACK
+            let backItem = UIBarButtonItem()
+            backItem.title = "Inicio"
+            navigationItem.backBarButtonItem = backItem
+        }
     }
 }

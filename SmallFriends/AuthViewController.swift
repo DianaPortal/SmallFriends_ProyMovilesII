@@ -312,15 +312,15 @@ class AuthViewController: UIViewController {
                               duration: 1,
                               options: .transitionFlipFromRight,
                               animations: {
-                                window.rootViewController = tabBarController
-                              }, completion: { _ in
-                                window.makeKeyAndVisible()
-                              })
+                window.rootViewController = tabBarController
+            }, completion: { _ in
+                window.makeKeyAndVisible()
+            })
         } else {
             print("No se pudo acceder al SceneDelegate o al window.")
         }
     }
-
+    
     
     // Func - Alertas
     private func showAlert(title: String, message: String) {

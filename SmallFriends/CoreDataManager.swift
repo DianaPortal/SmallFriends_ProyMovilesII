@@ -22,38 +22,38 @@ class CoreDataManager {
     }
     
     var context: NSManagedObjectContext {
-            return persistentContainer.viewContext
-        }
-
-        func saveContext() {
-            if context.hasChanges {
-                do {
-                    try context.save()
-                } catch {
-                    print("Error al guardar: \(error)")
-                }
+        return persistentContainer.viewContext
+    }
+    
+    func saveContext() {
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                print("Error al guardar: \(error)")
             }
         }
+    }
     
     // LISTAR MASCOTAS REGISTRADAS
     func fetchMascotas() -> [Mascota] {
-            let request: NSFetchRequest<Mascota> = Mascota.fetchRequest()
-            do {
-                return try context.fetch(request)
-            } catch {
-                print("Error al obtener mascotas: \(error)")
-                return []
-            }
+        let request: NSFetchRequest<Mascota> = Mascota.fetchRequest()
+        do {
+            return try context.fetch(request)
+        } catch {
+            print("Error al obtener mascotas: \(error)")
+            return []
         }
+    }
     
     // LISTAR MASCOTAS REGISTRADAS POR USUARIO LOGUEADO
     func fetchMascotasDelUsuario(_ usuario: Usuario) -> [Mascota] {
         let request: NSFetchRequest<Mascota> = Mascota.fetchRequest()
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-                NSPredicate(format: "usuario == %@", usuario),
-                NSPredicate(format: "estadoMascota != %@", "Inactiva")
-            ])
-
+            NSPredicate(format: "usuario == %@", usuario),
+            NSPredicate(format: "estadoMascota != %@", "Inactiva")
+        ])
+        
         do {
             return try CoreDataManager.shared.context.fetch(request)
         } catch {
@@ -66,10 +66,10 @@ class CoreDataManager {
     func fetchCitasDelUsuario(_ usuario: Usuario) -> [CitasCD] {
         let request: NSFetchRequest<CitasCD> = CitasCD.fetchRequest()
         request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-                NSPredicate(format: "usuario == %@", usuario),
-                NSPredicate(format: "estadoCita != %@", "Cancelada")
-            ])
-
+            NSPredicate(format: "usuario == %@", usuario),
+            NSPredicate(format: "estadoCita != %@", "Cancelada")
+        ])
+        
         do {
             return try CoreDataManager.shared.context.fetch(request)
         } catch {
@@ -79,7 +79,7 @@ class CoreDataManager {
     }
     
     func deleteMascota(_ mascota: Mascota) {
-            context.delete(mascota)
-            saveContext()
-        }
+        context.delete(mascota)
+        saveContext()
+    }
 }
