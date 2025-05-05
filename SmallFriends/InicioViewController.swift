@@ -41,16 +41,16 @@ class InicioViewController: UIViewController {
             if let usuario = try contexto.fetch(request).first {
                 let nombre = usuario.nombre?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
                 if !nombre.isEmpty {
-                    tituloLabel.text = "¡Hola \(nombre.capitalizedFirstLetter)!"
+                    tituloLabel.text = "¡Hola \(nombre.capitalizedFirstLetter)! 👋🏻"
                 } else {
-                    tituloLabel.text = "¡Hola!"
+                    tituloLabel.text = "¡Hola! 👋🏻"
                 }
             } else {
-                tituloLabel.text = "¡Hola!"
+                tituloLabel.text = "¡Hola! 👋🏻"
             }
         } catch {
             print("Error al obtener nombre del usuario: \(error.localizedDescription)")
-            tituloLabel.text = "¡Hola!"
+            tituloLabel.text = "¡Hola! 👋🏻"
         }
     }
 
@@ -88,8 +88,7 @@ class InicioViewController: UIViewController {
         if tabBarController.selectedIndex == 1 {
             if let navigationController = tabBarController.viewControllers?[1] as? UINavigationController {
                 // Verificamos si ListadoViewController ya está en el stack de navegación
-                if let listadoMascotasVC = navigationController.viewControllers.first(where: { $0 is ListadoViewController }) {
-                    // Si ya estamos en el Listado de Mascotas, no hacemos nada
+                if navigationController.viewControllers.contains(where: { $0 is ListadoViewController }) {
                     print("Ya estamos en el Listado de Mascotas")
                 } else {
                     // Si no está en el Listado de Mascotas, empujamos el controlador adecuado
@@ -137,7 +136,7 @@ class InicioViewController: UIViewController {
         // Verificamos si ya estamos en el Listado de Mascotas
         if let navigationController = tabBarController.viewControllers?[1] as? UINavigationController {
             // Verificamos si ListadoViewController ya está en el stack
-            if let listadoMascotasVC = navigationController.viewControllers.first(where: { $0 is ListadoViewController }) {
+            if navigationController.viewControllers.contains(where: { $0 is ListadoViewController }) {
                 print("Ya estamos en el Listado de Mascotas")
             } else {
                 // Si no está en el Listado de Mascotas, empujamos el controlador adecuado
@@ -167,8 +166,7 @@ class InicioViewController: UIViewController {
         if tabBarController.selectedIndex == 2 {
             if let navigationController = tabBarController.viewControllers?[2] as? UINavigationController {
                 // Verificamos si Listado de Citas ya está en el stack de navegación
-                if let citasVC = navigationController.viewControllers.first(where: { $0 is ListadoCitaViewController }) {
-                    // Si ya estamos en el Listado de Citas, no hacemos nada
+                if navigationController.viewControllers.contains(where: { $0 is ListadoCitaViewController }) {
                     print("Ya estamos en el Listado de Citas")
                 } else {
                     // Si no está en el Listado de Citas, empujamos el controlador adecuado
@@ -246,8 +244,7 @@ class InicioViewController: UIViewController {
         if tabBarController.selectedIndex == 3 {
             if let navigationController = tabBarController.viewControllers?[3] as? UINavigationController {
                 // Verificamos si el Listado de Eventos ya está en el stack de navegación
-                if let eventosVC = navigationController.viewControllers.first(where: { $0 is ListaEventosAPIViewController }) {
-                    // Si ya estamos en el Listado de Eventos, no hacemos nada
+                if navigationController.viewControllers.contains(where: { $0 is ListaEventosAPIViewController }) {
                     print("Ya estamos en el Listado de Eventos")
                 } else {
                     // Si no está en el Listado de Eventos, empujamos el controlador adecuado
