@@ -10,7 +10,7 @@ import CoreData
 import FirebaseAuth
 
 class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-    
+
     @IBOutlet weak var fechaLabel: UILabel!
     @IBOutlet weak var fechaDatePicker: UIDatePicker!
     @IBOutlet weak var lugarLabel: UILabel!
@@ -20,28 +20,41 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
     @IBOutlet weak var descripCitaLabel: UILabel!
     @IBOutlet weak var descripCitaTextField: UITextField!
     @IBOutlet weak var mascotaPickerView: UIPickerView!
-    
+
+    // VARIABLE PARA EL PICKER DE MASCOTAS
     var mascotasUsuario: [Mascota] = []
+
+    // Opciones de tipo de citas para las mascotas
     let tipoCita = ["Consulta Médica", "Limpieza Completa", "Vacunación", "Baño", "Revisión"]
+
+    // Propiedad para almacenar la cita que se va a actualizar
     var citaAActualizar: CitasCD?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = citaAActualizar == nil ? "🗕 Registrar Cita 🗕" : "🗕 Actualizar Cita 🗕"
+        // CAMBIO DE TITLE DEPENDIENDO DE LA ACCION
+        title = citaAActualizar == nil ? "📅 Registrar Cita 📅" : "📅 Actualizar Cita 📅"
 
+        // Configuración del UIPickerView
         tipoCitaPickerView.delegate = self
         tipoCitaPickerView.dataSource = self
 
+        // LLAMADO AL PICKER VIEW DE MASCOTA
         mascotaPickerView.delegate = self
         mascotaPickerView.dataSource = self
         cargarMascotasDelUsuario()
+
+        // Evitar selección de fechas pasadas
+        fechaDatePicker.minimumDate = Date()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cargarMascotasDelUsuario()
     }
+
+    //Acciones
 
     func cargarMascotasDelUsuario() {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
@@ -55,6 +68,8 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                 let usuarios = try context.fetch(fetchRequestUsuario)
                 if let usuario = usuarios.first,
                    let todasLasMascotas = usuario.mascota?.allObjects as? [Mascota] {
+
+                    // FILTRA SOLO MASCOTAS CON ESTADO ACTIVO
                     self.mascotasUsuario = todasLasMascotas.filter {
                         $0.estadoMascota?.trimmingCharacters(in: .whitespacesAndNewlines).lowercased() == "activa"
                     }
@@ -75,6 +90,8 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                             if let mascota = cita.mascota,
                                let index = self.mascotasUsuario.firstIndex(of: mascota) {
                                 self.mascotaPickerView.selectRow(index, inComponent: 0, animated: false)
+                            } else {
+                                print("La mascota de la cita no está en la lista de mascotas activas del usuario.")
                             }
                         }
                     }
@@ -89,19 +106,26 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         guard
             let lugar = campo(lugarTextField, nombre: "Lugar")
         else {
+            print("Error: Campos inválidos")
             return
         }
 
+        // ADICION DE VALOR POR DEFECTO PARA EL CAMPO DESCRIPCION
         let descripcion = descripCitaTextField.text?.isEmpty == false ? descripCitaTextField.text! : "Sin descripcion"
+
+        // Obtener la fecha seleccionada del UIDatePicker
         let fecha = fechaDatePicker.date
 
-        let intervalo = fecha.timeIntervalSinceNow
-        guard intervalo > 0 else {
-            mostrarAlerta(titulo: "Fecha inválida", mensaje: "No puedes programar una cita en el pasado.")
+        // Validar que la fecha no sea pasada
+        if fecha < Date() {
+            mostrarAlerta(mensaje: "No puedes seleccionar una fecha pasada para la cita.")
             return
         }
 
+        // Obtener el tipo de cita seleccionado del UIPickerView
         let tipoCitaSeleccionado = tipoCita[tipoCitaPickerView.selectedRow(inComponent: 0)]
+
+        // Guardar en Core Data
         guardarEnCoreData(fecha: fecha, lugar: lugar, tipoCita: tipoCitaSeleccionado, descripcion: descripcion)
 
         mostrarAlerta(titulo: "Éxito", mensaje: citaAActualizar != nil ? "Cita actualizada correctamente" : "Cita registrada correctamente") {
