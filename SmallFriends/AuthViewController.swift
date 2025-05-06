@@ -21,18 +21,19 @@ class AuthViewController: UIViewController {
         if let _ = defaults.string(forKey: "email"),
            let _ = defaults.string(forKey: "provider") {
             authStackView.isHidden = true
+            // Si hay sesión, va directamente al inicio
             goToMainTabBar()
         }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Mostrar login si no hay sesión
+        // Mostrar login si no hay sesión activa
         authStackView.isHidden = false
     }
     
     // MARK: - Acciones
-    // Btn Iniciar sesión
+    // Btn Iniciar sesión con correo y contraseña
     @IBAction func iniciarSesionTapped(_ sender: UIButton) {
         guard let email = correoTextField.text, !email.isEmpty,
               let password = passwordTextField.text, !password.isEmpty else {
@@ -40,7 +41,7 @@ class AuthViewController: UIViewController {
             return
         }
         
-        
+        // Inicio de sesión con Firebase Auth
         Auth.auth().signIn(withEmail: email, password: password) { result, error in
             if let error = error {
                 print("Error al iniciar sesión: \(error.localizedDescription)")
@@ -49,7 +50,7 @@ class AuthViewController: UIViewController {
             }
             let successAlert = UIAlertController(title: "¡Bienvenido!", message: "Has iniciado sesión con éxito.", preferredStyle: .alert)
             
-            // Mostrar alerta de éxito al iniciar sesión
+            // Mostrar alerta de éxito y bienvenida al iniciar sesión
             successAlert.addAction(UIAlertAction(title: "Ir al inicio", style: .default) { _ in
                 // Aquí sí validamos bien el resultado
                 self.goToMainTabBar()
@@ -61,7 +62,7 @@ class AuthViewController: UIViewController {
         }
         
     }
-    
+    // Botón ¿Olvidaste tu contraseña?
     @IBAction func olvidastePasswordTapped(_ sender: UIButton) {
         // Mostrar un alert para que el usuario ingrese su correo electrónico
         let alert = UIAlertController(title: "Recuperar Contraseña", message: "Ingresa tu correo para enviar un enlace de recuperación.", preferredStyle: .alert)
@@ -70,14 +71,13 @@ class AuthViewController: UIViewController {
             textField.placeholder = "Correo electrónico"
             textField.keyboardType = .emailAddress
         }
-        
+        // Acción para enviar el enlace de recuperación
         let resetAction = UIAlertAction(title: "Enviar enlace", style: .default) { _ in
             guard let email = alert.textFields?.first?.text, !email.isEmpty else {
                 self.showAlert(title: "Campo vacío", message: "Por favor ingresa un correo electrónico.")
                 return
             }
             
-            // Enviar enlace de restablecimiento de contraseña
             Auth.auth().sendPasswordReset(withEmail: email) { error in
                 if let error = error {
                     // Si hay un error al enviar el enlace
@@ -98,11 +98,11 @@ class AuthViewController: UIViewController {
     }
     
     
-    //Btn Registrar Usuario
+    // Botón para registrar un nuevo usuario
     @IBAction func registrarseTapped(_ sender: UIButton) {
         //Mostrar alerta para registrar Usuario
         let alert = UIAlertController(title: "Registro Usuario", message: "Ingresa tus datos", preferredStyle: .alert)
-        
+        // Campos: correo, contraseña, nombre y apellidos
         alert.addTextField { textField in
             textField.placeholder = "Correo electrónico"
             textField.keyboardType = .emailAddress
@@ -141,11 +141,11 @@ class AuthViewController: UIViewController {
                 return
             }
             
-            // Capitalizar nombre y apellidos
+            // Capitalizar nombre y apellido
             let nombreCapitalizado = nombre.capitalizedFirstLetter
             let apellidosCapitalizados = apellidos.capitalizedFirstLetter
             
-            // Crear usuario en Firebase
+            // Crear usuario en Firebase Auth
             Auth.auth().createUser(withEmail: email, password: password) { result, error in
                 if let error = error {
                     print("Error al registrar usuario: \(error.localizedDescription)")
@@ -153,13 +153,13 @@ class AuthViewController: UIViewController {
                     return
                 }
                 
+                // Guardar el usuario en Core Data
                 let uid = result?.user.uid ?? ""
                 self.guardarUsuarioEnCoreData(uid: uid, email: email, provider: .basic, nombre: nombreCapitalizado, apellidos: apellidosCapitalizados)
                 
                 // Mostrar alerta de éxito antes de redirigir
                 let successAlert = UIAlertController(title: "¡Registro exitoso!", message: "Bienvenid@, \(nombreCapitalizado).", preferredStyle: .alert)
                 successAlert.addAction(UIAlertAction(title: "Ir al inicio", style: .default) { _ in
-                    // Redirige al MainTabBarController
                     self.showHome(result: result, error: error, provider: .basic)
                 })
                 self.present(successAlert, animated: true, completion: nil)
@@ -174,7 +174,7 @@ class AuthViewController: UIViewController {
         
     }
     
-    //Autenticación con google
+    // Botón para autenticación con Google
     @IBAction func googleTapped(_ sender: UIButton) {
         let presentingVC = self.presentingViewController ?? self.navigationController ?? self
         
@@ -184,6 +184,7 @@ class AuthViewController: UIViewController {
                 return
             }
             
+            // Obtener credenciales de Google
             guard let user = signInResult?.user,
                   let idToken = user.idToken?.tokenString else {
                 print("No se pudo obtener el ID Token de Google.")
@@ -192,7 +193,7 @@ class AuthViewController: UIViewController {
             
             let accessToken = user.accessToken.tokenString
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-            
+            // Autenticación con Firebase
             Auth.auth().signIn(with: credential) { result, error in
                 // Obtener nombre y apellidos desde Google
                 let fullName = user.profile?.name ?? "Sin nombre"
@@ -216,10 +217,11 @@ class AuthViewController: UIViewController {
         }
     }
     
-    //Autenticación con facebook
+    // Botón para autenticación con Facebook
     @IBAction func facebookTapped(_ sender: UIButton) {
         let loginManager = LoginManager()
-        loginManager.logOut() // Cierra sesión previa
+        // Cierra sesión previa
+        loginManager.logOut()
         
         loginManager.logIn(permissions: ["email"], from: self) { result, error in
             if let error = error {
@@ -250,7 +252,7 @@ class AuthViewController: UIViewController {
         }
     }
     
-    // Función de manejo de inciar sesión
+    // Función principal que maneja post-autenticación y redirección
     private func showHome(result: AuthDataResult?, error: Error?, provider: ProviderType) {
         if let error = error as NSError? {
             print("Error al autenticar con \(provider.rawValue): \(error.localizedDescription)")
@@ -281,7 +283,7 @@ class AuthViewController: UIViewController {
             showAlert(title: "Error", message: "No se pudo iniciar sesión. Intenta más tarde.")
             return
         }
-        
+        // Guarda la sesión en UserDefaults
         let defaults = UserDefaults.standard
         defaults.set(result.user.email, forKey: "email")
         defaults.set(provider.rawValue, forKey: "provider")
@@ -294,7 +296,7 @@ class AuthViewController: UIViewController {
     }
     
     
-    // MARK: - Función para ir al TabBarController principal --> mostrar la pantalla de bienvenida
+    // MARK: - Navegación hacia TabBar principal
     
     private func goToMainTabBar() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -322,14 +324,16 @@ class AuthViewController: UIViewController {
     }
     
     
-    // Func - Alertas
+    
+    // MARK: - Funciones auxiliares
+    // Mostrar alertas simples
     private func showAlert(title: String, message: String) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)
     }
     
-    // Función para guardar La sesió en core data
+    // Función para guardar el usuario en Core Data si no existe
     private func guardarUsuarioEnCoreData(uid: String, email: String?, provider: ProviderType, nombre: String = "Sin nombre", apellidos: String = "Sin apellidos") {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let contexto = appDelegate.persistentContainer.viewContext
@@ -357,6 +361,7 @@ class AuthViewController: UIViewController {
         }
     }
     
+    // Imprimir en consola los datos guardados
     private func imprimirDatosGuardados(uid: String) {
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         let contexto = appDelegate.persistentContainer.viewContext
