@@ -19,6 +19,8 @@ class CoreDataManager {
                 fatalError("Error al cargar Core Data: \(error)")
             }
         }
+        
+        persistentContainer.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
     }
     
     var context: NSManagedObjectContext {
@@ -26,6 +28,11 @@ class CoreDataManager {
     }
     
     func saveContext() {
+        let context = self.context
+            
+            // Establecer la política de fusión justo antes de guardar
+            context.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        
         if context.hasChanges {
             do {
                 try context.save()
@@ -65,15 +72,13 @@ class CoreDataManager {
     // LISTAR MASCOTAS REGISTRADAS POR USUARIO LOGUEADO
     func fetchCitasDelUsuario(_ usuario: Usuario) -> [CitasCD] {
         let request: NSFetchRequest<CitasCD> = CitasCD.fetchRequest()
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
-            NSPredicate(format: "usuario == %@", usuario),
-            NSPredicate(format: "estadoCita != %@", "Cancelada")
-        ])
+        request.predicate = NSPredicate(format: "usuario == %@ AND estadoCita != %@", usuario, "Cancelada")
         
         do {
-            return try CoreDataManager.shared.context.fetch(request)
+            let citas = try context.fetch(request)
+            return citas.sorted(by: { ($0.fechaCita ?? Date()) > ($1.fechaCita ?? Date()) })
         } catch {
-            print("Error al obtener mascotas del usuario: \(error)")
+            print("Error al obtener las citas del usuario: \(error)")
             return []
         }
     }

@@ -25,6 +25,7 @@ extension CitasCD {
     @NSManaged public var estadoCita: String?
     @NSManaged public var usuario: Usuario?
     @NSManaged public var notificaciones: NotificacionCD?
+    @NSManaged public var id: String?
 
 }
 

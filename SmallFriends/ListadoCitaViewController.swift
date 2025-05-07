@@ -7,16 +7,18 @@
 
 import UIKit
 import CoreData
+import FirebaseFirestore
+
 class ListadoCitaViewController: UIViewController {
     
     @IBOutlet weak var tablaCitas: UITableView!
     
     var citas: [CitasCD] = []
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    let db = Firestore.firestore() // Firebase Firestore
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         tablaCitas.dataSource = self
         tablaCitas.delegate = self
@@ -26,9 +28,8 @@ class ListadoCitaViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cargarCitas()
+        cargarCitas() // Recargar citas al volver a la vista
     }
-    
     
     @IBAction func botonRegistrarTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -47,47 +48,56 @@ class ListadoCitaViewController: UIViewController {
         }
     }
     
-    // Función para cargar las citas desde CoreData (UPDATE - AHORA LA FUNCION BUSCA LAS CITAS FILTRANDO POR MASCOTAS DEL USUARIO LOGUEADO)
+    // Función para cargar las citas desde CoreData (y también para sincronizar con Firestore)
     func cargarCitas() {
-        guard let correo = UserDefaults.standard.string(forKey: "email") else {
-            print("No hay correo guardado en UserDefaults")
+        guard let usuario = obtenerUsuarioLogueado() else {
+            print("No hay usuario logueado.")
             citas = []
             tablaCitas.reloadData()
             return
         }
         
-        let request: NSFetchRequest<CitasCD> = CitasCD.fetchRequest()
-        request.predicate = NSPredicate(format: "usuario.email == %@ AND estadoCita != %@", correo, "Cancelada")
+        // Usamos fetchCitasDelUsuario para cargar las citas asociadas al usuario
+        citas = CoreDataManager.shared.fetchCitasDelUsuario(usuario)
         
-        context.reset()
+        tablaCitas.reloadData()
         
-        do {
-            citas = try context.fetch(request).sorted(by: { ($0.fechaCita ?? Date()) > ($1.fechaCita ?? Date()) })
-            
-            // Refrescar cada cita y su mascota para asegurarte de que los datos estén actualizados
-            for cita in citas {
-                context.refresh(cita, mergeChanges: true)
-                if let mascota = cita.mascota {
-                    context.refresh(mascota, mergeChanges: true)
-                }
-            }
-            
-            tablaCitas.reloadData()
-            
-            if citas.isEmpty {
-                tablaCitas.setEmptyMessage("No hay citas registradas")
-            } else {
-                tablaCitas.restore()
-            }
-        } catch {
-            print("Error al cargar citas: \(error)")
+        if citas.isEmpty {
+            tablaCitas.setEmptyMessage("No hay citas registradas")
+        } else {
+            tablaCitas.restore()
         }
+    }
+
+    
+    // Función para actualizar el estado de la cita en Firestore
+    func actualizarEstadoCitaEnFirestore(cita: CitasCD, nuevoEstado: String) {
+        guard let citaID = cita.id else { return }
         
-        
+        db.collection("citas").document(citaID).updateData([
+            "estadoCita": nuevoEstado
+        ]) { error in
+            if let error = error {
+                print("Error al actualizar el estado de la cita en Firestore: \(error.localizedDescription)")
+            } else {
+                print("Estado de la cita actualizado correctamente en Firestore")
+                
+                // Después de actualizar Firestore, también actualiza el estado en CoreData
+                            cita.estadoCita = nuevoEstado
+                            
+                            // Guardar cambios en CoreData
+                            do {
+                                try CoreDataManager.shared.context.save()
+                                // Recargar citas después de la actualización
+                                self.cargarCitas() // Esto debería actualizar la vista
+                            } catch {
+                                print("Error al actualizar el estado de la cita en CoreData: \(error)")
+                            }
+            }
+        }
     }
     
-    
-    // BUSCAR USUARIO LOGUEADO
+    // Función para obtener el usuario logueado
     func obtenerUsuarioLogueado() -> Usuario? {
         guard let correo = UserDefaults.standard.string(forKey: "email") else { return nil }
         
@@ -102,7 +112,6 @@ class ListadoCitaViewController: UIViewController {
         }
     }
 }
-
 
 // MARK: - UITableViewDataSource
 extension ListadoCitaViewController: UITableViewDataSource {
@@ -156,8 +165,7 @@ extension ListadoCitaViewController: UITableViewDelegate {
     }
     
     // FUNCION PARA CANCELAR CITAS (ELIMINAR LOGICO)
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let citaAEliminar = citas[indexPath.row]
             
@@ -172,7 +180,16 @@ extension ListadoCitaViewController: UITableViewDelegate {
                 
                 do {
                     try CoreDataManager.shared.context.save()
-                    self.cargarCitas()
+                    
+                    if citaAEliminar.id != nil {// Actualizamos Firestore también
+                        self.actualizarEstadoCitaEnFirestore(cita: citaAEliminar, nuevoEstado: "Cancelada")
+                    }
+                    // Recargar las citas después de la cancelación
+                    // self.cargarCitas()  // Recargar las citas desde CoreData
+                    
+                    // Eliminar la cita de la lista
+                    self.citas.remove(at: indexPath.row)
+                    self.tablaCitas.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
                     print("Error al cancelar la cita: \(error)")
                 }
@@ -186,10 +203,11 @@ extension ListadoCitaViewController: UITableViewDelegate {
             present(alerta, animated: true, completion: nil)
         }
     }
+
     
     // CAMBIO DE NOMBRE DEL BOTON DELETE POR "CANCELAR"
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Cancelar"
     }
-    
 }
+
