@@ -29,6 +29,7 @@ extension Mascota {
     @NSManaged public var usuario: Usuario?
     @NSManaged public var estadoMascota: String?
     @NSManaged public var citas: NSSet?
+    @NSManaged public var id: String?
 
 }
 

@@ -64,6 +64,7 @@
 		B7CD11F42DB7013D0004D170 /* DetalleEventoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F32DB7013D0004D170 /* DetalleEventoViewController.swift */; };
 		B7CD11F72DB701670004D170 /* NotificacionesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7CD11F62DB701670004D170 /* NotificacionesViewController.swift */; };
 		B7F8B7122DC8FDCA0084E55F /* SmallFriendsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7F8B7112DC8FDCA0084E55F /* SmallFriendsTabBarController.swift */; };
+		E92F0D662DCBAC8D001B64F1 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = E92F0D652DCBAC8D001B64F1 /* FirebaseFirestore */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -128,6 +129,7 @@
 				8422B3022DB243E100A5D49B /* FacebookShare in Frameworks */,
 				84AA103A2DAD635D00E5D78E /* FirebaseAuthCombine-Community in Frameworks */,
 				84AA103E2DAD635D00E5D78E /* FirebaseCrashlytics in Frameworks */,
+				E92F0D662DCBAC8D001B64F1 /* FirebaseFirestore in Frameworks */,
 				84AA103C2DAD635D00E5D78E /* FirebaseCore in Frameworks */,
 				8422B2F82DB22A7800A5D49B /* FacebookBasics in Frameworks */,
 				8422B2FE2DB22A7800A5D49B /* FacebookLogin in Frameworks */,
@@ -247,6 +249,7 @@
 				8422B2FB2DB22A7800A5D49B /* FacebookGamingServices */,
 				8422B2FD2DB22A7800A5D49B /* FacebookLogin */,
 				8422B3012DB243E100A5D49B /* FacebookShare */,
+				E92F0D652DCBAC8D001B64F1 /* FirebaseFirestore */,
 			);
 			productName = SmallFriends;
 			productReference = B75921FB2DAC15EB00A31AEE /* SmallFriends.app */;
@@ -688,6 +691,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 84E9D9222DB1DD1800EFA233 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		E92F0D652DCBAC8D001B64F1 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84AA102C2DAD635D00E5D78E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
 		};
 /* End XCSwiftPackageProductDependency section */
 

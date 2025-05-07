@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import FirebaseFirestore
 
 class ListadoViewController: UIViewController {
     
@@ -14,6 +15,7 @@ class ListadoViewController: UIViewController {
     
     var mascotas: [Mascota] = []
     var mascotaSeleccionada: Mascota?
+    let db = Firestore.firestore()  // Conexión con Firestore
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +67,6 @@ class ListadoViewController: UIViewController {
         }
     }
     
-    // BUSCAR USUARIO LOGUEADO
     func obtenerUsuarioLogueado() -> Usuario? {
         guard let correo = UserDefaults.standard.string(forKey: "email") else { return nil }
         
@@ -80,6 +81,18 @@ class ListadoViewController: UIViewController {
         }
     }
     
+    // Nueva función para actualizar el estado de la mascota en Firestore
+    func actualizarEstadoEnFirestore(mascotaID: String, nuevoEstado: String) {
+        db.collection("mascotas").document(mascotaID).updateData([
+            "estadoMascota": nuevoEstado
+        ]) { error in
+            if let error = error {
+                print("Error al actualizar el estado en Firestore: \(error.localizedDescription)")
+            } else {
+                print("Estado de la mascota actualizado correctamente en Firestore")
+            }
+        }
+    }
 }
 
 extension ListadoViewController: UITableViewDataSource {
@@ -143,13 +156,23 @@ extension ListadoViewController: UITableViewDelegate {
             )
             
             let confirmar = UIAlertAction(title: "Eliminar", style: .destructive) { _ in
+                // Cambiar estado en Core Data
                 mascotaAEliminar.estadoMascota = "Inactiva"
+                
+                // Guardar cambios en Core Data
                 do {
                     try CoreDataManager.shared.context.save()
+                    
+                    // Verificar si la mascota tiene un documentID en Firestore y actualizarlo
+                    if let mascotaID = mascotaAEliminar.id {
+                        self.actualizarEstadoEnFirestore(mascotaID: mascotaID, nuevoEstado: "Inactiva")
+                    }
+                    
+                    // Eliminar la mascota de la lista
                     self.mascotas.remove(at: indexPath.row)
                     self.mascotasTableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
-                    print("Error al cancelar la cita: \(error)")
+                    print("Error al eliminar la mascota: \(error)")
                 }
             }
             
@@ -159,7 +182,6 @@ extension ListadoViewController: UITableViewDelegate {
             alerta.addAction(cancelar)
             
             self.present(alerta, animated: true, completion: nil)
-            
         }
         
         cancelarAction.image = UIImage(systemName: "trash")
@@ -168,13 +190,13 @@ extension ListadoViewController: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [cancelarAction])
     }
     
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mascotaSeleccionada = mascotas[indexPath.row]
         let detalleMascotaVC = storyboard?.instantiateViewController(withIdentifier: "detalleMascota") as! DetalleMascotaViewController
         detalleMascotaVC.mascota = mascotaSeleccionada
         navigationController?.pushViewController(detalleMascotaVC, animated: true)
         // BOTON BACK PERSONALIZADO
+        
         let backItem = UIBarButtonItem()
         backItem.title = "Mascotas"
         navigationItem.backBarButtonItem = backItem

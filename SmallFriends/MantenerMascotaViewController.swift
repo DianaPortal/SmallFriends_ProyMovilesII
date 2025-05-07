@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import FirebaseFirestore
 
 class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
@@ -24,9 +25,10 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
     @IBOutlet weak var razaField: UITextField!
     @IBOutlet weak var dniField: UITextField!
     
+    let db = Firestore.firestore()  // Instancia de Firestore
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         
         // CAMBIO DE TITLE DEPENDIENDO DE LA ACCION
         title = mascotaAEditar == nil ? "🐶 Registrar Mascota 🐱" : "🐶 Actualizar Mascota 🐱"
@@ -131,6 +133,7 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
             mascota = mascotaExistente
         } else {
             mascota = Mascota(context: CoreDataManager.shared.context)
+            mascota.id = UUID().uuidString  // Asignar un ID único a la mascota
         }
         
         // ASIGNA CAMPOS
@@ -168,11 +171,35 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
         
         CoreDataManager.shared.saveContext()
         
-        mostrarAlerta(titulo: "Éxito", mensaje: mascotaAEditar != nil ? "Mascota actualizada correctamente" : "Mascota registrada correctamente") {
-            self.navigationController?.popViewController(animated: true)
+        // ** FIRESTORE: Actualizar o registrar la mascota en Firestore**
+        let referencia: DocumentReference
+        let id = mascota.id ?? UUID().uuidString
+        referencia = db.collection("mascotas").document(id)
+        
+        let data: [String: Any] = [
+            "nombre": mascota.nombre ?? "",
+            "edad": mascota.edad,
+            "tipo": mascota.tipo ?? "",
+            "peso": mascota.peso ?? 0,
+            "raza": mascota.raza ?? "",
+            "dni": mascota.dni ?? "",
+            "foto": mascota.foto != nil ? UIImage(data: mascota.foto!)?.jpegData(compressionQuality: 0.8)?.base64EncodedString() : nil,
+            "estadoMascota": mascota.estadoMascota ?? "Activa"  // Agregar el estado de la mascota
+        ]
+
+        
+        referencia.setData(data) { error in
+            if let error = error {
+                print("Error al registrar mascota en Firestore: \(error)")
+                self.mostrarAlerta(mensaje: "Hubo un error al registrar la mascota en Firestore.")
+            } else {
+                print("Mascota registrada exitosamente en Firestore.")
+                self.mostrarAlerta(titulo: "Éxito", mensaje: self.mascotaAEditar != nil ? "Mascota actualizada correctamente" : "Mascota registrada correctamente") {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
         }
     }
-    
     
     // FUNCION PARA MOSTRAR ALERTA POR ERRORES EN LOS CAMPOS
     func mostrarAlerta(mensaje: String) {
@@ -201,6 +228,8 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
         
         // VALIDACION DE CARACTERES NUMERICOS Y RANGO DE CARACTERES
         let caracteresNoNumericos = CharacterSet.decimalDigits.inverted
+       
+
         return dni.count == 8 && dni.rangeOfCharacter(from: caracteresNoNumericos) == nil
     }
     
@@ -252,7 +281,6 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
             return nil
         }
     }
-    
 }
 
 extension MantenerMascotaViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
