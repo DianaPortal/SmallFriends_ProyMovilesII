@@ -11,42 +11,63 @@ import UserNotifications
 import FirebaseAuth
 import CoreData
 
-
+/// Controlador de vista para mostrar los detalles de un evento, incluyendo información básica, un mapa interactivo y la opción de agregar un recordatorio de notificación.
 class DetalleEventoViewController: UIViewController {
-    //ID del evento que se va a mostrar
+    
+    // MARK: - Propiedades
+    
+    /// ID del evento que se va a mostrar.
     var eventoID: Int?
-    //mapaWKWebView -- mostrar el mapa con mapbox
+    
+    /// WebView para mostrar el mapa con Mapbox.
     var mapaWKWebView: WKWebView!
-    // Outlets conectados al storyboard
+    
+    // MARK: - Outlets conectados al storyboard
+    
+    /// Etiqueta para mostrar el título del evento.
     @IBOutlet weak var tituloEventoLabel: UILabel!
+    
+    /// Etiqueta para mostrar la descripción del evento.
     @IBOutlet weak var descripcionLabel: UILabel!
+    
+    /// Etiqueta para mostrar la fecha del evento.
     @IBOutlet weak var fechaEventoLabel: UILabel!
+    
+    /// Etiqueta para mostrar la hora del evento.
     @IBOutlet weak var horaEventoLabel: UILabel!
+    
+    /// Etiqueta para mostrar el lugar del evento.
     @IBOutlet weak var lugarEventoLabel: UILabel!
+    
+    /// Botón para agregar un recordatorio del evento.
     @IBOutlet weak var recuerdameButton: UIButton!
+    
+    // MARK: - Ciclo de vida de la vista
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //Configurar el webView para el mapa
+        // Configurar el webView para mostrar el mapa
         configurarWebView()
         
-        
+        // Animar los elementos de la interfaz
         animarElementos()
         
-        //si existe un id evento válido -- obtener detalle del evento
+        // Si existe un id de evento válido, obtener los detalles del evento
         if let id = eventoID {
             obtenerDetalleEvento(id: id)
         }
     }
     
-    //Configurar y posicionar el WKWebView para mostrar el mapa
+    // MARK: - Métodos
+    
+    /// Configura y posiciona el `WKWebView` para mostrar el mapa.
     func configurarWebView() {
         mapaWKWebView = WKWebView()
         mapaWKWebView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(mapaWKWebView)
         
-        //Constraints para ubicar el mapa debajo del label de la ubicación
+        // Constraints para ubicar el mapa debajo del label de la ubicación
         NSLayoutConstraint.activate([
             mapaWKWebView.topAnchor.constraint(equalTo: lugarEventoLabel.bottomAnchor, constant: 16),
             mapaWKWebView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -55,30 +76,30 @@ class DetalleEventoViewController: UIViewController {
         ])
     }
     
-    //Función para obtener el detalle del evento desde la API
+    /// Función para obtener los detalles de un evento desde la API.
     func obtenerDetalleEvento(id: Int) {
         guard let url = URL(string: "https://apieventos-17cx.onrender.com/api/eventos/\(id)") else { return }
         
         let task = URLSession.shared.dataTask(with: url) { data, response, error in
-            //Manejo de errores
+            // Manejo de errores
             if let error = error {
                 print("Error: \(error)")
                 return
             }
             
-            //Verifica que la respuesta sea válida y con código 200
+            // Verifica que la respuesta sea válida y con código 200
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                 print("Error: Respuesta no válida o error en la solicitud.")
                 return
             }
             
-            //Verifica que se haya recibido la data
+            // Verifica que se haya recibido la data
             guard let data = data else {
                 print("No se recibió data")
                 return
             }
             
-            //Decodificar el json recibido en un objeto
+            // Decodificar el JSON recibido en un objeto
             do {
                 let detalleEvento = try JSONDecoder().decode(DetalleEvento.self, from: data)
                 DispatchQueue.main.async {
@@ -90,11 +111,10 @@ class DetalleEventoViewController: UIViewController {
             }
         }
         task.resume()
-        
     }
-    //Muestra la información del evento
+    
+    /// Muestra la información del evento en la interfaz de usuario.
     func actualizarUIConEvento(evento: DetalleEvento) {
-        
         tituloEventoLabel.text = "📅\(evento.titulo)🐾"
         descripcionLabel.text = evento.descripcion
         descripcionLabel.sizeToFit()
@@ -102,11 +122,11 @@ class DetalleEventoViewController: UIViewController {
         horaEventoLabel.text = "Hora: \(evento.hora)"
         lugarEventoLabel.text = "Lugar: 📍 \(evento.ubicacion)"
         
-        //Carga el mapa centrado en la ubicación del evento
+        // Cargar el mapa centrado en la ubicación del evento
         mostrarMapaConMapbox(lat: evento.latitud, lng: evento.longitud)
     }
     
-    //Gernera y carga un mapa html usando MapBox con marcador y botón para centrar
+    /// Genera y carga un mapa HTML usando MapBox con un marcador y un botón para centrar el mapa.
     func mostrarMapaConMapbox(lat: Double, lng: Double) {
         let html = """
         <!DOCTYPE html>
@@ -160,20 +180,20 @@ class DetalleEventoViewController: UIViewController {
         mapaWKWebView.loadHTMLString(html, baseURL: nil)
     }
     
-    //Acción del botón "Recuerdame" (Agregar a las notificaciones el evento)
+    /// Acción del botón "Recuerdame" para agregar el evento a las notificaciones.
     @IBAction func recuerdame(_ sender: UIButton) {
         print("Botón presionado")
         
-        //Verifica permisos de notificación
+        // Verifica permisos de notificación
         UNUserNotificationCenter.current().getNotificationSettings { settings in
             DispatchQueue.main.async {
-                //Confirma que el usuario esté autenticado
+                // Confirma que el usuario esté autenticado
                 guard let usuarioID = Auth.auth().currentUser?.uid else {
                     self.mostrarAlerta(titulo: "Error", mensaje: "Inicia sesión para poder programar recordatorios.")
                     return
                 }
                 
-                //Verifica que existan los datos del evento
+                // Verifica que existan los datos del evento
                 guard let titulo = self.tituloEventoLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                       let mensaje = self.descripcionLabel.text?.trimmingCharacters(in: .whitespacesAndNewlines),
                       let fechaTexto = self.fechaEventoLabel.text,
@@ -182,7 +202,7 @@ class DetalleEventoViewController: UIViewController {
                     return
                 }
                 
-                //Combina la fecha y hora en un objeto Date
+                // Combina la fecha y hora en un objeto Date
                 let fechaFinal = self.combinarFechaYHora(fecha: fechaTexto, hora: horaTexto)
                 
                 // Valida que la fecha sea futura
@@ -212,6 +232,7 @@ class DetalleEventoViewController: UIViewController {
                             
                             // Cambia el color del botón como confirmación
                             sender.backgroundColor = .systemGreen
+                            
                             // Crea y programa la notificación local
                             let content = UNMutableNotificationContent()
                             content.title = titulo
@@ -237,6 +258,7 @@ class DetalleEventoViewController: UIViewController {
                             
                             try context.save()
                             print("Notificación guardada en Core Data")
+                            
                             // Desactiva el botón para evitar duplicados
                             self.recuerdameButton.setTitle("Recordatorio guardado", for: .normal)
                             self.recuerdameButton.isEnabled = false
@@ -252,68 +274,44 @@ class DetalleEventoViewController: UIViewController {
             }
         }
     }
-    //Función para - un mensaje emergente (alerta)
+    
+    /// Muestra un mensaje emergente de alerta.
     func mostrarAlerta(titulo: String, mensaje: String) {
         let alert = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)
     }
-    // Función para formatear una fecha para mostrarla al usuario
+    
+    /// Formatea una fecha para mostrarla al usuario.
     func formattedDate(date: Date) -> String {
         let formatter = DateFormatter()
-        formatter.dateStyle = .medium
+        formatter.dateStyle = .long
         formatter.timeStyle = .short
         return formatter.string(from: date)
     }
     
-    // Función para convertir cadenas de fecha y hora a un objeto Date
+    /// Combina la fecha y hora en un único objeto Date.
     func combinarFechaYHora(fecha: String, hora: String) -> Date? {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
-        
-        let fechaLimpia = fecha.replacingOccurrences(of: "Fecha: ", with: "").trimmingCharacters(in: .whitespaces)
-        let horaLimpia = hora.replacingOccurrences(of: "Hora: ", with: "").trimmingCharacters(in: .whitespaces)
-        
-        let combinada = "\(fechaLimpia) \(horaLimpia)"
-        return formatter.date(from: combinada)
+        formatter.dateFormat = "dd/MM/yyyy HH:mm"
+        return formatter.date(from: "\(fecha) \(hora)")
     }
     
-    // Función para animar la aparición secuencial de los labels
+    /// Animación para mostrar los elementos de la interfaz.
     func animarElementos() {
-        let delay: TimeInterval = 0.3
-        
-        // Animaciones
-        UIView.animate(withDuration: 1.0, delay: 0.0, options: .curveEaseOut, animations: {
-            self.tituloEventoLabel.transform = CGAffineTransform(translationX: 0, y: -20)
-            self.tituloEventoLabel.alpha = 1.0
-        })
-        
-        UIView.animate(withDuration: 1.0, delay: delay, options: .curveEaseOut, animations: {
-            self.descripcionLabel.transform = CGAffineTransform(translationX: 0, y: -20)
-            self.descripcionLabel.alpha = 1.0
-        })
-        
-        UIView.animate(withDuration: 1.0, delay: delay * 2, options: .curveEaseOut, animations: {
-            self.fechaEventoLabel.transform = CGAffineTransform(translationX: 0, y: -20)
-            self.fechaEventoLabel.alpha = 1.0
-        })
-        
-        UIView.animate(withDuration: 1.0, delay: delay * 3, options: .curveEaseOut, animations: {
-            self.horaEventoLabel.transform = CGAffineTransform(translationX: 0, y: -20)
-            self.horaEventoLabel.alpha = 1.0
-        })
-        
-        UIView.animate(withDuration: 1.0, delay: delay * 4, options: .curveEaseOut, animations: {
-            self.lugarEventoLabel.transform = CGAffineTransform(translationX: 0, y: -20)
-            self.lugarEventoLabel.alpha = 1.0
+        UIView.animate(withDuration: 0.3, animations: {
+            self.tituloEventoLabel.alpha = 1
+            self.descripcionLabel.alpha = 1
+            self.fechaEventoLabel.alpha = 1
+            self.horaEventoLabel.alpha = 1
+            self.lugarEventoLabel.alpha = 1
         })
     }
     
-    // Animación del mapa al cargar
+    /// Animación para mostrar el mapa con un retraso.
     func animarMapa() {
-        mapaWKWebView.alpha = 0
-        UIView.animate(withDuration: 1.0) {
+        UIView.animate(withDuration: 0.5, delay: 0.3, options: [], animations: {
             self.mapaWKWebView.alpha = 1
-        }
+        })
     }
 }

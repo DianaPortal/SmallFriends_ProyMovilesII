@@ -1,12 +1,16 @@
 //
-// MantenerCitaViewController.swift
-// SmallFriends
+//  MantenerCitaViewController.swift
+//  SmallFriends
 
 import UIKit
 import CoreData
 import FirebaseFirestore
 import FirebaseAuth
 
+/// Esta clase maneja la creación y actualización de citas para las mascotas del usuario.
+/// Permite al usuario registrar o actualizar una cita, seleccionar una mascota activa,
+/// definir el tipo de cita, la fecha y el lugar, además de guardar la cita en Core Data y Firestore.
+/// También programa notificaciones para recordar al usuario sobre las citas programadas.
 class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var fechaLabel: UILabel!
@@ -19,11 +23,13 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
     @IBOutlet weak var descripCitaTextField: UITextField!
     @IBOutlet weak var mascotaPickerView: UIPickerView!
 
-    var mascotasUsuario: [Mascota] = []
-    let tipoCita = ["Consulta Médica", "Limpieza Completa", "Vacunación", "Baño", "Revisión"]
-    var citaAActualizar: CitasCD?
-    
-    let db = Firestore.firestore() // Conexión con Firestore
+    var mascotasUsuario: [Mascota] = []  // Lista de mascotas activas del usuario.
+    let tipoCita = ["Consulta Médica", "Limpieza Completa", "Vacunación", "Baño", "Revisión"]  // Tipos de citas disponibles.
+    var citaAActualizar: CitasCD?  // Cita a actualizar (si existe).
+
+    let db = Firestore.firestore() // Conexión con Firestore.
+
+    // MARK: - Ciclo de vida de la vista
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,14 +41,17 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         mascotaPickerView.dataSource = self
         cargarMascotasDelUsuario()
         
-        fechaDatePicker.minimumDate = Date()
+        fechaDatePicker.minimumDate = Date()  // No se puede seleccionar una fecha pasada.
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cargarMascotasDelUsuario()
+        cargarMascotasDelUsuario()  // Cargar las mascotas activas al mostrar la vista.
     }
 
+    // MARK: - Funciones relacionadas con las mascotas
+
+    /// Carga las mascotas activas del usuario actual desde Core Data y actualiza el picker de mascotas.
     func cargarMascotasDelUsuario() {
         guard let correoGuardado = UserDefaults.standard.string(forKey: "email") else { return }
 
@@ -80,14 +89,18 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         }
     }
 
+    // MARK: - Función de acción al guardar la cita
+
+    /// Función que se ejecuta al presionar el botón de guardar.
+    /// Valida la entrada del usuario y guarda la cita en Core Data y Firestore.
     @IBAction func guardarTapped(_ sender: UIButton) {
-        // Validar si hay una mascota seleccionada en el picker
+        // Validar si hay una mascota seleccionada en el picker.
         guard mascotasUsuario.count > 0 else {
             mostrarAlerta(mensaje: "Debes tener al menos una mascota activa para registrar o actualizar la cita.")
             return
         }
         
-        // Verificar si se seleccionó alguna mascota
+        // Verificar si se seleccionó alguna mascota.
         let mascotaSeleccionadaIndex = mascotaPickerView.selectedRow(inComponent: 0)
         if mascotaSeleccionadaIndex == -1 {
             mostrarAlerta(mensaje: "Por favor, selecciona una mascota.")
@@ -95,7 +108,7 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         }
 
         guard
-            let lugar = campo(lugarTextField, nombre: "Lugar")
+            let lugar = campo(lugarTextField, nombre: "Lugar")  // Validación de campo lugar.
         else {
             print("Error: Campos inválidos")
             return
@@ -117,24 +130,26 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         }
     }
 
+    // MARK: - Guardar la cita en Core Data
 
+    /// Guarda o actualiza una cita en Core Data.
     func guardarEnCoreData(fecha: Date, lugar: String, tipoCita: String, descripcion: String) {
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
 
         if let cita = citaAActualizar {
-            // Aquí actualizamos la cita en Core Data
+            // Aquí actualizamos la cita en Core Data.
             cita.fechaCita = fecha
             cita.lugarCita = lugar
             cita.tipoCita = tipoCita
             cita.descripcionCita = descripcion
 
-            // Actualizar la mascota seleccionada
+            // Actualizar la mascota seleccionada.
             let mascotaSeleccionada = mascotasUsuario[mascotaPickerView.selectedRow(inComponent: 0)]
             cita.mascota = mascotaSeleccionada
             
-            // Actualizar el ID solo si es necesario
+            // Actualizar el ID solo si es necesario.
             if cita.id == nil {
-                cita.id = UUID().uuidString // Asigna un ID único si no tiene uno
+                cita.id = UUID().uuidString // Asigna un ID único si no tiene uno.
             }
 
             do {
@@ -145,7 +160,7 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                 print("Error al actualizar la cita: \(error.localizedDescription)")
             }
         } else {
-            // Si es una nueva cita, la guardamos en Core Data
+            // Si es una nueva cita, la guardamos en Core Data.
             let nuevaCita = CitasCD(context: context)
             nuevaCita.fechaCita = fecha
             nuevaCita.lugarCita = lugar
@@ -153,14 +168,14 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
             nuevaCita.descripcionCita = descripcion
             nuevaCita.estadoCita = "Activa"
             
-            // Obtener y asignar la mascota seleccionada
+            // Obtener y asignar la mascota seleccionada.
             let mascotaSeleccionada = mascotasUsuario[mascotaPickerView.selectedRow(inComponent: 0)]
             nuevaCita.mascota = mascotaSeleccionada
 
-            // Asigna un ID único si la cita es nueva
+            // Asigna un ID único si la cita es nueva.
             nuevaCita.id = UUID().uuidString
 
-            // Guardar usuario en la cita
+            // Guardar usuario en la cita.
             if let correoGuardado = UserDefaults.standard.string(forKey: "email") {
                 let fetchRequestUsuario: NSFetchRequest<Usuario> = Usuario.fetchRequest()
                 fetchRequestUsuario.predicate = NSPredicate(format: "email == %@", correoGuardado)
@@ -184,10 +199,10 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         }
     }
 
+    // MARK: - Programación de notificación
 
-
+    /// Función para programar una notificación de la cita.
     func programarNotificacion(cita: CitasCD) {
-        // Función para programar una notificación de la cita
         guard let fechaCita = cita.fechaCita else { return }
         let intervalo = fechaCita.timeIntervalSinceNow
         guard intervalo > 0 else {
@@ -212,7 +227,7 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
             }
         }
 
-        // Guardar notificación en Core Data
+        // Guardar notificación en Core Data.
         guard let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext else { return }
         let notificacion: NotificacionCD
         if let existente = cita.notificaciones {
@@ -234,11 +249,13 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         }
     }
 
-    // Actualización en Firestore de la cita
+    // MARK: - Actualización en Firestore
+
+    /// Actualiza la cita en Firestore.
     func actualizarCitaEnFirestore(cita: CitasCD) {
         guard let citaID = cita.id else { return } // Asegúrate de tener un ID
 
-        // Nombre de la mascota
+        // Nombre de la mascota.
         let nombreMascota = cita.mascota?.nombre ?? "Sin nombre"
 
         db.collection("citas").document(citaID).updateData([
@@ -283,8 +300,9 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         }
     }
 
+    // MARK: - Validaciones
 
-
+    /// Función que valida que un campo de texto no esté vacío.
     func campo(_ textField: UITextField, nombre: String) -> String? {
         guard let texto = textField.text, !texto.isEmpty else {
             mostrarAlerta(mensaje: "El campo \(nombre) no puede estar vacío")
@@ -293,17 +311,21 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         return texto
     }
 
+    /// Muestra una alerta con el mensaje proporcionado.
     func mostrarAlerta(mensaje: String) {
         let alerta = UIAlertController(title: "Error", message: mensaje, preferredStyle: .alert)
         alerta.addAction(UIAlertAction(title: "OK", style: .default))
         present(alerta, animated: true)
     }
 
+    /// Muestra una alerta con título y mensaje personalizados, y permite ejecutar una acción cuando el usuario acepta.
     func mostrarAlerta(titulo: String, mensaje: String, alAceptar: (() -> Void)? = nil) {
         let alerta = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
         alerta.addAction(UIAlertAction(title: "OK", style: .default) { _ in alAceptar?() })
         present(alerta, animated: true)
     }
+
+    // MARK: - UIPickerView Delegate y DataSource
 
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
@@ -317,6 +339,9 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         return pickerView == mascotaPickerView ? mascotasUsuario[row].nombre ?? "Sin nombre" : tipoCita[row]
     }
 
+    // MARK: - Actualizar notificaciones
+
+    /// Actualiza el listado de notificaciones programadas en la vista de notificaciones.
     func actualizarListadoDeNotificaciones() {
         if let navigationController = self.navigationController,
            let listNotificacionesVC = navigationController.viewControllers.first(where: { $0 is ListNotificacionesViewController }) as? ListNotificacionesViewController {

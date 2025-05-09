@@ -1,4 +1,3 @@
-//
 //  DetalleCitaViewController.swift
 //  SmallFriends
 //
@@ -10,21 +9,40 @@ import FirebaseAuth
 import CoreData
 import UserNotifications
 
+/// Controlador de vista para mostrar los detalles de una cita.
 class DetalleCitaViewController: UIViewController {
     
+    // MARK: - Outlets
+    
+    /// Etiqueta que muestra la fecha de la cita.
     @IBOutlet weak var fechaCitaLabel: UILabel!
+    
+    /// Etiqueta que muestra el nombre de la mascota.
     @IBOutlet weak var mascotaLabel: UILabel!
+    
+    /// Etiqueta que muestra el lugar de la cita.
     @IBOutlet weak var lugarCitaLabel: UILabel!
+    
+    /// Etiqueta que muestra el tipo de cita.
     @IBOutlet weak var tipoCitaLabel: UILabel!
+    
+    /// Etiqueta que muestra la descripción de la cita.
     @IBOutlet weak var descripCitaLabel: UILabel!
+    
+    /// Vista stack que contiene los detalles de la cita.
     @IBOutlet weak var citaStackView: UIStackView!
     
+    // MARK: - Propiedades
     
-    // Cita que se va a mostrar
+    /// La cita a mostrar en la vista.
     var cita: CitasCD?
-    // Configura la interfaz cuando la vista se carga
+    
+    // MARK: - Ciclo de vida de la vista
+    
+    /// Configura la interfaz cuando la vista se carga.
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Estilo visual del contenedor principal
         citaStackView.layer.cornerRadius = 16
         citaStackView.layer.borderWidth = 0.5
@@ -34,19 +52,23 @@ class DetalleCitaViewController: UIViewController {
         citaStackView.layer.shadowOpacity = 0.1
         citaStackView.layer.shadowOffset = CGSize(width: 0, height: 2)
         citaStackView.layer.shadowRadius = 4
+        
         // Margen interno para el contenido del stack
         citaStackView.isLayoutMarginsRelativeArrangement = true
         citaStackView.layoutMargins = UIEdgeInsets(top: 12, left: 20, bottom: 12, right: 16)
     }
     
+    /// Se llama antes de que la vista aparezca en pantalla. Carga los detalles de la cita si existe.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         // Verifica que haya una cita asignada
         guard let cita = cita else {
             print("La cita no está asignada")
             return
         }
-        // Carga los datos en las etiquetas
+        
+        // Carga los datos de la cita en las etiquetas
         if let fecha = cita.fechaCita {
             fechaCitaLabel.text = formatearFecha(fecha)
         }
@@ -56,25 +78,33 @@ class DetalleCitaViewController: UIViewController {
         descripCitaLabel.text = cita.descripcionCita
     }
     
-    // Acción al pulsar el botón "Actualizar"
+    // MARK: - Acciones
+    
+    /// Acción cuando se pulsa el botón "Actualizar".
+    /// Navega a la vista de mantenimiento de la cita con los datos de la cita actual.
     @IBAction func botonActualizarTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        // Intenta cargar la vista de mantenimiento de la cita
         if let mantenerCitaVC = storyboard.instantiateViewController(withIdentifier: "showMantenerCita") as? MantenerCitaViewController {
             
             // Pasa la cita actual al nuevo controlador
             mantenerCitaVC.citaAActualizar = self.cita
             
-            // Cambia el texto del botón de back en la barra de navegación
+            // Cambia el texto del botón de retroceso en la barra de navegación
             let backItem = UIBarButtonItem()
             backItem.title = "Detalle"
             navigationItem.backBarButtonItem = backItem
             
-            // Navega hacia la pantalla de mantenimiento de cita
+            // Navega hacia la pantalla de mantenimiento de la cita
             self.navigationController?.pushViewController(mantenerCitaVC, animated: true)
         }
     }
     
-    //Formatea una fecha para mostrarla
+    /// Formatea una fecha para mostrarla en un formato específico.
+    ///
+    /// - Parameter fecha: La fecha que se va a formatear.
+    /// - Returns: Una cadena de texto con la fecha y hora formateadas.
     func formatearFecha(_ fecha: Date) -> String {
         let formatterFecha = DateFormatter()
         formatterFecha.locale = Locale(identifier: "es_ES")
@@ -90,7 +120,8 @@ class DetalleCitaViewController: UIViewController {
         return "\(fechaFormateada) | \(horaFormateada)"
     }
     
-    // Acción al pulsar el botón "Programar Notificación"
+    /// Acción cuando se pulsa el botón "Programar Notificación".
+    /// Se encarga de verificar los permisos y programar la notificación.
     @IBAction func programarNotifTapped(_ sender: UIButton) {
         print("Botón presionado")
         
@@ -112,10 +143,12 @@ class DetalleCitaViewController: UIViewController {
                     self.mostrarAlerta(titulo: "Fecha inválida", mensaje: "La fecha ya pasó.")
                     return
                 }
+                
                 // Si las notificaciones están autorizadas
                 if settings.authorizationStatus == .authorized {
                     if let appDelegate = UIApplication.shared.delegate as? AppDelegate {
                         let context = appDelegate.persistentContainer.viewContext
+                        
                         // Consulta para evitar notificaciones duplicadas
                         let fetchRequest: NSFetchRequest<NotificacionCD> = NotificacionCD.fetchRequest()
                         fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [
@@ -130,23 +163,28 @@ class DetalleCitaViewController: UIViewController {
                                 self.mostrarAlerta(titulo: "Ya registrado", mensaje: "Esta notificación ya fue programada.")
                                 return
                             }
+                            
                             // Cambia la apariencia del botón
                             sender.backgroundColor = .systemGreen
+                            
                             // Crea el contenido de la notificación
                             let content = UNMutableNotificationContent()
                             content.title = "Recordatorio de cita: \(tipo)"
                             content.body = "Lugar: \(lugar). Descripción: \(descripcion)."
                             content.sound = .default
+                            
                             // Define cuándo se disparará la notificación
                             let triggerDate = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: fecha)
                             let trigger = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
                             let idNotificacion = UUID().uuidString
                             let request = UNNotificationRequest(identifier: idNotificacion, content: content, trigger: trigger)
+                            
                             UNUserNotificationCenter.current().add(request) { error in
                                 if let error = error {
                                     print("Error al programar notificación: \(error.localizedDescription)")
                                 }
                             }
+                            
                             // Guarda la notificación en Core Data
                             let nuevaNotif = NotificacionCD(context: context)
                             nuevaNotif.titulo = content.title
@@ -173,13 +211,22 @@ class DetalleCitaViewController: UIViewController {
             }
         }
     }
-    // Muestra una alerta en pantalla
+    
+    /// Muestra una alerta con el título y mensaje especificado.
+    ///
+    /// - Parameters:
+    ///   - titulo: El título de la alerta.
+    ///   - mensaje: El mensaje de la alerta.
     func mostrarAlerta(titulo: String, mensaje: String) {
         let alert = UIAlertController(title: titulo, message: mensaje, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         self.present(alert, animated: true)
     }
-    // Formatea una fecha con estilo corto (para alertas)
+    
+    /// Formatea una fecha con un estilo corto (para alertas).
+    ///
+    /// - Parameter date: La fecha a formatear.
+    /// - Returns: Una cadena de texto con la fecha formateada en estilo corto.
     func formattedDate(date: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "es_ES")
@@ -189,6 +236,3 @@ class DetalleCitaViewController: UIViewController {
     }
     
 }
-
-
-

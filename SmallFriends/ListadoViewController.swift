@@ -9,47 +9,57 @@ import UIKit
 import CoreData
 import FirebaseFirestore
 
+/// Vista que maneja la pantalla de listado de mascotas del usuario.
 class ListadoViewController: UIViewController {
     
+    // MARK: - IBOutlets
     @IBOutlet weak var mascotasTableView: UITableView!
     
-    var mascotas: [Mascota] = []
-    var mascotaSeleccionada: Mascota?
-    let db = Firestore.firestore()  // Conexión con Firestore
+    // MARK: - Propiedades
+    var mascotas: [Mascota] = []  // Arreglo para almacenar las mascotas del usuario.
+    var mascotaSeleccionada: Mascota?  // Mascota seleccionada en la tabla.
+    let db = Firestore.firestore()  // Conexión a Firestore para actualización de datos en la base de datos.
+    
+    // MARK: - Métodos del ciclo de vida
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        // Asignación de los delegados de la tabla.
         mascotasTableView.dataSource = self
         mascotasTableView.delegate = self
-        
         print("Pantalla de listado de mascotas cargada")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cargarMascotas()
+        cargarMascotas()  // Cargar las mascotas del usuario cuando la vista está por aparecer.
     }
     
+    // MARK: - Acciones de UI
+    
+    /// Acción cuando el botón de registrar mascota es presionado.
     @IBAction func botonRegistrarTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let mantenerMascotaVC = storyboard.instantiateViewController(withIdentifier: "MantenerMascotaVC") as? MantenerMascotaViewController {
             
-            // SE PASA UN NULO PARA QUE LA VISTA "MANTENER" ENTIENDA QUE ES UN REGISTRO
+            // Se pasa un valor nulo para indicar que esta vista está en modo registro.
             mantenerMascotaVC.mascotaAEditar = nil
             
-            // BOTON BACK
+            // Configuración del botón de retroceso.
             let backItem = UIBarButtonItem()
             backItem.title = "Mascotas"
             navigationItem.backBarButtonItem = backItem
             
-            // NAVEGACION A LA VISTA
+            // Navegar a la vista de registro de mascota.
             self.navigationController?.pushViewController(mantenerMascotaVC, animated: true)
         }
     }
     
+    // MARK: - Métodos de carga de datos
+    
+    /// Cargar las mascotas del usuario logueado.
     func cargarMascotas() {
-        // VERIFICA SI EL USUARIO ESTA LOGUEADO
+        // Verifica si el usuario está logueado.
         guard let usuario = obtenerUsuarioLogueado() else {
             print("No hay usuario logueado.")
             mascotas = []
@@ -57,9 +67,11 @@ class ListadoViewController: UIViewController {
             return
         }
         
+        // Obtener las mascotas del usuario desde CoreData.
         mascotas = CoreDataManager.shared.fetchMascotasDelUsuario(usuario)
         mascotasTableView.reloadData()
         
+        // Si no hay mascotas, se muestra un mensaje en la tabla.
         if mascotas.isEmpty {
             mascotasTableView.setEmptyMessage("No hay mascotas registradas")
         } else {
@@ -67,6 +79,7 @@ class ListadoViewController: UIViewController {
         }
     }
     
+    /// Obtener el usuario actualmente logueado desde UserDefaults.
     func obtenerUsuarioLogueado() -> Usuario? {
         guard let correo = UserDefaults.standard.string(forKey: "email") else { return nil }
         
@@ -81,7 +94,9 @@ class ListadoViewController: UIViewController {
         }
     }
     
-    // Nueva función para actualizar el estado de la mascota en Firestore
+    // MARK: - Métodos para Firestore
+    
+    /// Actualiza el estado de una mascota en Firestore.
     func actualizarEstadoEnFirestore(mascotaID: String, nuevoEstado: String) {
         db.collection("mascotas").document(mascotaID).updateData([
             "estadoMascota": nuevoEstado
@@ -95,42 +110,39 @@ class ListadoViewController: UIViewController {
     }
 }
 
+// MARK: - Extensiones para UITableViewDataSource y UITableViewDelegate
+
 extension ListadoViewController: UITableViewDataSource {
+    
+    /// Define el número de filas en la tabla (una fila por mascota).
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return mascotas.count
     }
     
+    /// Configura cada celda con los datos de una mascota.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let celda = tableView.dequeueReusableCell(withIdentifier: "celdaMascota", for: indexPath) as! MascotaTableViewCell
         let mascota = mascotas[indexPath.row]
         
-        // MARK: ESTRUCTURACION DEL DETALLE DE MASCOTA EN EL LISTADO
-        
-        // DIVIDE EL DETALLE EN PARTES
+        // Configuración del detalle de la mascota en la celda.
         let nombre = mascota.nombre ?? "Sin nombre"
         let edadTexto = "Edad: \(mascota.edad) \(mascota.edad == 1 ? "año" : "años")"
         let razaTexto = "Raza: \(mascota.raza ?? "Sin raza")"
         
-        // ESTRUCTURA EL DETALLE JUNTANDO LAS PARTES
         let textoCompleto = "\(nombre)\n\(edadTexto)\n\(razaTexto)"
-        
-        // CREA NSMutableAttributedString PARA ESTILIZAR PARTES ESPECIFICAS DEL DETALLE
         let textoAtributado = NSMutableAttributedString(string: textoCompleto)
         
-        // DEFINE RANGO PARA ESTILIZAR
         let rangoNombre = (textoCompleto as NSString).range(of: nombre)
         
-        // APLICA ESTILO ITALIC A TODO MENOS AL NOMBRE
+        // Aplicación de estilos a partes específicas del texto.
         let fuenteNormal = UIFont.italicSystemFont(ofSize: 16)
         textoAtributado.addAttribute(.font, value: fuenteNormal, range: NSMakeRange(0, textoCompleto.count))
-        
-        // APLICA ESTILO BOLD AL NOMBRE
         textoAtributado.addAttribute(.font, value: UIFont.boldSystemFont(ofSize: 24), range: rangoNombre)
         
-        // ASIGNA EL TEXTO ESTILIZADO AL LABEL
+        // Asigna el texto estilizado a la celda.
         celda.detalleMascotaLabel.attributedText = textoAtributado
         
-        // MOSTRAR FOTO O IMAGEN POR DEFECTO
+        // Mostrar la imagen de la mascota si existe, de lo contrario, mostrar imagen predeterminada.
         if let datosFoto = mascota.foto {
             celda.fotoMascotaIV.image = UIImage(data: datosFoto)
         } else {
@@ -141,6 +153,8 @@ extension ListadoViewController: UITableViewDataSource {
 }
 
 extension ListadoViewController: UITableViewDelegate {
+    
+    /// Acción cuando se realiza un swipe para eliminar una mascota.
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath)
     -> UISwipeActionsConfiguration? {
@@ -149,6 +163,7 @@ extension ListadoViewController: UITableViewDelegate {
             completionHandler(false)
             let mascotaAEliminar = self.mascotas[indexPath.row]
             
+            // Alerta de confirmación para eliminar la mascota.
             let alerta = UIAlertController(
                 title: "Eliminar Mascota",
                 message: "¿Estás seguro de que deseas eliminar de tus mascotas a \"\(mascotaAEliminar.nombre ?? "esta mascota")\"?",
@@ -156,19 +171,14 @@ extension ListadoViewController: UITableViewDelegate {
             )
             
             let confirmar = UIAlertAction(title: "Eliminar", style: .destructive) { _ in
-                // Cambiar estado en Core Data
+                // Cambiar estado de la mascota a "Inactiva" en Core Data y Firestore.
                 mascotaAEliminar.estadoMascota = "Inactiva"
-                
-                // Guardar cambios en Core Data
                 do {
                     try CoreDataManager.shared.context.save()
-                    
-                    // Verificar si la mascota tiene un documentID en Firestore y actualizarlo
                     if let mascotaID = mascotaAEliminar.id {
                         self.actualizarEstadoEnFirestore(mascotaID: mascotaID, nuevoEstado: "Inactiva")
                     }
-                    
-                    // Eliminar la mascota de la lista
+                    // Eliminar la mascota de la lista.
                     self.mascotas.remove(at: indexPath.row)
                     self.mascotasTableView.deleteRows(at: [indexPath], with: .automatic)
                 } catch {
@@ -177,7 +187,6 @@ extension ListadoViewController: UITableViewDelegate {
             }
             
             let cancelar = UIAlertAction(title: "Mantener", style: .cancel, handler: nil)
-            
             alerta.addAction(confirmar)
             alerta.addAction(cancelar)
             
@@ -190,20 +199,24 @@ extension ListadoViewController: UITableViewDelegate {
         return UISwipeActionsConfiguration(actions: [cancelarAction])
     }
     
+    /// Acción cuando se selecciona una fila de la tabla para ver el detalle de la mascota.
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         mascotaSeleccionada = mascotas[indexPath.row]
         let detalleMascotaVC = storyboard?.instantiateViewController(withIdentifier: "detalleMascota") as! DetalleMascotaViewController
         detalleMascotaVC.mascota = mascotaSeleccionada
         navigationController?.pushViewController(detalleMascotaVC, animated: true)
-        // BOTON BACK PERSONALIZADO
         
+        // Botón de retroceso personalizado.
         let backItem = UIBarButtonItem()
         backItem.title = "Mascotas"
         navigationItem.backBarButtonItem = backItem
     }
 }
 
+// MARK: - Extensiones de UITableView para mostrar un mensaje vacío
+
 extension UITableView {
+    /// Muestra un mensaje cuando la tabla está vacía.
     func setEmptyMessage(_ message: String) {
         let messageLabel = UILabel()
         messageLabel.text = message
@@ -216,6 +229,7 @@ extension UITableView {
         self.separatorStyle = .none
     }
     
+    /// Restaura la tabla a su estado normal.
     func restore() {
         self.backgroundView = nil
         self.separatorStyle = .singleLine

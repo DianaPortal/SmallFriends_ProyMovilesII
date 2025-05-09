@@ -7,21 +7,25 @@
 
 import UIKit
 
+/// Celda personalizada para mostrar información de una mascota en la tabla.
 class MascotaTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var fotoMascotaIV: UIImageView!
-    @IBOutlet weak var detalleMascotaLabel: UILabel!
-    //@IBOutlet weak var detallesMascota: UILabel!
+    // MARK: - IBOutlets
+    @IBOutlet weak var fotoMascotaIV: UIImageView!  // Imagen de la mascota.
+    @IBOutlet weak var detalleMascotaLabel: UILabel!  // Etiqueta que muestra los detalles de la mascota.
+    
+    //@IBOutlet weak var detallesMascota: UILabel!  // Esta línea está comentada, posiblemente por un motivo de no uso.
+    
+    // MARK: - Métodos del ciclo de vida
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        // Inicialización de la celda cuando se carga desde el storyboard.
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        // Configure the view for the selected state
+        // Configuración de la vista cuando la celda es seleccionada.
     }
-    
 }
