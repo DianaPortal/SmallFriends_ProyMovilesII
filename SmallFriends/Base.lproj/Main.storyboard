@@ -72,7 +72,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="iniciarSesionTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qav-vh-OcF"/>
+                                            <action selector="iniciarSesionTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="grN-X0-jUD"/>
                                         </connections>
                                     </button>
                                     <label verifyAmbiguity="ignoreSizes" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="o" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N4i-By-nHD">
@@ -89,7 +89,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="iconGoogle"/>
                                                 <connections>
-                                                    <action selector="googleTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Uls-o3-qXP"/>
+                                                    <action selector="googleTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Adg-Jq-PoL"/>
                                                 </connections>
                                             </button>
                                             <button verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Gz-N2-7p1">
@@ -97,7 +97,7 @@
                                                 <state key="normal" title="Button"/>
                                                 <buttonConfiguration key="configuration" style="plain" image="iconFacebook"/>
                                                 <connections>
-                                                    <action selector="facebookTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4pQ-nP-a4g"/>
+                                                    <action selector="facebookTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N6k-HC-1vk"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -109,7 +109,7 @@
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="¿Olvidaste tu contraseña?"/>
                                         <connections>
-                                            <action selector="olvidastePasswordTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0co-Lq-3kn"/>
+                                            <action selector="olvidastePasswordTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vNg-8L-XNT"/>
                                         </connections>
                                     </button>
                                     <button verifyAmbiguity="ignoreSizes" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jR6-8G-dgL">
@@ -124,7 +124,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="registrarseTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nku-NN-Ls9"/>
+                                            <action selector="registrarseTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sT7-3c-9Ak"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -145,9 +145,9 @@
                     <navigationItem key="navigationItem" id="Lqg-4F-4nh"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="authStackView" destination="pe6-6A-SjA" id="l06-0j-RaN"/>
-                        <outlet property="correoTextField" destination="bdE-Qv-347" id="HWn-kz-7T5"/>
-                        <outlet property="passwordTextField" destination="17u-JK-r5b" id="Y74-D7-NOT"/>
+                        <outlet property="authStackView" destination="pe6-6A-SjA" id="Acp-Fa-t7M"/>
+                        <outlet property="correoTextField" destination="bdE-Qv-347" id="9b2-n0-2Cs"/>
+                        <outlet property="passwordTextField" destination="17u-JK-r5b" id="s2J-G6-BF7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
