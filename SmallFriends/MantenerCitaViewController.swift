@@ -148,9 +148,9 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
             // Si es una nueva cita, la guardamos en Core Data
             let nuevaCita = CitasCD(context: context)
             nuevaCita.fechaCita = fecha
-            nuevaCita.lugarCita = lugar
+            nuevaCita.lugarCita = lugar.capitalizedFirstLetter
             nuevaCita.tipoCita = tipoCita
-            nuevaCita.descripcionCita = descripcion
+            nuevaCita.descripcionCita = descripcion.capitalizedFirstLetter
             nuevaCita.estadoCita = "Activa"
             
             // Obtener y asignar la mascota seleccionada
@@ -244,7 +244,7 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
         db.collection("citas").document(citaID).updateData([
             "fechaCita": cita.fechaCita ?? Date(),
             "mascota": nombreMascota, // Guardamos el nombre de la mascota
-            "lugarCita": cita.lugarCita ?? "",
+            "lugarCita": cita.lugarCita?.capitalizedFirstLetter ?? "",
             "tipoCita": cita.tipoCita ?? "",
             "descripcionCita": cita.descripcionCita ?? "",
             "estadoCita": cita.estadoCita ?? "Activa"
