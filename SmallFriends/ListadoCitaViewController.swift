@@ -9,28 +9,14 @@ import UIKit
 import CoreData
 import FirebaseFirestore
 
-/// Esta clase es responsable de mostrar una lista de citas para el usuario, cargando los datos desde CoreData y Firestore.
-/// Permite ver, registrar y cancelar citas, y sincroniza los datos con Firestore para asegurar que se mantengan actualizados en ambos lugares.
-
 class ListadoCitaViewController: UIViewController {
     
-    // MARK: - Outlets
-    
-    /// La tabla que muestra las citas registradas para el usuario.
     @IBOutlet weak var tablaCitas: UITableView!
     
-    /// Lista que almacena las citas que se mostrarán en la tabla.
     var citas: [CitasCD] = []
-    
-    /// Contexto de CoreData para interactuar con la base de datos local.
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    /// Instancia de Firestore para interactuar con la base de datos de Firebase.
     let db = Firestore.firestore() // Firebase Firestore
     
-    // MARK: - Ciclo de vida de la vista
-    
-    /// Método que se llama cuando la vista ha sido cargada. Se configura la tabla y se realiza un log para indicar que la vista está cargada.
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,15 +26,11 @@ class ListadoCitaViewController: UIViewController {
         print("Pantalla de listado de citas cargada")
     }
     
-    /// Método que se llama cada vez que la vista está por aparecer en pantalla. Se recargan las citas al volver a la vista.
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         cargarCitas() // Recargar citas al volver a la vista
     }
     
-    // MARK: - Acciones
-    
-    /// Acción que se ejecuta cuando el usuario toca el botón de registrar una nueva cita. Navega a la vista de mantenimiento de citas.
     @IBAction func botonRegistrarTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         if let mantenerCitaVC = storyboard.instantiateViewController(withIdentifier: "showMantenerCita") as? MantenerCitaViewController {
@@ -66,9 +48,7 @@ class ListadoCitaViewController: UIViewController {
         }
     }
     
-    // MARK: - Funciones auxiliares
-    
-    /// Función que carga las citas asociadas al usuario logueado desde CoreData y sincroniza con Firestore.
+    // Función para cargar las citas desde CoreData (y también para sincronizar con Firestore)
     func cargarCitas() {
         guard let usuario = obtenerUsuarioLogueado() else {
             print("No hay usuario logueado.")
@@ -88,8 +68,9 @@ class ListadoCitaViewController: UIViewController {
             tablaCitas.restore()
         }
     }
+
     
-    /// Función para actualizar el estado de la cita en Firestore y CoreData.
+    // Función para actualizar el estado de la cita en Firestore
     func actualizarEstadoCitaEnFirestore(cita: CitasCD, nuevoEstado: String) {
         guard let citaID = cita.id else { return }
         
@@ -102,21 +83,21 @@ class ListadoCitaViewController: UIViewController {
                 print("Estado de la cita actualizado correctamente en Firestore")
                 
                 // Después de actualizar Firestore, también actualiza el estado en CoreData
-                cita.estadoCita = nuevoEstado
-                
-                // Guardar cambios en CoreData
-                do {
-                    try CoreDataManager.shared.context.save()
-                    // Recargar citas después de la actualización
-                    self.cargarCitas() // Esto debería actualizar la vista
-                } catch {
-                    print("Error al actualizar el estado de la cita en CoreData: \(error)")
-                }
+                            cita.estadoCita = nuevoEstado
+                            
+                            // Guardar cambios en CoreData
+                            do {
+                                try CoreDataManager.shared.context.save()
+                                // Recargar citas después de la actualización
+                                self.cargarCitas() // Esto debería actualizar la vista
+                            } catch {
+                                print("Error al actualizar el estado de la cita en CoreData: \(error)")
+                            }
             }
         }
     }
     
-    /// Función para obtener el usuario logueado desde CoreData.
+    // Función para obtener el usuario logueado
     func obtenerUsuarioLogueado() -> Usuario? {
         guard let correo = UserDefaults.standard.string(forKey: "email") else { return nil }
         
@@ -135,12 +116,10 @@ class ListadoCitaViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension ListadoCitaViewController: UITableViewDataSource {
     
-    /// Método que devuelve el número de filas en la tabla (cantidad de citas).
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return citas.count
     }
     
-    /// Método que configura cada celda en la tabla para mostrar los datos de una cita.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "celdaMostrarCitas", for: indexPath) as! CitasTableViewCell
         
@@ -155,7 +134,6 @@ extension ListadoCitaViewController: UITableViewDataSource {
         return cell
     }
     
-    /// Método que formatea la fecha de la cita para mostrarla en un formato legible.
     func formatearFecha(_ fecha: Date) -> String {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "es_ES") // Español
@@ -166,8 +144,7 @@ extension ListadoCitaViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension ListadoCitaViewController: UITableViewDelegate {
-    
-    /// Método que se llama cuando se selecciona una celda en la tabla. Navega a la vista de detalle de la cita.
+    // Método que se llama cuando se selecciona una celda
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Obtener la cita seleccionada
         let citaSeleccionada = citas[indexPath.row]
@@ -187,7 +164,7 @@ extension ListadoCitaViewController: UITableViewDelegate {
         navigationItem.backBarButtonItem = backItem
     }
     
-    /// Función para cancelar una cita (eliminación lógica) con una alerta de confirmación.
+    // FUNCION PARA CANCELAR CITAS (ELIMINAR LOGICO)
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let citaAEliminar = citas[indexPath.row]
@@ -204,9 +181,12 @@ extension ListadoCitaViewController: UITableViewDelegate {
                 do {
                     try CoreDataManager.shared.context.save()
                     
-                    if citaAEliminar.id != nil { // Actualizamos Firestore también
+                    if citaAEliminar.id != nil {// Actualizamos Firestore también
                         self.actualizarEstadoCitaEnFirestore(cita: citaAEliminar, nuevoEstado: "Cancelada")
                     }
+                    // Recargar las citas después de la cancelación
+                    // self.cargarCitas()  // Recargar las citas desde CoreData
+                    
                     // Eliminar la cita de la lista
                     self.citas.remove(at: indexPath.row)
                     self.tablaCitas.deleteRows(at: [indexPath], with: .automatic)
@@ -223,9 +203,11 @@ extension ListadoCitaViewController: UITableViewDelegate {
             present(alerta, animated: true, completion: nil)
         }
     }
+
     
-    /// Cambia el nombre del botón de confirmación de eliminación a "Cancelar".
+    // CAMBIO DE NOMBRE DEL BOTON DELETE POR "CANCELAR"
     func tableView(_ tableView: UITableView, titleForDeleteConfirmationButtonForRowAt indexPath: IndexPath) -> String? {
         return "Cancelar"
     }
 }
+

@@ -7,28 +7,19 @@
 
 import UIKit
 
-/// Esta clase es una subclase de `UITableViewCell` que se utiliza para mostrar una celda personalizada en la tabla de citas.
-/// La celda incluye dos etiquetas para mostrar información sobre la cita y aplica varios estilos visuales y animaciones a la celda.
 class CitasTableViewCell: UITableViewCell {
     
-    // MARK: - Outlets
-    
-    /// Etiqueta que muestra el tipo de cita.
     @IBOutlet weak var citaLabel: UILabel!
-    
-    /// Etiqueta que muestra los detalles de la cita (como la fecha y la mascota asociada).
     @IBOutlet weak var detalleCita: UILabel!
     
-    // MARK: - Ciclo de vida de la celda
     
-    /// Método que se llama cuando la celda es cargada desde el nib. Se utiliza para estilizar la celda.
     override func awakeFromNib() {
         super.awakeFromNib()
-        estilizarCelda() // Estiliza la celda cuando se carga
+        estilizarCelda()
     }
     
-    /// Método que se llama cuando la celda es seleccionada o deseleccionada.
-    /// Aplica una animación de sombra cuando la celda es seleccionada.
+    
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -46,9 +37,8 @@ class CitasTableViewCell: UITableViewCell {
         }
     }
     
-    // MARK: - Métodos de estilo y animación
     
-    /// Función que aplica estilos visuales a la celda y sus elementos (etiquetas y fondo).
+    // Función para estilizar las etiquetas y la celda
     func estilizarCelda() {
         // Estilo para la celda
         self.layer.cornerRadius = 10
@@ -78,7 +68,7 @@ class CitasTableViewCell: UITableViewCell {
         self.contentView.transform = CGAffineTransform(translationX: 0, y: 30)
     }
     
-    /// Función que anima la celda deslizándola hacia su posición original y aumentando su opacidad.
+    // Función para animar los elementos de la celda
     func animarCelda() {
         UIView.animate(withDuration: 1.0) {
             self.contentView.alpha = 1
@@ -86,10 +76,10 @@ class CitasTableViewCell: UITableViewCell {
         }
     }
     
-    // MARK: - Funciones para preparar animación
-    
-    /// Función que prepara la animación de la celda, es llamada por el controlador que usa la celda en la tabla.
+    // Llamada para animar la celda desde el controlador que está usando la tabla
     func prepararAnimacion() {
-        animarCelda() // Llama a la función de animación
+        animarCelda()
     }
+    
+    
 }

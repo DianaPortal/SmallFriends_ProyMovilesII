@@ -1,10 +1,9 @@
 //
-//  UserViewController.swift
+//  HomeViewController.swift
 //  SmallFriends
 //
 //  Created by Diana on 14/04/25.
 //
-//  Esta clase gestiona la visualización de la información del usuario, su cierre de sesión, y la actualización de sus datos personales.
 
 import UIKit
 import FirebaseAuth
@@ -12,7 +11,6 @@ import GoogleSignIn
 import FacebookLogin
 import CoreData
 
-// Enum para los diferentes proveedores de autenticación.
 enum ProviderType: String {
     case basic
     case google
@@ -45,7 +43,7 @@ class UserViewController: UIViewController {
         title = "Informacion del Usuario"
         cargarUsuarioDesdeCoreData()
         
-        // Estilización del Stack View
+        // Estilizar stack
         usuarioStackView.layer.cornerRadius = 16
         usuarioStackView.layer.borderWidth = 0.5
         usuarioStackView.layer.borderColor = UIColor.systemGray4.cgColor
@@ -64,9 +62,6 @@ class UserViewController: UIViewController {
         cargarUsuarioDesdeCoreData()
     }
     
-    // MARK: - Métodos
-    
-    /// Carga la información del usuario desde CoreData usando el UID de Firebase.
     private func cargarUsuarioDesdeCoreData() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
         
@@ -95,7 +90,6 @@ class UserViewController: UIViewController {
         }
     }
     
-    /// Formatea un texto en negrita y normal para mostrar en los labels.
     private func formatearTextoEnNegrita(titulo: String, valor: String) -> NSAttributedString {
         let textoCompleto = NSMutableAttributedString()
         
@@ -110,10 +104,7 @@ class UserViewController: UIViewController {
         textoCompleto.append(normal)
         return textoCompleto
     }
-    
-    // MARK: - Acciones
-    
-    /// Acción para cerrar la sesión del usuario.
+    //Acciones
     @IBAction func closeSessionButtonAction(_ sender: UIButton) {
         let alert = UIAlertController(
             title: "¿Cerrar sesión?",
@@ -124,7 +115,7 @@ class UserViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
         
         alert.addAction(UIAlertAction(title: "Cerrar sesión", style: .destructive, handler: { _ in
-            // Eliminar la sesión guardada en UserDefaults
+            // Elimina la sesión guardada
             let defaults = UserDefaults.standard
             defaults.removeObject(forKey: "email")
             defaults.removeObject(forKey: "provider")
@@ -133,7 +124,7 @@ class UserViewController: UIViewController {
             // Cancelar notificaciones pendientes
             UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
             
-            // Cerrar sesión en Firebase y proveedores externos (Google, Facebook)
+            // Cerrar sesión en Firebase y proveedor
             switch self.provider {
             case .basic:
                 self.firebaseLogOut()
@@ -147,14 +138,14 @@ class UserViewController: UIViewController {
                 print("No provider, no se puede hacer log out.")
             }
             
-            // Navegar a la pantalla de autenticación
+            // Navegar al AuthViewController
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             if let authVC = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController {
                 if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate,
                    let window = sceneDelegate.window {
                     let nav = UINavigationController(rootViewController: authVC)
                     
-                    // Agregar animación de transición
+                    // Agregamos animación de transición
                     UIView.transition(with: window,
                                       duration: 1,
                                       options: .transitionFlipFromLeft,
@@ -167,22 +158,29 @@ class UserViewController: UIViewController {
         }))
         
         self.present(alert, animated: true, completion: nil)
+        
+        
     }
     
-    /// Acción para actualizar los datos del usuario.
     @IBAction func actualizarTapped(_ sender: UIButton) {
+        // Crear un UIAlertController para que el usuario ingrese los nuevos valores
         let alert = UIAlertController(title: "Actualizar datos", message: "Modifica tu nombre y apellido", preferredStyle: .alert)
         
+        // Agregar el campo de texto para el nombre
         alert.addTextField { textField in
             textField.placeholder = "Nombre"
+            // Rellenar el campo con el valor actual del nombre
             textField.text = self.nombreLabel.text?.replacingOccurrences(of: "Nombre: ", with: "")
         }
         
+        // Agregar el campo de texto para el apellido
         alert.addTextField { textField in
             textField.placeholder = "Apellidos"
+            // Rellenar el campo con el valor actual del apellido
             textField.text = self.ApellidosLabel.text?.replacingOccurrences(of: "Apellidos: ", with: "")
         }
         
+        // Acción para guardar los cambios
         let guardarAction = UIAlertAction(title: "Guardar", style: .default) { _ in
             guard let nuevoNombre = alert.textFields?[0].text,
                   let nuevosApellidos = alert.textFields?[1].text,
@@ -209,6 +207,7 @@ class UserViewController: UIViewController {
                     self.nombreLabel.attributedText = self.formatearTextoEnNegrita(titulo: "Nombre: ", valor: nombreFormateado)
                     self.ApellidosLabel.attributedText = self.formatearTextoEnNegrita(titulo: "Apellidos: ", valor: apellidosFormateado)
                     
+                    
                     print("Usuario actualizado correctamente")
                 }
             } catch {
@@ -216,15 +215,17 @@ class UserViewController: UIViewController {
             }
         }
         
+        // Acción para cancelar la actualización
         let cancelarAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
         
+        // Añadir las acciones al UIAlertController
         alert.addAction(guardarAction)
         alert.addAction(cancelarAction)
         
+        // Presentar el UIAlertController
         present(alert, animated: true, completion: nil)
     }
     
-    /// Cierra la sesión de Firebase.
     private func firebaseLogOut() {
         do {
             try Auth.auth().signOut()
@@ -234,3 +235,4 @@ class UserViewController: UIViewController {
         }
     }
 }
+
