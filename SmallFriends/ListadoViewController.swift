@@ -8,6 +8,7 @@
 import UIKit
 import CoreData
 import FirebaseFirestore
+import FirebaseAuth
 
 class ListadoViewController: UIViewController {
     
@@ -28,7 +29,13 @@ class ListadoViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        cargarMascotas()
+
+        // Si hay un usuario logueado, sincroniza mascotas
+        if let uid = Auth.auth().currentUser?.uid {
+            sincronizarMascotasDesdeFirestore(uidUsuario: uid)
+        } else {
+            cargarMascotas() // Si no hay UID, solo carga lo que haya localmente
+        }
     }
     
     @IBAction func botonRegistrarTapped(_ sender: Any) {
@@ -93,6 +100,57 @@ class ListadoViewController: UIViewController {
             }
         }
     }
+    
+    func sincronizarMascotasDesdeFirestore(uidUsuario: String) {
+        db.collection("mascotas")
+            .whereField("uidUsuario", isEqualTo: uidUsuario)
+            .whereField("estadoMascota", isEqualTo: "Activa")
+            .getDocuments { snapshot, error in
+                if let error = error {
+                    print("Error al obtener mascotas desde Firestore: \(error.localizedDescription)")
+                    return
+                }
+                
+                guard let documentos = snapshot?.documents else {
+                    print("No se encontraron mascotas.")
+                    return
+                }
+
+                guard let usuario = self.obtenerUsuarioLogueado() else {
+                    print("No se pudo encontrar el usuario logueado en Core Data.")
+                    return
+                }
+
+                for doc in documentos {
+                    let data = doc.data()
+                    let nombre = data["nombre"] as? String ?? "Sin nombre"
+                    let raza = data["raza"] as? String ?? "Sin raza"
+                    let edad = data["edad"] as? Int16 ?? 0
+                    let estado = data["estadoMascota"] as? String ?? "Activa"
+                    let id = doc.documentID
+                    
+                    // Evitar duplicados
+                    if !CoreDataManager.shared.existeMascotaConID(id) {
+                        let nuevaMascota = Mascota(context: CoreDataManager.shared.context)
+                        nuevaMascota.nombre = nombre
+                        nuevaMascota.raza = raza
+                        nuevaMascota.edad = edad
+                        nuevaMascota.estadoMascota = estado
+                        nuevaMascota.id = id
+                        nuevaMascota.usuario = usuario
+                    }
+                }
+                
+                do {
+                    try CoreDataManager.shared.context.save()
+                    print("Mascotas sincronizadas con éxito desde Firestore.")
+                    self.cargarMascotas()
+                } catch {
+                    print("Error al guardar mascotas en Core Data: \(error.localizedDescription)")
+                }
+            }
+    }
+
 }
 
 extension ListadoViewController: UITableViewDataSource {

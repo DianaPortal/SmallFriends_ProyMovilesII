@@ -56,6 +56,19 @@ class CoreDataManager {
         }
     }
     
+    func existeMascotaConID(_ id: String) -> Bool {
+        let request: NSFetchRequest<Mascota> = Mascota.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id)
+        do {
+            let resultado = try context.fetch(request)
+            return !resultado.isEmpty
+        } catch {
+            print("Error al verificar existencia de mascota: \(error)")
+            return false
+        }
+    }
+
+    
     // Función para listar todas las mascotas registradas en el sistema
     func fetchMascotas() -> [Mascota] {
         let request: NSFetchRequest<Mascota> = Mascota.fetchRequest()

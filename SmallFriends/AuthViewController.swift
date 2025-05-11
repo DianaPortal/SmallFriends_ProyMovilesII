@@ -50,6 +50,12 @@ class AuthViewController: UIViewController {
                 self.showAlert(title: "Error de autenticación", message: "Correo o contraseña incorrectos.")
                 return
             }
+            
+            guard let uid = result?.user.uid else { return }
+            
+            // 🔄 Recupera y guarda el usuario en Core Data desde Firestore
+            self.obtenerYGuardarUsuarioDesdeFirestore(uid: uid)
+            
             let successAlert = UIAlertController(title: "¡Bienvenido!", message: "Has iniciado sesión con éxito.", preferredStyle: .alert)
             successAlert.addAction(UIAlertAction(title: "Ir al inicio", style: .default) { _ in
                 self.goToMainTabBar()
@@ -57,6 +63,7 @@ class AuthViewController: UIViewController {
             })
             self.present(successAlert, animated: true, completion: nil)
         }
+
     }
     
     /// Acción para la recuperación de contraseña.
@@ -313,6 +320,31 @@ class AuthViewController: UIViewController {
         authStackView.isHidden = true
         goToMainTabBar()
     }
+    
+    private func obtenerYGuardarUsuarioDesdeFirestore(uid: String) {
+        let db = Firestore.firestore()
+        let usuarioRef = db.collection("usuarios").document(uid)
+        
+        usuarioRef.getDocument { document, error in
+            if let error = error {
+                print("Error al obtener usuario de Firestore: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let document = document, document.exists,
+                  let data = document.data() else {
+                print("El documento del usuario no existe.")
+                return
+            }
+
+            let email = data["email"] as? String ?? ""
+            let nombre = data["nombre"] as? String ?? "Sin nombre"
+            let apellidos = data["apellidos"] as? String ?? "Sin apellidos"
+
+            self.guardarUsuarioEnCoreData(uid: uid, email: email, provider: .basic, nombre: nombre, apellidos: apellidos)
+        }
+    }
+
     
     /// Método que redirige al usuario al controlador de TabBar principal.
     private func goToMainTabBar() {
