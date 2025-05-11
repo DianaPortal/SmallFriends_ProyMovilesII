@@ -41,12 +41,23 @@ class DetalleCitaViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // Verifica que haya una cita asignada
+        
         guard let cita = cita else {
             print("La cita no está asignada")
             return
         }
-        // Carga los datos en las etiquetas
+
+        // Refresca la cita desde Core Data para obtener los datos actualizados
+        if let context = (UIApplication.shared.delegate as? AppDelegate)?.persistentContainer.viewContext {
+            do {
+                let citaActualizada = try context.existingObject(with: cita.objectID) as? CitasCD
+                self.cita = citaActualizada
+            } catch {
+                print("Error al obtener cita actualizada: \(error)")
+            }
+        }
+
+        // Carga los datos actualizados en las etiquetas
         if let fecha = cita.fechaCita {
             fechaCitaLabel.text = formatearFecha(fecha)
         }
@@ -55,6 +66,7 @@ class DetalleCitaViewController: UIViewController {
         tipoCitaLabel.text = cita.tipoCita
         descripCitaLabel.text = cita.descripcionCita
     }
+
     
     // Acción al pulsar el botón "Actualizar"
     @IBAction func botonActualizarTapped(_ sender: Any) {
