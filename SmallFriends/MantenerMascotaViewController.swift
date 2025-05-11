@@ -183,7 +183,8 @@ class MantenerMascotaViewController: UIViewController, UIPickerViewDataSource, U
             "peso": mascota.peso ?? 0,
             "raza": mascota.raza ?? "",
             "dni": mascota.dni ?? "",
-            "foto": mascota.foto != nil ? UIImage(data: mascota.foto!)?.jpegData(compressionQuality: 0.8)?.base64EncodedString() : nil,
+            "foto": (UIImage(data: mascota.foto!)?.jpegData(compressionQuality: 0.8)?.base64EncodedString() ?? "") as Any,
+
             "estadoMascota": mascota.estadoMascota ?? "Activa"  // Agregar el estado de la mascota
         ]
 
