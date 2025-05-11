@@ -1,6 +1,7 @@
 import UIKit
 import CoreData
 import FirebaseAuth
+import FirebaseFirestore
 import GoogleSignIn
 import FirebaseCore
 import FacebookLogin
@@ -139,6 +140,11 @@ class AuthViewController: UIViewController {
                 }
                 
                 let uid = result?.user.uid ?? ""
+                
+                // Guardar datos en Firestore
+                self.guardarUsuarioEnFirestore(uid: uid, email: email, nombre: nombreCapitalizado, apellidos: apellidosCapitalizados)
+                
+                // Guarda en CoreData
                 self.guardarUsuarioEnCoreData(uid: uid, email: email, provider: .basic, nombre: nombreCapitalizado, apellidos: apellidosCapitalizados)
                 
                 let successAlert = UIAlertController(title: "¡Registro exitoso!", message: "Bienvenid@, \(nombreCapitalizado).", preferredStyle: .alert)
@@ -154,6 +160,32 @@ class AuthViewController: UIViewController {
         
         present(alert, animated: true, completion: nil)
     }
+
+    private func guardarUsuarioEnFirestore(uid: String, email: String, nombre: String, apellidos: String) {
+        let db = Firestore.firestore()
+        
+        // Referencia al documento del usuario en la colección "usuarios"
+        let usuarioRef = db.collection("usuarios").document(uid)
+        
+        // Datos que deseas guardar
+        let datosUsuario: [String: Any] = [
+            "email": email,
+            "nombre": nombre,
+            "apellidos": apellidos,
+            "uid": uid,
+            "fechaRegistro": Timestamp()
+        ]
+        
+        // Guardar los datos
+        usuarioRef.setData(datosUsuario) { error in
+            if let error = error {
+                print("Error al guardar en Firestore: \(error.localizedDescription)")
+            } else {
+                print("Usuario guardado en Firestore")
+            }
+        }
+    }
+
     
     /// Acción para la autenticación con Google.
     @IBAction func googleTapped(_ sender: UIButton) {
@@ -173,17 +205,30 @@ class AuthViewController: UIViewController {
             
             let accessToken = user.accessToken.tokenString
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
+            
+            // Autenticarse en Firebase con Google
             Auth.auth().signIn(with: credential) { result, error in
+                if let error = error {
+                    print("Error al autenticar con Firebase: \(error.localizedDescription)")
+                    return
+                }
+                
+                // Extraer la información del usuario
                 let fullName = user.profile?.name ?? "Sin nombre"
                 let nameComponents = fullName.split(separator: " ", maxSplits: 1).map { String($0) }
                 let nombre = nameComponents.first ?? "Sin nombre"
                 let apellidos = nameComponents.count > 1 ? nameComponents[1] : "Sin apellidos"
                 
+                // Guardar el usuario en Firestore
                 if let uid = result?.user.uid {
+                    self.guardarUsuarioEnFirestore(uid: uid, email: result?.user.email ?? "", nombre: nombre, apellidos: apellidos)
+                    
+                    // Guardar en Core Data
                     self.guardarUsuarioEnCoreData(uid: uid, email: result?.user.email, provider: .google, nombre: nombre, apellidos: apellidos)
                 }
-                let nombreCapitalizado = nombre.capitalized
                 
+                // Mostrar una alerta de bienvenida
+                let nombreCapitalizado = nombre.capitalized
                 let successAlert = UIAlertController(title: "¡SmallFriends!", message: "Bienvenid@, \(nombreCapitalizado).", preferredStyle: .alert)
                 successAlert.addAction(UIAlertAction(title: "Ir al inicio", style: .default) { _ in
                     self.showHome(result: result, error: error, provider: .google)
@@ -193,6 +238,7 @@ class AuthViewController: UIViewController {
             }
         }
     }
+
     
     /// Acción para la autenticación con Facebook.
     @IBAction func facebookTapped(_ sender: UIButton) {

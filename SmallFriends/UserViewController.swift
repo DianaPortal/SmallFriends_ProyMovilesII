@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 import GoogleSignIn
 import FacebookLogin
 import CoreData
@@ -207,8 +208,10 @@ class UserViewController: UIViewController {
                     self.nombreLabel.attributedText = self.formatearTextoEnNegrita(titulo: "Nombre: ", valor: nombreFormateado)
                     self.ApellidosLabel.attributedText = self.formatearTextoEnNegrita(titulo: "Apellidos: ", valor: apellidosFormateado)
                     
-                    
                     print("Usuario actualizado correctamente")
+                    
+                    // Ahora actualizar Firestore
+                    self.actualizarUsuarioEnFirebase(nombre: nuevoNombre, apellidos: nuevosApellidos, uid: uid)
                 }
             } catch {
                 print("Error al actualizar el usuario: \(error.localizedDescription)")
@@ -225,6 +228,25 @@ class UserViewController: UIViewController {
         // Presentar el UIAlertController
         present(alert, animated: true, completion: nil)
     }
+
+    // Función para actualizar Firestore
+    private func actualizarUsuarioEnFirebase(nombre: String, apellidos: String, uid: String) {
+        let db = Firestore.firestore()
+        let usuarioRef = db.collection("usuarios").document(uid)
+        
+        // Actualizar el nombre y apellido en Firestore
+        usuarioRef.updateData([
+            "nombre": nombre.capitalizedFirstLetter,
+            "apellidos": apellidos.capitalizedFirstLetter
+        ]) { error in
+            if let error = error {
+                print("Error al actualizar en Firestore: \(error.localizedDescription)")
+            } else {
+                print("Usuario actualizado en Firestore")
+            }
+        }
+    }
+
     
     private func firebaseLogOut() {
         do {
