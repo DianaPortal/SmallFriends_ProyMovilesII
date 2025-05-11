@@ -142,7 +142,6 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
                 }
 
                 try context.save()
-                programarNotificacion(cita: citaEnContexto)
                 actualizarCitaEnFirestore(cita: citaEnContexto)
             } catch {
                 print("❌ Error al actualizar la cita: \(error.localizedDescription)")
@@ -174,7 +173,6 @@ class MantenerCitaViewController: UIViewController, UIPickerViewDelegate, UIPick
 
             do {
                 try context.save()
-                programarNotificacion(cita: nuevaCita)
                 guardarCitaEnFirestore(cita: nuevaCita)
             } catch {
                 print("❌ Error al guardar la cita: \(error.localizedDescription)")
